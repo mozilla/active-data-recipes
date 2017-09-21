@@ -30,7 +30,7 @@ For recipe specific options see:
 
     adr hours_on_try
 
-Returns the total number of compute hours spend on try over the past week. The date range can be
+Returns the total number of compute hours spent on try over the past week. The date range can be
 modified with `--from-date` and `--to-date` using the format described [here][0]. For example:
 
     adr hours_on_try --from-date today-2month --to-date today-month
