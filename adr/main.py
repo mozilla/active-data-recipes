@@ -24,6 +24,9 @@ def cli(args=sys.argv[1:]):
     args, remainder = parser.parse_known_args(args)
 
     for path in sorted(os.listdir(RECIPE_DIR)):
+        if not path.endswith('.py') or path == '__init__.py':
+            continue
+
         name = os.path.splitext(path)[0]
         if args.list:
             print(name)
