@@ -1,5 +1,6 @@
 from __future__ import print_function, absolute_import
 
+import importlib
 import os
 import sys
 from argparse import ArgumentParser
@@ -31,7 +32,8 @@ def cli(args=sys.argv[1:]):
         if args.recipe != name:
             continue
 
-        mod = __import__('recipes.{}'.format(args.recipe))
+        modname = '.recipes.{}'.format(args.recipe)
+        mod = importlib.import_module(modname, package='adr')
         return mod.run(remainder)
 
     if not args.list:

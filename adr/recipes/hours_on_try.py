@@ -18,4 +18,4 @@ def run(args):
     query_args = vars(args)
     query_args['branch_name'] = 'try'
 
-    return run_query('total_hours_spent_on_branch', **kwargs)
+    return run_query('total_hours_spent_on_branch', **query_args)

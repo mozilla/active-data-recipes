@@ -4,13 +4,14 @@
     "where":{"and":[
         {"eq":{"repo.branch.name":"%(branch_name)s"}},
         {"gte":{"repo.push.date":{"date":"%(from_date)s"}}},
-        {"lte":{"repo.push.date":{"date":"%(to_date)s"}}}
+        {"lte":{"repo.push.date":{"date":"%(to_date)s"}}},
+        {"lte":{"action.duration":%(max_task_duration)s}}
     ]},
     "select":[
         {
             "aggregate":"sum",
             "name":"hours",
-            "value":{"div":{"action.duration":"%(max_task_duration)s"}}
+            "value":{"div":{"action.duration":3600}}
         },
         {"name":"tasks", "aggregate":"count"}
     ]

@@ -5,11 +5,12 @@ import os
 import requests
 
 here = os.path.abspath(os.path.dirname(__file__))
-ACTIVE_DATA_URL = 'https://activedata.allizom.org/query'
+ACTIVE_DATA_URL = 'http://activedata.allizom.org/query'
 QUERY_DIR = os.path.join(here, 'queries')
 
 
 def query_activedata(query):
+    print("Print running query:\n{}".format(query))
     response = requests.post(ACTIVE_DATA_URL,
                              data=query,
                              stream=True)
@@ -24,7 +25,7 @@ def run_query(query, **kwargs):
         if query != name:
             continue
 
-        with open(path) as fh:
+        with open(os.path.join(QUERY_DIR, path)) as fh:
             query = fh.read()
 
         query = query % kwargs
