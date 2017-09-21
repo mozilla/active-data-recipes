@@ -10,7 +10,7 @@ QUERY_DIR = os.path.join(here, 'queries')
 
 
 def query_activedata(query):
-    print("Print running query:\n{}".format(query))
+    print("Running query:\n{}".format(query))
     response = requests.post(ACTIVE_DATA_URL,
                              data=query,
                              stream=True)
