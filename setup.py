@@ -17,7 +17,7 @@ setup(
     keywords='mozilla',
     author='Andrew Halberstadt',
     author_email='ahalberstadt@mozilla.com',
-    url='https://github.com/ahal/activedata-recipes',
+    url='https://github.com/ahal/active-data-recipes',
     license='MPL',
     packages=['adr'],
     include_package_data=True,
