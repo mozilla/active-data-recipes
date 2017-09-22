@@ -1,0 +1,13 @@
+{
+    "limit":100000,
+    "from":"repo",
+    "where":{"and":[
+        {"eq":{"branch.name":"try"}},
+        {"gte":{"push.date":{"date":"%(from_date)s"}}},
+        {"lte":{"push.date":{"date":"%(to_date)s"}}}
+    ]},
+    "select":[
+        {"name":"user","value":"push.user"},
+        {"name":"message","value":"changeset.description"}
+    ]
+}
