@@ -10,6 +10,12 @@ Each recipe should try to answer a single question.
 
     pip install active-data-recipes
 
+or
+
+    git clone https://github.com/ahal/active-data-recipes
+    cd active-data-recipes
+    python setup.py develop
+
 # Usage
 
 Run:
