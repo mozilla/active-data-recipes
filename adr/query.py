@@ -1,16 +1,19 @@
 from __future__ import print_function, absolute_import
 
+import logging
 import os
 
 import requests
 
 here = os.path.abspath(os.path.dirname(__file__))
+log = logging.getLogger('adr')
+
 ACTIVE_DATA_URL = 'http://activedata.allizom.org/query'
 QUERY_DIR = os.path.join(here, 'queries')
 
 
 def query_activedata(query):
-    print("Running query:\n{}".format(query))
+    log.debug("Running query:\n{}".format(query))
     response = requests.post(ACTIVE_DATA_URL,
                              data=query,
                              stream=True)
@@ -31,4 +34,4 @@ def run_query(query, **kwargs):
         query = query % kwargs
         return query_activedata(query)
 
-    print("query '{}' not found".format(query))
+    log.error("query '{}' not found".format(query))

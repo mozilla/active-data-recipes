@@ -2,7 +2,7 @@ from __future__ import print_function, absolute_import
 
 import json
 
-from terminaltables import SingleTable
+from terminaltables import GithubFlavoredMarkdownTable, SingleTable
 
 
 class JSONFormatter(object):
@@ -41,5 +41,6 @@ class TableFormatter(object):
 
 all_formatters = {
     'json': JSONFormatter(),
+    'markdown': TableFormatter(table_cls=GithubFlavoredMarkdownTable),
     'table': TableFormatter(),
 }

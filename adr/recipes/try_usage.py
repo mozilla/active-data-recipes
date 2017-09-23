@@ -55,7 +55,7 @@ def run(args):
                 break
 
     def fmt(key):
-        percent = '{}%'.format(int(float(count[key]) / count['total'] * 100))
+        percent = round(float(count[key]) / count['total'] * 100, 1)
         return [d[key]['method'], count[key], percent, len(users[key])]
 
     data = [['Method', 'Pushes', 'Percent', 'Unique Users']]

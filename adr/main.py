@@ -1,6 +1,7 @@
 from __future__ import print_function, absolute_import
 
 import importlib
+import logging
 import os
 import sys
 from argparse import ArgumentParser
@@ -8,6 +9,12 @@ from argparse import ArgumentParser
 from .formatter import all_formatters
 
 here = os.path.abspath(os.path.dirname(__file__))
+
+log = logging.getLogger('adr')
+log.setLevel(logging.DEBUG)
+log.addHandler(logging.StreamHandler())
+
+QUIET = False
 RECIPE_DIR = os.path.join(here, 'recipes')
 
 
@@ -22,11 +29,16 @@ class RecipeParser(ArgumentParser):
         self.add_argument('-f', '--format', dest='fmt', default='table',
                           choices=all_formatters.keys(),
                           help="Format to print data in, defaults to 'table'.")
+        self.add_argument('-q', '--quiet', action='store_true', default=False,
+                          help="Don't print query.")
 
 
 def cli(args=sys.argv[1:]):
     parser = RecipeParser()
     args, remainder = parser.parse_known_args(args)
+
+    if args.quiet:
+        log.setLevel(logging.INFO)
 
     for path in sorted(os.listdir(RECIPE_DIR)):
         if not path.endswith('.py') or path == '__init__.py':
@@ -34,7 +46,7 @@ def cli(args=sys.argv[1:]):
 
         name = os.path.splitext(path)[0]
         if args.list:
-            print(name)
+            log.info(name)
             continue
 
         if args.recipe != name:
@@ -48,7 +60,7 @@ def cli(args=sys.argv[1:]):
         return(formatter(output))
 
     if not args.list:
-        print("recipe '{}' not found!".format(args.recipe))
+        log.error("recipe '{}' not found!".format(args.recipe))
 
 
 if __name__ == '__main__':
