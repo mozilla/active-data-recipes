@@ -37,9 +37,9 @@ def run(args):
         'test': 'Pushed via `mach try fuzzy`',
         'method': 'mach try fuzzy',
     }
-    d['other'] = {
+    d['empty'] = {
         'test': '',
-        'method': 'other',
+        'method': 'empty',
     }
     d['total'] = {
         'test': None,
@@ -56,9 +56,9 @@ def run(args):
 
     def fmt(key):
         percent = round(float(count[key]) / count['total'] * 100, 1)
-        return [d[key]['method'], count[key], percent, len(users[key])]
+        return [d[key]['method'], count[key], percent, len(users[key]), round(float(count[key])/len(users[key]), 2)]
 
-    data = [['Method', 'Pushes', 'Percent', 'Unique Users']]
+    data = [['Method', 'Pushes', 'Percent', 'Users', 'Push / User']]
     for k, v in sorted(count.items(), key=lambda t: t[1], reverse=True):
         data.append(fmt(k))
     return data
