@@ -57,6 +57,7 @@ def cli(args=sys.argv[1:]):
         output = mod.run(remainder)
 
         formatter = all_formatters[args.fmt]
+        log.debug("Result:")
         return(formatter(output))
 
     if not args.list:
