@@ -5,6 +5,8 @@ import os
 import sys
 from argparse import ArgumentParser
 
+from .formatter import all_formatters
+
 here = os.path.abspath(os.path.dirname(__file__))
 RECIPE_DIR = os.path.join(here, 'recipes')
 
@@ -17,6 +19,9 @@ class RecipeParser(ArgumentParser):
         self.add_argument('recipe', nargs='?', help="Recipe to run.")
         self.add_argument('-l', '--list', action='store_true', default=False,
                           help="List available recipes.")
+        self.add_argument('-f', '--format', dest='fmt', default='table',
+                          choices=all_formatters.keys(),
+                          help="Format to print data in, defaults to 'table'.")
 
 
 def cli(args=sys.argv[1:]):
@@ -37,7 +42,10 @@ def cli(args=sys.argv[1:]):
 
         modname = '.recipes.{}'.format(args.recipe)
         mod = importlib.import_module(modname, package='adr')
-        return mod.run(remainder)
+        output = mod.run(remainder)
+
+        formatter = all_formatters[args.fmt]
+        return(formatter(output))
 
     if not args.list:
         print("recipe '{}' not found!".format(args.recipe))
