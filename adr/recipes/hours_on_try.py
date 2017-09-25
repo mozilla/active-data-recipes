@@ -6,9 +6,9 @@ from ..query import run_query
 
 def run(args):
     parser = ArgumentParser()
-    parser.add_argument('--from', dest='from_date', default='today-week',
+    parser.add_argument('--from', dest='from_date', default='now-week',
                         help="Starting date to pull data from, defaults to a week ago")
-    parser.add_argument('--to', dest='to_date', default='today',
+    parser.add_argument('--to', dest='to_date', default='now',
                         help="Ending date to pull data from, defaults to today")
     parser.add_argument('--max-duration', dest='max_task_duration', default='18000',
                         help="Maximum task duration to consider (in seconds. Defaults "
