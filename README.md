@@ -48,4 +48,12 @@ modified with `--from` and `--to` using the format described [here][0]. For exam
 Prints stats on what percentage of try pushes are being scheduled with various different mechanisms
 over the last week. The date range can be modified the same as the `hours_on_try` recipe.
 
+## Try Users
+
+    adr try_users
+
+Prints stats on how often individual users are pushing to try over the last week. The date range can
+be modified the same as the `hours_on_try` recipe.
+
+
 [0]: https://github.com/klahnakoski/ActiveData/blob/dev/docs/jx_time.md

@@ -1,0 +1,10 @@
+{
+    "limit":1000,
+    "from":"repo",
+    "where":{"and":[
+        {"eq":{"branch.name":"%(branch)s"}},
+        {"gte":{"push.date":{"date":"%(from_date)s"}}},
+        {"lte":{"push.date":{"date":"%(to_date)s"}}}
+    ]},
+    "groupby": ["push.user"]
+}
