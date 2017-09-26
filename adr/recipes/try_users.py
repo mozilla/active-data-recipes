@@ -16,7 +16,13 @@ def run(args):
                              "today")
     parser.add_argument('--limit', type=int, default=25,
                         help="Maximum number of users to return")
+    parser.add_argument('--sort-key', type=int, default=1,
+                        help="Key to sort on (int, 0-based index)")
     args = parser.parse_args(args)
+
+    header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
+    if args.sort_key < 0 or len(header)-1 < args.sort_key:
+        parser.error("invalid value for 'sort_key'")
 
     query_args = vars(args)
     query_args['branch'] = 'try'
@@ -31,7 +37,6 @@ def run(args):
     for user, num in pushes:
         users[user].append(num)
 
-    header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
     data = []
     for user, value in users.items():
         if len(value) != 2:
@@ -39,7 +44,7 @@ def run(args):
         tasks, pushes = value
         data.append([user, tasks, pushes, round(float(tasks)/pushes, 2)])
 
-    data = sorted(data, key=lambda k: k[1], reverse=True)
+    data = sorted(data, key=lambda k: k[args.sort_key], reverse=True)
     data = data[:args.limit]
     data.insert(0, header)
     return data
