@@ -41,6 +41,15 @@ modified with `--from` and `--to` using the format described [here][0]. For exam
 
     adr hours_on_try --from today-2month --to today-month
 
+## Inspect
+
+    adr inspect
+
+Get information on the ActiveData schema. The above command returns the available tables. To see
+the columns in a table, run:
+
+    adr inspect --table task
+
 ## Try Usage
 
     adr try_usage
