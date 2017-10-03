@@ -1,5 +1,6 @@
 from __future__ import print_function, absolute_import
 
+import datetime
 import logging
 import os
 
@@ -18,8 +19,7 @@ def query_activedata(query):
                              data=query,
                              stream=True)
     response.raise_for_status()
-    data = response.json()["data"]
-    return data
+    return response.json()
 
 
 def run_query(query, **kwargs):
@@ -35,3 +35,7 @@ def run_query(query, **kwargs):
         return query_activedata(query)
 
     log.error("query '{}' not found".format(query))
+
+
+def format_date(timestamp, interval='day'):
+    return datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')

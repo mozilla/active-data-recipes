@@ -26,10 +26,10 @@ def run(args):
 
     query_args = vars(args)
     query_args['branch'] = 'try'
-    pushes = run_query('user_pushes', **query_args)
+    pushes = run_query('user_pushes', **query_args)['data']
 
     query_args['from'] = 'task'
-    tasks = run_query('user_tasks', **query_args)
+    tasks = run_query('user_tasks', **query_args)['data']
 
     users = defaultdict(list)
     for user, num in tasks:

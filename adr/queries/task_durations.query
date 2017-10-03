@@ -1,0 +1,18 @@
+{
+    "limit":10000,
+    "from":"task",
+    "where":{"and":[
+        {"in":{"repo.branch.name":%(branch)s}},
+        {"gte":{"repo.push.date":{"date":"%(from_date)s"}}},
+        {"lte":{"repo.push.date":{"date":"%(to_date)s"}}}
+    ]},
+    "select":[
+        {"aggregate":"count","name":"tasks"},
+        {
+            "aggregate":"avg",
+            "name":"average minutes",
+            "value":{"div":{"action.duration":60}}
+        }
+    ],
+    "groupby":["run.name"]
+}

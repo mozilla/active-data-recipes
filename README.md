@@ -50,6 +50,13 @@ the columns in a table, run:
 
     adr inspect --table task
 
+## Task Durations
+
+    adr task_durations
+
+Get information on the longest running tasks. Returns the total count, average runtime and total
+runtime over a given date range and set of branches.
+
 ## Try Usage
 
     adr try_usage
