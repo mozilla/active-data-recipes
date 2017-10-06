@@ -32,6 +32,12 @@ For recipe specific options see:
 
 # Recipes
 
+## Code Coverage
+
+    adr code_coverage --path <path> --rev <rev>
+
+Get code coverage information for the given `path` at `rev`. Both arguments are required.
+
 ## Hours on Try
 
     adr hours_on_try
