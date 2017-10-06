@@ -6,7 +6,7 @@ import os
 import sys
 from argparse import ArgumentParser
 
-from .formatter import all_formatters
+from adr.formatter import all_formatters
 
 here = os.path.abspath(os.path.dirname(__file__))
 
