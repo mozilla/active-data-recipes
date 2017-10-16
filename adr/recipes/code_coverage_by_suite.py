@@ -15,32 +15,38 @@ def run(args):
                         help="Source code path to show summary coverage stats for.")
     parser.add_argument('--rev', required=True,
                         help="Revision to collect coverage data at.")
-    parser.add_argument('--suite', required=False, default="",
-                        help="Revision to collect coverage data at.")
     args = parser.parse_args(args)
     query_args = vars(args)
 
-    #TODO: cppunit, jittest
-    all_suites = ['gtest', 'marionette', 'mochitest', 'talos', 'reftest', 'xpcshell', 'web-platform-tests', 'firefox-ui', 'awsy']
-    suites = all_suites
-    if args.suite:
-        suites = [args.suite]
+    all_suites = ['gtest', 'marionette', 'mochitest-plain', 'mochitest-browser-chrome', 'mochitest-devtools-chrome', 'mochitest-chrome', 'mochitest-a11y', 'mochitest-gl', 'mochitest-gpu', 'mochitest-clipboard', 'mochitest-media', 'talos', 'reftest', 'reftest-no-accel', 'reftest-crashtest', 'reftest-jsreftest', 'xpcshell', 'web-platform-tests', 'firefox-ui-functional local', 'firefox-ui-functional remote', 'awsy', 'cppunittest', 'jittest', 'web-platform-tests-wdspec', 'web-platform-tests-reftests']
+    all_suites_name = ['gtest', 'Mn', 'm', 'bc', 'dt', 'c', 'a11y', 'gl', 'gpu', 'cl', 'mda',  'T', 'R', 'Ru', 'C', 'J', 'X', 'wpt', 'fx-l', 'fx-r', 'awsy', 'cpp', 'jit', 'Wd', 'Wr']
 
     retVal = {}
-    for suite in suites:
-        query_args['suite'] = suite
-        result = run_query('code_coverage_by_suite', **query_args)
-        output = [result['header']]+result['data']
-        for line in result['data']:
-            if line[0] not in retVal:
-                retVal[line[0]] = []
-            retVal[line[0]].append(str(line[1]))
+    counter = 0
+    result = run_query('code_coverage_by_suite', **query_args)
+    suites = []
+    for line in result['data']:
+        # line = [suite, filename, count]
+        if line[1] not in retVal:
+            retVal[line[1]] = {}
+        retVal[line[1]][line[0]] = line[2]
 
-    temp = ['path']
-    temp.extend(suites)
-    output = [temp]
-    for item in retVal:
-        temp = [item]
-        temp.extend(retVal[item])
-        output.append(temp)
+    output = [['path']]
+    output[0].extend(all_suites_name)
+    counter = 1
+    for path in retVal:
+        if not path:
+            continue
+
+        output.append([])
+        output[counter].append(path)
+        for suite in all_suites:
+            if suite not in retVal[path]:
+                output[counter].append('')
+            elif retVal[path][suite] == None:
+                output[counter].append('')
+            else:
+                output[counter].append(retVal[path][suite])
+        counter += 1
+
     return output
