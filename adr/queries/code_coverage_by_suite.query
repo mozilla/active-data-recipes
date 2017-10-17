@@ -1,27 +1,27 @@
 {
 	"from":"coverage",
-	"select":[
-		{"value":"source.file.name","aggregate":"cardinality"}
+	"format":"table",
+	"edges":[
+		"run.suite.fullname",
+		{
+			"name":"file",
+			"value":{"left":[
+				"source.file.name",
+				{"add":[
+					1,
+					{
+						"default":{"length":"source.file.name"},
+						"start":{"length":{"literal":"%(path)s"}},
+						"find":{"source.file.name":"/"}
+					}
+				]}
+			]}
+		}
 	],
+	"limit":1000,
 	"where":{"and":[
 		{"prefix":{"source.file.name":"%(path)s"}},
-		{"prefix":{"repo.changeset.id":"%(rev)s"}},
-        {"eq":{"run.suite.name":"%(suite)s"}}
+		{"prefix":{"repo.changeset.id":"%(rev)s"}}
 	]},
-	"groupby":[{
-		"name":"file",
-		"value":{"left":[
-			"source.file.name",
-			{"add":[
-				1,
-				{
-					"find":{"source.file.name":"/"},
-					"start":{"length":{"literal":"%(path)s"}},
-					"default":{"length":"source.file.name"}
-				}
-			]}
-		]}
-	}],
-    "format":"table",
-	"limit":1000
+	"select":[{"aggregate":"cardinality","value":"source.file.name"}]
 }
