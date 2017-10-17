@@ -3,8 +3,8 @@
     "from":"task",
     "where":{"and":[
         {"in":{"repo.branch.name":%(branch)s}},
-        {"gte":{"repo.push.date":{"date":"%(from_date)s"}}},
-        {"lte":{"repo.push.date":{"date":"%(to_date)s"}}}
+        {"gte":["repo.push.date", {"date":"%(from_date)s"}]},
+        {"lte":["repo.push.date", {"date":"%(to_date)s"}]}
     ]},
     "select":[
         {"aggregate":"count","name":"tasks"},

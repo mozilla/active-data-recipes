@@ -3,9 +3,9 @@
     "from":"task",
     "where":{"and":[
         {"eq":{"repo.branch.name":"%(branch_name)s"}},
-        {"gte":{"repo.push.date":{"date":"%(from_date)s"}}},
-        {"lte":{"repo.push.date":{"date":"%(to_date)s"}}},
-        {"lte":{"action.duration":%(max_task_duration)s}}
+        {"gte":["repo.push.date", {"date":"%(from_date)s"}]},
+        {"lte":["repo.push.date", {"date":"%(to_date)s"}]},
+        {"lte":["action.duration", %(max_task_duration)s]}
     ]},
     "select":[
         {
