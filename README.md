@@ -70,6 +70,8 @@ runtime over a given date range and set of branches.
 Prints stats on what percentage of try pushes are being scheduled with various different mechanisms
 over the last week. The date range can be modified the same as the `hours_on_try` recipe.
 
+<script src="https://gist.github.com/ahal/ef47348af284653cb85812623f2916ad.js"></script>
+
 ## Try Users
 
     adr try_users
