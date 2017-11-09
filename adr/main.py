@@ -58,7 +58,8 @@ def cli(args=sys.argv[1:]):
 
         formatter = all_formatters[args.fmt]
         log.debug("Result:")
-        return(formatter(output))
+        print(formatter(output))
+        return
 
     if not args.list:
         log.error("recipe '{}' not found!".format(args.recipe))
