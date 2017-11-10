@@ -14,8 +14,22 @@ log = logging.getLogger('adr')
 log.setLevel(logging.DEBUG)
 log.addHandler(logging.StreamHandler())
 
-QUIET = False
 RECIPE_DIR = os.path.join(here, 'recipes')
+
+
+def run_recipe(recipe, args, fmt='table', quiet=False):
+    if quiet:
+        log.setLevel(logging.INFO)
+    else:
+        log.setLevel(logging.DEBUG)
+
+    modname = '.recipes.{}'.format(recipe)
+    mod = importlib.import_module(modname, package='adr')
+    output = mod.run(args)
+
+    formatter = all_formatters[fmt]
+    log.debug("Result:")
+    return formatter(output)
 
 
 class RecipeParser(ArgumentParser):
@@ -37,9 +51,6 @@ def cli(args=sys.argv[1:]):
     parser = RecipeParser()
     args, remainder = parser.parse_known_args(args)
 
-    if args.quiet:
-        log.setLevel(logging.INFO)
-
     for path in sorted(os.listdir(RECIPE_DIR)):
         if not path.endswith('.py') or path == '__init__.py':
             continue
@@ -52,13 +63,7 @@ def cli(args=sys.argv[1:]):
         if args.recipe != name:
             continue
 
-        modname = '.recipes.{}'.format(args.recipe)
-        mod = importlib.import_module(modname, package='adr')
-        output = mod.run(remainder)
-
-        formatter = all_formatters[args.fmt]
-        log.debug("Result:")
-        print(formatter(output))
+        print(run_recipe(args.recipe, fmt=args.fmt))
         return
 
     if not args.list:

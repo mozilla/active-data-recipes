@@ -8,6 +8,7 @@ with open('README.md') as fh:
 DEPS = [
     'requests >= 2.18.3',
     'terminaltables >= 3.1.0',
+    'pyyaml',
 ]
 
 setup(
@@ -27,5 +28,6 @@ setup(
     # -*- Entry points: -*-
     [console_scripts]
     adr = adr.main:cli
+    adr-gist = adr.gist:cli
     """,
 )
