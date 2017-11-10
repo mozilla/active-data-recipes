@@ -1,12 +1,13 @@
 #### View Recipe
-[try usage](#try-usage)  
-[task durations](#task-durations)  
+[backout_rate](#backout-rate)  
+[task_durations](#task-durations)  
+[try_usage](#try-usage)  
 
-## Try Usage
-
+## Backout Rate
 {% gist 01a58c929e33bc5d2ef0092ce2cad12e try-usage.md %}
 
-
 ## Task Durations
-
 {% gist 01a58c929e33bc5d2ef0092ce2cad12e task-durations.md %}
+
+## Try Usage
+{% gist 01a58c929e33bc5d2ef0092ce2cad12e try-usage.md %}
