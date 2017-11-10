@@ -32,6 +32,12 @@ For recipe specific options see:
 
 # Recipes
 
+## Backout Rate
+
+    adr backout_rate [--from <date> [--to <date>]]
+
+Get information on the backout rate on autoland and mozilla-inbound over the given time period.
+
 ## Code Coverage
 
     adr code_coverage --path <path> --rev <rev>
