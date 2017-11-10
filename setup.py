@@ -1,6 +1,6 @@
 from setuptools import setup
 
-PACKAGE_VERSION = '0.6.0'
+PACKAGE_VERSION = '0.7.0'
 DESC = "Collection of recipes for finding information in ActiveData"
 with open('README.md') as fh:
     README = fh.read()
