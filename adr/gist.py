@@ -29,19 +29,35 @@ def cli(args=sys.argv[1:]):
     with open(args.gist_config, 'r') as fh:
         config = yaml.load(fh)
 
+    output = None
     for recipe in config['recipes']:
-        args = config['recipes'][recipe]
-        table = run_recipe(recipe, args, fmt='markdown', quiet=True)
+        recipe_args = config['recipes'][recipe]
+        table = run_recipe(recipe, recipe_args, fmt='markdown', quiet=True)
 
         filename = '{}.md'.format(recipe.replace('_', '-'))
         cmd = [
             'gist',
-            '-u', config['gist'],
             '-f', filename,
         ]
+
+        if 'gist' in config:
+            cmd.extend(['-u', config['gist']])
+        else:
+            log.info("no 'gist' key defined, creating new gist")
+
         proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         proc.stdin.write(table)
-        output = proc.communicate()[0]
+        output = proc.communicate()[0].strip()
+        log.info("updated {}".format(recipe))
+
+        if 'gist' not in config:
+            create_new = False
+            config['gist'] = output.rsplit('/', 1)[1]
+            with open(args.gist_config, 'w') as fh:
+                fh.write(yaml.dump(config))
+
+    if output:
+        log.info(output)
 
 
 if __name__ == '__main__':

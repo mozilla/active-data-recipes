@@ -63,7 +63,7 @@ def cli(args=sys.argv[1:]):
         if args.recipe != name:
             continue
 
-        print(run_recipe(args.recipe, fmt=args.fmt))
+        print(run_recipe(args.recipe, remainder, fmt=args.fmt))
         return
 
     if not args.list:
