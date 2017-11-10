@@ -1,3 +1,1 @@
-### Try Usage
-
-{% gist ef47348af284653cb85812623f2916ad %}
+{% gist 01a58c929e33bc5d2ef0092ce2cad12e %}
