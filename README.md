@@ -1,4 +1,3 @@
-Active Data Results
-===================
+### Try Usage
 
-This page contains results from some of the recipes in active-data-recipes.
+{% gist ef47348af284653cb85812623f2916ad %}
