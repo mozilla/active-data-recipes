@@ -1,10 +1,10 @@
 {
-	"limit":50000,
+	"limit":10000,
 	"from":"coverage",
 	"where":{"and":[
 		{"prefix":{"source.file.name":"%(path)s"}},
 		{"prefix":{"repo.changeset.id12":"%(rev)s"}}
 	]},
-	"select":["source","run.suite","run.name"],
+	"select":[{"aggregate":"count"}],
 	"format":"table"
 }
