@@ -12,7 +12,7 @@ Backout rate on inbound and autoland over the past week.
 
 ## Files with Coverage
 
-Show how many files have any kind of code coverage over the last 10 commits to mozilla-central.
+Files that have any kind of code coverage over the last 10 commits to mozilla-central.
 
 {% gist 01a58c929e33bc5d2ef0092ce2cad12e files-with-coverage.md %}
 
