@@ -44,6 +44,14 @@ Get information on the backout rate on autoland and mozilla-inbound over the giv
 
 Get code coverage information for the given `path` at `rev`. Both arguments are required.
 
+
+## Files with Coverage
+
+    adr files_with_coverage
+
+See how many files in tree have any code coverage at all.
+
+
 ## Hours on Try
 
     adr hours_on_try
