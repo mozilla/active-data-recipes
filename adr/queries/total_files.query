@@ -1,0 +1,6 @@
+{
+	"sort":{"repo.changeset.date":"desc"},
+	"from":"firefox-files",
+	"limit":50,
+	"groupby":["repo.changeset.id12","repo.changeset.date"]
+}

@@ -7,9 +7,10 @@ from ..query import run_query
 import copy
 import json
 import os
-
+import logging
 
 OUTPUTFILE_PREFIX = 'coverage_map'
+log = logging.getLogger('adr')
 
 def removeJob(lines, jobname):
     # TODO: do we need a deep copy here?
@@ -42,14 +43,78 @@ def run(args):
                         help="Ignore performance tests in aggregating and reporting jobs.")
     args = parser.parse_args(args)
 
-    def minimumJobs(args):
+    def artifactCount(args):
         query_args = vars(args)
-        result = run_query('raw_coverage', **query_args)
+        result = run_query('raw_coverage_count', **query_args)
+        for item in result['data']:
+            return item[0]
+
+    def buildDirList(dirs):
+        dirs.sort()
+        all_dirs = {}
+        last_dir = ''
+        for line in dirs:
+            l = line.strip()
+            if not l.endswith('/'):
+                l = "%s/" % l
+            if l == '/':
+                continue
+
+            args.path = l
+            count = int(artifactCount(args))
+            if count <= 0:
+                continue
+
+            if last_dir and l.startswith(last_dir) or l == last_dir:
+                continue
+
+            if l in all_dirs:
+                continue
+
+            # check if the parent is already in the dir list
+            if '/'.join(l.split('/')[0:-1]) in all_dirs:
+                continue
+
+            if count < 50000:
+                all_dirs[l] = count
+                last_dir = l
+            else:
+                newdirs = []
+                for d in dirs:
+                    if d.startswith(l):
+                        newdirs.append(d)
+
+                if l in newdirs:
+                    del newdirs[newdirs.index(l)]
+
+                if newdirs:
+                    sub_dirs = buildDirList(newdirs)
+                    for sd in sub_dirs:
+                        all_dirs[sd] = sub_dirs[sd]
+                    last_dir = sd
+                else:
+                    all_dirs[l] = count
+                    last_dir = l
+
+
+        log.debug("original list of directories: %s" % len(dirs))
+        log.debug("reduced set of directories: %s" % len(all_dirs.keys()))
+        return all_dirs
+
+    def minimumJobs(args, expected_count=0):
+        query_args = vars(args)
+
+        if expected_count >= 50000:
+            result = run_query('raw_coverage_nosubdir', **query_args)
+        else:
+            result = run_query('raw_coverage', **query_args)
 
         # format is: {sourcename: {lines: {}, suites: []}, sourcename: ...}
         retVal = {}
 
         # this will be 1+ files, and 1+ suites, need to support that
+        if expected_count and len(result['data']) != expected_count:
+            log.debug("  Missing data for path: %s: %s != %s" % (args.path, len(result['data']), expected_count))
         for suite in result['data']:
             sourcename = suite[0]['file']['name']
             if sourcename not in retVal:
@@ -110,21 +175,24 @@ def run(args):
 
         return output, jsonOutput
 
+
+    # Main code
     if os.path.isfile(args.path):
         merged_data = {}
         with open(args.path, 'r') as f:
             data = f.read()
+        dirs = data.split('\n')
+        all_dirs = buildDirList(dirs)
 
-        for line in data.split('\n'):
-            args.path = line.strip()
-            if not args.path:
-                continue
-            print("generating coverage for: %s" % args.path)
-            output, jsonOutput = minimumJobs(args)
+        for dir in all_dirs:
+            args.path = dir
+            log.debug("generating coverage for: %s" % args.path)
+
+            output, jsonOutput = minimumJobs(args, all_dirs[dir])
             for filename in jsonOutput:
                 merged_data[filename] = jsonOutput[filename]
 
-        with open('%s.json' %s (OUTPUTFILE_PREFIX), 'wb') as f:
+        with open('%s.json' % (OUTPUTFILE_PREFIX), 'wb') as f:
             json.dump(merged_data, f)
         return []
     else:
