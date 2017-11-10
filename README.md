@@ -1,6 +1,6 @@
-#### Recipes
-[try usage](#try-usage)
-[task durations](#task-durations)
+#### View Recipe
+[try usage](#try-usage)  
+[task durations](#task-durations)  
 
 ## Try Usage
 
