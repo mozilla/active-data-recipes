@@ -63,6 +63,8 @@ the columns in a table, run:
 Get information on the longest running tasks. Returns the total count, average runtime and total
 runtime over a given date range and set of branches.
 
+[View Results](https://ahal.github.io/active-data-recipes/#task-durations)
+
 ## Try Usage
 
     adr try_usage
@@ -70,7 +72,7 @@ runtime over a given date range and set of branches.
 Prints stats on what percentage of try pushes are being scheduled with various different mechanisms
 over the last week. The date range can be modified the same as the `hours_on_try` recipe.
 
-<script src="https://gist.github.com/ahal/ef47348af284653cb85812623f2916ad.js"></script>
+[View Results](https://ahal.github.io/active-data-recipes/#try-usage)
 
 ## Try Users
 
