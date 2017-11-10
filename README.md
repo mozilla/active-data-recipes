@@ -38,6 +38,8 @@ For recipe specific options see:
 
 Get information on the backout rate on autoland and mozilla-inbound over the given time period.
 
+[View Results](https://ahal.github.io/active-data-recipes/#backout-rate)
+
 ## Code Coverage
 
     adr code_coverage --path <path> --rev <rev>
@@ -51,6 +53,7 @@ Get code coverage information for the given `path` at `rev`. Both arguments are 
 
 See how many files in tree have any code coverage at all.
 
+[View Results](https://ahal.github.io/active-data-recipes/#files-with-coverage)
 
 ## Hours on Try
 
