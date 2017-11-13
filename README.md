@@ -3,7 +3,7 @@
 * [files_with_coverage](#files-with-coverage)
 * [task_durations](#task-durations)
 * [try_usage](#try-usage)
-* [try users](#try-users)
+* [try_users](#try-users)
 
 ## Backout Rate
 
