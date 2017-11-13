@@ -3,6 +3,7 @@
 * [files_with_coverage](#files-with-coverage)
 * [task_durations](#task-durations)
 * [try_usage](#try-usage)
+* [try users](#try-users)
 
 ## Backout Rate
 
@@ -27,3 +28,9 @@ Top 25 tasks with the longest average duration over the past week.
 Methods used to push to try over the past week.
 
 {% gist 01a58c929e33bc5d2ef0092ce2cad12e try-usage.md %}
+
+## Try Users
+
+Heaviest users of try over the past week.
+
+{% gist 01a58c929e33bc5d2ef0092ce2cad12e try-users.md %}
