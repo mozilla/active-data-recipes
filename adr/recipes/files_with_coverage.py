@@ -29,8 +29,7 @@ def run(args):
             by_revision[item[0]]['total'] = item[2]
 
     data = []
-    dates = by_date.keys()
-    dates.sort(reverse=True)
+    dates = sorted(by_date.keys(), reverse=True)
 
     for date in dates[0:args.limit]:
         rev = by_date[date]

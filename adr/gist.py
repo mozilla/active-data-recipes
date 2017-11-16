@@ -34,7 +34,7 @@ def cli(args=sys.argv[1:]):
     output = None
     for recipe in config['recipes']:
         recipe_args = config['recipes'][recipe]
-        table = run_recipe(recipe, recipe_args, fmt='markdown')
+        table = bytes(run_recipe(recipe, recipe_args, fmt='markdown'), 'utf8')
 
         filename = '{}.md'.format(recipe.replace('_', '-'))
         cmd = [
@@ -48,8 +48,7 @@ def cli(args=sys.argv[1:]):
             log.info("no 'gist' key defined, creating new gist")
 
         proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        proc.stdin.write(table)
-        output = proc.communicate()[0].strip()
+        output = proc.communicate(input=table)[0].strip()
         log.info("updated {}".format(recipe))
 
         if 'gist' not in config:
