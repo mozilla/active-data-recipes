@@ -1,4 +1,4 @@
-from":"coverage",
+from: coverage
 select:
     - {value: source.file.name, aggregate: cardinality}
     - {value: source.file.total_uncovered, aggregate: sum}
@@ -9,9 +9,9 @@ where:
         - prefix: {repo.changeset.id: {$eval: rev}}
 groupby:
     - {name: file,
-       value:
-           left: [source.file.name, add: [1, {find: {source.file.name: "/"},
-                                                     start: {length: {literal: {$eval: path}}},
-                                                     default: {length: "source.file.name"}}]]}
+       value: {left: [source.file.name, {add: [1, {find: {source.file.name: "/"},
+                                                   start: {length: {literal: {$eval: path}}},
+                                                   default: {length: "source.file.name"}}]}
+       ]}}
 format: table
 limit: 1000
