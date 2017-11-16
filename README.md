@@ -1,5 +1,7 @@
 # active-data-recipes
 
+[![Build Status](https://travis-ci.org/ahal/active-data-recipes.svg?branch=master)](https://travis-ci.org/ahal/active-data-recipes)
+
 A repository of various ActiveData recipes. A recipe is a small snippet that runs one or more active
 data queries and returns the output. Queries can sometimes be modified by command line arguments and
 output can sometimes be post-processed.
