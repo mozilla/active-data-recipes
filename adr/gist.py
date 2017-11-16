@@ -16,15 +16,17 @@ DEFAULT_CONFIG = os.path.expanduser(os.path.join('~', '.adr-gist.yml'))
 
 
 def cli(args=sys.argv[1:]):
+    parser = ArgumentParser()
+    parser.add_argument('gist_config', nargs='?', default=DEFAULT_CONFIG,
+                        help='Path to yaml config file.')
+    parser.add_argument('--gist', default='gist',
+                        help='Path to the gist binary.')
+    args = parser.parse_args(args)
+
     gist = find_executable('gist')
     if not gist:
         log.error("gist not installed!")
         return 1
-
-    parser = ArgumentParser()
-    parser.add_argument('gist_config', nargs='?', default=DEFAULT_CONFIG,
-                        help='Path to yaml config file.')
-    args = parser.parse_args(args)
 
     with open(args.gist_config, 'r') as fh:
         config = yaml.load(fh)
