@@ -1,3 +1,4 @@
+---
 from: task
 select:
     - {aggregate: sum, name: hours, value: {div: {action.duration: 3600}}}
@@ -9,3 +10,6 @@ where:
         - lte: [repo.push.date, {date: {$eval: to_date}}]
         - lte: [action.duration, {$eval: max_task_duration}]
 limit: 1000
+
+---
+{data: {"hours":147043.22233721122,"tasks":422341}}

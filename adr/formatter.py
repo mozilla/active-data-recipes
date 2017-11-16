@@ -26,7 +26,7 @@ class TableFormatter(object):
             else:
                 header = data.keys()
 
-            if isinstance(data.values()[0], list):
+            if isinstance(list(data.values())[0], list):
                 data = [[i for i in data[key]] for key in header]
             else:
                 t = []

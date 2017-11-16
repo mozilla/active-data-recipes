@@ -25,20 +25,23 @@ def query_activedata(query):
     return response.json()
 
 
-def run_query(query, **kwargs):
+def load_query(name):
     for path in os.listdir(QUERY_DIR):
-        name = os.path.splitext(path)[0]
-        if query != name:
+        query = os.path.splitext(path)[0]
+        if name != query:
             continue
 
         with open(os.path.join(QUERY_DIR, path)) as fh:
-            query = yaml.load(fh)
-
-        query = jsone.render(query, kwargs)
-        query = json.dumps(query, indent=2, separators=(',', ':'))
-        return query_activedata(query)
+            return list(yaml.load_all(fh))
 
     log.error("query '{}' not found".format(query))
+
+
+def run_query(name, **context):
+    query = load_query(name)[0]
+    query = jsone.render(query, context)
+    query_str = json.dumps(query, indent=2, separators=(',', ':'))
+    return query_activedata(query_str)
 
 
 def format_date(timestamp, interval='day'):
