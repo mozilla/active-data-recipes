@@ -12,7 +12,7 @@ Each recipe should try to answer a single question.
 
 or
 
-    git clone https://github.com/ahal/active-data-recipes
+    git clone https://github.com/mozilla/active-data-recipes
     cd active-data-recipes
     python setup.py develop
 
