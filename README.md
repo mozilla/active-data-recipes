@@ -38,7 +38,7 @@ For recipe specific options see:
 
 Get information on the backout rate on autoland and mozilla-inbound over the given time period.
 
-[View Results](https://ahal.github.io/active-data-recipes/#backout-rate)
+[View Results](https://mozilla.github.io/active-data-recipes/#backout-rate)
 
 ## Code Coverage
 
@@ -53,7 +53,7 @@ Get code coverage information for the given `path` at `rev`. Both arguments are 
 
 See how many files in tree have any code coverage at all.
 
-[View Results](https://ahal.github.io/active-data-recipes/#files-with-coverage)
+[View Results](https://mozilla.github.io/active-data-recipes/#files-with-coverage)
 
 ## Hours on Try
 
@@ -80,7 +80,7 @@ the columns in a table, run:
 Get information on the longest running tasks. Returns the total count, average runtime and total
 runtime over a given date range and set of branches.
 
-[View Results](https://ahal.github.io/active-data-recipes/#task-durations)
+[View Results](https://mozilla.github.io/active-data-recipes/#task-durations)
 
 ## Try Usage
 
@@ -89,7 +89,7 @@ runtime over a given date range and set of branches.
 Prints stats on what percentage of try pushes are being scheduled with various different mechanisms
 over the last week. The date range can be modified the same as the `hours_on_try` recipe.
 
-[View Results](https://ahal.github.io/active-data-recipes/#try-usage)
+[View Results](https://mozilla.github.io/active-data-recipes/#try-usage)
 
 ## Try Users
 
