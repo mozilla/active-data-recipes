@@ -5,6 +5,7 @@ import json
 import logging
 import os
 
+import jsone
 import requests
 import yaml
 
@@ -33,8 +34,8 @@ def run_query(query, **kwargs):
         with open(os.path.join(QUERY_DIR, path)) as fh:
             query = yaml.load(fh)
 
+        query = jsone.render(query, kwargs)
         query = json.dumps(query, indent=2, separators=(',', ':'))
-        query = query % kwargs
         return query_activedata(query)
 
     log.error("query '{}' not found".format(query))

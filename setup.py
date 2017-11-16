@@ -6,6 +6,7 @@ with open('README.md') as fh:
     README = fh.read()
 
 DEPS = [
+    'json-e >= 2.3.2',
     'requests >= 2.18.3',
     'terminaltables >= 3.1.0',
     'pyyaml',

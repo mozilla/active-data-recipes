@@ -5,13 +5,13 @@ select:
     - {value: source.file.total_covered, aggregate: sum}
 where:
     and:
-        - prefix: {source.file.name: "%(path)s"}
-        - prefix: {repo.changeset.id: "%(rev)s"}
+        - prefix: {source.file.name: {$eval: path}}
+        - prefix: {repo.changeset.id: {$eval: rev}}
 groupby:
     - {name: file,
        value:
            left: [source.file.name, add: [1, {find: {source.file.name: "/"},
-                                                     start: {length: {literal: "%(path)s"}},
+                                                     start: {length: {literal: {$eval: path}}},
                                                      default: {length: "source.file.name"}}]]}
 format: table
 limit: 1000

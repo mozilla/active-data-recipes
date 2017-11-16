@@ -4,7 +4,7 @@ select:
 where:
     and:
         - in: {branch.name: ["autoland", "mozilla-inbound"]}
-        - gte: [push.date, {date: "%(from_date)s"}]
-        - lte: [push.date, {date: "%(to_date)s"}]
+        - gte: [push.date, {date: {$eval: from_date}}]
+        - lte: [push.date, {date: {$eval: to_date}}]
         - exists: changeset.backedoutby
 limit: 100000

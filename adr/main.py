@@ -17,11 +17,11 @@ log.addHandler(logging.StreamHandler())
 RECIPE_DIR = os.path.join(here, 'recipes')
 
 
-def run_recipe(recipe, args, fmt='table', quiet=False):
-    if quiet:
-        log.setLevel(logging.INFO)
-    else:
+def run_recipe(recipe, args, fmt='table', verbose=False):
+    if verbose:
         log.setLevel(logging.DEBUG)
+    else:
+        log.setLevel(logging.INFO)
 
     modname = '.recipes.{}'.format(recipe)
     mod = importlib.import_module(modname, package='adr')
@@ -43,8 +43,8 @@ class RecipeParser(ArgumentParser):
         self.add_argument('-f', '--format', dest='fmt', default='table',
                           choices=all_formatters.keys(),
                           help="Format to print data in, defaults to 'table'.")
-        self.add_argument('-q', '--quiet', action='store_true', default=False,
-                          help="Don't print query.")
+        self.add_argument('-v', '--verbose', action='store_true', default=False,
+                          help="Print the query and other debugging information.")
 
 
 def cli(args=sys.argv[1:]):
@@ -63,7 +63,7 @@ def cli(args=sys.argv[1:]):
         if args.recipe != name:
             continue
 
-        print(run_recipe(args.recipe, remainder, fmt=args.fmt, quiet=args.quiet))
+        print(run_recipe(args.recipe, remainder, fmt=args.fmt, verbose=args.verbose))
         return
 
     if not args.list:

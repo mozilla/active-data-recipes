@@ -3,7 +3,7 @@ groupby:
     - repo.push.user
 where:
     and:
-        - eq: {repo.branch.name: "%(branch)s"}
-        - gte: [repo.push.date, {date: "%(from_date)s"}]
-        - lte: [repo.push.date, {date: "%(to_date)s"}]
+        - eq: {repo.branch.name: {$eval: branch}}
+        - gte: [repo.push.date, {date: {$eval: from_date}}]
+        - lte: [repo.push.date, {date: {$eval: to_date}}]
 limit: 1000

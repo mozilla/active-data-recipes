@@ -6,7 +6,7 @@ edges:
     - {name: file,
        value: {left: [source.file.name,
                       {add: [1, {default: {length: source.file.name},
-                                 start: {length: {literal: "%(path)s"}},
+                                 start: {length: {literal: {$eval: path}}},
                                  find: {source.file.name: "/"}
                                  }
                              ]
@@ -15,7 +15,7 @@ edges:
        }
 where:
     and:
-        - prefix: {source.file.name: "%(path)s"}
-        - prefix: {repo.changeset.id: "%(rev)s"}
+        - prefix: {source.file.name: {$eval: path}}
+        - prefix: {repo.changeset.id: {$eval: rev}}
 limit: 1000
 format: table

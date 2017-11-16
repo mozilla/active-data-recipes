@@ -10,7 +10,7 @@ def run(args):
                         help="Starting date to pull data from, defaults to a week ago")
     parser.add_argument('--to', dest='to_date', default='now',
                         help="Ending date to pull data from, defaults to today")
-    parser.add_argument('--max-duration', dest='max_task_duration', default='18000',
+    parser.add_argument('--max-duration', dest='max_task_duration', type=int, default=18000,
                         help="Maximum task duration to consider (in seconds. Defaults "
                              "to 18000 seconds.")
     args = parser.parse_args(args)

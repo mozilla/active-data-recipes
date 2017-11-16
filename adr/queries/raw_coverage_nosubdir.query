@@ -5,8 +5,8 @@ select:
     - run.name
 where:
     and:
-        - prefix: {source.file.name: "%(path)s"}
-        - not: {regex: {source.file.name: "%(path)s/[A-Za-z0-9]+/.*"}}
-        - prefix: {repo.changeset.id12: "%(rev)s"}
+        - prefix: {source.file.name: {$eval: path}}
+        - not: {regex: {source.file.name: {$eval: path+'/[A-Za-z0-9]+/.*\"'}}}
+        - prefix: {repo.changeset.id12: {$eval: rev}}
 limit: 50000
 format: table

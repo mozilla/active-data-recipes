@@ -3,7 +3,7 @@ select:
     - {aggregate: count}
 where:
     and:
-        - prefix: {source.file.name: "%(path)s"}
-        - prefix: {repo.changeset.id12: "%(rev)s"}
+        - prefix: {source.file.name: {$eval: path}}
+        - prefix: {repo.changeset.id12: {$eval: rev}}
 format: table
 limit: 10000

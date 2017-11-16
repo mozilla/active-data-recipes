@@ -34,7 +34,7 @@ def cli(args=sys.argv[1:]):
     output = None
     for recipe in config['recipes']:
         recipe_args = config['recipes'][recipe]
-        table = run_recipe(recipe, recipe_args, fmt='markdown', quiet=True)
+        table = run_recipe(recipe, recipe_args, fmt='markdown')
 
         filename = '{}.md'.format(recipe.replace('_', '-'))
         cmd = [
