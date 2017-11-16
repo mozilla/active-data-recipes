@@ -1,10 +1,9 @@
-{
-    "limit":1000,
-    "from":"task",
-    "where":{"and":[
-        {"eq":{"repo.branch.name":"%(branch)s"}},
-        {"gte":["repo.push.date", {"date":"%(from_date)s"}]},
-        {"lte":["repo.push.date", {"date":"%(to_date)s"}]}
-    ]},
-    "groupby": ["repo.push.user"]
-}
+from: task
+groupby:
+    - repo.push.user
+where:
+    and:
+        - eq: {repo.branch.name: "%(branch)s"}
+        - gte: [repo.push.date, {date: "%(from_date)s"}]
+        - lte: [repo.push.date, {date: "%(to_date)s"}]
+limit: 1000

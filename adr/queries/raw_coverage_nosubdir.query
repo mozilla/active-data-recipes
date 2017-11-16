@@ -1,11 +1,12 @@
-{
-	"limit":50000,
-	"from":"coverage",
-	"where":{"and":[
-		{"prefix":{"source.file.name":"%(path)s"}},
-		{"not":{"regex":{"source.file.name":"%(path)s/[A-Za-z0-9]+/.*"}}},
-		{"prefix":{"repo.changeset.id12":"%(rev)s"}}
-	]},
-	"select":["source","run.suite","run.name"],
-	"format":"table"
-}
+from: coverage
+select:
+    - source
+    - run.suite
+    - run.name
+where:
+    and:
+        - prefix: {source.file.name: "%(path)s"}
+        - not: {regex: {source.file.name: "%(path)s/[A-Za-z0-9]+/.*"}}
+        - prefix: {repo.changeset.id12: "%(rev)s"}
+limit: 50000
+format: table

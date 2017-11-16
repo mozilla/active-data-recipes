@@ -1,23 +1,15 @@
-{
-	"sort":{"repo.push.date":"desc"},
-	"from":"coverage",
-	"format":"table",
-	"limit":50,
-	"where":{"and":[
-		{"gt":{"source.file.total_covered":0}},
-		{"eq":{"repo.branch.name":"mozilla-central"}}
-	]},
-	"groupby":["repo.changeset.id12","repo.push.date"],
-	"select":[
-		{
-			"aggregate":"cardinality",
-			"name":"num_tasks",
-			"value":"task.id"
-		},
-		{
-			"aggregate":"cardinality",
-			"name":"num_files_w_coverage",
-			"value":"source.file.name"
-		}
-	]
-}
+from: coverage
+select:
+    - {aggregate: cardinality, name: num_tasks, value: task.id}
+    - {aggregate: cardinality, name: num_files_w_coverage, value: source.file.name}
+groupby:
+    - repo.changeset.id12
+    - repo.push.date
+where:
+    and:
+        - gt: {source.file.total_covered: 0}
+        - eq: {repo.branch.name: mozilla-central}
+sort:
+    repo.push.date: desc
+format: table
+limit: 50

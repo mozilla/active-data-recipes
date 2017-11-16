@@ -1,27 +1,21 @@
-{
-	"from":"coverage",
-	"format":"table",
-	"edges":[
-		"run.suite.fullname",
-		{
-			"name":"file",
-			"value":{"left":[
-				"source.file.name",
-				{"add":[
-					1,
-					{
-						"default":{"length":"source.file.name"},
-						"start":{"length":{"literal":"%(path)s"}},
-						"find":{"source.file.name":"/"}
-					}
-				]}
-			]}
-		}
-	],
-	"limit":1000,
-	"where":{"and":[
-		{"prefix":{"source.file.name":"%(path)s"}},
-		{"prefix":{"repo.changeset.id":"%(rev)s"}}
-	]},
-	"select":[{"aggregate":"cardinality","value":"source.file.name"}]
-}
+from: coverage
+select:
+    - {aggregate: cardinality, value: source.file.name}
+edges:
+    - run.suite.fullname
+    - {name: file,
+       value: {left: [source.file.name,
+                      {add: [1, {default: {length: source.file.name},
+                                 start: {length: {literal: "%(path)s"}},
+                                 find: {source.file.name: "/"}
+                                 }
+                             ]
+                       }]
+               }
+       }
+where:
+    and:
+        - prefix: {source.file.name: "%(path)s"}
+        - prefix: {repo.changeset.id: "%(rev)s"}
+limit: 1000
+format: table

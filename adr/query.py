@@ -1,10 +1,12 @@
 from __future__ import print_function, absolute_import
 
 import datetime
+import json
 import logging
 import os
 
 import requests
+import yaml
 
 here = os.path.abspath(os.path.dirname(__file__))
 log = logging.getLogger('adr')
@@ -29,8 +31,9 @@ def run_query(query, **kwargs):
             continue
 
         with open(os.path.join(QUERY_DIR, path)) as fh:
-            query = fh.read()
+            query = yaml.load(fh)
 
+        query = json.dumps(query, indent=2, separators=(',', ':'))
         query = query % kwargs
         return query_activedata(query)
 

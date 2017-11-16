@@ -1,11 +1,10 @@
-{
-    "limit":100000,
-    "from":"repo",
-    "where":{"and":[
-        {"in":{"branch.name": ["autoland", "mozilla-inbound"]}},
-        {"gte":["push.date", {"date":"%(from_date)s"}]},
-        {"lte":["push.date", {"date":"%(to_date)s"}]},
-        {"exists":"changeset.backedoutby"}
-    ]},
-    "select": ["push.id"]
-}
+from: repo
+select:
+    - push.id
+where:
+    and:
+        - in: {branch.name: ["autoland", "mozilla-inbound"]}
+        - gte: [push.date, {date: "%(from_date)s"}]
+        - lte: [push.date, {date: "%(to_date)s"}]
+        - exists: changeset.backedoutby
+limit: 100000

@@ -24,7 +24,7 @@ def run(args):
                         help="Key to sort on (int, 0-based index)")
 
     args = parser.parse_args(args)
-    args.branch = json.dumps(args.branch)
+    #args.branch = json.dumps(args.branch)
     query_args = vars(args)
 
     data = run_query('task_durations', **query_args)['data']

@@ -1,1 +1,3 @@
-{"from":"meta.columns","where":{"eq":{"table":"%(table)s"}}}
+from: meta.columns
+where:
+    eq: {table: "%(table)s"}
