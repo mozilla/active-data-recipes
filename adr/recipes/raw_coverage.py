@@ -1,13 +1,13 @@
 from __future__ import print_function, absolute_import
 
-from argparse import ArgumentParser
-
-from ..query import run_query
-
 import copy
 import json
-import os
 import logging
+import os
+
+from ..cli import RecipeParser
+from ..query import run_query
+
 
 OUTPUTFILE_PREFIX = 'coverage_map'
 log = logging.getLogger('adr')
@@ -32,7 +32,7 @@ def taskclusterName(jobname):
     return "test-linux64/debug-%s" % jobname
 
 def run(args):
-    parser = ArgumentParser()
+    parser = RecipeParser()
     parser.add_argument('--path', required=True,
                         help="Source code path to show summary coverage stats for.")
     parser.add_argument('--rev', required=True,

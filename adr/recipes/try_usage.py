@@ -1,19 +1,13 @@
 from __future__ import print_function, absolute_import
 
-from argparse import ArgumentParser
 from collections import defaultdict, OrderedDict
 
+from ..cli import RecipeParser
 from ..query import run_query
 
 
 def run(args):
-    parser = ArgumentParser()
-    parser.add_argument('--from', dest='from_date', default='now-week',
-                        help="Starting date to pull data from, defaults "
-                             "to a week ago")
-    parser.add_argument('--to', dest='to_date', default='now',
-                        help="Ending date to pull data from, defaults to "
-                             "today")
+    parser = RecipeParser('date')
     args = parser.parse_args(args)
 
     query_args = vars(args)

@@ -1,15 +1,11 @@
 from __future__ import print_function, absolute_import
 
-from argparse import ArgumentParser
+from ..cli import RecipeParser
 from ..query import run_query
 
 
 def run(args):
-    parser = ArgumentParser()
-    parser.add_argument('--from', dest='from_date', default='now-week',
-                        help="Starting date to pull data from, defaults to a week ago")
-    parser.add_argument('--to', dest='to_date', default='now',
-                        help="Ending date to pull data from, defaults to today")
+    parser = RecipeParser('date')
     parser.add_argument('--max-duration', dest='max_task_duration', type=int, default=18000,
                         help="Maximum task duration to consider (in seconds. Defaults "
                              "to 18000 seconds.")
