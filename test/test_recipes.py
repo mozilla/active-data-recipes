@@ -4,7 +4,7 @@ import json
 import os
 import sys
 from imp import reload
-from io import StringIO
+from io import BytesIO, StringIO
 
 import pytest
 import yaml
@@ -36,7 +36,10 @@ def test_recipe(monkeypatch, recipe_test):
 
     result = json.loads(run_recipe(recipe_test['recipe'], recipe_test['args'], fmt='json'))
 
-    buf = StringIO()
+    if sys.version_info > (3, 0):
+        buf = StringIO()
+    else:
+        buf = BytesIO()
     yaml.dump(result, buf)
     print("Yaml formatted result for copy/paste:")
     print(buf.getvalue())
