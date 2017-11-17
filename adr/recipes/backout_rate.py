@@ -18,11 +18,12 @@ def run(args):
 
     args = parser.parse_args(args)
     query_args = vars(args)
+    query = run_query('backout_rate', **query_args)
 
-    data = next(run_query('push_ids', **query_args))['data']
+    data = next(query)['data']
     pushes = len(set(data['push.id']))
 
-    data = next(run_query('backout_ids', **query_args))['data']
+    data = next(query)['data']
     backouts = len(set(data['push.id']))
 
     result = (
