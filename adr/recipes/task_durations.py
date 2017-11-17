@@ -27,7 +27,7 @@ def run(args):
     #args.branch = json.dumps(args.branch)
     query_args = vars(args)
 
-    data = run_query('task_durations', **query_args)['data']
+    data = next(run_query('task_durations', **query_args))['data']
     result = []
     for record in data:
         if record[2] is None:

@@ -13,11 +13,12 @@ def run(args):
     args = parser.parse_args(args)
 
     if not args.table:
-        data = run_query('meta')['data']
+        data = next(run_query('meta'))['data']
         data = sorted([(d['name'],) for d in data])
         data.insert(0, ('Table',))
         return data
-    data = run_query('meta_columns', table=args.table)['data']
+
+    data = next(run_query('meta_columns', table=args.table))['data']
     data = sorted([(d['name'],) for d in data])
     data.insert(0, ('Column',))
     return data

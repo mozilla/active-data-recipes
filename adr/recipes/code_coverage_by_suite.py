@@ -23,7 +23,7 @@ def run(args):
 
     retVal = {}
     counter = 0
-    result = run_query('code_coverage_by_suite', **query_args)
+    result = next(run_query('code_coverage_by_suite', **query_args))
     suites = []
     for line in result['data']:
         # line = [suite, filename, count]

@@ -17,7 +17,7 @@ def run(args):
     args = parser.parse_args(args)
 
     query_args = vars(args)
-    data = run_query('try_commit_messages', **query_args)['data']
+    data = next(run_query('try_commit_messages', **query_args))['data']
 
     count = defaultdict(int)
     count['total'] = len(data['message'])

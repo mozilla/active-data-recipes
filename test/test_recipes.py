@@ -30,7 +30,8 @@ def test_recipe(monkeypatch, recipe_test):
     def _run_query(query, *args, **kwargs):
         if query not in recipe_test['queries']:
             pytest.fail('no data found for {}'.format(query))
-        return recipe_test['queries'][query]
+        for result in recipe_test['queries'][query]:
+            yield result
 
     monkeypatch.setattr(query, 'run_query', _run_query)
 

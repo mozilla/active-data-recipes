@@ -2,5 +2,6 @@
 recipe: hours_on_try
 args: []
 queries:
-    total_hours_spent_on_branch: {data: {"hours":147043.22233721122,"tasks":422341}}
+    total_hours_spent_on_branch:
+        - {data: {"hours":147043.22233721122,"tasks":422341}}
 expected: {'hours': 147043, 'tasks': 422341}

@@ -25,7 +25,7 @@ def removeJob(lines, jobname):
             del retVal[line]
 
     return retVal
-    
+
 def taskclusterName(jobname):
     # output data to .json file, create format like: test-linux64/debug-<jobname>
     # todo, there are a lot of exceptions.
@@ -45,7 +45,7 @@ def run(args):
 
     def artifactCount(args):
         query_args = vars(args)
-        result = run_query('raw_coverage_count', **query_args)
+        result = next(run_query('raw_coverage_count', **query_args))
         for item in result['data']:
             return item[0]
 
@@ -105,9 +105,9 @@ def run(args):
         query_args = vars(args)
 
         if expected_count >= 50000:
-            result = run_query('raw_coverage_nosubdir', **query_args)
+            result = next(run_query('raw_coverage_nosubdir', **query_args))
         else:
-            result = run_query('raw_coverage', **query_args)
+            result = next(run_query('raw_coverage', **query_args))
 
         # format is: {sourcename: {lines: {}, suites: []}, sourcename: ...}
         retVal = {}

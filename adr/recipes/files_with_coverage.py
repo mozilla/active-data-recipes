@@ -12,8 +12,8 @@ def run(args):
     args = parser.parse_args(args)
 
     header = ['Revision', 'Files With Coverage', 'Total Files', 'Percent with Coverage']
-    covered_files = run_query('covered_files')['data']
-    total_files = run_query('total_files')['data']
+    covered_files = next(run_query('covered_files'))['data']
+    total_files = next(run_query('total_files'))['data']
 
     by_revision = {}
     by_date = {}

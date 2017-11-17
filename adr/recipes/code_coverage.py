@@ -18,6 +18,6 @@ def run(args):
     args = parser.parse_args(args)
     query_args = vars(args)
 
-    result = run_query('code_coverage', **query_args)
+    result = next(run_query('code_coverage', **query_args))
     output = [result['header']]+result['data']
     return output

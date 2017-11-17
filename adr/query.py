@@ -32,16 +32,17 @@ def load_query(name):
             continue
 
         with open(os.path.join(QUERY_DIR, path)) as fh:
-            return list(yaml.load_all(fh))
+            for query in yaml.load_all(fh):
+                yield query
 
     log.error("query '{}' not found".format(query))
 
 
 def run_query(name, **context):
-    query = load_query(name)[0]
-    query = jsone.render(query, context)
-    query_str = json.dumps(query, indent=2, separators=(',', ':'))
-    return query_activedata(query_str)
+    for query in load_query(name):
+        query = jsone.render(query, context)
+        query_str = json.dumps(query, indent=2, separators=(',', ':'))
+        yield query_activedata(query_str)
 
 
 def format_date(timestamp, interval='day'):

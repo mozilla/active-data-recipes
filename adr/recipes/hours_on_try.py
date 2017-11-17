@@ -18,6 +18,6 @@ def run(args):
     query_args = vars(args)
     query_args['branch_name'] = 'try'
 
-    data = run_query('total_hours_spent_on_branch', **query_args)['data']
+    data = next(run_query('total_hours_spent_on_branch', **query_args))['data']
     data['hours'] = int(data['hours'])
     return data
