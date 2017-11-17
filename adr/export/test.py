@@ -1,9 +1,11 @@
 from __future__ import print_function, absolute_import
 
+import json
 import logging
 import os
 import sys
 from argparse import ArgumentParser
+from collections import defaultdict
 
 import yaml
 
@@ -23,13 +25,13 @@ def cli(args=sys.argv[1:]):
     args, remainder = parser.parse_known_args(args)
 
     orig_run_query = query.run_query
-    query_results = {}
+    query_results = defaultdict(list)
 
     def new_run_query(name, **context):
         qgen = orig_run_query(name, **context)
 
         for result in qgen:
-            query_results[name] = result
+            query_results[name].append(result)
             yield result
 
     query.run_query = new_run_query
@@ -38,8 +40,8 @@ def cli(args=sys.argv[1:]):
     test = {
         'recipe': args.recipe,
         'args': remainder,
-        'queries': query_results,
-        'expected': result,
+        'queries': dict(query_results),
+        'expected': json.loads(result),
     }
 
     path = os.path.join(test_dir, '{}.test'.format(args.recipe))
