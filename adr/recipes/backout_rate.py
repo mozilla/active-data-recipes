@@ -22,7 +22,7 @@ def run(args):
     data = next(run_query('push_ids', **query_args))['data']
     pushes = len(set(data['push.id']))
 
-    query = next(run_query('backout_ids', **query_args))['data']
+    data = next(run_query('backout_ids', **query_args))['data']
     backouts = len(set(data['push.id']))
 
     result = (
