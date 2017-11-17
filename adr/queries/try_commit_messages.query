@@ -9,19 +9,3 @@ where:
         - gte: [push.date, {date: {$eval: from_date}}]
         - lte: [push.date, {date: {$eval: to_date}}]
 limit: 100000
-
----
-data: {
-    "message":[
-        "try: -b d -p win64 -u none -t none\n\nPushed via `mach try syntax`",
-        "try: -b o -p linux64-ccov -t g5-e10s --artifact",
-        "Fuzzy with query: ccov mochitest-e10s-1$\n\nPushed via `mach try fuzzy`",
-        "Pushed via `mach try empty`"
-    ],
-    "user":[
-        "foo@example.com",
-        "bar@example.com",
-        "baz@example.com",
-        "baz@example.com"
-    ]
-}

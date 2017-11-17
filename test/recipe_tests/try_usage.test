@@ -1,0 +1,29 @@
+---
+recipe: try_usage
+args: []
+queries:
+    try_commit_messages:
+        data: {
+            "message":[
+                "try: -b do -p linux -u none -t none\n\nPushed via `mach try syntax`",
+                "try: -b d -p win64 -u none -t none\n\nPushed via `mach try syntax`",
+                "try: -b o -p linux64-ccov -t g5-e10s --artifact",
+                "try: -b o -p win64 -u none -t none\n\nPushed via `mach try syntax`",
+                "Fuzzy with query: e10s-1$\n\nPushed via `mach try fuzzy`",
+                "try: -b o -p linux64-ccov -t g5-e10s --artifact",
+            ],
+            "user":[
+                "foo@example.com",
+                "foo@example.com",
+                "bar@example.com",
+                "baz@example.com",
+                "foo@example.com",
+                "baz@example.com"
+            ]
+        }
+expected: [
+    ['Method', 'Pushes', 'Percent', 'Users', 'Push / User'],
+    ['total', 6, 100.0, 3, 2.0], ['mach try syntax', 3, 50.0, 2, 1.5],
+    ['vanilla try syntax', 2, 33.3, 2, 1.0],
+    ['mach try fuzzy', 1, 16.7, 1, 1.0]
+]

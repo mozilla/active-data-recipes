@@ -6,6 +6,8 @@ import os
 import sys
 from argparse import ArgumentParser
 
+from six import string_types
+
 from adr.formatter import all_formatters
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -27,9 +29,11 @@ def run_recipe(recipe, args, fmt='table', verbose=False):
     mod = importlib.import_module(modname, package='adr')
     output = mod.run(args)
 
-    formatter = all_formatters[fmt]
+    if isinstance(fmt, string_types):
+        fmt = all_formatters[fmt]
+
     log.debug("Result:")
-    return formatter(output)
+    return fmt(output)
 
 
 class RecipeParser(ArgumentParser):

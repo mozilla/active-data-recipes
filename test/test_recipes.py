@@ -1,5 +1,6 @@
 from __future__ import print_function, absolute_import
 
+import json
 import os
 
 import pytest
@@ -7,7 +8,6 @@ import yaml
 
 from adr import query
 from adr.main import run_recipe
-from adr.query import load_query
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -25,18 +25,16 @@ RECIPES = {
 }
 
 
-@pytest.fixture(autouse=True)
-def mock_run_query(monkeypatch):
+def test_recipe(monkeypatch, recipe_test):
 
     def _run_query(query, *args, **kwargs):
-        output = load_query(query)
-        if len(output) < 2:
-            pytest.skip('no sample data found')
-        return output[1]
+        if query not in recipe_test['queries']:
+            pytest.fail('no data found for {}'.format(query))
+        return recipe_test['queries'][query]
 
     monkeypatch.setattr(query, 'run_query', _run_query)
 
-
-@pytest.mark.parametrize('recipe', RECIPES.keys())
-def test_recipe(recipe):
-    run_recipe(recipe, RECIPES[recipe])
+    result = json.loads(run_recipe(recipe_test['recipe'], recipe_test['args'], fmt='json'))
+    print("Copy/paste result:")
+    print(result)
+    assert result == recipe_test['expected']

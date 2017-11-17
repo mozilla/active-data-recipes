@@ -6,10 +6,13 @@ from terminaltables import GithubFlavoredMarkdownTable, SingleTable
 
 
 class JSONFormatter(object):
+    def __init__(self, indent=None):
+        self.indent = indent
+
     def __call__(self, data):
         if isinstance(data, bytes):
             data = json.loads(data)
-        return json.dumps(data, indent=2)
+        return json.dumps(data, indent=self.indent)
 
 
 class TableFormatter(object):
