@@ -20,7 +20,9 @@ def run(args):
 
     query_args = vars(args)
     query_args['branch'] = 'try'
-    pushes = next(run_query('user_pushes', **query_args))['data']
+    pushes = next(run_query('user_pushes', **query_args))
+    print(pushes)
+    pushes = pushes['data']
 
     query_args['from'] = 'task'
     tasks = next(run_query('user_tasks', **query_args))['data']

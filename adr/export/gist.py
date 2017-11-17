@@ -9,7 +9,7 @@ from distutils.spawn import find_executable
 
 import yaml
 
-from .main import run_recipe
+from ..main import run_recipe
 
 log = logging.getLogger('adr')
 DEFAULT_CONFIG = os.path.expanduser(os.path.join('~', '.adr-gist.yml'))
@@ -23,7 +23,7 @@ def cli(args=sys.argv[1:]):
                         help='Path to the gist binary.')
     args = parser.parse_args(args)
 
-    gist = find_executable('gist')
+    gist = find_executable(args.gist)
     if not gist:
         log.error("gist not installed!")
         return 1
@@ -38,7 +38,7 @@ def cli(args=sys.argv[1:]):
 
         filename = '{}.md'.format(recipe.replace('_', '-'))
         cmd = [
-            'gist',
+            gist,
             '-f', filename,
         ]
 

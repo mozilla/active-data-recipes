@@ -17,7 +17,6 @@ QUERY_DIR = os.path.join(here, 'queries')
 
 
 def query_activedata(query):
-    log.debug("Running query:\n{}".format(query))
     response = requests.post(ACTIVE_DATA_URL,
                              data=query,
                              stream=True)
@@ -42,6 +41,7 @@ def run_query(name, **context):
     for query in load_query(name):
         query = jsone.render(query, context)
         query_str = json.dumps(query, indent=2, separators=(',', ':'))
+        log.debug("Running query {}:\n{}".format(name, query_str))
         yield query_activedata(query_str)
 
 
