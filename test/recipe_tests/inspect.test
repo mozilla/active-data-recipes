@@ -1,0 +1,1047 @@
+---
+recipe: inspect
+args: []
+queries:
+  meta:
+  - data:
+    - {name: saved_queries, timestamp: 1510934657.986817}
+    - {name: coverage, timestamp: 1510908914.029275}
+    - {name: unittest, timestamp: 1510923902.34292}
+    - {name: fx-test, timestamp: 1510924768.767904}
+    - {name: orange_factor, timestamp: 1510928928.100758}
+    - {name: coverage-summary, timestamp: 1510908262.781161}
+    - {name: repo, timestamp: 1510934985.541752}
+    - {name: task, timestamp: 1510935460.99098}
+    - {name: firefox-files, timestamp: 1510944605.580932}
+expected:
+- [Table]
+- [coverage]
+- [coverage-summary]
+- [firefox-files]
+- [fx-test]
+- [orange_factor]
+- [repo]
+- [saved_queries]
+- [task]
+- [unittest]
+
+---
+recipe: inspect
+args: [--table, task]
+queries:
+  meta_columns:
+  - data:
+    - es_column: action.timings.harness
+      es_index: task
+      last_updated: 1510934992.272431
+      name: action.timings.harness
+      nested_path: [action.timings, .]
+      table: task
+      type: object
+    - {es_column: build.task.provisioner, es_index: task, last_updated: 1510934990.603505,
+      name: build.task.provisioner, nested_path: ., table: task, type: object}
+    - {es_column: etl.source.type, es_index: task, last_updated: 1510934993.242768,
+      name: etl.source.type, nested_path: ., table: task, type: string}
+    - {es_column: build.task.retries, es_index: task, last_updated: 1510934989.869496,
+      name: build.task.retries, nested_path: ., table: task, type: object}
+    - {es_column: repo.index, es_index: task, last_updated: 1510934989.339645, name: repo.index,
+      nested_path: ., table: task, type: long}
+    - {es_column: build.run.key, es_index: task, last_updated: 1510934990.791192,
+      name: build.run.key, nested_path: ., table: task, type: string}
+    - {es_column: action.end_time, es_index: task, last_updated: 1510934992.343081,
+      name: action.end_time, nested_path: ., table: task, type: double}
+    - {es_column: task.retries, es_index: task, last_updated: 1510934988.79223, name: task.retries,
+      nested_path: ., table: task, type: object}
+    - es_column: action.timings.step
+      es_index: task
+      last_updated: 1510934992.190937
+      name: action.timings.step
+      nested_path: [action.timings, .]
+      table: task
+      type: string
+    - {es_column: etl.source.source, es_index: task, last_updated: 1510934993.221237,
+      name: etl.source.source, nested_path: ., table: task, type: object}
+    - {es_column: build.build.revision, es_index: task, last_updated: 1510934991.79925,
+      name: build.build.revision, nested_path: ., table: task, type: string}
+    - {es_column: build.build.revision12, es_index: task, last_updated: 1510934991.689822,
+      name: build.build.revision12, nested_path: ., table: task, type: string}
+    - {es_column: build.task.retries.total, es_index: task, last_updated: 1510934989.845407,
+      name: build.task.retries.total, nested_path: ., table: task, type: long}
+    - {es_column: build.action.harness_time_skew, es_index: task, last_updated: 1510934991.935812,
+      name: build.action.harness_time_skew, nested_path: ., table: task, type: double}
+    - {es_column: build.task.worker.type, es_index: task, last_updated: 1510934990.449424,
+      name: build.task.worker.type, nested_path: ., table: task, type: string}
+    - {es_column: task.run.start_time, es_index: task, last_updated: 1510934988.029422,
+      name: task.run.start_time, nested_path: ., table: task, type: double}
+    - {es_column: task.runs, es_index: task, last_updated: 1510934988.654094, name: task.runs,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.repo.branch, es_index: task, last_updated: 1510934991.505923,
+      name: build.repo.branch, nested_path: ., table: task, type: object}
+    - {es_column: task.maxRunTime, es_index: task, last_updated: 1510934987.438354,
+      name: task.maxRunTime, nested_path: ., table: task, type: long}
+    - {es_column: etl.error, es_index: task, last_updated: 1510934993.309229, name: etl.error,
+      nested_path: ., table: task, type: string}
+    - {es_column: run.suite.name, es_index: task, last_updated: 1510934989.266387,
+      name: run.suite.name, nested_path: ., table: task, type: string}
+    - {es_column: task.run.scheduled, es_index: task, last_updated: 1510934987.986362,
+      name: task.run.scheduled, nested_path: ., table: task, type: double}
+    - {es_column: build.task.run.worker.group, es_index: task, last_updated: 1510934989.965933,
+      name: build.task.run.worker.group, nested_path: ., table: task, type: string}
+    - {es_column: task.tags, es_index: task, last_updated: 1510934988.28222, name: task.tags,
+      nested_path: ., table: task, type: nested}
+    - {es_column: task.requires, es_index: task, last_updated: 1510934989.062127,
+      name: task.requires, nested_path: ., table: task, type: string}
+    - {es_column: build.task.provisioner.id, es_index: task, last_updated: 1510934990.59233,
+      name: build.task.provisioner.id, nested_path: ., table: task, type: string}
+    - {es_column: build.task.image, es_index: task, last_updated: 1510934990.399738,
+      name: build.task.image, nested_path: ., table: task, type: object}
+    - {es_column: run.machine, es_index: task, last_updated: 1510934989.19425, name: run.machine,
+      nested_path: ., table: task, type: object}
+    - {es_column: etl.source.source.source.code, es_index: task, last_updated: 1510934993.105386,
+      name: etl.source.source.source.code, nested_path: ., table: task, type: string}
+    - {es_column: build.action.end_time, es_index: task, last_updated: 1510934991.94662,
+      name: build.action.end_time, nested_path: ., table: task, type: double}
+    - es_column: action.timings.harness.mode
+      es_index: task
+      last_updated: 1510934992.259462
+      name: action.timings.harness.mode
+      nested_path: [action.timings, .]
+      table: task
+      type: string
+    - es_column: task.tags.name
+      es_index: task
+      last_updated: 1510934988.244873
+      name: task.tags.name
+      nested_path: [task.tags, .]
+      table: task
+      type: string
+    - {es_column: build.task.image.type, es_index: task, last_updated: 1510934990.380577,
+      name: build.task.image.type, nested_path: ., table: task, type: string}
+    - {es_column: task.run.end_time, es_index: task, last_updated: 1510934988.136967,
+      name: task.run.end_time, nested_path: ., table: task, type: double}
+    - {es_column: build.treeherder.symbol, es_index: task, last_updated: 1510934991.198336,
+      name: build.treeherder.symbol, nested_path: ., table: task, type: string}
+    - {es_column: build.task.priority, es_index: task, last_updated: 1510934990.495159,
+      name: build.task.priority, nested_path: ., table: task, type: string}
+    - {es_column: etl.source.bucket, es_index: task, last_updated: 1510934993.057494,
+      name: etl.source.bucket, nested_path: ., table: task, type: string}
+    - {es_column: action.start_time, es_index: task, last_updated: 1510934992.161718,
+      name: action.start_time, nested_path: ., table: task, type: double}
+    - {es_column: build.treeherder.groupSymbol, es_index: task, last_updated: 1510934990.889748,
+      name: build.treeherder.groupSymbol, nested_path: ., table: task, type: string}
+    - {es_column: repo.changeset.id12, es_index: task, last_updated: 1510934989.454893,
+      name: repo.changeset.id12, nested_path: ., table: task, type: string}
+    - {es_column: build.treeherder.collection, es_index: task, last_updated: 1510934991.060062,
+      name: build.treeherder.collection, nested_path: ., table: task, type: object}
+    - es_column: action.timings.harness.result
+      es_index: task
+      last_updated: 1510934992.202679
+      name: action.timings.harness.result
+      nested_path: [action.timings, .]
+      table: task
+      type: string
+    - {es_column: build.repo.branch.locale, es_index: task, last_updated: 1510934991.441032,
+      name: build.repo.branch.locale, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.symbol, es_index: task, last_updated: 1510934992.837798,
+      name: treeherder.symbol, nested_path: ., table: task, type: string}
+    - {es_column: task.group, es_index: task, last_updated: 1510934987.628313, name: task.group,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.task.deadline, es_index: task, last_updated: 1510934990.561412,
+      name: build.task.deadline, nested_path: ., table: task, type: double}
+    - {es_column: build.type, es_index: task, last_updated: 1510934991.913932, name: build.type,
+      nested_path: ., table: task, type: string}
+    - {es_column: repo.branch, es_index: task, last_updated: 1510934989.68275, name: repo.branch,
+      nested_path: ., table: task, type: object}
+    - {es_column: task.routes, es_index: task, last_updated: 1510934988.675457, name: task.routes,
+      nested_path: ., table: task, type: string}
+    - {es_column: task.runs.state, es_index: task, last_updated: 1510934988.550834,
+      name: task.runs.state, nested_path: ., table: task, type: string}
+    - {es_column: build.repo.tags, es_index: task, last_updated: 1510934991.408685,
+      name: build.repo.tags, nested_path: ., table: task, type: string}
+    - {es_column: task.runs.end_time, es_index: task, last_updated: 1510934988.610824,
+      name: task.runs.end_time, nested_path: ., table: task, type: double}
+    - {es_column: build.task.run.status, es_index: task, last_updated: 1510934989.919334,
+      name: build.task.run.status, nested_path: ., table: task, type: string}
+    - {es_column: repo, es_index: task, last_updated: 1510934989.776105, name: repo,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.task.image.namespace, es_index: task, last_updated: 1510934990.331898,
+      name: build.task.image.namespace, nested_path: ., table: task, type: string}
+    - {es_column: repo.branch.locale, es_index: task, last_updated: 1510934989.567649,
+      name: repo.branch.locale, nested_path: ., table: task, type: string}
+    - {es_column: task.dependencies, es_index: task, last_updated: 1510934988.697053,
+      name: task.dependencies, nested_path: ., table: task, type: string}
+    - {es_column: task.priority, es_index: task, last_updated: 1510934987.83699, name: task.priority,
+      nested_path: ., table: task, type: string}
+    - {es_column: action.etl, es_index: task, last_updated: 1510934992.404954, name: action.etl,
+      nested_path: ., table: task, type: object}
+    - {es_column: task.kind, es_index: task, last_updated: 1510934988.818979, name: task.kind,
+      nested_path: ., table: task, type: string}
+    - {es_column: build.task.run.worker, es_index: task, last_updated: 1510934990.013822,
+      name: build.task.run.worker, nested_path: ., table: task, type: object}
+    - {es_column: build.repo.changeset, es_index: task, last_updated: 1510934991.395044,
+      name: build.repo.changeset, nested_path: ., table: task, type: object}
+    - {es_column: build.task.features, es_index: task, last_updated: 1510934990.67535,
+      name: build.task.features, nested_path: ., table: task, type: string}
+    - {es_column: repo.branch.url, es_index: task, last_updated: 1510934989.578449,
+      name: repo.branch.url, nested_path: ., table: task, type: string}
+    - es_column: task.tags.value
+      es_index: task
+      last_updated: 1510934988.271181
+      name: task.tags.value
+      nested_path: [task.tags, .]
+      table: task
+      type: string
+    - {es_column: build.repo.changeset.date, es_index: task, last_updated: 1510934991.352106,
+      name: build.repo.changeset.date, nested_path: ., table: task, type: long}
+    - {es_column: build.treeherder.machine, es_index: task, last_updated: 1510934991.103077,
+      name: build.treeherder.machine, nested_path: ., table: task, type: object}
+    - {es_column: treeherder.groupName, es_index: task, last_updated: 1510934992.730561,
+      name: treeherder.groupName, nested_path: ., table: task, type: string}
+    - es_column: action.timings.harness.duration
+      es_index: task
+      last_updated: 1510934992.248399
+      name: action.timings.harness.duration
+      nested_path: [action.timings, .]
+      table: task
+      type: double
+    - es_column: action.timings.harness.start_time
+      es_index: task
+      last_updated: 1510934992.214172
+      name: action.timings.harness.start_time
+      nested_path: [action.timings, .]
+      table: task
+      type: double
+    - {es_column: task.mounts.content.url, es_index: task, last_updated: 1510934988.920166,
+      name: task.mounts.content.url, nested_path: ., table: task, type: string}
+    - {es_column: repo.changeset.backedoutby, es_index: task, last_updated: 1510934989.395726,
+      name: repo.changeset.backedoutby, nested_path: ., table: task, type: string}
+    - {es_column: build.action.harness_time_zone, es_index: task, last_updated: 1510934991.980107,
+      name: build.action.harness_time_zone, nested_path: ., table: task, type: long}
+    - {es_column: build.task.group, es_index: task, last_updated: 1510934990.632855,
+      name: build.task.group, nested_path: ., table: task, type: object}
+    - {es_column: build.run, es_index: task, last_updated: 1510934990.823046, name: build.run,
+      nested_path: ., table: task, type: object}
+    - {es_column: repo.branch.name, es_index: task, last_updated: 1510934989.589251,
+      name: repo.branch.name, nested_path: ., table: task, type: string}
+    - {es_column: run.key, es_index: task, last_updated: 1510934989.205076, name: run.key,
+      nested_path: ., table: task, type: string}
+    - {es_column: build.task.signing, es_index: task, last_updated: 1510934990.484131,
+      name: build.task.signing, nested_path: ., table: task, type: object}
+    - {es_column: build.task.run.start_time, es_index: task, last_updated: 1510934989.944326,
+      name: build.task.run.start_time, nested_path: ., table: task, type: double}
+    - {es_column: run.suite, es_index: task, last_updated: 1510934989.307001, name: run.suite,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.action.duration, es_index: task, last_updated: 1510934991.95731,
+      name: build.action.duration, nested_path: ., table: task, type: double}
+    - {es_column: task.run.worker.group, es_index: task, last_updated: 1510934988.050714,
+      name: task.run.worker.group, nested_path: ., table: task, type: string}
+    - {es_column: task.runs.scheduled, es_index: task, last_updated: 1510934988.420794,
+      name: task.runs.scheduled, nested_path: ., table: task, type: double}
+    - {es_column: task.capabilities.devices.loopbackVideo, es_index: task, last_updated: 1510934987.751121,
+      name: task.capabilities.devices.loopbackVideo, nested_path: ., table: task,
+      type: boolean}
+    - {es_column: task.group.id, es_index: task, last_updated: 1510934987.599046,
+      name: task.group.id, nested_path: ., table: task, type: string}
+    - {es_column: build.task.retries.remaining, es_index: task, last_updated: 1510934989.85761,
+      name: build.task.retries.remaining, nested_path: ., table: task, type: long}
+    - {es_column: build.build, es_index: task, last_updated: 1510934991.822493, name: build.build,
+      nested_path: ., table: task, type: object}
+    - {es_column: etl.timestamp, es_index: task, last_updated: 1510934992.888283,
+      name: etl.timestamp, nested_path: ., table: task, type: double}
+    - es_column: action.timings.end_time
+      es_index: task
+      last_updated: 1510934992.28348
+      name: action.timings.end_time
+      nested_path: [action.timings, .]
+      table: task
+      type: double
+    - {es_column: repo.push.date, es_index: task, last_updated: 1510934989.695141,
+      name: repo.push.date, nested_path: ., table: task, type: long}
+    - {es_column: repo.changeset.date, es_index: task, last_updated: 1510934989.476337,
+      name: repo.changeset.date, nested_path: ., table: task, type: long}
+    - {es_column: task.mounts.format, es_index: task, last_updated: 1510934989.019449,
+      name: task.mounts.format, nested_path: ., table: task, type: string}
+    - {es_column: etl.source.source.count, es_index: task, last_updated: 1510934993.079004,
+      name: etl.source.source.count, nested_path: ., table: task, type: long}
+    - {es_column: build.revision, es_index: task, last_updated: 1510934992.137794,
+      name: build.revision, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.groupSymbol, es_index: task, last_updated: 1510934992.492701,
+      name: treeherder.groupSymbol, nested_path: ., table: task, type: string}
+    - {es_column: build.task.run.worker.id, es_index: task, last_updated: 1510934989.987556,
+      name: build.task.run.worker.id, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.collection.opt, es_index: task, last_updated: 1510934992.514112,
+      name: treeherder.collection.opt, nested_path: ., table: task, type: boolean}
+    - {es_column: treeherder.tier, es_index: task, last_updated: 1510934992.809206,
+      name: treeherder.tier, nested_path: ., table: task, type: long}
+    - {es_column: build.treeherder.tier, es_index: task, last_updated: 1510934991.187458,
+      name: build.treeherder.tier, nested_path: ., table: task, type: long}
+    - {es_column: task.image.name, es_index: task, last_updated: 1510934987.449327,
+      name: task.image.name, nested_path: ., table: task, type: string}
+    - {es_column: etl.machine.pid, es_index: task, last_updated: 1510934992.931055,
+      name: etl.machine.pid, nested_path: ., table: task, type: long}
+    - {es_column: task.env, es_index: task, last_updated: 1510934987.942636, name: task.env,
+      nested_path: ., table: task, type: object}
+    - {es_column: task.created, es_index: task, last_updated: 1510934988.858505, name: task.created,
+      nested_path: ., table: task, type: double}
+    - {es_column: etl.machine.os, es_index: task, last_updated: 1510934992.952709,
+      name: etl.machine.os, nested_path: ., table: task, type: string}
+    - {es_column: task.provisioner.id, es_index: task, last_updated: 1510934988.8845,
+      name: task.provisioner.id, nested_path: ., table: task, type: string}
+    - {es_column: build.task.id, es_index: task, last_updated: 1510934990.664301,
+      name: build.task.id, nested_path: ., table: task, type: string}
+    - {es_column: task.capabilities, es_index: task, last_updated: 1510934987.81558,
+      name: task.capabilities, nested_path: ., table: task, type: object}
+    - {es_column: build.repo.push, es_index: task, last_updated: 1510934991.59637,
+      name: build.repo.push, nested_path: ., table: task, type: object}
+    - es_column: task.artifacts.name
+      es_index: task
+      last_updated: 1510934987.69192
+      name: task.artifacts.name
+      nested_path: [task.artifacts, .]
+      table: task
+      type: string
+    - {es_column: build.task.dependencies, es_index: task, last_updated: 1510934990.580929,
+      name: build.task.dependencies, nested_path: ., table: task, type: string}
+    - {es_column: build.task.run.reason_created, es_index: task, last_updated: 1510934990.057029,
+      name: build.task.run.reason_created, nested_path: ., table: task, type: string}
+    - {es_column: build.run.name, es_index: task, last_updated: 1510934990.780535,
+      name: build.run.name, nested_path: ., table: task, type: string}
+    - {es_column: repo.push.user, es_index: task, last_updated: 1510934989.73551,
+      name: repo.push.user, nested_path: ., table: task, type: string}
+    - {es_column: task.state, es_index: task, last_updated: 1510934987.856158, name: task.state,
+      nested_path: ., table: task, type: string}
+    - {es_column: build.task.run.state, es_index: task, last_updated: 1510934990.035724,
+      name: build.task.run.state, nested_path: ., table: task, type: string}
+    - {es_column: build.product, es_index: task, last_updated: 1510934989.82938, name: build.product,
+      nested_path: ., table: task, type: string}
+    - {es_column: task.retries.remaining, es_index: task, last_updated: 1510934988.781693,
+      name: task.retries.remaining, nested_path: ., table: task, type: long}
+    - {es_column: task.run.duration, es_index: task, last_updated: 1510934988.147764,
+      name: task.run.duration, nested_path: ., table: task, type: double}
+    - {es_column: run, es_index: task, last_updated: 1510934989.329009, name: run,
+      nested_path: ., table: task, type: object}
+    - {es_column: task.retries.total, es_index: task, last_updated: 1510934988.770835,
+      name: task.retries.total, nested_path: ., table: task, type: long}
+    - {es_column: task.capabilities.privileged, es_index: task, last_updated: 1510934987.724419,
+      name: task.capabilities.privileged, nested_path: ., table: task, type: boolean}
+    - {es_column: build.repo.rev, es_index: task, last_updated: 1510934991.419442,
+      name: build.repo.rev, nested_path: ., table: task, type: long}
+    - {es_column: build.treeherder, es_index: task, last_updated: 1510934991.209135,
+      name: build.treeherder, nested_path: ., table: task, type: object}
+    - {es_column: build.repo.branch.name, es_index: task, last_updated: 1510934991.478842,
+      name: build.repo.branch.name, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.revision, es_index: task, last_updated: 1510934992.84857,
+      name: treeherder.revision, nested_path: ., table: task, type: string}
+    - {es_column: etl.source, es_index: task, last_updated: 1510934993.285873, name: etl.source,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.branch, es_index: task, last_updated: 1510934991.843921, name: build.branch,
+      nested_path: ., table: task, type: string}
+    - {es_column: repo.push.id, es_index: task, last_updated: 1510934989.715908, name: repo.push.id,
+      nested_path: ., table: task, type: string}
+    - {es_column: build.build.platform, es_index: task, last_updated: 1510934991.711361,
+      name: build.build.platform, nested_path: ., table: task, type: string}
+    - {es_column: build.task.requires, es_index: task, last_updated: 1510934990.651628,
+      name: build.task.requires, nested_path: ., table: task, type: string}
+    - {es_column: task.mounts.file, es_index: task, last_updated: 1510934988.992993,
+      name: task.mounts.file, nested_path: ., table: task, type: string}
+    - {es_column: task.run.worker.id, es_index: task, last_updated: 1510934988.075661,
+      name: task.run.worker.id, nested_path: ., table: task, type: string}
+    - {es_column: build.action, es_index: task, last_updated: 1510934992.045336, name: build.action,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.treeherder.collection.debug, es_index: task, last_updated: 1510934991.009871,
+      name: build.treeherder.collection.debug, nested_path: ., table: task, type: boolean}
+    - {es_column: build.treeherder.machine.platform, es_index: task, last_updated: 1510934991.081478,
+      name: build.treeherder.machine.platform, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.build.platform, es_index: task, last_updated: 1510934992.760248,
+      name: treeherder.build.platform, nested_path: ., table: task, type: string}
+    - {es_column: build.build.type, es_index: task, last_updated: 1510934991.777706,
+      name: build.build.type, nested_path: ., table: task, type: string}
+    - {es_column: build.task.version, es_index: task, last_updated: 1510934990.546577,
+      name: build.task.version, nested_path: ., table: task, type: long}
+    - {es_column: run.timestamp, es_index: task, last_updated: 1510934989.130818,
+      name: run.timestamp, nested_path: ., table: task, type: double}
+    - {es_column: task.image.namespace, es_index: task, last_updated: 1510934987.472441,
+      name: task.image.namespace, nested_path: ., table: task, type: string}
+    - {es_column: task.run.reason_created, es_index: task, last_updated: 1510934988.126194,
+      name: task.run.reason_created, nested_path: ., table: task, type: string}
+    - {es_column: task.runs.worker.id, es_index: task, last_updated: 1510934988.511042,
+      name: task.runs.worker.id, nested_path: ., table: task, type: string}
+    - {es_column: build.repo.changeset.id, es_index: task, last_updated: 1510934991.373671,
+      name: build.repo.changeset.id, nested_path: ., table: task, type: string}
+    - {es_column: repo.changeset.bug, es_index: task, last_updated: 1510934989.433576,
+      name: repo.changeset.bug, nested_path: ., table: task, type: long}
+    - {es_column: build.task.maxRunTime, es_index: task, last_updated: 1510934990.280312,
+      name: build.task.maxRunTime, nested_path: ., table: task, type: long}
+    - {es_column: etl.source.timestamp, es_index: task, last_updated: 1510934993.036094,
+      name: etl.source.timestamp, nested_path: ., table: task, type: double}
+    - {es_column: task.scheduler.id, es_index: task, last_updated: 1510934988.718518,
+      name: task.scheduler.id, nested_path: ., table: task, type: string}
+    - {es_column: build.task.image.taskId, es_index: task, last_updated: 1510934990.361859,
+      name: build.task.image.taskId, nested_path: ., table: task, type: string}
+    - {es_column: action, es_index: task, last_updated: 1510934992.426248, name: action,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.task.run.duration, es_index: task, last_updated: 1510934990.100746,
+      name: build.task.run.duration, nested_path: ., table: task, type: double}
+    - {es_column: etl.type, es_index: task, last_updated: 1510934993.333934, name: etl.type,
+      nested_path: ., table: task, type: string}
+    - {es_column: etl, es_index: task, last_updated: 1510934993.379995, name: etl,
+      nested_path: ., table: task, type: object}
+    - {es_column: task.image.type, es_index: task, last_updated: 1510934987.5048,
+      name: task.image.type, nested_path: ., table: task, type: string}
+    - {es_column: build.task.group.id, es_index: task, last_updated: 1510934990.614642,
+      name: build.task.group.id, nested_path: ., table: task, type: string}
+    - {es_column: action.harness_time_skew, es_index: task, last_updated: 1510934992.332244,
+      name: action.harness_time_skew, nested_path: ., table: task, type: double}
+    - {es_column: etl.source.source.source.id, es_index: task, last_updated: 1510934993.132376,
+      name: etl.source.source.source.id, nested_path: ., table: task, type: integer}
+    - {es_column: task.run.worker, es_index: task, last_updated: 1510934988.104568,
+      name: task.run.worker, nested_path: ., table: task, type: object}
+    - {es_column: build.treeherder.collection.asan, es_index: task, last_updated: 1510934991.031305,
+      name: build.treeherder.collection.asan, nested_path: ., table: task, type: boolean}
+    - {es_column: build.treeherder.jobKind, es_index: task, last_updated: 1510934990.868155,
+      name: build.treeherder.jobKind, nested_path: ., table: task, type: string}
+    - {es_column: build.build.product, es_index: task, last_updated: 1510934991.663432,
+      name: build.build.product, nested_path: ., table: task, type: string}
+    - {es_column: build.task.parent, es_index: task, last_updated: 1510934990.229298,
+      name: build.task.parent, nested_path: ., table: task, type: object}
+    - {es_column: treeherder.machine, es_index: task, last_updated: 1510934992.709294,
+      name: treeherder.machine, nested_path: ., table: task, type: object}
+    - es_column: task.artifacts.storageType
+      es_index: task
+      last_updated: 1510934987.642239
+      name: task.artifacts.storageType
+      nested_path: [task.artifacts, .]
+      table: task
+      type: string
+    - {es_column: build.task.state, es_index: task, last_updated: 1510934990.535088,
+      name: build.task.state, nested_path: ., table: task, type: string}
+    - {es_column: task.capabilities.devices, es_index: task, last_updated: 1510934987.794175,
+      name: task.capabilities.devices, nested_path: ., table: task, type: object}
+    - {es_column: etl.machine, es_index: task, last_updated: 1510934992.998636, name: etl.machine,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.run.suite, es_index: task, last_updated: 1510934990.769805,
+      name: build.run.suite, nested_path: ., table: task, type: object}
+    - {es_column: run.type, es_index: task, last_updated: 1510934989.31811, name: run.type,
+      nested_path: ., table: task, type: string}
+    - {es_column: build.task.run, es_index: task, last_updated: 1510934990.119346,
+      name: build.task.run, nested_path: ., table: task, type: object}
+    - {es_column: etl.machine.name, es_index: task, last_updated: 1510934992.974152,
+      name: etl.machine.name, nested_path: ., table: task, type: string}
+    - {es_column: repo.rev, es_index: task, last_updated: 1510934989.556952, name: repo.rev,
+      nested_path: ., table: task, type: long}
+    - {es_column: build.repo.changeset.bug, es_index: task, last_updated: 1510934991.302014,
+      name: build.repo.changeset.bug, nested_path: ., table: task, type: long}
+    - es_column: action.timings.harness.end_time
+      es_index: task
+      last_updated: 1510934992.23715
+      name: action.timings.harness.end_time
+      nested_path: [action.timings, .]
+      table: task
+      type: double
+    - {es_column: build.channel, es_index: task, last_updated: 1510934992.066981,
+      name: build.channel, nested_path: ., table: task, type: string}
+    - {es_column: action.timings, es_index: task, last_updated: 1510934992.321359,
+      name: action.timings, nested_path: ., table: task, type: nested}
+    - {es_column: build.repo.changeset.backedoutby, es_index: task, last_updated: 1510934991.258873,
+      name: build.repo.changeset.backedoutby, nested_path: ., table: task, type: string}
+    - {es_column: build.run.machine, es_index: task, last_updated: 1510934990.729234,
+      name: build.run.machine, nested_path: ., table: task, type: object}
+    - {es_column: build.repo.push.user, es_index: task, last_updated: 1510934991.569263,
+      name: build.repo.push.user, nested_path: ., table: task, type: string}
+    - {es_column: build.platform, es_index: task, last_updated: 1510934991.639593,
+      name: build.platform, nested_path: ., table: task, type: string}
+    - {es_column: task.image, es_index: task, last_updated: 1510934987.531609, name: task.image,
+      nested_path: ., table: task, type: object}
+    - {es_column: task.mounts.cacheName, es_index: task, last_updated: 1510934988.963138,
+      name: task.mounts.cacheName, nested_path: ., table: task, type: string}
+    - {es_column: build.action.etl, es_index: task, last_updated: 1510934992.023691,
+      name: build.action.etl, nested_path: ., table: task, type: object}
+    - {es_column: build.task.worker.id, es_index: task, last_updated: 1510934990.461557,
+      name: build.task.worker.id, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.jobKind, es_index: task, last_updated: 1510934992.469027,
+      name: treeherder.jobKind, nested_path: ., table: task, type: string}
+    - {es_column: task.mounts.content.taskId, es_index: task, last_updated: 1510934988.931052,
+      name: task.mounts.content.taskId, nested_path: ., table: task, type: string}
+    - {es_column: task.worker.id, es_index: task, last_updated: 1510934988.372195,
+      name: task.worker.id, nested_path: ., table: task, type: string}
+    - {es_column: etl.source.id, es_index: task, last_updated: 1510934993.264161,
+      name: etl.source.id, nested_path: ., table: task, type: integer}
+    - {es_column: etl.machine.python, es_index: task, last_updated: 1510934992.909679,
+      name: etl.machine.python, nested_path: ., table: task, type: string}
+    - {es_column: task.parent.id, es_index: task, last_updated: 1510934988.19299,
+      name: task.parent.id, nested_path: ., table: task, type: string}
+    - {es_column: run.suite.fullname, es_index: task, last_updated: 1510934989.2446,
+      name: run.suite.fullname, nested_path: ., table: task, type: string}
+    - {es_column: task.mounts.content.artifact, es_index: task, last_updated: 1510934988.941958,
+      name: task.mounts.content.artifact, nested_path: ., table: task, type: string}
+    - {es_column: build.task.parent.id, es_index: task, last_updated: 1510934990.190851,
+      name: build.task.parent.id, nested_path: ., table: task, type: string}
+    - {es_column: action.etl.total_bytes, es_index: task, last_updated: 1510934992.378132,
+      name: action.etl.total_bytes, nested_path: ., table: task, type: long}
+    - {es_column: task.scheduler, es_index: task, last_updated: 1510934988.739739,
+      name: task.scheduler, nested_path: ., table: task, type: object}
+    - {es_column: task.worker.type, es_index: task, last_updated: 1510934988.341718,
+      name: task.worker.type, nested_path: ., table: task, type: string}
+    - {es_column: etl.source.source.id, es_index: task, last_updated: 1510934993.199784,
+      name: etl.source.source.id, nested_path: ., table: task, type: integer}
+    - {es_column: build.task.run.scheduled, es_index: task, last_updated: 1510934989.898904,
+      name: build.task.run.scheduled, nested_path: ., table: task, type: double}
+    - {es_column: task.capabilities.devices.loopbackAudio, es_index: task, last_updated: 1510934987.772644,
+      name: task.capabilities.devices.loopbackAudio, nested_path: ., table: task,
+      type: boolean}
+    - {es_column: task.expires, es_index: task, last_updated: 1510934988.293032, name: task.expires,
+      nested_path: ., table: task, type: double}
+    - {es_column: etl.id, es_index: task, last_updated: 1510934993.355334, name: etl.id,
+      nested_path: ., table: task, type: integer}
+    - {es_column: task.command, es_index: task, last_updated: 1510934988.870704, name: task.command,
+      nested_path: ., table: task, type: string}
+    - {es_column: task.scopes, es_index: task, last_updated: 1510934987.964729, name: task.scopes,
+      nested_path: ., table: task, type: string}
+    - {es_column: build.treeherder.collection.opt, es_index: task, last_updated: 1510934990.911085,
+      name: build.treeherder.collection.opt, nested_path: ., table: task, type: boolean}
+    - {es_column: build.repo.push.date, es_index: task, last_updated: 1510934991.539716,
+      name: build.repo.push.date, nested_path: ., table: task, type: long}
+    - {es_column: build.action.etl.total_bytes, es_index: task, last_updated: 1510934992.002061,
+      name: build.action.etl.total_bytes, nested_path: ., table: task, type: long}
+    - {es_column: repo.tags, es_index: task, last_updated: 1510934989.545935, name: repo.tags,
+      nested_path: ., table: task, type: string}
+    - {es_column: task, es_index: task, last_updated: 1510934989.093039, name: task,
+      nested_path: ., table: task, type: object}
+    - {es_column: run.machine.platform, es_index: task, last_updated: 1510934989.158302,
+      name: run.machine.platform, nested_path: ., table: task, type: string}
+    - {es_column: task.worker.group, es_index: task, last_updated: 1510934988.31996,
+      name: task.worker.group, nested_path: ., table: task, type: string}
+    - {es_column: build.revision12, es_index: task, last_updated: 1510934991.894162,
+      name: build.revision12, nested_path: ., table: task, type: string}
+    - {es_column: etl.source.name, es_index: task, last_updated: 1510934993.009248,
+      name: etl.source.name, nested_path: ., table: task, type: string}
+    - {es_column: build.task, es_index: task, last_updated: 1510934990.686227, name: build.task,
+      nested_path: ., table: task, type: object}
+    - es_column: action.timings.start_time
+      es_index: task
+      last_updated: 1510934992.179221
+      name: action.timings.start_time
+      nested_path: [action.timings, .]
+      table: task
+      type: double
+    - {es_column: build.task.scheduler.id, es_index: task, last_updated: 1510934990.138031,
+      name: build.task.scheduler.id, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.build, es_index: task, last_updated: 1510934992.798086,
+      name: treeherder.build, nested_path: ., table: task, type: object}
+    - {es_column: build.action.start_time, es_index: task, last_updated: 1510934991.924812,
+      name: build.action.start_time, nested_path: ., table: task, type: double}
+    - {es_column: treeherder.collection.pgo, es_index: task, last_updated: 1510934992.557024,
+      name: treeherder.collection.pgo, nested_path: ., table: task, type: boolean}
+    - {es_column: task.provisioner, es_index: task, last_updated: 1510934988.895529,
+      name: task.provisioner, nested_path: ., table: task, type: object}
+    - {es_column: build.repo.changeset.author, es_index: task, last_updated: 1510934991.280371,
+      name: build.repo.changeset.author, nested_path: ., table: task, type: string}
+    - {es_column: build.task.expires, es_index: task, last_updated: 1510934990.418327,
+      name: build.task.expires, nested_path: ., table: task, type: double}
+    - {es_column: build.repo.changeset.id12, es_index: task, last_updated: 1510934991.323858,
+      name: build.repo.changeset.id12, nested_path: ., table: task, type: string}
+    - {es_column: build.treeherder.build, es_index: task, last_updated: 1510934991.167815,
+      name: build.treeherder.build, nested_path: ., table: task, type: object}
+    - {es_column: task.image.taskId, es_index: task, last_updated: 1510934987.483365,
+      name: task.image.taskId, nested_path: ., table: task, type: string}
+    - {es_column: build.task.worker, es_index: task, last_updated: 1510934990.472804,
+      name: build.task.worker, nested_path: ., table: task, type: object}
+    - {es_column: task.mounts.content, es_index: task, last_updated: 1510934988.95261,
+      name: task.mounts.content, nested_path: ., table: task, type: object}
+    - {es_column: task.parent, es_index: task, last_updated: 1510934988.218877, name: task.parent,
+      nested_path: ., table: task, type: object}
+    - {es_column: treeherder.collection.debug, es_index: task, last_updated: 1510934992.621532,
+      name: treeherder.collection.debug, nested_path: ., table: task, type: boolean}
+    - {es_column: repo.push, es_index: task, last_updated: 1510934989.753233, name: repo.push,
+      nested_path: ., table: task, type: object}
+    - {es_column: task.run.state, es_index: task, last_updated: 1510934988.115417,
+      name: task.run.state, nested_path: ., table: task, type: string}
+    - {es_column: task.runs.reason_created, es_index: task, last_updated: 1510934988.589303,
+      name: task.runs.reason_created, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.revision_hash, es_index: task, last_updated: 1510934992.826987,
+      name: treeherder.revision_hash, nested_path: ., table: task, type: string}
+    - {es_column: repo.changeset.author, es_index: task, last_updated: 1510934989.406611,
+      name: repo.changeset.author, nested_path: ., table: task, type: string}
+    - {es_column: task.worker, es_index: task, last_updated: 1510934988.39924, name: task.worker,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.task.worker.group, es_index: task, last_updated: 1510934990.437231,
+      name: build.task.worker.group, nested_path: ., table: task, type: string}
+    - {es_column: task.version, es_index: task, last_updated: 1510934987.883408, name: task.version,
+      nested_path: ., table: task, type: long}
+    - {es_column: build.url, es_index: task, last_updated: 1510934990.844625, name: build.url,
+      nested_path: ., table: task, type: string}
+    - {es_column: task.run.status, es_index: task, last_updated: 1510934988.007688,
+      name: task.run.status, nested_path: ., table: task, type: string}
+    - {es_column: run.chunk, es_index: task, last_updated: 1510934989.141785, name: run.chunk,
+      nested_path: ., table: task, type: long}
+    - {es_column: build.treeherder.collection.fuzz, es_index: task, last_updated: 1510934990.988325,
+      name: build.treeherder.collection.fuzz, nested_path: ., table: task, type: boolean}
+    - {es_column: treeherder.machine.platform, es_index: task, last_updated: 1510934992.687681,
+      name: treeherder.machine.platform, nested_path: ., table: task, type: string}
+    - {es_column: run.suite.flavor, es_index: task, last_updated: 1510934989.215642,
+      name: run.suite.flavor, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.collection.fuzz, es_index: task, last_updated: 1510934992.59999,
+      name: treeherder.collection.fuzz, nested_path: ., table: task, type: boolean}
+    - {es_column: task.artifacts, es_index: task, last_updated: 1510934987.702954,
+      name: task.artifacts, nested_path: ., table: task, type: nested}
+    - {es_column: build.repo.push.id, es_index: task, last_updated: 1510934991.552887,
+      name: build.repo.push.id, nested_path: ., table: task, type: string}
+    - {es_column: build.run.machine.platform, es_index: task, last_updated: 1510934990.697208,
+      name: build.run.machine.platform, nested_path: ., table: task, type: string}
+    - es_column: task.artifacts.contentType
+      es_index: task
+      last_updated: 1510934987.681075
+      name: task.artifacts.contentType
+      nested_path: [task.artifacts, .]
+      table: task
+      type: string
+    - {es_column: build.build.date, es_index: task, last_updated: 1510934991.754336,
+      name: build.build.date, nested_path: ., table: task, type: long}
+    - {es_column: action.duration, es_index: task, last_updated: 1510934992.353719,
+      name: action.duration, nested_path: ., table: task, type: double}
+    - {es_column: build.repo.branch.url, es_index: task, last_updated: 1510934991.468082,
+      name: build.repo.branch.url, nested_path: ., table: task, type: string}
+    - {es_column: build.build.branch, es_index: task, last_updated: 1510934991.73284,
+      name: build.build.branch, nested_path: ., table: task, type: string}
+    - {es_column: build.task.image.path, es_index: task, last_updated: 1510934990.312262,
+      name: build.task.image.path, nested_path: ., table: task, type: string}
+    - {es_column: task.runs.duration, es_index: task, last_updated: 1510934988.632386,
+      name: task.runs.duration, nested_path: ., table: task, type: double}
+    - {es_column: action.harness_time_zone, es_index: task, last_updated: 1510934992.364451,
+      name: action.harness_time_zone, nested_path: ., table: task, type: long}
+    - {es_column: task.runs.worker.group, es_index: task, last_updated: 1510934988.489592,
+      name: task.runs.worker.group, nested_path: ., table: task, type: string}
+    - {es_column: task.runs.worker, es_index: task, last_updated: 1510934988.540203,
+      name: task.runs.worker, nested_path: ., table: task, type: object}
+    - es_column: task.artifacts.expires
+      es_index: task
+      last_updated: 1510934987.669939
+      name: task.artifacts.expires
+      nested_path: [task.artifacts, .]
+      table: task
+      type: double
+    - {es_column: build.task.created, es_index: task, last_updated: 1510934990.257554,
+      name: build.task.created, nested_path: ., table: task, type: double}
+    - {es_column: task.mounts, es_index: task, last_updated: 1510934989.040862, name: task.mounts,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.repo, es_index: task, last_updated: 1510934991.618119, name: build.repo,
+      nested_path: ., table: task, type: object}
+    - {es_column: build.treeherder.collection.pgo, es_index: task, last_updated: 1510934990.945279,
+      name: build.treeherder.collection.pgo, nested_path: ., table: task, type: boolean}
+    - {es_column: build.repo.index, es_index: task, last_updated: 1510934991.219735,
+      name: build.repo.index, nested_path: ., table: task, type: long}
+    - {es_column: build, es_index: task, last_updated: 1510934992.149937, name: build,
+      nested_path: ., table: task, type: object}
+    - {es_column: task.features, es_index: task, last_updated: 1510934987.427224,
+      name: task.features, nested_path: ., table: task, type: string}
+    - {es_column: build.treeherder.collection.make, es_index: task, last_updated: 1510934990.966729,
+      name: build.treeherder.collection.make, nested_path: ., table: task, type: boolean}
+    - {es_column: task.runs.status, es_index: task, last_updated: 1510934988.442662,
+      name: task.runs.status, nested_path: ., table: task, type: string}
+    - {es_column: run.machine.aws_instance_type, es_index: task, last_updated: 1510934989.1835,
+      name: run.machine.aws_instance_type, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.collection, es_index: task, last_updated: 1510934992.664358,
+      name: treeherder.collection, nested_path: ., table: task, type: object}
+    - {es_column: task.cache, es_index: task, last_updated: 1510934987.713709, name: task.cache,
+      nested_path: ., table: task, type: object}
+    - {es_column: repo.changeset.id, es_index: task, last_updated: 1510934989.503132,
+      name: repo.changeset.id, nested_path: ., table: task, type: string}
+    - {es_column: task.id, es_index: task, last_updated: 1510934987.577367, name: task.id,
+      nested_path: ., table: task, type: string}
+    - {es_column: repo.changeset.description, es_index: task, last_updated: 1510934989.366795,
+      name: repo.changeset.description, nested_path: ., table: task, type: string}
+    - {es_column: task.image.cache, es_index: task, last_updated: 1510934987.460099,
+      name: task.image.cache, nested_path: ., table: task, type: object}
+    - {es_column: build.treeherder.build.platform, es_index: task, last_updated: 1510934991.146282,
+      name: build.treeherder.build.platform, nested_path: ., table: task, type: string}
+    - {es_column: treeherder.collection.ccov, es_index: task, last_updated: 1510934992.535561,
+      name: treeherder.collection.ccov, nested_path: ., table: task, type: boolean}
+    - es_column: task.artifacts.url
+      es_index: task
+      last_updated: 1510934987.658855
+      name: task.artifacts.url
+      nested_path: [task.artifacts, .]
+      table: task
+      type: string
+    - {es_column: treeherder.collection.asan, es_index: task, last_updated: 1510934992.64299,
+      name: treeherder.collection.asan, nested_path: ., table: task, type: boolean}
+    - {es_column: resource_usage, es_index: task, last_updated: 1510934989.80251,
+      name: resource_usage, nested_path: ., table: task, type: object}
+    - es_column: action.timings.order
+      es_index: task
+      last_updated: 1510934992.305699
+      name: action.timings.order
+      nested_path: [action.timings, .]
+      table: task
+      type: long
+    - {es_column: build.task.kind, es_index: task, last_updated: 1510934989.88137,
+      name: build.task.kind, nested_path: ., table: task, type: string}
+    - {es_column: task.env.name, es_index: task, last_updated: 1510934987.894051,
+      name: task.env.name, nested_path: ., table: task, type: string}
+    - {es_column: build.run.machine.tc_worker_type, es_index: task, last_updated: 1510934990.707946,
+      name: build.run.machine.tc_worker_type, nested_path: ., table: task, type: string}
+    - {es_column: build.treeherder.groupName, es_index: task, last_updated: 1510934991.124474,
+      name: build.treeherder.groupName, nested_path: ., table: task, type: string}
+    - {es_column: run.machine.tc_worker_type, es_index: task, last_updated: 1510934989.169313,
+      name: run.machine.tc_worker_type, nested_path: ., table: task, type: string}
+    - {es_column: task.image.path, es_index: task, last_updated: 1510934987.494204,
+      name: task.image.path, nested_path: ., table: task, type: string}
+    - {es_column: build.run.machine.aws_instance_type, es_index: task, last_updated: 1510934990.71872,
+      name: build.run.machine.aws_instance_type, nested_path: ., table: task, type: string}
+    - {es_column: treeherder, es_index: task, last_updated: 1510934992.859457, name: treeherder,
+      nested_path: ., table: task, type: object}
+    - {es_column: task.runs.start_time, es_index: task, last_updated: 1510934988.467762,
+      name: task.runs.start_time, nested_path: ., table: task, type: double}
+    - {es_column: build.date, es_index: task, last_updated: 1510934991.8672, name: build.date,
+      nested_path: ., table: task, type: long}
+    - {es_column: task.mounts.directory, es_index: task, last_updated: 1510934988.909364,
+      name: task.mounts.directory, nested_path: ., table: task, type: string}
+    - es_column: action.timings.harness.step
+      es_index: task
+      last_updated: 1510934992.225678
+      name: action.timings.harness.step
+      nested_path: [action.timings, .]
+      table: task
+      type: string
+    - {es_column: run.name, es_index: task, last_updated: 1510934989.119677, name: run.name,
+      nested_path: ., table: task, type: string}
+    - {es_column: etl.source.source.type, es_index: task, last_updated: 1510934993.175466,
+      name: etl.source.source.type, nested_path: ., table: task, type: string}
+    - {es_column: build.repo.changeset.description, es_index: task, last_updated: 1510934991.230539,
+      name: build.repo.changeset.description, nested_path: ., table: task, type: string}
+    - {es_column: build.treeherder.collection.ccov, es_index: task, last_updated: 1510934990.934212,
+      name: build.treeherder.collection.ccov, nested_path: ., table: task, type: boolean}
+    - {es_column: etl.source.source.source, es_index: task, last_updated: 1510934993.153891,
+      name: etl.source.source.source, nested_path: ., table: task, type: object}
+    - {es_column: task.env.value, es_index: task, last_updated: 1510934987.920875,
+      name: task.env.value, nested_path: ., table: task, type: string}
+    - {es_column: build.task.run.end_time, es_index: task, last_updated: 1510934990.078513,
+      name: build.task.run.end_time, nested_path: ., table: task, type: double}
+    - {es_column: repo.changeset, es_index: task, last_updated: 1510934989.524447,
+      name: repo.changeset, nested_path: ., table: task, type: object}
+    - {es_column: task.run, es_index: task, last_updated: 1510934988.171458, name: task.run,
+      nested_path: ., table: task, type: object}
+    - {es_column: treeherder.collection.make, es_index: task, last_updated: 1510934992.578477,
+      name: treeherder.collection.make, nested_path: ., table: task, type: boolean}
+    - {es_column: task.deadline, es_index: task, last_updated: 1510934987.555864,
+      name: task.deadline, nested_path: ., table: task, type: double}
+    - {es_column: build.task.scheduler, es_index: task, last_updated: 1510934990.164061,
+      name: build.task.scheduler, nested_path: ., table: task, type: object}
+    - {es_column: _id, es_index: task, last_updated: 1510934992.447671, name: _id,
+      nested_path: ., table: task, type: string}
+    - {es_column: build.run.timestamp, es_index: task, last_updated: 1510934990.812319,
+      name: build.run.timestamp, nested_path: ., table: task, type: double}
+    - es_column: action.timings.duration
+      es_index: task
+      last_updated: 1510934992.294578
+      name: action.timings.duration
+      nested_path: [action.timings, .]
+      table: task
+      type: double
+expected:
+- [Column]
+- [_id]
+- [action]
+- [action.duration]
+- [action.end_time]
+- [action.etl]
+- [action.etl.total_bytes]
+- [action.harness_time_skew]
+- [action.harness_time_zone]
+- [action.start_time]
+- [action.timings]
+- [action.timings.duration]
+- [action.timings.end_time]
+- [action.timings.harness]
+- [action.timings.harness.duration]
+- [action.timings.harness.end_time]
+- [action.timings.harness.mode]
+- [action.timings.harness.result]
+- [action.timings.harness.start_time]
+- [action.timings.harness.step]
+- [action.timings.order]
+- [action.timings.start_time]
+- [action.timings.step]
+- [build]
+- [build.action]
+- [build.action.duration]
+- [build.action.end_time]
+- [build.action.etl]
+- [build.action.etl.total_bytes]
+- [build.action.harness_time_skew]
+- [build.action.harness_time_zone]
+- [build.action.start_time]
+- [build.branch]
+- [build.build]
+- [build.build.branch]
+- [build.build.date]
+- [build.build.platform]
+- [build.build.product]
+- [build.build.revision]
+- [build.build.revision12]
+- [build.build.type]
+- [build.channel]
+- [build.date]
+- [build.platform]
+- [build.product]
+- [build.repo]
+- [build.repo.branch]
+- [build.repo.branch.locale]
+- [build.repo.branch.name]
+- [build.repo.branch.url]
+- [build.repo.changeset]
+- [build.repo.changeset.author]
+- [build.repo.changeset.backedoutby]
+- [build.repo.changeset.bug]
+- [build.repo.changeset.date]
+- [build.repo.changeset.description]
+- [build.repo.changeset.id]
+- [build.repo.changeset.id12]
+- [build.repo.index]
+- [build.repo.push]
+- [build.repo.push.date]
+- [build.repo.push.id]
+- [build.repo.push.user]
+- [build.repo.rev]
+- [build.repo.tags]
+- [build.revision]
+- [build.revision12]
+- [build.run]
+- [build.run.key]
+- [build.run.machine]
+- [build.run.machine.aws_instance_type]
+- [build.run.machine.platform]
+- [build.run.machine.tc_worker_type]
+- [build.run.name]
+- [build.run.suite]
+- [build.run.timestamp]
+- [build.task]
+- [build.task.created]
+- [build.task.deadline]
+- [build.task.dependencies]
+- [build.task.expires]
+- [build.task.features]
+- [build.task.group]
+- [build.task.group.id]
+- [build.task.id]
+- [build.task.image]
+- [build.task.image.namespace]
+- [build.task.image.path]
+- [build.task.image.taskId]
+- [build.task.image.type]
+- [build.task.kind]
+- [build.task.maxRunTime]
+- [build.task.parent]
+- [build.task.parent.id]
+- [build.task.priority]
+- [build.task.provisioner]
+- [build.task.provisioner.id]
+- [build.task.requires]
+- [build.task.retries]
+- [build.task.retries.remaining]
+- [build.task.retries.total]
+- [build.task.run]
+- [build.task.run.duration]
+- [build.task.run.end_time]
+- [build.task.run.reason_created]
+- [build.task.run.scheduled]
+- [build.task.run.start_time]
+- [build.task.run.state]
+- [build.task.run.status]
+- [build.task.run.worker]
+- [build.task.run.worker.group]
+- [build.task.run.worker.id]
+- [build.task.scheduler]
+- [build.task.scheduler.id]
+- [build.task.signing]
+- [build.task.state]
+- [build.task.version]
+- [build.task.worker]
+- [build.task.worker.group]
+- [build.task.worker.id]
+- [build.task.worker.type]
+- [build.treeherder]
+- [build.treeherder.build]
+- [build.treeherder.build.platform]
+- [build.treeherder.collection]
+- [build.treeherder.collection.asan]
+- [build.treeherder.collection.ccov]
+- [build.treeherder.collection.debug]
+- [build.treeherder.collection.fuzz]
+- [build.treeherder.collection.make]
+- [build.treeherder.collection.opt]
+- [build.treeherder.collection.pgo]
+- [build.treeherder.groupName]
+- [build.treeherder.groupSymbol]
+- [build.treeherder.jobKind]
+- [build.treeherder.machine]
+- [build.treeherder.machine.platform]
+- [build.treeherder.symbol]
+- [build.treeherder.tier]
+- [build.type]
+- [build.url]
+- [etl]
+- [etl.error]
+- [etl.id]
+- [etl.machine]
+- [etl.machine.name]
+- [etl.machine.os]
+- [etl.machine.pid]
+- [etl.machine.python]
+- [etl.source]
+- [etl.source.bucket]
+- [etl.source.id]
+- [etl.source.name]
+- [etl.source.source]
+- [etl.source.source.count]
+- [etl.source.source.id]
+- [etl.source.source.source]
+- [etl.source.source.source.code]
+- [etl.source.source.source.id]
+- [etl.source.source.type]
+- [etl.source.timestamp]
+- [etl.source.type]
+- [etl.timestamp]
+- [etl.type]
+- [repo]
+- [repo.branch]
+- [repo.branch.locale]
+- [repo.branch.name]
+- [repo.branch.url]
+- [repo.changeset]
+- [repo.changeset.author]
+- [repo.changeset.backedoutby]
+- [repo.changeset.bug]
+- [repo.changeset.date]
+- [repo.changeset.description]
+- [repo.changeset.id]
+- [repo.changeset.id12]
+- [repo.index]
+- [repo.push]
+- [repo.push.date]
+- [repo.push.id]
+- [repo.push.user]
+- [repo.rev]
+- [repo.tags]
+- [resource_usage]
+- [run]
+- [run.chunk]
+- [run.key]
+- [run.machine]
+- [run.machine.aws_instance_type]
+- [run.machine.platform]
+- [run.machine.tc_worker_type]
+- [run.name]
+- [run.suite]
+- [run.suite.flavor]
+- [run.suite.fullname]
+- [run.suite.name]
+- [run.timestamp]
+- [run.type]
+- [task]
+- [task.artifacts]
+- [task.artifacts.contentType]
+- [task.artifacts.expires]
+- [task.artifacts.name]
+- [task.artifacts.storageType]
+- [task.artifacts.url]
+- [task.cache]
+- [task.capabilities]
+- [task.capabilities.devices]
+- [task.capabilities.devices.loopbackAudio]
+- [task.capabilities.devices.loopbackVideo]
+- [task.capabilities.privileged]
+- [task.command]
+- [task.created]
+- [task.deadline]
+- [task.dependencies]
+- [task.env]
+- [task.env.name]
+- [task.env.value]
+- [task.expires]
+- [task.features]
+- [task.group]
+- [task.group.id]
+- [task.id]
+- [task.image]
+- [task.image.cache]
+- [task.image.name]
+- [task.image.namespace]
+- [task.image.path]
+- [task.image.taskId]
+- [task.image.type]
+- [task.kind]
+- [task.maxRunTime]
+- [task.mounts]
+- [task.mounts.cacheName]
+- [task.mounts.content]
+- [task.mounts.content.artifact]
+- [task.mounts.content.taskId]
+- [task.mounts.content.url]
+- [task.mounts.directory]
+- [task.mounts.file]
+- [task.mounts.format]
+- [task.parent]
+- [task.parent.id]
+- [task.priority]
+- [task.provisioner]
+- [task.provisioner.id]
+- [task.requires]
+- [task.retries]
+- [task.retries.remaining]
+- [task.retries.total]
+- [task.routes]
+- [task.run]
+- [task.run.duration]
+- [task.run.end_time]
+- [task.run.reason_created]
+- [task.run.scheduled]
+- [task.run.start_time]
+- [task.run.state]
+- [task.run.status]
+- [task.run.worker]
+- [task.run.worker.group]
+- [task.run.worker.id]
+- [task.runs]
+- [task.runs.duration]
+- [task.runs.end_time]
+- [task.runs.reason_created]
+- [task.runs.scheduled]
+- [task.runs.start_time]
+- [task.runs.state]
+- [task.runs.status]
+- [task.runs.worker]
+- [task.runs.worker.group]
+- [task.runs.worker.id]
+- [task.scheduler]
+- [task.scheduler.id]
+- [task.scopes]
+- [task.state]
+- [task.tags]
+- [task.tags.name]
+- [task.tags.value]
+- [task.version]
+- [task.worker]
+- [task.worker.group]
+- [task.worker.id]
+- [task.worker.type]
+- [treeherder]
+- [treeherder.build]
+- [treeherder.build.platform]
+- [treeherder.collection]
+- [treeherder.collection.asan]
+- [treeherder.collection.ccov]
+- [treeherder.collection.debug]
+- [treeherder.collection.fuzz]
+- [treeherder.collection.make]
+- [treeherder.collection.opt]
+- [treeherder.collection.pgo]
+- [treeherder.groupName]
+- [treeherder.groupSymbol]
+- [treeherder.jobKind]
+- [treeherder.machine]
+- [treeherder.machine.platform]
+- [treeherder.revision]
+- [treeherder.revision_hash]
+- [treeherder.symbol]
+- [treeherder.tier]
