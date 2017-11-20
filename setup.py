@@ -4,7 +4,7 @@ from setuptools import setup
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-PACKAGE_VERSION = '0.8.2'
+PACKAGE_VERSION = '0.9.0'
 DESC = "Collection of recipes for finding information in ActiveData"
 with open(os.path.join(here, 'README.md')) as fh:
     README = fh.read()
