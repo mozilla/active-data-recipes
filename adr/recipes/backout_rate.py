@@ -19,9 +19,6 @@ def run(args):
     backouts = len(set(next(query)['data']['push.id']))
     backout_rate = round((float(backouts) / pushes) * 100, 2)
 
-    query_args['branch'] = 'try'
-    data = next(run_query('total_hours_spent_on_branch', **query_args))['data']
-
     return (
         ['Pushes', 'Backouts', 'Backout Rate'],
         [pushes, backouts, backout_rate],
