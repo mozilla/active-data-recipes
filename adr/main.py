@@ -36,23 +36,18 @@ def run_recipe(recipe, args, fmt='table', verbose=False):
     return fmt(output)
 
 
-class RecipeParser(ArgumentParser):
-
-    def __init__(self, *args, **kwargs):
-        ArgumentParser.__init__(self, *args, **kwargs)
-
-        self.add_argument('recipe', nargs='?', help="Recipe to run.")
-        self.add_argument('-l', '--list', action='store_true', default=False,
-                          help="List available recipes.")
-        self.add_argument('-f', '--format', dest='fmt', default='table',
-                          choices=all_formatters.keys(),
-                          help="Format to print data in, defaults to 'table'.")
-        self.add_argument('-v', '--verbose', action='store_true', default=False,
-                          help="Print the query and other debugging information.")
-
-
 def cli(args=sys.argv[1:]):
-    parser = RecipeParser()
+    parser = ArgumentParser()
+    parser.add_argument('recipe', nargs='?', help="Recipe to run.")
+    parser.add_argument('-l', '--list', action='store_true', default=False,
+                        help="List available recipes.")
+    parser.add_argument('-f', '--format', dest='fmt', default='table',
+                        choices=all_formatters.keys(),
+                        help="Format to print data in, defaults to 'table'.")
+    parser.add_argument('-v', '--verbose', action='store_true', default=False,
+                        help="Print the query and other debugging information.")
+
+
     args, remainder = parser.parse_known_args(args)
 
     for path in sorted(os.listdir(RECIPE_DIR)):
