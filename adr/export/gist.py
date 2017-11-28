@@ -9,9 +9,8 @@ from distutils.spawn import find_executable
 
 import yaml
 
-from ..main import run_recipe
+from ..main import run_recipe, log
 
-log = logging.getLogger('adr')
 DEFAULT_CONFIG = os.path.expanduser(os.path.join('~', '.adr-gist.yml'))
 
 
@@ -22,6 +21,8 @@ def cli(args=sys.argv[1:]):
     parser.add_argument('--gist', default='gist',
                         help='Path to the gist binary.')
     args = parser.parse_args(args)
+
+    log.setLevel(logging.INFO)
 
     gist = find_executable(args.gist)
     if not gist:

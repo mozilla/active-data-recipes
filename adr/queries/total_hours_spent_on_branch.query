@@ -5,8 +5,8 @@ select:
     - {name: tasks, aggregate: count}
 where:
     and:
-        - eq: {repo.branch.name: {$eval: branch_name}}
+        - eq: {repo.branch.name: {$eval: branch}}
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
-        - lte: [action.duration, {$eval: max_task_duration}]
+        - lte: [action.duration, 18000]
 limit: 1000

@@ -58,15 +58,6 @@ See how many files in tree have any code coverage at all.
 
 [View Results](https://mozilla.github.io/active-data-recipes/#files-with-coverage)
 
-## Hours on Try
-
-    adr hours_on_try
-
-Returns the total number of compute hours spent on try over the past week. The date range can be
-modified with `--from` and `--to` using the format described [here][0]. For example:
-
-    adr hours_on_try --from today-2month --to today-month
-
 ## Inspect
 
     adr inspect
@@ -84,6 +75,17 @@ Get information on the longest running tasks. Returns the total count, average r
 runtime over a given date range and set of branches.
 
 [View Results](https://mozilla.github.io/active-data-recipes/#task-durations)
+
+## Try Efficiency
+
+    adr try_efficiency
+
+Prints information on try effifiency. This is a measure of how effective try is at preventing
+backouts. It is roughly:
+
+    1000000 / (total_compute_hours_on_try * backout_rate)
+
+[View Results](https://mozilla.github.io/active-data-recipes/#try-efficiency)
 
 ## Try Usage
 

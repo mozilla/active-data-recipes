@@ -22,7 +22,11 @@ def run(args):
     query_args['branch'] = 'try'
     data = next(run_query('total_hours_spent_on_branch', **query_args))['data']
 
+    try_hours = int(data['hours'])
+    try_efficiency = round(1000000/(backout_rate * try_hours), 2)
+
+
     return (
-        ['Pushes', 'Backouts', 'Backout Rate'],
-        [pushes, backouts, backout_rate],
+        ['Backout Rate', 'Total Compute Hours on Try', 'Try Efficiency'],
+        [backout_rate, try_hours, try_efficiency],
     )
