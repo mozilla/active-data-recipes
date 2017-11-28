@@ -27,17 +27,20 @@ class TableFormatter(object):
             if 'names' in data.keys():
                 header = data.pop('names')
             else:
-                header = data.keys()
+                header = list(data.keys())
 
-            if isinstance(list(data.values())[0], list):
-                data = [[i for i in data[key]] for key in header]
+            example = list(data.values())[0]
+            if isinstance(example, list):
+                if len(example) == len(header):
+                    data = [[i for i in data[key]] for key in header]
+                else:
+                    data = [[i] for key in header for i in data[key]]
             else:
                 t = []
                 for key in header:
                     t.append(data[key])
                 data = [t]
             data.insert(0, header)
-
         table = self.table_cls(data)
         return table.table
 
