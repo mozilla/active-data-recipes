@@ -2,6 +2,7 @@
 * [backout_rate](#backout-rate)
 * [files_with_coverage](#files-with-coverage)
 * [task_durations](#task-durations)
+* [try_efficiency](#try-efficiency)
 * [try_usage](#try-usage)
 * [try_users](#try-users)
 
@@ -22,6 +23,12 @@ Files that have any kind of code coverage over the last 10 commits to mozilla-ce
 Top 25 tasks with the longest average duration over the past week.
 
 {% gist 01a58c929e33bc5d2ef0092ce2cad12e task-durations.md %}
+
+## Try Efficiency
+
+How effective try is at preventing backouts over the past week.
+
+{% gist 01a58c929e33bc5d2ef0092ce2cad12e try-efficiency.md %}
 
 ## Try Usage
 
