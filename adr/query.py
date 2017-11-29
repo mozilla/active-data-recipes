@@ -98,7 +98,7 @@ def cli(args=sys.argv[1:]):
 
     for result in run_query(args.query, **fake_context):
         data = result['data']
-        if 'header' in result:
+        if args.fmt != 'json' and 'header' in result:
             data.insert(0, result['header'])
         print(fmt(data))
 
