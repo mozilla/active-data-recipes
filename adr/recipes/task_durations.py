@@ -18,8 +18,8 @@ def run(args):
                         help="Key to sort on (int, 0-based index)")
 
     args = parser.parse_args(args)
-    #args.branch = json.dumps(args.branch)
     query_args = vars(args)
+    limit = query_args.pop('limit')
 
     data = next(run_query('task_durations', **query_args))['data']
     result = []
@@ -30,6 +30,6 @@ def run(args):
         record.append(int(round(record[1] * record[2], 0)))
         result.append(record)
 
-    result = sorted(result, key=lambda k: k[args.sort_key], reverse=True)[:args.limit]
+    result = sorted(result, key=lambda k: k[args.sort_key], reverse=True)[:limit]
     result.insert(0, ['Task', 'Count', 'Average Hours', 'Total Hours'])
     return result

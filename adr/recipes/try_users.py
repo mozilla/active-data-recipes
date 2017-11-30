@@ -20,6 +20,7 @@ def run(args):
 
     query_args = vars(args)
     query_args['branch'] = 'try'
+    limit = query_args.pop('limit')
     pushes = next(run_query('user_pushes', **query_args))
     pushes = pushes['data']
 
@@ -40,6 +41,6 @@ def run(args):
         data.append([user, tasks, pushes, round(float(tasks)/pushes, 2)])
 
     data = sorted(data, key=lambda k: k[args.sort_key], reverse=True)
-    data = data[:args.limit]
+    data = data[:limit]
     data.insert(0, header)
     return data
