@@ -1,7 +1,7 @@
 args: []
 expected:
 - [Backout Rate, Total Compute Hours on Try, Try Efficiency]
-- [8.89, 162973, 0.69]
+- [8.89, 162973, 6.9]
 queries:
   backout_rate:
   - data:
