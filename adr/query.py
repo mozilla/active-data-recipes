@@ -98,8 +98,18 @@ def cli(args=sys.argv[1:]):
 
     for result in run_query(args.query, **fake_context):
         data = result['data']
-        if args.fmt != 'json' and 'header' in result:
+
+        if args.fmt == 'json':
+            print(fmt(result))
+            return
+
+        if 'edges' in result:
+            for edge in result['edges']:
+                data[edge['name']] = [p['name'] for p in edge['domain']['partitions']]
+
+        if 'header' in result:
             data.insert(0, result['header'])
+
         print(fmt(data))
 
 

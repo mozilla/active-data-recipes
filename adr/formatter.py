@@ -1,6 +1,7 @@
 from __future__ import print_function, absolute_import
 
 import json
+from six.moves import zip_longest
 
 from terminaltables import GithubFlavoredMarkdownTable, SingleTable
 
@@ -34,7 +35,7 @@ class TableFormatter(object):
                 if len(example) == len(header):
                     data = [[i for i in data[key]] for key in header]
                 else:
-                    data = [[i] for key in header for i in data[key]]
+                    data = list(zip_longest(*data.values(), fillvalue=''))
             else:
                 t = []
                 for key in header:
@@ -46,7 +47,7 @@ class TableFormatter(object):
 
 
 all_formatters = {
-    'json': JSONFormatter(),
+    'json': JSONFormatter(indent=2),
     'markdown': TableFormatter(table_cls=GithubFlavoredMarkdownTable),
     'table': TableFormatter(),
 }
