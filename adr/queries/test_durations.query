@@ -1,0 +1,33 @@
+from: unittest
+format: cube
+edges:
+    - {domain: {
+        type: range, 
+        key: name, 
+        partitions: [
+            {max: 1, min: 0, dataIndex: 0, name: 1sec},
+            {max: 2, min: 1, dataIndex: 1, name: 2sec},
+            {max: 5, min: 2, dataIndex: 2, name: 5sec},
+            {max: 10, min: 5, dataIndex: 3, name: 10sec},
+            {max: 20, min: 10, dataIndex: 4, name: 20sec},
+            {max: 30, min: 20, dataIndex: 5, name: 30sec},
+            {max: 45, min: 30, dataIndex: 6, name: 45sec},
+            {max: 60, min: 45, dataIndex: 7, name: 60sec},
+            {max: 90, min: 60, dataIndex: 8, name: 90sec},
+            {max: 120, min: 90, dataIndex: 9, name: 120sec},
+            {max: 150, min: 120, dataIndex: 10, name: '150sec'},
+            {max: 600, min: 150, dataIndex: 11, name: '600sec'}
+        ]},
+    value: result.duration}
+limit: 10000
+where:
+    and:
+        - in: {repo.branch.name: {$eval: branch}}
+        - gte: [repo.push.date, {date: {$eval: from_date}}]
+        - lte: [repo.push.date, {date: {$eval: to_date}}]
+        - eq: {build.type: {$eval: build_type}}
+        - eq: {run.machine.platform: {$eval: platform}}
+        - regex: {result.test: ".*/.*"}
+        - eq: {result.ok: "T"}
+select:
+    - {aggregate: cardinality, value: result.test}

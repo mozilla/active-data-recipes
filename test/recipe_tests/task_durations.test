@@ -26,3 +26,37 @@ queries:
     - [test-windows7-32/debug-mochitest-5, 561, 29.303874969833885]
     header: [run.name, tasks, average minutes]
 recipe: task_durations
+recipe: task_durations
+args: []
+queries:
+  task_durations:
+  - !!python/unicode 'data':
+    - [!!python/unicode 'test-windows10-64/opt-mochitest-media', 575, 30.806880193605945]
+    - [!!python/unicode 'test-windows10-64/opt-mochitest-devtools-chrome-7', 572,
+      8.336053038304533]
+    - [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-6', 571, 6.163521563451198]
+    - [!!python/unicode 'test-windows10-64/opt-crashtest', 570, 9.486388977551854]
+    - [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-4', 570, 5.360885523987496]
+    - [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-7', 570, 5.568164804944192]
+    - [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-5', 569, 8.222858584943504]
+    - [!!python/unicode 'test-windows10-64/opt-mochitest-plain-headless-3', 568, 15.282580249115808]
+    - [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-8', 568, 7.159203232536678]
+    - [!!python/unicode 'test-windows10-64/opt-mochitest-plain-headless-1', 567, 15.903928184544757]
+    !!python/unicode 'header': [!!python/unicode 'run.name', !!python/unicode 'tasks',
+      !!python/unicode 'average minutes']
+expected:
+- [!!python/unicode 'Taskname', !!python/unicode 'Num Jobs', !!python/unicode 'Average
+    Hours', !!python/unicode 'Total Hours']
+- [!!python/unicode 'test-windows10-64/opt-mochitest-media', 575, 0.51, 293]
+- [!!python/unicode 'test-windows10-64/opt-mochitest-plain-headless-1', 567, 0.27,
+  153]
+- [!!python/unicode 'test-windows10-64/opt-mochitest-plain-headless-3', 568, 0.25,
+  142]
+- [!!python/unicode 'test-windows10-64/opt-crashtest', 570, 0.16, 91]
+- [!!python/unicode 'test-windows10-64/opt-mochitest-devtools-chrome-7', 572, 0.14,
+  80]
+- [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-5', 569, 0.14, 80]
+- [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-8', 568, 0.12, 68]
+- [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-6', 571, 0.1, 57]
+- [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-4', 570, 0.09, 51]
+- [!!python/unicode 'test-windows10-64/opt-mochitest-webgl-7', 570, 0.09, 51]
