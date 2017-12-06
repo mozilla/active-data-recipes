@@ -68,7 +68,7 @@ Recipes can be very simple, or arbitrarily complex. They live under `adr/recipes
 
 Recipe files must define a `run(args)` function. The `args` parameter is a list of command line
 arguments that should be parsed by a recipe specific argument parser. For convenience, you can use
-the `adr.cli.RecipeParser` object to accomplish this. It allows sharing certain common arguments
+the `adr.cli.RecipeParser` class to accomplish this. It allows sharing certain common arguments
 (like `--to/--from`) across recipes.
 
 The only other requirement is that the data returned be in a format recognized by the formatter
