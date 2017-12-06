@@ -7,7 +7,7 @@ There are two basic concepts in `adr`, queries and recipes.
 
 A query is a `yaml` (or `json`) file that has a `.query` extension and lives under `adr/queries`.
 Queries are [json-e][0] templates that get rendered with whatever context a recipe passes it.
-Consult the [json-e documentation][1] for more information. A rendered query should result in
+Consult the [json-e documentation][1] for more information. A rendered query file should result in
 a valid ActiveData query.
 
 
