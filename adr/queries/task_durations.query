@@ -9,3 +9,6 @@ where:
         - in: {repo.branch.name: {$eval: branches}}
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
+        - eq: {build.type: {$eval: build_type}}
+        - eq: {run.machine.platform: {$eval: platform}}
+limit: 10000

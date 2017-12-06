@@ -1,0 +1,18 @@
+where:
+    and:
+        - gte: {result.duration: {$eval: min_seconds}}
+        - lt: {result.duration: {$eval: max_seconds}}
+        - in: {repo.branch.name: {$eval: branch}}
+        - gte: [repo.push.date, {date: {$eval: from_date}}]
+        - lte: [repo.push.date, {date: {$eval: to_date}}]
+        - eq: {build.type: {$eval: build_type}}
+        - eq: {run.machine.platform: {$eval: platform}}
+        - regex: {result.test: ".*/.*"}
+        - eq: {result.ok: "T"}
+limit: 50000
+groupby:
+    - result.test
+select:
+    - {aggregate: count, name: tasks}
+    - {aggregate: avg, name: "average seconds", value: result.duration}
+from: unittest
