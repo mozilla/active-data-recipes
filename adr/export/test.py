@@ -33,7 +33,9 @@ def cli(args=sys.argv[1:]):
         qgen = orig_run_query(name, **context)
 
         for result in qgen:
-            query_results[name].append(deepcopy(result))
+            mock_result = deepcopy(result)
+            mock_result.pop('meta')
+            query_results[name].append(mock_result)
             yield result
 
     query.run_query = new_run_query
