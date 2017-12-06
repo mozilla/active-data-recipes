@@ -12,13 +12,17 @@ import yaml
 from adr import query
 from adr.main import run_recipe
 
+if sys.version_info > (3, 0):
+    IO = StringIO
+else:
+    IO = BytesIO
+
 
 class new_run_query(object):
     def __init__(self, test):
         self.test = test
 
     def __call__(self, query, *args, **kwargs):
-        print(self.test['queries'].keys())
         if query not in self.test['queries']:
             pytest.fail("no test data found for query '{}' in '{}.test'".format(
                         query, self.test['recipe']))
@@ -36,11 +40,13 @@ def test_recipe(monkeypatch, recipe_test):
 
     result = json.loads(run_recipe(recipe_test['recipe'], recipe_test['args'], fmt='json'))
 
-    if sys.version_info > (3, 0):
-        buf = StringIO()
-    else:
-        buf = BytesIO()
+    buf = IO()
     yaml.dump(result, buf)
     print("Yaml formatted result for copy/paste:")
+    print(buf.getvalue())
+
+    buf = IO()
+    yaml.dump(recipe_test['expected'], buf)
+    print("\nYaml formatted expected:")
     print(buf.getvalue())
     assert result == recipe_test['expected']

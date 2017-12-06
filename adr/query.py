@@ -86,6 +86,7 @@ def cli(args=sys.argv[1:]):
     # Fake the context for convenience
     fake_context = {
         'branch': 'mozilla-central',
+        'branches': ['mozilla-central'],
         'from_date': 'now-week',
         'to_date': 'now',
         'rev': '5b33b070378a',

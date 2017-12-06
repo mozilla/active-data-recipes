@@ -6,6 +6,7 @@ import os
 import sys
 from argparse import ArgumentParser
 from collections import defaultdict
+from copy import deepcopy
 
 import yaml
 
@@ -28,10 +29,11 @@ def cli(args=sys.argv[1:]):
     query_results = defaultdict(list)
 
     def new_run_query(name, **context):
+        context['limit'] = 10
         qgen = orig_run_query(name, **context)
 
         for result in qgen:
-            query_results[name].append(result)
+            query_results[name].append(deepcopy(result))
             yield result
 
     query.run_query = new_run_query

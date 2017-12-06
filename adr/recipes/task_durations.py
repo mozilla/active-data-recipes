@@ -9,7 +9,7 @@ from ..query import format_date, run_query
 
 def run(args):
     parser = RecipeParser('date')
-    parser.add_argument('-b', '--branch', default=['autoland', 'mozilla-inbound', 'mozilla-central'],
+    parser.add_argument('-b', '--branches', default=['autoland', 'mozilla-inbound', 'mozilla-central'],
                         help="Branches to gather backout rate on, can be specified "
                              "multiple times.")
     parser.add_argument('--limit', type=int, default=50,
