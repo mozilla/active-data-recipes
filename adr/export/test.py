@@ -5,7 +5,7 @@ import logging
 import os
 import sys
 from argparse import ArgumentParser
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from copy import deepcopy
 
 import yaml
@@ -41,12 +41,22 @@ def cli(args=sys.argv[1:]):
     query.run_query = new_run_query
 
     result = run_recipe(args.recipe, remainder, fmt='json')
-    test = {
-        'recipe': args.recipe,
-        'args': remainder,
-        'queries': dict(query_results),
-        'expected': json.loads(result),
-    }
+    test = OrderedDict()
+    test['recipe'] = args.recipe
+    test['args'] = remainder
+    test['queries'] = dict(query_results)
+    test['expected'] = json.loads(result)
+
+    # get pyyaml to preserve ordering of dict keys
+    def represent_ordereddict(dumper, data):
+        value = []
+        for item_key, item_value in data.items():
+            node_key = dumper.represent_data(item_key)
+            node_value = dumper.represent_data(item_value)
+
+            value.append((node_key, node_value))
+        return yaml.nodes.MappingNode(u'tag:yaml.org,2002:map', value)
+    yaml.add_representer(OrderedDict, represent_ordereddict)
 
     path = os.path.join(test_dir, '{}.test'.format(args.recipe))
     with open(path, 'a') as fh:

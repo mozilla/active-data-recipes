@@ -1,9 +1,27 @@
----
 recipe: backout_rate
 args: []
 queries:
-    backout_rate:
-        - {"data":{"push.id":[55172,97236,55172,97237,55192,55196,97252,97251,97252,97252,97257,97252,55197,55197,55209,55209,97232,55172,97236,55172,97236,55179,55179,55183,97257,97252,97257,97252,97252,55206,55197,55209,55209,97267,55213,97261,55224,55217,55225,55227]}}
-        - {"data":{"push.id":[97257,97252,97257,97252,97252,55206,55197,55209,97267,97261,55224,55217,55225,55227]}}
-expected: [['Pushes', 'Backouts', 'Backout Rate'], [21, 11, 52.38]]
-
+  backout_rate:
+  - data:
+      push.id: [97847, 56305, 56319, 56302, 97878, 97874, 97880, 97876, 97889, 56364]
+    edges:
+    - domain: {interval: 1, max: 10, min: 0, type: rownum}
+      name: rownum
+    select:
+    - name: push.id
+      pull: fields.push\.id
+      put: {child: ., index: 0, name: push.id}
+      value: push.id
+  - data:
+      push.id: [56456, 56456, 97969, 97969, 56289, 56344, 56422, 56344, 56344, 56344]
+    edges:
+    - domain: {interval: 1, max: 10, min: 0, type: rownum}
+      name: rownum
+    select:
+    - name: push.id
+      pull: fields.push\.id
+      put: {child: ., index: 0, name: push.id}
+      value: push.id
+expected:
+- [Pushes, Backouts, Backout Rate]
+- [10, 5, 50.0]
