@@ -32,10 +32,8 @@ class TableFormatter(object):
 
             example = list(data.values())[0]
             if isinstance(example, list):
-                if len(example) == len(header):
-                    data = [[i for i in data[key]] for key in header]
-                else:
-                    data = list(zip_longest(*data.values(), fillvalue=''))
+                values = [data[key] for key in header]
+                data = list(zip_longest(*values, fillvalue=''))
             else:
                 t = []
                 for key in header:
