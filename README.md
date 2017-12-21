@@ -39,7 +39,7 @@ For recipe specific options see:
 
     adr backout_rate [--from <date> [--to <date>]]
 
-Get information on the backout rate on autoland and mozilla-inbound over the given time period.
+Get information on the backout rate on autoland and Mozilla-inbound over the given time period.
 
 [View Results](https://mozilla.github.io/active-data-recipes/#backout-rate)
 
@@ -54,7 +54,7 @@ Get code coverage information for the given `path` at `rev`. Both arguments are 
 
     adr files_with_coverage
 
-See how many files in tree have any code coverage at all.
+See how many files in the tree have any code coverage at all.
 
 [View Results](https://mozilla.github.io/active-data-recipes/#files-with-coverage)
 
@@ -71,7 +71,7 @@ the columns in a table, run:
 
     adr task_durations
 
-Get information on the longest running tasks. Returns the total count, average runtime and total
+Get information on the longest running tasks. Returns the total count, average runtime, and total
 runtime over a given date range and set of branches.
 
 [View Results](https://mozilla.github.io/active-data-recipes/#task-durations)
@@ -80,8 +80,8 @@ runtime over a given date range and set of branches.
 
     adr try_efficiency
 
-Prints information on try effifiency. This is a measure of how effective try is at preventing
-backouts. It is roughly:
+Prints information on try efficiency. This is a measure of how effective try is at preventing
+blackouts. It is roughly:
 
     1000000 / (total_compute_hours_on_try * backout_rate)
 
