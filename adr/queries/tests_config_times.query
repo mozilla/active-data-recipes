@@ -1,0 +1,15 @@
+where:
+    and:
+        - in: {repo.branch.name: {$eval: branch}}
+        - gte: [repo.push.date, {date: {$eval: from_date}}]
+        - lte: [repo.push.date, {date: {$eval: to_date}}]
+        - eq: {build.type: {$eval: build_type}}
+        - regex: {result.test: {$eval: test_name}}
+        - eq: {result.ok: "T"}
+limit: 50000
+groupby:
+    - run.machine.platform
+select:
+    - {aggregate: count, name: tasks}
+    - {aggregate: max, name: "max seconds", value: result.duration}
+from: unittest

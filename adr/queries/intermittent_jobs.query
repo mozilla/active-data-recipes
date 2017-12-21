@@ -1,0 +1,12 @@
+where:
+    and:
+        - gte: [repo.push.date, {date: {$eval: from_date}}]
+        - lte: [repo.push.date, {date: {$eval: to_date}}]
+        - in: {repo.branch.name: {$eval: branch}}
+        - prefix: {job.type.name: {$eval: platform_config}}
+        - in: {failure.classification: ["intermittent", "autoclassified intermittent"]}
+limit: 5000
+select:
+    - repo.changeset.id12
+    - job.type.name
+from: treeherder
