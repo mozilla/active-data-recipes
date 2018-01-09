@@ -44,8 +44,26 @@ class TableFormatter(object):
         return table.table
 
 
+class TabFormatter(object):
+    def __init__(self):
+        pass
+
+    def __call__(self, data):
+        if isinstance(data, bytes):
+            data = json.loads(data)
+
+        if not isinstance(data, list):
+            raise Exception("expecting a list")
+
+        return "\n".join(
+            "\t".join(str(c) for c in row)
+            for row in data
+        )
+
+
 all_formatters = {
     'json': JSONFormatter(indent=2),
     'markdown': TableFormatter(table_cls=GithubFlavoredMarkdownTable),
     'table': TableFormatter(),
+    'tab': TabFormatter()
 }
