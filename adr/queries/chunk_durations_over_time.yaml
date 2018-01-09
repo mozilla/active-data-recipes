@@ -1,0 +1,36 @@
+{
+    "from": "task",
+    "select": [
+        {"aggregate": "count"},
+        {
+            "name": "median",
+            "value": "action.duration",
+            "aggregate": "median"
+        }
+    ],
+    "edges": [
+        {"name": "chunk", "value": ["run.suite.name", "run.chunk"], "allowNulls": false},
+        {
+            "name": "day",
+            "value": "action.start_time",
+            "domain": {
+                "type": "time",
+                "min": {$eval: from_date},
+                "max": {$eval: to_date},
+                "interval": "day"
+            },
+            "allowNulls": false
+        }
+    ],
+    "where": {
+        "and": [
+            {"eq": {"repo.branch.name": {$eval: branch}}},
+            {"eq": {"treeherder.jobKind": "test"}},
+            {"eq": {"build.type": "opt"}},
+            {"eq": {"build.platform": "linux64"}},
+            {"lt": {"action.start_time": {"date": {$eval: to_date}}}},
+            {"gte": {"action.start_time": {"date": {$eval: from_date}}}}
+        ]
+    },
+    "limit": 1000
+}
