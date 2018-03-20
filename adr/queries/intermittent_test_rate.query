@@ -1,0 +1,15 @@
+where:
+    and:
+        - gte: [repo.push.date, {date: {$eval: from_date}}]
+        - lte: [repo.push.date, {date: {$eval: to_date}}]
+        - in: {repo.branch.name: {$eval: branch}}
+        - regex: {result.test: ".*/.*"}
+        - regex: {result.test: {$eval: test}}
+        - prefix: {run.key: {$eval: platform_config}}
+limit: 50000
+groupby:
+    - {$eval: groupby}
+select:
+    - {"aggregate": "count", "name": "failures", "value": {"then": 1, "when": {"eq": {"result.ok": "F"}}}}
+    - {"aggregate": "count", "name": "total", "value": {"then": 1, "when": {"in": {"result.ok": ["T", "F"]}}}}
+from: unittest

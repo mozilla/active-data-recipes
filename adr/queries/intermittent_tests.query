@@ -1,0 +1,15 @@
+where:
+    and:
+        - gte: [repo.push.date, {date: {$eval: from_date}}]
+        - lte: [repo.push.date, {date: {$eval: to_date}}]
+        - in: {repo.branch.name: {$eval: branch}}
+        - regex: {result.test: ".*/.*"}
+        - regex: {result.test: {$eval: test}}
+        - prefix: {run.key: {$eval: platform_config}}
+        - in: {result.ok: {$eval: result}}
+limit: 5000
+select:
+    - repo.changeset.id12
+    - run.key
+    - result.test
+from: unittest
