@@ -1,5 +1,11 @@
 # How To Contribute
 
+Changes should be submitted via pull request. Please make sure all tests pass before submitting by
+running `tox`. If adding a new recipe, please also add a test for it (see the
+[testing](#testing) section below).
+
+# Concepts
+
 There are two basic concepts in `adr`, queries and recipes.
 
 
@@ -126,6 +132,7 @@ other.
 The active-data-recipes module supports both python 2.7 and python 3.6. You can run the unittests
 with:
 
+    $ pip install tox
     $ tox
 
 The tests themselves live in the `test` directory and are written with the [pytest][4] framework.
