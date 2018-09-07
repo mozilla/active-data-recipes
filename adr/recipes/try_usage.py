@@ -31,6 +31,10 @@ def run(args):
         'test': 'Pushed via `mach try fuzzy`',
         'method': 'mach try fuzzy',
     }
+    d['again'] = {
+        'test': 'Pushed via `mach try again`',
+        'method': 'mach try again',
+    }
     d['empty'] = {
         'test': '',
         'method': 'empty',
