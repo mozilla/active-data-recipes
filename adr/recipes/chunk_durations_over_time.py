@@ -50,8 +50,8 @@ def run(args):
                 ttest[c, d], pvalue[c, d] = ttest_ind(test_times[c, :d], test_times[c, d:])
             except Exception:
                 pass
-    change_index = pvalue[:, 2:-1].argmin(axis=1) + 2
-    best_split = pvalue[:, 2:-1].min(axis=1)
+    change_index = pvalue[:, 2:num_days-1].argmin(axis=1) + 2
+    best_split = pvalue[:, 2:num_days-1].min(axis=1)
     order = best_split.argsort()
 
     # ActiveData response has edges which detail the domain of each edge
