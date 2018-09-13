@@ -1,15 +1,18 @@
 from __future__ import print_function, absolute_import
 
-import json
-from collections import defaultdict
-
 from ..cli import RecipeParser
-from ..query import format_date, run_query
+from ..query import run_query
+
+DEFAULT_BRANCHES = [
+    'autoland',
+    'mozilla-inbound',
+    'mozilla-central',
+]
 
 
 def run(args):
     parser = RecipeParser('date')
-    parser.add_argument('-b', '--branches', default=['autoland', 'mozilla-inbound', 'mozilla-central'],
+    parser.add_argument('-b', '--branches', default=DEFAULT_BRANCHES,
                         help="Branches to gather backout rate on, can be specified "
                              "multiple times.")
     parser.add_argument('-p', '--platform', default='windows10-64',

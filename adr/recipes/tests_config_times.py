@@ -1,10 +1,7 @@
 from __future__ import print_function, absolute_import
 
-import json
-from collections import defaultdict
-
 from ..cli import RecipeParser
-from ..query import format_date, run_query
+from ..query import run_query
 
 
 def run(args):
@@ -14,7 +11,8 @@ def run(args):
     parser.add_argument('-c', '--build_type', default='opt',
                         help="build configuration, default is 'opt'.")
     parser.add_argument('-t', '--test_name', default=None, required=True,
-                        help="full path of the test name (ex. 'dom/xhr/tests/test_worker_xhr_timeout.html').")
+                        help="full path of the test name "
+                             "(ex. 'dom/xhr/tests/test_worker_xhr_timeout.html').")
     args = parser.parse_args(args)
 
     result = []

@@ -1,9 +1,5 @@
 from __future__ import print_function, absolute_import
 
-import json
-from argparse import ArgumentParser
-from collections import defaultdict
-
 from ..cli import RecipeParser
 from ..query import run_query
 

@@ -57,38 +57,38 @@ def run(args):
         all_dirs = {}
         last_dir = ''
         for line in dirs:
-            l = line.strip()
-            if not l.endswith('/'):
-                l = "%s/" % l
-            if l == '/':
+            line = line.strip()
+            if not line.endswith('/'):
+                line = "%s/" % line
+            if line == '/':
                 continue
 
-            args.path = l
+            args.path = line
             count = int(artifactCount(args))
             if count <= 0:
                 continue
 
-            if last_dir and l.startswith(last_dir) or l == last_dir:
+            if last_dir and line.startswith(last_dir) or line == last_dir:
                 continue
 
-            if l in all_dirs:
+            if line in all_dirs:
                 continue
 
             # check if the parent is already in the dir list
-            if '/'.join(l.split('/')[0:-1]) in all_dirs:
+            if '/'.join(line.split('/')[0:-1]) in all_dirs:
                 continue
 
             if count < 50000:
-                all_dirs[l] = count
-                last_dir = l
+                all_dirs[line] = count
+                last_dir = line
             else:
                 newdirs = []
                 for d in dirs:
-                    if d.startswith(l):
+                    if d.startswith(line):
                         newdirs.append(d)
 
-                if l in newdirs:
-                    del newdirs[newdirs.index(l)]
+                if line in newdirs:
+                    del newdirs[newdirs.index(line)]
 
                 if newdirs:
                     sub_dirs = buildDirList(newdirs)
@@ -96,8 +96,8 @@ def run(args):
                         all_dirs[sd] = sub_dirs[sd]
                     last_dir = sd
                 else:
-                    all_dirs[l] = count
-                    last_dir = l
+                    all_dirs[line] = count
+                    last_dir = line
 
         log.debug("original list of directories: %s" % len(dirs))
         log.debug("reduced set of directories: %s" % len(all_dirs.keys()))
@@ -138,7 +138,7 @@ def run(args):
             lines = retVal[sourcename]['lines']
             suites = retVal[sourcename]['suites']
             # Prep data for reducing total jobs
-            if type(suite[0]['file']['covered']) == type(1):
+            if isinstance(suite[0]['file']['covered'], int):
                 suite[0]['file']['covered'] = [suite[0]['file']['covered']]
 
             for line in suite[0]['file']['covered']:
@@ -149,8 +149,9 @@ def run(args):
             suites.append(jobname)
 
         # SETA style discovery of important suites
-        # NOTE: this will be biased based on the order we evaluate suites (currently alpha_num sorted)
-        #       jobs at the top of the list will be removed first
+        # NOTE: this will be biased based on the order we evaluate suites
+        # (currently alpha_num sorted) jobs at the top of the list will be
+        # removed first
         jsonOutput = {}
         for sourcename in retVal:
             lines = retVal[sourcename]['lines']

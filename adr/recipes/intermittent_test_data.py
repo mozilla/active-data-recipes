@@ -1,10 +1,7 @@
 from __future__ import print_function, absolute_import
 
-import json
-from collections import defaultdict
-
 from ..cli import RecipeParser
-from ..query import format_date, run_query
+from ..query import run_query
 
 
 def run(args):
