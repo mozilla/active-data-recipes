@@ -1,4 +1,4 @@
-Availavble Recipes
+Available Recipes
 ==================
 
 backout_rate

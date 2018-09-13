@@ -1,3 +1,13 @@
+"""
+Get information on the longest running tasks. Returns the total count, average
+runtime and total runtime over a given date range and set of branches.
+
+.. code-block:: bash
+
+    adr task_durations
+
+`View Results <https://mozilla.github.io/active-data-recipes/#task-durations>`__
+"""
 from __future__ import print_function, absolute_import
 
 from ..cli import RecipeParser

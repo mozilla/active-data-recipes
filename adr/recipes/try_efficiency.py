@@ -1,3 +1,15 @@
+"""
+Prints information on try effifiency. This is a measure of how effective try is
+at preventing backouts. It is roughly:
+
+    1000000 / (total_compute_hours_on_try * backout_rate)
+
+.. code-block:: bash
+
+    adr try_efficiency
+
+`View Results <https://mozilla.github.io/active-data-recipes/#try-efficiency>`_
+"""
 from __future__ import print_function, absolute_import
 
 from ..cli import RecipeParser

@@ -1,5 +1,10 @@
 """
-Documentation for try_users
+Prints stats on how often individual users are pushing to try over the last
+week. The date range can be modified the same as the `hours_on_try` recipe.
+
+.. code-block:: bash
+
+    adr try_users
 """
 
 from __future__ import print_function, absolute_import

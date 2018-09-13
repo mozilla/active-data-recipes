@@ -1,3 +1,12 @@
+"""
+Get information on the ActiveData schema. The above command returns the
+available tables. To see the columns in a table, run:
+
+.. code-block:: bash
+
+    adr inspect
+    adr inspect --table task
+"""
 from __future__ import print_function, absolute_import
 
 from ..cli import RecipeParser
