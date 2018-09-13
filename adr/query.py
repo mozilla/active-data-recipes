@@ -13,7 +13,7 @@ import yaml
 from six import string_types
 
 from .formatter import all_formatters
-from .main import log
+from .cli import log
 
 here = os.path.abspath(os.path.dirname(__file__))
 
