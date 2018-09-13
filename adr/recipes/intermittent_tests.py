@@ -42,7 +42,7 @@ def run(args):
             continue
 
         index = jobs['repo.changeset.id12'].index(rev)
-       
+
         if jobname != jobs['job.type.name'][index]:
             continue
 

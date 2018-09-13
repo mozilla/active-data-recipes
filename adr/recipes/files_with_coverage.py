@@ -5,6 +5,7 @@ from collections import defaultdict
 from ..cli import RecipeParser
 from ..query import run_query
 
+
 def run(args):
     parser = RecipeParser()
     parser.add_argument('--limit', required=False, default=10, type=int,

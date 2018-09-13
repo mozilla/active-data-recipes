@@ -17,8 +17,10 @@ def run(args):
     args = parser.parse_args(args)
     query_args = vars(args)
 
-    all_suites = ['gtest', 'marionette', 'mochitest-plain', 'mochitest-browser-chrome', 'mochitest-devtools-chrome', 'mochitest-chrome', 'mochitest-a11y', 'mochitest-gl', 'mochitest-gpu', 'mochitest-clipboard', 'mochitest-media', 'talos', 'reftest', 'reftest-no-accel', 'reftest-crashtest', 'reftest-jsreftest', 'xpcshell', 'web-platform-tests', 'firefox-ui-functional local', 'firefox-ui-functional remote', 'awsy', 'cppunittest', 'jittest', 'web-platform-tests-wdspec', 'web-platform-tests-reftests']
-    all_suites_name = ['gtest', 'Mn', 'm', 'bc', 'dt', 'c', 'a11y', 'gl', 'gpu', 'cl', 'mda',  'T', 'R', 'Ru', 'C', 'J', 'X', 'wpt', 'fx-l', 'fx-r', 'awsy', 'cpp', 'jit', 'Wd', 'Wr']
+    all_suites = ['gtest', 'marionette', 'mochitest-plain', 'mochitest-browser-chrome', 'mochitest-devtools-chrome', 'mochitest-chrome', 'mochitest-a11y', 'mochitest-gl', 'mochitest-gpu', 'mochitest-clipboard', 'mochitest-media', 'talos', 'reftest',
+                  'reftest-no-accel', 'reftest-crashtest', 'reftest-jsreftest', 'xpcshell', 'web-platform-tests', 'firefox-ui-functional local', 'firefox-ui-functional remote', 'awsy', 'cppunittest', 'jittest', 'web-platform-tests-wdspec', 'web-platform-tests-reftests']
+    all_suites_name = ['gtest', 'Mn', 'm', 'bc', 'dt', 'c', 'a11y', 'gl', 'gpu', 'cl', 'mda',
+                       'T', 'R', 'Ru', 'C', 'J', 'X', 'wpt', 'fx-l', 'fx-r', 'awsy', 'cpp', 'jit', 'Wd', 'Wr']
 
     retVal = {}
     counter = 0

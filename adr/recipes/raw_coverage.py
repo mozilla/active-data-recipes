@@ -12,6 +12,7 @@ from ..query import run_query
 OUTPUTFILE_PREFIX = 'coverage_map'
 log = logging.getLogger('adr')
 
+
 def removeJob(lines, jobname):
     # TODO: do we need a deep copy here?
     temp_lines = copy.copy(lines)
@@ -26,10 +27,12 @@ def removeJob(lines, jobname):
 
     return retVal
 
+
 def taskclusterName(jobname):
     # output data to .json file, create format like: test-linux64/debug-<jobname>
     # todo, there are a lot of exceptions.
     return "test-linux64/debug-%s" % jobname
+
 
 def run(args):
     parser = RecipeParser()
@@ -96,7 +99,6 @@ def run(args):
                     all_dirs[l] = count
                     last_dir = l
 
-
         log.debug("original list of directories: %s" % len(dirs))
         log.debug("reduced set of directories: %s" % len(all_dirs.keys()))
         return all_dirs
@@ -114,7 +116,8 @@ def run(args):
 
         # this will be 1+ files, and 1+ suites, need to support that
         if expected_count and len(result['data']) != expected_count:
-            log.debug("  Missing data for path: %s: %s != %s" % (args.path, len(result['data']), expected_count))
+            log.debug("  Missing data for path: %s: %s != %s" %
+                      (args.path, len(result['data']), expected_count))
         for suite in result['data']:
             sourcename = suite[0]['file']['name']
             if sourcename not in retVal:
@@ -141,10 +144,9 @@ def run(args):
             for line in suite[0]['file']['covered']:
                 if line not in lines:
                     lines[line] = []
-                if jobname not in lines[line]: #handle the case of !args.use_chunks
+                if jobname not in lines[line]:  # handle the case of !args.use_chunks
                     lines[line].append(jobname)
             suites.append(jobname)
-
 
         # SETA style discovery of important suites
         # NOTE: this will be biased based on the order we evaluate suites (currently alpha_num sorted)
@@ -171,10 +173,9 @@ def run(args):
             output.append([sourcename, retVal[sourcename]['uniqueSuites']])
 
         with open('%s_%s.json' % (OUTPUTFILE_PREFIX, args.path.replace('/', '_')), 'w') as f:
-             json.dump(jsonOutput, f)
+            json.dump(jsonOutput, f)
 
         return output, jsonOutput
-
 
     # Main code
     if os.path.isfile(args.path):
