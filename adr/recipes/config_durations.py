@@ -1,3 +1,10 @@
+"""
+Get the average and total runtime for build platforms and types.
+
+.. code-block:: bash
+
+    adr config_durations [--branch <branch>]
+"""
 from __future__ import print_function, absolute_import
 
 from ..cli import RecipeParser

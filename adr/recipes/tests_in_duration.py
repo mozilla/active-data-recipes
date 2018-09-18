@@ -1,3 +1,10 @@
+"""
+This is currently broken.
+
+.. code-block:: bash
+
+    adr tests_in_duration
+"""
 from __future__ import print_function, absolute_import
 
 from ..cli import RecipeParser
