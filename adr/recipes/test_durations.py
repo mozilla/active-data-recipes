@@ -1,3 +1,10 @@
+"""
+See the number of tests that have a duration in pre-selected buckets.
+
+.. code-block:: bash
+
+    adr test_durations
+"""
 from __future__ import print_function, absolute_import
 
 from ..cli import RecipeParser

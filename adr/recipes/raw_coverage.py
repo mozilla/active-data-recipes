@@ -1,3 +1,10 @@
+"""
+This is currently broken.
+
+.. code-block:: bash
+
+    adr raw_coverage
+"""
 from __future__ import print_function, absolute_import
 
 import copy

@@ -27,7 +27,7 @@ def verify_docs(identifiers):
         match_group = re.search(expression, doctext)
         if not match_group:
             res = 1
-            print("error: recipe `{}` missing from doc file: `docs/recipes.rst`"
+            print("ERROR: recipe `{}` missing from doc file: `docs/recipes.rst`"
                   .format(identifier))
     return res
 
@@ -37,7 +37,7 @@ def verify_docstrings(modules):
     for name in modules:
         mod = import_module('adr.recipes.{}'.format(name))
         if not getattr(mod, '__doc__', None):
-            print("error: recipe `{}` missing a module level doc string".format(name))
+            print("ERROR: recipe `{}` missing a module level doc string".format(name))
             res = 1
     return res
 

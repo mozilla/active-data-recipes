@@ -1,3 +1,10 @@
+"""
+Get runtimes for a specific test file broken across platforms.
+
+.. code-block:: bash
+
+    adr tests_config_time -t <path to test>
+"""
 from __future__ import print_function, absolute_import
 
 from ..cli import RecipeParser
