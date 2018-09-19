@@ -55,6 +55,15 @@ class RecipeParser(ArgumentParser):
 
 
 def run_recipe(recipe, args, fmt='table'):
+    """Given a recipe, calls the appropriate query and returns the result.
+
+    The provided recipe name is used to make a call to the modules.
+
+    :param str recipe: name of the recipe to be run.
+    :param list args: remainder arguments that were unparsed.
+    :param str fmt: output format.
+    :returns: string
+    """
     modname = '.recipes.{}'.format(recipe)
     mod = importlib.import_module(modname, package='adr')
     output = mod.run(args)
@@ -67,6 +76,13 @@ def run_recipe(recipe, args, fmt='table'):
 
 
 def query_handler(args, remainder):
+    """Runs queries.
+
+    All functionality remains same as adr.query:cli.
+
+    :param Namespace args: Namespace object produced by main().
+    :param list remainder: List of unknown arguments.
+    """
     queries = [os.path.splitext(item)[0] for item in os.listdir(
                  QUERY_DIR) if item.endswith('.query')]
 
@@ -112,6 +128,13 @@ def query_handler(args, remainder):
 
 
 def recipe_handler(args, remainder):
+    """Runs recipes.
+
+    All functionality remains the same as the deprecated adr.cli:cli.
+
+    :param Namespace args: Namespace object produced by main().
+    :param list remainder: List of unknown arguments.
+    """
     recipes = [os.path.splitext(item)[0] for item in os.listdir(
                RECIPE_DIR) if item != '__init__.py' and item.endswith('.py')]
 
@@ -131,6 +154,14 @@ def recipe_handler(args, remainder):
 
 
 def _build_parser_arguments(parser):
+    """Builds the parser argument list.
+
+    Given a ArgumentParser object, this method will populate the standard
+    list of arguments.
+
+    :param ArgumentParser parser: instance of an ArgumentParser.
+    :returns: ArgumentParser
+    """
     # optional arguments
     parser.add_argument('-l', '--list', action='store_true', default=False,
                         help="List available recipes.")
@@ -145,16 +176,49 @@ def _build_parser_arguments(parser):
 
 
 def _set_logging_verbosity(is_verbose):
+    """Sets the logging verbosity at a specified level.
+
+    Default logging level is INFO.
+
+    If the -v flag is provided to adr, the logging level is set to DEBUG.
+
+    :param bool is_verbose: Speciies if -v flag has been supplied when adr was invoked.
+    """
     log.setLevel(logging.DEBUG) if is_verbose else log.setLevel(logging.INFO)
 
 
 def _check_tasks_exist(task):
+    """Checks whether the tasks argument is populated.
+
+    If no tasks are found, the program is terminated.
+
+    :param list task: list of tasks to be run.
+    """
     if len(task) == 0:
         sys.stdout.write('Please provide at least one recipe or query to run.\n')
         sys.exit()
 
 
 def main(args=sys.argv[1:]):
+    """Entry point for the adr module.
+
+    When the adr module is called, this method is run.
+
+    The argument list is parsed, and the appropriate parser or subparser is created.
+
+    Using the argument list, arguments are parsed and grouped into a Namespace object
+    representing known arguments, and a remainder list representing unknown arguments.
+
+    The method then calls the appropriate method for the action specified.
+
+    Supported use cases:
+
+    $ adr recipe <recipe_name>
+    $ adr query <query_name>
+    $ adr <recipe_name>
+
+    :param list args: command-line arguments.
+    """
     # create parsers and subparsers.
     parser = ArgumentParser(description='Runs adr recipes and/or queries.')
 
