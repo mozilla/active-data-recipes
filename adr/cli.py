@@ -91,18 +91,6 @@ def _build_parser_arguments(parser):
     return parser
 
 
-def _set_logging_verbosity(is_verbose):
-    """Sets the logging verbosity at a specified level.
-
-    Default logging level is INFO.
-
-    If the -v flag is provided to adr, the logging level is set to DEBUG.
-
-    :param bool is_verbose: Speciies if -v flag has been supplied when adr was invoked.
-    """
-    log.setLevel(logging.DEBUG) if is_verbose else log.setLevel(logging.INFO)
-
-
 def _check_tasks_exist(task):
     """Checks whether the tasks argument is populated.
 
