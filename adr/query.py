@@ -91,7 +91,7 @@ def cli(args=sys.argv[1:]):
         'branch': 'mozilla-central',
         'branches': ['mozilla-central'],
         'from_date': 'today-week',
-        'to_date': 'eod',
+        'to_date': 'eod',  # end of day
         'rev': '5b33b070378a',
         'path': 'dom/indexedDB',
         'limit': 10,
