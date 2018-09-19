@@ -3,10 +3,7 @@ Show ActiveData query usage, by day
 
 .. code-block:: bash
 
-    adr backout_rate [--from <date> [--to <date>]]
-
-
-`View Results <https://mozilla.github.io/active-data-recipes/#activedata-usage>`__
+    adr activedata_usage [--from <date> [--to <date>]]
 """
 
 from __future__ import print_function, absolute_import
