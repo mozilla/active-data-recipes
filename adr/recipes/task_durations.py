@@ -1,21 +1,30 @@
+"""
+Get information on the longest running tasks. Returns the total count, average
+runtime and total runtime over a given date range and set of branches.
+
+.. code-block:: bash
+
+    adr task_durations
+
+`View Results <https://mozilla.github.io/active-data-recipes/#task-durations>`__
+"""
 from __future__ import print_function, absolute_import
 
-import json
-from collections import defaultdict
-
 from ..cli import RecipeParser
-from ..query import format_date, run_query
+from ..query import run_query
+
+DEFAULT_BRANCHES = [
+    'autoland',
+    'mozilla-inbound',
+    'mozilla-central',
+]
 
 
 def run(args):
-    parser = RecipeParser('date')
-    parser.add_argument('-b', '--branches', default=['autoland', 'mozilla-inbound', 'mozilla-central'],
+    parser = RecipeParser('build', 'date', 'platform')
+    parser.add_argument('-B', '--branch', default=DEFAULT_BRANCHES, action='append',
                         help="Branches to gather backout rate on, can be specified "
                              "multiple times.")
-    parser.add_argument('-p', '--platform', default='windows10-64',
-                        help="platform for results, default is windows10-64")
-    parser.add_argument('-c', '--build_type', default='opt',
-                        help="build configuration, default is 'opt'.")
     parser.add_argument('--limit', type=int, default=20,
                         help="Maximum number of jobs to return")
     parser.add_argument('--sort-key', type=int, default=2,

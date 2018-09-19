@@ -1,3 +1,10 @@
+"""
+This is currently broken.
+
+.. code-block:: bash
+
+    adr raw_coverage
+"""
 from __future__ import print_function, absolute_import
 
 import copy
@@ -11,6 +18,7 @@ from ..query import run_query
 
 OUTPUTFILE_PREFIX = 'coverage_map'
 log = logging.getLogger('adr')
+
 
 def removeJob(lines, jobname):
     # TODO: do we need a deep copy here?
@@ -26,17 +34,15 @@ def removeJob(lines, jobname):
 
     return retVal
 
+
 def taskclusterName(jobname):
     # output data to .json file, create format like: test-linux64/debug-<jobname>
     # todo, there are a lot of exceptions.
     return "test-linux64/debug-%s" % jobname
 
+
 def run(args):
-    parser = RecipeParser()
-    parser.add_argument('--path', required=True,
-                        help="Source code path to show summary coverage stats for.")
-    parser.add_argument('--rev', required=True,
-                        help="Revision to collect coverage data at.")
+    parser = RecipeParser('path', 'rev')
     parser.add_argument('--use-chunks', default=False, action="store_true",
                         help="use chunks in aggregating and reporting jobs.")
     parser.add_argument('--no-perf', default=False, action="store_true",
@@ -54,38 +60,38 @@ def run(args):
         all_dirs = {}
         last_dir = ''
         for line in dirs:
-            l = line.strip()
-            if not l.endswith('/'):
-                l = "%s/" % l
-            if l == '/':
+            line = line.strip()
+            if not line.endswith('/'):
+                line = "%s/" % line
+            if line == '/':
                 continue
 
-            args.path = l
+            args.path = line
             count = int(artifactCount(args))
             if count <= 0:
                 continue
 
-            if last_dir and l.startswith(last_dir) or l == last_dir:
+            if last_dir and line.startswith(last_dir) or line == last_dir:
                 continue
 
-            if l in all_dirs:
+            if line in all_dirs:
                 continue
 
             # check if the parent is already in the dir list
-            if '/'.join(l.split('/')[0:-1]) in all_dirs:
+            if '/'.join(line.split('/')[0:-1]) in all_dirs:
                 continue
 
             if count < 50000:
-                all_dirs[l] = count
-                last_dir = l
+                all_dirs[line] = count
+                last_dir = line
             else:
                 newdirs = []
                 for d in dirs:
-                    if d.startswith(l):
+                    if d.startswith(line):
                         newdirs.append(d)
 
-                if l in newdirs:
-                    del newdirs[newdirs.index(l)]
+                if line in newdirs:
+                    del newdirs[newdirs.index(line)]
 
                 if newdirs:
                     sub_dirs = buildDirList(newdirs)
@@ -93,9 +99,8 @@ def run(args):
                         all_dirs[sd] = sub_dirs[sd]
                     last_dir = sd
                 else:
-                    all_dirs[l] = count
-                    last_dir = l
-
+                    all_dirs[line] = count
+                    last_dir = line
 
         log.debug("original list of directories: %s" % len(dirs))
         log.debug("reduced set of directories: %s" % len(all_dirs.keys()))
@@ -114,7 +119,8 @@ def run(args):
 
         # this will be 1+ files, and 1+ suites, need to support that
         if expected_count and len(result['data']) != expected_count:
-            log.debug("  Missing data for path: %s: %s != %s" % (args.path, len(result['data']), expected_count))
+            log.debug("  Missing data for path: %s: %s != %s" %
+                      (args.path, len(result['data']), expected_count))
         for suite in result['data']:
             sourcename = suite[0]['file']['name']
             if sourcename not in retVal:
@@ -135,20 +141,20 @@ def run(args):
             lines = retVal[sourcename]['lines']
             suites = retVal[sourcename]['suites']
             # Prep data for reducing total jobs
-            if type(suite[0]['file']['covered']) == type(1):
+            if isinstance(suite[0]['file']['covered'], int):
                 suite[0]['file']['covered'] = [suite[0]['file']['covered']]
 
             for line in suite[0]['file']['covered']:
                 if line not in lines:
                     lines[line] = []
-                if jobname not in lines[line]: #handle the case of !args.use_chunks
+                if jobname not in lines[line]:  # handle the case of !args.use_chunks
                     lines[line].append(jobname)
             suites.append(jobname)
 
-
         # SETA style discovery of important suites
-        # NOTE: this will be biased based on the order we evaluate suites (currently alpha_num sorted)
-        #       jobs at the top of the list will be removed first
+        # NOTE: this will be biased based on the order we evaluate suites
+        # (currently alpha_num sorted) jobs at the top of the list will be
+        # removed first
         jsonOutput = {}
         for sourcename in retVal:
             lines = retVal[sourcename]['lines']
@@ -171,10 +177,9 @@ def run(args):
             output.append([sourcename, retVal[sourcename]['uniqueSuites']])
 
         with open('%s_%s.json' % (OUTPUTFILE_PREFIX, args.path.replace('/', '_')), 'w') as f:
-             json.dump(jsonOutput, f)
+            json.dump(jsonOutput, f)
 
         return output, jsonOutput
-
 
     # Main code
     if os.path.isfile(args.path):

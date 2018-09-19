@@ -1,9 +1,17 @@
-from __future__ import print_function, absolute_import
+"""
+See how many files in tree have any code coverage at all.
 
-from collections import defaultdict
+.. code-block:: bash
+
+    adr files_with_coverage
+
+`View Results <https://mozilla.github.io/active-data-recipes/#files-with-coverage>`__
+"""
+from __future__ import print_function, absolute_import
 
 from ..cli import RecipeParser
 from ..query import run_query
+
 
 def run(args):
     parser = RecipeParser()

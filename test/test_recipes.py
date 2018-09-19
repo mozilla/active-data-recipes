@@ -10,7 +10,7 @@ import pytest
 import yaml
 
 from adr import query
-from adr.main import run_recipe
+from adr.cli import run_recipe
 
 if sys.version_info > (3, 0):
     IO = StringIO

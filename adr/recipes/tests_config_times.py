@@ -1,20 +1,18 @@
+"""
+Get runtimes for a specific test file broken across platforms.
+
+.. code-block:: bash
+
+    adr tests_config_time -t <path to test>
+"""
 from __future__ import print_function, absolute_import
 
-import json
-from collections import defaultdict
-
 from ..cli import RecipeParser
-from ..query import format_date, run_query
+from ..query import run_query
 
 
 def run(args):
-    parser = RecipeParser('date')
-    parser.add_argument('-b', '--branch', default=['mozilla-inbound'],
-                        help="Branches to query results from.")
-    parser.add_argument('-c', '--build_type', default='opt',
-                        help="build configuration, default is 'opt'.")
-    parser.add_argument('-t', '--test_name', default=None, required=True,
-                        help="full path of the test name (ex. 'dom/xhr/tests/test_worker_xhr_timeout.html').")
+    parser = RecipeParser('date', 'branch', 'build', 'test')
     args = parser.parse_args(args)
 
     result = []

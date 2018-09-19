@@ -53,7 +53,6 @@ def cli(args=sys.argv[1:]):
         log.info("updated {}".format(recipe))
 
         if 'gist' not in config:
-            create_new = False
             config['gist'] = output.rsplit('/', 1)[1]
             with open(args.gist_config, 'w') as fh:
                 fh.write(yaml.dump(config))

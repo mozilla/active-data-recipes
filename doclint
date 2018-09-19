@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+import os
+import re
+import sys
+from importlib import import_module
+
+here = os.path.abspath(os.path.dirname(__file__))
+recipe_dir = os.path.join(here, 'adr', 'recipes')
+
+
+def verify_docs(identifiers):
+
+    # We ignore identifiers starting with '_' for the sake of tests.
+    # Strings starting with "_" are ignored for doc verification
+    # hence they can be used for faking test values
+    with open(os.path.join(here, 'docs', 'recipes.rst')) as fh:
+        doctext = "".join(fh.readlines())
+
+    expression_list = [
+        '\n' + identifier + "\n(?:(?:(?:-+\n)+)|(?:(?:.+\n)+))"
+        for identifier in identifiers
+        if not identifier.startswith("_")
+    ]
+
+    res = 0
+    for expression, identifier in zip(expression_list, identifiers):
+        match_group = re.search(expression, doctext)
+        if not match_group:
+            res = 1
+            print("ERROR: recipe `{}` missing from doc file: `docs/recipes.rst`"
+                  .format(identifier))
+    return res
+
+
+def verify_docstrings(modules):
+    res = 0
+    for name in modules:
+        mod = import_module('adr.recipes.{}'.format(name))
+        if not getattr(mod, '__doc__', None):
+            print("ERROR: recipe `{}` missing a module level doc string".format(name))
+            res = 1
+    return res
+
+
+recipes = []
+for name in os.listdir(recipe_dir):
+    recipe, ext = os.path.splitext(name)
+    if ext == '.py' and not name.startswith('_'):
+        recipes.append(recipe)
+
+res = verify_docs(recipes)
+res |= verify_docstrings(recipes)
+sys.exit(res)

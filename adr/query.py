@@ -13,7 +13,7 @@ import yaml
 from six import string_types
 
 from .formatter import all_formatters
-from .main import log
+from .cli import log
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -51,6 +51,9 @@ def run_query(name, **context):
         # to keep the results down to a sane level when testing queries.
         if 'limit' in context:
             query['limit'] = context['limit']
+        if 'format' in context:
+            query['format'] = context['format']
+
         query = jsone.render(query, context)
         query_str = json.dumps(query, indent=2, separators=(',', ':'))
         log.debug("Running query {}:\n{}".format(name, query_str))
@@ -92,6 +95,7 @@ def cli(args=sys.argv[1:]):
         'rev': '5b33b070378a',
         'path': 'dom/indexedDB',
         'limit': 10,
+        'format': 'table',
     }
 
     if isinstance(args.fmt, string_types):
@@ -106,7 +110,8 @@ def cli(args=sys.argv[1:]):
 
         if 'edges' in result:
             for edge in result['edges']:
-                data[edge['name']] = [p['name'] for p in edge['domain']['partitions']]
+                if 'partitions' in edge['domain']:
+                    data[edge['name']] = [p['name'] for p in edge['domain']['partitions']]
 
         if 'header' in result:
             data.insert(0, result['header'])

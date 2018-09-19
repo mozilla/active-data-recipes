@@ -1,6 +1,13 @@
-from __future__ import print_function, absolute_import
+"""
+Get information on the ActiveData schema. The above command returns the
+available tables. To see the columns in a table, run:
 
-from collections import defaultdict
+.. code-block:: bash
+
+    adr inspect
+    adr inspect --table task
+"""
+from __future__ import print_function, absolute_import
 
 from ..cli import RecipeParser
 from ..query import run_query

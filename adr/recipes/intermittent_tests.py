@@ -1,20 +1,18 @@
+"""
+This is currently broken.
+
+.. code-block:: bash
+
+    adr intermittent_tests
+"""
 from __future__ import print_function, absolute_import
 
-import json
-from collections import defaultdict
-
 from ..cli import RecipeParser
-from ..query import format_date, run_query
+from ..query import run_query
 
 
 def run(args):
-    parser = RecipeParser('date')
-    parser.add_argument('-b', '--branch', default=['mozilla-inbound'],
-                        help="Branches to query results from.")
-    parser.add_argument('-c', '--build_type', default='opt',
-                        help="build configuration, default is 'opt'.")
-    parser.add_argument('-p', '--platform', default='windows10-64',
-                        help="build configuration, default is 'windows10-64'.")
+    parser = RecipeParser('branch', 'build', 'date', 'platform')
     args = parser.parse_args(args)
 
     # These 4 args are defined so that we can share the queries with the
@@ -42,7 +40,7 @@ def run(args):
             continue
 
         index = jobs['repo.changeset.id12'].index(rev)
-       
+
         if jobname != jobs['job.type.name'][index]:
             continue
 

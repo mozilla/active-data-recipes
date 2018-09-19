@@ -1,17 +1,18 @@
+"""
+Get the average and total runtime for build platforms and types.
+
+.. code-block:: bash
+
+    adr config_durations [--branch <branch>]
+"""
 from __future__ import print_function, absolute_import
 
-import json
-from collections import defaultdict
-
 from ..cli import RecipeParser
-from ..query import format_date, run_query
+from ..query import run_query
 
 
 def run(args):
-    parser = RecipeParser('date')
-    parser.add_argument('-b', '--branch', default=['mozilla-central'],
-                        help="Branches to gather backout rate on, can be specified "
-                             "multiple times.")
+    parser = RecipeParser('date', 'branch')
     parser.add_argument('--limit', type=int, default=50,
                         help="Maximum number of jobs to return")
     parser.add_argument('--sort-key', type=int, default=4,
@@ -24,7 +25,7 @@ def run(args):
     data = next(run_query('config_durations', **query_args))['data']
     result = []
     for record in data:
-        if type(record[1]) == type([]):
+        if isinstance(record[1], list):
             record[1] = record[1][-1]
         if record[2] is None:
             continue
