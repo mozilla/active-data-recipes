@@ -3,13 +3,16 @@ Show ActiveData query usage, by day
 
 .. code-block:: bash
 
-    adr activedata_usage [--from <date> [--to <date>]]
+    adr backout_rate [--from <date> [--to <date>]]
+
+
+`View Results <https://mozilla.github.io/active-data-recipes/#activedata-usage>`__
 """
 
 from __future__ import print_function, absolute_import
 
-from adr.recipe import RecipeParser
-from adr.query import run_query
+from ..cli import RecipeParser
+from ..query import run_query
 
 
 def run(args):
