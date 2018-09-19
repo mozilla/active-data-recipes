@@ -41,7 +41,7 @@ ARGUMENT_GROUPS = {
           }],
         [['--to'],
          {'dest': 'to_date',
-          'default': 'eod',
+          'default': 'eod',  # end of day
           'help': "Ending date to pull data from, defaults "
                   "to now",
           }],
