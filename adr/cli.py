@@ -19,6 +19,19 @@ log.addHandler(logging.StreamHandler())
 RECIPE_DIR = os.path.join(here, 'recipes')
 
 ARGUMENT_GROUPS = {
+    'branch': [
+        [['-B', '--branch'],
+         {'default': ['mozilla-central'],
+          'action': 'append',
+          'help': "Branches to query results from",
+          }],
+    ],
+    'build': [
+        [['-b', '--build-type'],
+         {'default': 'opt',
+          'help': "Build type (default: opt)",
+          }],
+    ],
     'date': [
         [['--from'],
          {'dest': 'from_date',
@@ -33,7 +46,37 @@ ARGUMENT_GROUPS = {
                   "to now",
           }],
     ],
+    'path': [
+        [['--path'],
+         {'required': True,
+          'help': "Path relative to repository root (file or directory)",
+          }],
+    ],
+    'platform': [
+        [['-p', '--platform'],
+         {'default': 'windows10-64',
+          'help': "Platform to limit results to (default: windows10-64)",
+          }],
+    ],
+    'rev': [
+        [['-r', '--revision'],
+         {'dest': 'rev',
+          'required': True,
+          'help': "Revision to limit results to",
+          }],
+    ],
+    'test': [
+        [['-t', '--test'],
+         {'required': True,
+          'dest': 'test_name',
+          'help': "Path to a test file",
+          }],
+    ],
 }
+"""
+These are commonly used arguments which can be re-used. They are shared to
+provide a consistent CLI across recipes.
+"""
 
 
 class RecipeParser(ArgumentParser):

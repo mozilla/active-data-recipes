@@ -42,11 +42,7 @@ def taskclusterName(jobname):
 
 
 def run(args):
-    parser = RecipeParser()
-    parser.add_argument('--path', required=True,
-                        help="Source code path to show summary coverage stats for.")
-    parser.add_argument('--rev', required=True,
-                        help="Revision to collect coverage data at.")
+    parser = RecipeParser('path', 'rev')
     parser.add_argument('--use-chunks', default=False, action="store_true",
                         help="use chunks in aggregating and reporting jobs.")
     parser.add_argument('--no-perf', default=False, action="store_true",
