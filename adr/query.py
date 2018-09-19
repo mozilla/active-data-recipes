@@ -13,8 +13,8 @@ import yaml
 from six import string_types
 
 from .formatter import all_formatters
-from .cli import log
 
+log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 
 ACTIVE_DATA_URL = 'http://activedata.allizom.org/query'
