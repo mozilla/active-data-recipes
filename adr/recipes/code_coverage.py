@@ -7,7 +7,7 @@ Get code coverage information for the given `path` at `rev`. Both arguments are 
 """
 from __future__ import print_function, absolute_import
 
-from ..cli import RecipeParser
+from ..recipe import RecipeParser
 from ..query import run_query
 
 

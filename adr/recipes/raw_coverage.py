@@ -5,7 +5,7 @@ import json
 import logging
 import os
 
-from ..cli import RecipeParser
+from ..recipe import RecipeParser
 from ..query import run_query
 
 

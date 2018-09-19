@@ -10,7 +10,7 @@ runtime and total runtime over a given date range and set of branches.
 """
 from __future__ import print_function, absolute_import
 
-from ..cli import RecipeParser
+from ..recipe import RecipeParser
 from ..query import run_query
 
 DEFAULT_BRANCHES = [
