@@ -34,9 +34,7 @@ def query_handler(args, remainder):
 
     _set_logging_verbosity(args.verbose)
 
-    if args.list:
-        log.info('\n'.join(sorted(queries)))
-        return
+    _list(queries)
 
     _check_tasks_exist(args.task)
 
@@ -86,9 +84,7 @@ def recipe_handler(args, remainder):
 
     _set_logging_verbosity(args.verbose)
 
-    if args.list:
-        log.info('\n'.join(sorted(recipes)))
-        return
+    _list(recipes)
 
     _check_tasks_exist(args.task)
 
@@ -121,18 +117,6 @@ def _build_parser_arguments(parser):
     return parser
 
 
-def _set_logging_verbosity(is_verbose):
-    """Sets the logging verbosity at a specified level.
-
-    Default logging level is INFO.
-
-    If the -v flag is provided to adr, the logging level is set to DEBUG.
-
-    :param bool is_verbose: Speciies if -v flag has been supplied when adr was invoked.
-    """
-    log.setLevel(logging.DEBUG) if is_verbose else log.setLevel(logging.INFO)
-
-
 def _check_tasks_exist(task):
     """Checks whether the tasks argument is populated.
 
@@ -143,6 +127,28 @@ def _check_tasks_exist(task):
     if len(task) == 0:
         sys.stdout.write('Please provide at least one recipe or query to run.\n')
         sys.exit()
+
+
+def _list(items):
+    """Runs the -l/--list command line action.
+
+    :param list items: list of items that are to be printed to the console.
+    :returns None
+    """
+    log.info('\n'.join(sorted(items)))
+    return
+
+
+def _set_logging_verbosity(is_verbose):
+    """Runs the -v/--verbose command line action.
+
+    Default logging level is INFO.
+
+    If the -v flag is provided to adr, the logging level is set to DEBUG.
+
+    :param bool is_verbose: Speciies if -v flag has been supplied when adr was invoked.
+    """
+    log.setLevel(logging.DEBUG) if is_verbose else log.setLevel(logging.INFO)
 
 
 def main(args=sys.argv[1:]):
