@@ -35,13 +35,13 @@ ARGUMENT_GROUPS = {
     'date': [
         [['--from'],
          {'dest': 'from_date',
-          'default': 'now-week',
+          'default': 'today-week',
           'help': "Starting date to pull data from, defaults "
                   "to a week ago",
           }],
         [['--to'],
          {'dest': 'to_date',
-          'default': 'now',
+          'default': 'eod',
           'help': "Ending date to pull data from, defaults "
                   "to now",
           }],
