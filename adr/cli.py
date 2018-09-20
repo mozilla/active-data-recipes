@@ -34,41 +34,16 @@ def query_handler(args, remainder):
 
     _set_logging_verbosity(args.verbose)
 
-    _list(queries)
+    if args.list:
+        _list(queries)
+    else:
+        _check_tasks_exist(args.task)
 
-    _check_tasks_exist(args.task)
-
-    fake_context = {
-        'branch': 'mozilla-central',
-        'branches': ['mozilla-central'],
-        'from_date': 'now-week',
-        'to_date': 'now',
-        'rev': '5b33b070378a',
-        'path': 'dom/indexedDB',
-        'limit': 10,
-        'format': 'table',
-    }
-
-    if isinstance(args.fmt, string_types):
-        fmt = all_formatters[args.fmt]
-
-    for task in args.task:
-        for result in run_query(task, **fake_context):
-            data = result['data']
-
-            if args.fmt == 'json':
-                print(fmt(result))
-                return
-
-            if 'edges' in result:
-                for edge in result['edges']:
-                    if 'partitions' in edge['domain']:
-                        data[edge['name']] = [p['name'] for p in edge['domain']['partitions']]
-
-            if 'header' in result:
-                data.insert(0, result['header'])
-
-            print(fmt(data))
+    for query in args.task:
+        if query not in queries:
+            log.error("query '{}' not found!".format(query))
+            continue
+        run_query(query, args, fmt=args.fmt)
 
 
 def recipe_handler(args, remainder):
@@ -84,9 +59,10 @@ def recipe_handler(args, remainder):
 
     _set_logging_verbosity(args.verbose)
 
-    _list(recipes)
-
-    _check_tasks_exist(args.task)
+    if args.list:
+        _list(recipes)
+    else:
+        _check_tasks_exist(args.task)
 
     for recipe in args.task:
         if recipe not in recipes:
