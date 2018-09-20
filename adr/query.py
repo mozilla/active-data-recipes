@@ -22,8 +22,8 @@ QUERY_DIR = os.path.join(here, 'queries')
 FAKE_CONTEXT = {
     'branch': 'mozilla-central',
     'branches': ['mozilla-central'],
-    'from_date': 'now-week',
-    'to_date': 'now',
+    'from_date': 'today-week',
+    'to_date': 'today',
     'rev': '5b33b070378a',
     'path': 'dom/indexedDB',
     'limit': 10,
