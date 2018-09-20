@@ -1,3 +1,10 @@
+"""
+This is currently broken.
+
+.. code-block:: bash
+
+    adr intermittent_test_data
+"""
 from __future__ import print_function, absolute_import
 
 from ..recipe import RecipeParser
@@ -5,13 +12,7 @@ from ..query import run_query
 
 
 def run(args):
-    parser = RecipeParser('date')
-    parser.add_argument('-b', '--branch', default=['mozilla-inbound'],
-                        help="Branches to query results from.")
-    parser.add_argument('-c', '--build_type', default='opt',
-                        help="build configuration, default is 'opt'.")
-    parser.add_argument('-p', '--platform', default='windows10-64',
-                        help="build configuration, default is 'windows10-64'.")
+    parser = RecipeParser('branch', 'build', 'date', 'platform')
     parser.add_argument('-t', '--test', default='',
                         help="Filter on specific test name")
     args = parser.parse_args(args)

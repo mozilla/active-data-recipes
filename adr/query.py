@@ -12,7 +12,7 @@ import requests
 import yaml
 from six import string_types
 
-from .formatter import all_formatters
+from adr.formatter import all_formatters
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
@@ -188,8 +188,8 @@ def cli(args=sys.argv[1:]):
     fake_context = {
         'branch': 'mozilla-central',
         'branches': ['mozilla-central'],
-        'from_date': 'now-week',
-        'to_date': 'now',
+        'from_date': 'today-week',
+        'to_date': 'eod',  # end of day
         'rev': '5b33b070378a',
         'path': 'dom/indexedDB',
         'limit': 10,

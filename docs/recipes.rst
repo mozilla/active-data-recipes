@@ -1,6 +1,12 @@
 Available Recipes
 ==================
 
+activedata_usage
+----------------
+
+.. automodule:: adr.recipes.activedata_usage
+    :no-undoc-members:
+
 backout_rate
 ------------
 

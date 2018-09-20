@@ -15,18 +15,57 @@ here = os.path.abspath(os.path.dirname(__file__))
 RECIPE_DIR = os.path.join(here, 'recipes')
 
 ARGUMENT_GROUPS = {
+    'branch': [
+        [['-B', '--branch'],
+         {'default': ['mozilla-central'],
+          'action': 'append',
+          'help': "Branches to query results from",
+          }],
+    ],
+    'build': [
+        [['-b', '--build-type'],
+         {'default': 'opt',
+          'help': "Build type (default: opt)",
+          }],
+    ],
     'date': [
         [['--from'],
          {'dest': 'from_date',
-          'default': 'now-week',
+          'default': 'today-week',
           'help': "Starting date to pull data from, defaults "
                   "to a week ago",
           }],
         [['--to'],
          {'dest': 'to_date',
-          'default': 'now',
+          'default': 'eod',  # end of day
           'help': "Ending date to pull data from, defaults "
                   "to now",
+          }],
+    ],
+    'path': [
+        [['--path'],
+         {'required': True,
+          'help': "Path relative to repository root (file or directory)",
+          }],
+    ],
+    'platform': [
+        [['-p', '--platform'],
+         {'default': 'windows10-64',
+          'help': "Platform to limit results to (default: windows10-64)",
+          }],
+    ],
+    'rev': [
+        [['-r', '--revision'],
+         {'dest': 'rev',
+          'required': True,
+          'help': "Revision to limit results to",
+          }],
+    ],
+    'test': [
+        [['-t', '--test'],
+         {'required': True,
+          'dest': 'test_name',
+          'help': "Path to a test file",
           }],
     ],
 }

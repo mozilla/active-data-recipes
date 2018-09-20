@@ -21,14 +21,10 @@ DEFAULT_BRANCHES = [
 
 
 def run(args):
-    parser = RecipeParser('date')
-    parser.add_argument('-b', '--branches', default=DEFAULT_BRANCHES,
+    parser = RecipeParser('build', 'date', 'platform')
+    parser.add_argument('-B', '--branch', default=DEFAULT_BRANCHES, action='append',
                         help="Branches to gather backout rate on, can be specified "
                              "multiple times.")
-    parser.add_argument('-p', '--platform', default='windows10-64',
-                        help="platform for results, default is windows10-64")
-    parser.add_argument('-c', '--build_type', default='opt',
-                        help="build configuration, default is 'opt'.")
     parser.add_argument('--limit', type=int, default=20,
                         help="Maximum number of jobs to return")
     parser.add_argument('--sort-key', type=int, default=2,
