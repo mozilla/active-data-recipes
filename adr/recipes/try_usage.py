@@ -15,6 +15,7 @@ from collections import defaultdict, OrderedDict
 
 from ..cli import RecipeParser
 from ..query import run_query
+from ..errors import MissingDataError
 
 
 def run(args):
@@ -25,7 +26,10 @@ def run(args):
     data = next(run_query('try_commit_messages', **query_args))['data']
 
     count = defaultdict(int)
-    count['total'] = len(data['message'])
+    try:
+        count['total'] = len(data['message'])
+    except KeyError:
+        return MissingDataError
     users = defaultdict(set)
     users['total'] = set(data['user'])
 
