@@ -8,8 +8,8 @@ Show ActiveData query usage, by day
 
 from __future__ import print_function, absolute_import
 
-from ..cli import RecipeParser
-from ..query import run_query
+from adr.recipe import RecipeParser
+from adr.query import run_query
 
 
 def run(args):
