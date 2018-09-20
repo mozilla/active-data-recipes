@@ -5,8 +5,6 @@ import os
 import sys
 from argparse import ArgumentParser
 
-from six import string_types
-
 from adr.formatter import all_formatters
 from adr.query import run_query
 from adr.recipe import run_recipe

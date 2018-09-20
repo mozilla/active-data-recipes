@@ -83,7 +83,6 @@ def load_and_run_query(name, **context):
     :param dict context: dictionary of ActiveData configs.
     :yields str: json-formatted string.
     """
-    import pdb; pdb.set_trace()
     for query in load_query(name):
         # If limit is in the context, override the queries' value. We do this
         # to keep the results down to a sane level when testing queries.
@@ -148,7 +147,6 @@ def load_query_old(name):
 
 def run_query_old(name, **context):
     """Deprecated"""
-    import pdb;pdb.set_trace()
     for query in load_query_old(name):
         # If limit is in the context, override the queries' value. We do this
         # to keep the results down to a sane level when testing queries.
