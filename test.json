@@ -1,0 +1,1858 @@
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "WB7Z_iPERDquYGGasHP2lg"
+        },
+        "parent": {
+          "id": "WB7Z_iPERDquYGGasHP2lg"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-xlarge",
+          "group": "us-west-2",
+          "id": "i-0011bde8891b820c6"
+        },
+        "capabilities": {
+          "devices": {
+            "loopbackVideo": true
+          }
+        },
+        "priority": "very-low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533400552.312,
+        "scheduler": {
+          "id": "gecko-level-1"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "B50BQrQWRiqDhvaZIY7iMQ",
+          "J1nuKN_ZSuKl9G5UTVBQ7Q",
+          "NGPcaxR_SO21oMy9qa_eYQ"
+        ],
+        "requires": "all-completed",
+        "id": "PRqgEWMuSnWlhbqm5YzSYg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 6,
+            "ok": 169
+          },
+          "ok": 175,
+          "lines": 17081,
+          "start_time": 1533318910.683,
+          "bytes": 4147938,
+          "duration": 1770.481999874115,
+          "end_time": 1533320681.165,
+          "action": {
+            "mozleak_total": 119,
+            "log": 2058,
+            "process_exit": 15,
+            "process_output": 14410,
+            "mozleak_object": 112,
+            "process_start": 15
+          },
+          "total": 175
+        },
+        "name": "test-linux64-ccov/debug-mochitest-browser-chrome-e10s-9",
+        "timestamp": 1533318425.237,
+        "chunk": 9,
+        "machine": {
+          "platform": "linux64-ccov",
+          "aws": {
+            "instance_type": "m3.xlarge"
+          },
+          "tc_worker_type": "gecko-t-linux-xlarge"
+        },
+        "key": "test-linux64-ccov/debug-mochitest-browser-chrome-e10s-9",
+        "suite": "mochitest-browser-chrome",
+        "type": [
+          "e10s",
+          "chunked"
+        ]
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533314001,
+          "id": 289038,
+          "user": "james@hoppipolla.co.uk"
+        },
+        "changeset": {
+          "date": 1533313920,
+          "id12": "ec6be3ab04ef",
+          "description": "Fuzzy query=refest debug\n\nPushed via `mach try fuzzy`\n\nMozReview-Commit-ID: 2LA6oPFo01x",
+          "id": "ec6be3ab04ef8e1e0353dfa0fb27c00093cb381c",
+          "author": "James Graham <james@hoppipolla.co.uk>"
+        },
+        "rev": 1657576,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/try",
+          "name": "try"
+        },
+        "index": 1657576
+      },
+      "build": {
+        "task": {},
+        "revision12": "ec6be3ab04ef",
+        "url": "https://queue.taskcluster.net/v1/task/J1nuKN_ZSuKl9G5UTVBQ7Q/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "try",
+        "date": 1533314001,
+        "type": [
+          "debug",
+          "ccov"
+        ],
+        "revision": "ec6be3ab04ef8e1e0353dfa0fb27c00093cb381c"
+      },
+      "action": {
+        "duration": 2323.888999938965,
+        "start_time": 1533318425.237,
+        "end_time": 1533320749.126
+      },
+      "_id": "tc.1706821:170681263.10.48",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "M-e10s",
+        "collection": {
+          "debug": true
+        },
+        "machine": {
+          "platform": "linux64-ccov"
+        },
+        "groupName": "Mochitests with e10s",
+        "tier": 2,
+        "symbol": "bc9"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533338574.406305,
+        "machine": {
+          "python": "CPython",
+          "pid": 19886,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-152"
+        },
+        "source": {
+          "name": "public/test_info//browser-chrome-chunked_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/PRqgEWMuSnWlhbqm5YzSYg/artifacts/public/test_info//browser-chrome-chunked_raw.log",
+          "timestamp": 1533338570.87319,
+          "machine": {
+            "python": "CPython",
+            "pid": 19886,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-152"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10495,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-146"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533320749.969227,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170681263,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170681263
+              },
+              "type": "aggregation",
+              "id": 1706821
+            },
+            "type": "join",
+            "id": 83,
+            "timestamp": 1533328205.473035
+          },
+          "type": "join",
+          "id": 10,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 3.5327351093292236,
+        "type": "join",
+        "id": 48,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "OK",
+        "ok": true,
+        "start_time": 1533320292.621,
+        "expected": "OK",
+        "end_time": 1533320309.995,
+        "test": "dom/ipc/tests/browser_domainPolicy.js",
+        "duration": 17.37399983406067,
+        "result": "OK"
+      }
+    },
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "WB7Z_iPERDquYGGasHP2lg"
+        },
+        "parent": {
+          "id": "WB7Z_iPERDquYGGasHP2lg"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-xlarge",
+          "group": "us-west-2",
+          "id": "i-0011bde8891b820c6"
+        },
+        "capabilities": {
+          "devices": {
+            "loopbackVideo": true
+          }
+        },
+        "priority": "very-low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533400552.312,
+        "scheduler": {
+          "id": "gecko-level-1"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "B50BQrQWRiqDhvaZIY7iMQ",
+          "J1nuKN_ZSuKl9G5UTVBQ7Q",
+          "NGPcaxR_SO21oMy9qa_eYQ"
+        ],
+        "requires": "all-completed",
+        "id": "PRqgEWMuSnWlhbqm5YzSYg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 6,
+            "ok": 169
+          },
+          "ok": 175,
+          "lines": 17081,
+          "start_time": 1533318910.683,
+          "bytes": 4147938,
+          "duration": 1770.481999874115,
+          "end_time": 1533320681.165,
+          "action": {
+            "mozleak_total": 119,
+            "log": 2058,
+            "process_exit": 15,
+            "process_output": 14410,
+            "mozleak_object": 112,
+            "process_start": 15
+          },
+          "total": 175
+        },
+        "name": "test-linux64-ccov/debug-mochitest-browser-chrome-e10s-9",
+        "timestamp": 1533318425.237,
+        "chunk": 9,
+        "machine": {
+          "platform": "linux64-ccov",
+          "aws": {
+            "instance_type": "m3.xlarge"
+          },
+          "tc_worker_type": "gecko-t-linux-xlarge"
+        },
+        "key": "test-linux64-ccov/debug-mochitest-browser-chrome-e10s-9",
+        "suite": "mochitest-browser-chrome",
+        "type": [
+          "e10s",
+          "chunked"
+        ]
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533314001,
+          "id": 289038,
+          "user": "james@hoppipolla.co.uk"
+        },
+        "changeset": {
+          "date": 1533313920,
+          "id12": "ec6be3ab04ef",
+          "description": "Fuzzy query=refest debug\n\nPushed via `mach try fuzzy`\n\nMozReview-Commit-ID: 2LA6oPFo01x",
+          "id": "ec6be3ab04ef8e1e0353dfa0fb27c00093cb381c",
+          "author": "James Graham <james@hoppipolla.co.uk>"
+        },
+        "rev": 1657576,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/try",
+          "name": "try"
+        },
+        "index": 1657576
+      },
+      "build": {
+        "task": {},
+        "revision12": "ec6be3ab04ef",
+        "url": "https://queue.taskcluster.net/v1/task/J1nuKN_ZSuKl9G5UTVBQ7Q/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "try",
+        "date": 1533314001,
+        "type": [
+          "debug",
+          "ccov"
+        ],
+        "revision": "ec6be3ab04ef8e1e0353dfa0fb27c00093cb381c"
+      },
+      "action": {
+        "duration": 2323.888999938965,
+        "start_time": 1533318425.237,
+        "end_time": 1533320749.126
+      },
+      "_id": "tc.1706821:170681263.10.62",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "M-e10s",
+        "collection": {
+          "debug": true
+        },
+        "machine": {
+          "platform": "linux64-ccov"
+        },
+        "groupName": "Mochitests with e10s",
+        "tier": 2,
+        "symbol": "bc9"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533338574.406305,
+        "machine": {
+          "python": "CPython",
+          "pid": 19886,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-152"
+        },
+        "source": {
+          "name": "public/test_info//browser-chrome-chunked_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/PRqgEWMuSnWlhbqm5YzSYg/artifacts/public/test_info//browser-chrome-chunked_raw.log",
+          "timestamp": 1533338570.87319,
+          "machine": {
+            "python": "CPython",
+            "pid": 19886,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-152"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10495,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-146"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533320749.969227,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170681263,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170681263
+              },
+              "type": "aggregation",
+              "id": 1706821
+            },
+            "type": "join",
+            "id": 83,
+            "timestamp": 1533328205.473035
+          },
+          "type": "join",
+          "id": 10,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 3.5327351093292236,
+        "type": "join",
+        "id": 62,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "OK",
+        "ok": true,
+        "start_time": 1533319046.98,
+        "expected": "OK",
+        "end_time": 1533319048.32,
+        "test": "browser/base/content/test/plugins/browser_CTP_iframe.js",
+        "duration": 1.3399999141693115,
+        "result": "OK"
+      }
+    },
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "WB7Z_iPERDquYGGasHP2lg"
+        },
+        "parent": {
+          "id": "WB7Z_iPERDquYGGasHP2lg"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-xlarge",
+          "group": "us-west-2",
+          "id": "i-0011bde8891b820c6"
+        },
+        "capabilities": {
+          "devices": {
+            "loopbackVideo": true
+          }
+        },
+        "priority": "very-low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533400552.312,
+        "scheduler": {
+          "id": "gecko-level-1"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "B50BQrQWRiqDhvaZIY7iMQ",
+          "J1nuKN_ZSuKl9G5UTVBQ7Q",
+          "NGPcaxR_SO21oMy9qa_eYQ"
+        ],
+        "requires": "all-completed",
+        "id": "PRqgEWMuSnWlhbqm5YzSYg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 6,
+            "ok": 169
+          },
+          "ok": 175,
+          "lines": 17081,
+          "start_time": 1533318910.683,
+          "bytes": 4147938,
+          "duration": 1770.481999874115,
+          "end_time": 1533320681.165,
+          "action": {
+            "mozleak_total": 119,
+            "log": 2058,
+            "process_exit": 15,
+            "process_output": 14410,
+            "mozleak_object": 112,
+            "process_start": 15
+          },
+          "total": 175
+        },
+        "name": "test-linux64-ccov/debug-mochitest-browser-chrome-e10s-9",
+        "timestamp": 1533318425.237,
+        "chunk": 9,
+        "machine": {
+          "platform": "linux64-ccov",
+          "aws": {
+            "instance_type": "m3.xlarge"
+          },
+          "tc_worker_type": "gecko-t-linux-xlarge"
+        },
+        "key": "test-linux64-ccov/debug-mochitest-browser-chrome-e10s-9",
+        "suite": "mochitest-browser-chrome",
+        "type": [
+          "e10s",
+          "chunked"
+        ]
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533314001,
+          "id": 289038,
+          "user": "james@hoppipolla.co.uk"
+        },
+        "changeset": {
+          "date": 1533313920,
+          "id12": "ec6be3ab04ef",
+          "description": "Fuzzy query=refest debug\n\nPushed via `mach try fuzzy`\n\nMozReview-Commit-ID: 2LA6oPFo01x",
+          "id": "ec6be3ab04ef8e1e0353dfa0fb27c00093cb381c",
+          "author": "James Graham <james@hoppipolla.co.uk>"
+        },
+        "rev": 1657576,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/try",
+          "name": "try"
+        },
+        "index": 1657576
+      },
+      "build": {
+        "task": {},
+        "revision12": "ec6be3ab04ef",
+        "url": "https://queue.taskcluster.net/v1/task/J1nuKN_ZSuKl9G5UTVBQ7Q/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "try",
+        "date": 1533314001,
+        "type": [
+          "debug",
+          "ccov"
+        ],
+        "revision": "ec6be3ab04ef8e1e0353dfa0fb27c00093cb381c"
+      },
+      "action": {
+        "duration": 2323.888999938965,
+        "start_time": 1533318425.237,
+        "end_time": 1533320749.126
+      },
+      "_id": "tc.1706821:170681263.10.116",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "M-e10s",
+        "collection": {
+          "debug": true
+        },
+        "machine": {
+          "platform": "linux64-ccov"
+        },
+        "groupName": "Mochitests with e10s",
+        "tier": 2,
+        "symbol": "bc9"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533338574.406305,
+        "machine": {
+          "python": "CPython",
+          "pid": 19886,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-152"
+        },
+        "source": {
+          "name": "public/test_info//browser-chrome-chunked_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/PRqgEWMuSnWlhbqm5YzSYg/artifacts/public/test_info//browser-chrome-chunked_raw.log",
+          "timestamp": 1533338570.87319,
+          "machine": {
+            "python": "CPython",
+            "pid": 19886,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-152"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10495,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-146"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533320749.969227,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170681263,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170681263
+              },
+              "type": "aggregation",
+              "id": 1706821
+            },
+            "type": "join",
+            "id": 83,
+            "timestamp": 1533328205.473035
+          },
+          "type": "join",
+          "id": 10,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 3.5327351093292236,
+        "type": "join",
+        "id": 116,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "OK",
+        "ok": true,
+        "start_time": 1533319396.856,
+        "expected": "OK",
+        "end_time": 1533319415.956,
+        "test": "browser/base/content/test/tabs/browser_multiselect_tabs_using_Shift.js",
+        "duration": 19.100000143051147,
+        "result": "OK"
+      }
+    },
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "WB7Z_iPERDquYGGasHP2lg"
+        },
+        "parent": {
+          "id": "WB7Z_iPERDquYGGasHP2lg"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-xlarge",
+          "group": "us-west-2",
+          "id": "i-0011bde8891b820c6"
+        },
+        "capabilities": {
+          "devices": {
+            "loopbackVideo": true
+          }
+        },
+        "priority": "very-low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533400552.312,
+        "scheduler": {
+          "id": "gecko-level-1"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "B50BQrQWRiqDhvaZIY7iMQ",
+          "J1nuKN_ZSuKl9G5UTVBQ7Q",
+          "NGPcaxR_SO21oMy9qa_eYQ"
+        ],
+        "requires": "all-completed",
+        "id": "PRqgEWMuSnWlhbqm5YzSYg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 6,
+            "ok": 169
+          },
+          "ok": 175,
+          "lines": 17081,
+          "start_time": 1533318910.683,
+          "bytes": 4147938,
+          "duration": 1770.481999874115,
+          "end_time": 1533320681.165,
+          "action": {
+            "mozleak_total": 119,
+            "log": 2058,
+            "process_exit": 15,
+            "process_output": 14410,
+            "mozleak_object": 112,
+            "process_start": 15
+          },
+          "total": 175
+        },
+        "name": "test-linux64-ccov/debug-mochitest-browser-chrome-e10s-9",
+        "timestamp": 1533318425.237,
+        "chunk": 9,
+        "machine": {
+          "platform": "linux64-ccov",
+          "aws": {
+            "instance_type": "m3.xlarge"
+          },
+          "tc_worker_type": "gecko-t-linux-xlarge"
+        },
+        "key": "test-linux64-ccov/debug-mochitest-browser-chrome-e10s-9",
+        "suite": "mochitest-browser-chrome",
+        "type": [
+          "e10s",
+          "chunked"
+        ]
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533314001,
+          "id": 289038,
+          "user": "james@hoppipolla.co.uk"
+        },
+        "changeset": {
+          "date": 1533313920,
+          "id12": "ec6be3ab04ef",
+          "description": "Fuzzy query=refest debug\n\nPushed via `mach try fuzzy`\n\nMozReview-Commit-ID: 2LA6oPFo01x",
+          "id": "ec6be3ab04ef8e1e0353dfa0fb27c00093cb381c",
+          "author": "James Graham <james@hoppipolla.co.uk>"
+        },
+        "rev": 1657576,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/try",
+          "name": "try"
+        },
+        "index": 1657576
+      },
+      "build": {
+        "task": {},
+        "revision12": "ec6be3ab04ef",
+        "url": "https://queue.taskcluster.net/v1/task/J1nuKN_ZSuKl9G5UTVBQ7Q/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "try",
+        "date": 1533314001,
+        "type": [
+          "debug",
+          "ccov"
+        ],
+        "revision": "ec6be3ab04ef8e1e0353dfa0fb27c00093cb381c"
+      },
+      "action": {
+        "duration": 2323.888999938965,
+        "start_time": 1533318425.237,
+        "end_time": 1533320749.126
+      },
+      "_id": "tc.1706821:170681263.10.130",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "M-e10s",
+        "collection": {
+          "debug": true
+        },
+        "machine": {
+          "platform": "linux64-ccov"
+        },
+        "groupName": "Mochitests with e10s",
+        "tier": 2,
+        "symbol": "bc9"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533338574.406305,
+        "machine": {
+          "python": "CPython",
+          "pid": 19886,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-152"
+        },
+        "source": {
+          "name": "public/test_info//browser-chrome-chunked_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/PRqgEWMuSnWlhbqm5YzSYg/artifacts/public/test_info//browser-chrome-chunked_raw.log",
+          "timestamp": 1533338570.87319,
+          "machine": {
+            "python": "CPython",
+            "pid": 19886,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-152"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10495,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-146"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533320749.969227,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170681263,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170681263
+              },
+              "type": "aggregation",
+              "id": 1706821
+            },
+            "type": "join",
+            "id": 83,
+            "timestamp": 1533328205.473035
+          },
+          "type": "join",
+          "id": 10,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 3.5327351093292236,
+        "type": "join",
+        "id": 130,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "OK",
+        "ok": true,
+        "start_time": 1533319228.949,
+        "expected": "OK",
+        "end_time": 1533319232.443,
+        "test": "browser/base/content/test/tabs/browser_allow_process_switches_despite_related_browser.js",
+        "duration": 3.494000196456909,
+        "result": "OK"
+      }
+    },
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "parent": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-large",
+          "group": "us-west-2",
+          "id": "i-0d8734837856f6fd2"
+        },
+        "priority": "low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533402055.087,
+        "scheduler": {
+          "id": "gecko-level-3"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "X0V49J-mTruFjOoersKrVw",
+          "bFBMLR9HSVCa8R-fEBrh4A"
+        ],
+        "requires": "all-completed",
+        "id": "GEpnUub2Sg-QcjMJL77CGg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 4,
+            "pass": 401
+          },
+          "ok": 405,
+          "lines": 825,
+          "start_time": 1533317139.153,
+          "bytes": 184562,
+          "duration": 93.87899994850159,
+          "end_time": 1533317233.032,
+          "action": {
+            "log": 11
+          },
+          "total": 405
+        },
+        "name": "test-linux64/opt-xpcshell-3",
+        "timestamp": 1533316819.002,
+        "chunk": 3,
+        "machine": {
+          "platform": "linux64",
+          "aws": {
+            "instance_type": "m3.large"
+          },
+          "tc_worker_type": "gecko-t-linux-large"
+        },
+        "key": "test-linux64/opt-xpcshell-3",
+        "suite": "xpcshell"
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533315540,
+          "id": 106045,
+          "user": "bvandyk@mozilla.com"
+        },
+        "changeset": {
+          "description": "Bug 1404977 - Tests P2: Add test to ensure multiple, concurrent gUM calls in a single window succeed. r=pehrsons\n\nMozReview-Commit-ID: HGwcu6Z2mDn",
+          "author": "Bryce Van Dyk <bvandyk@mozilla.com>",
+          "bug": 1404977,
+          "id12": "67c4ed3c73d7",
+          "date": 1533306900,
+          "id": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+        },
+        "rev": 430041,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/integration/mozilla-inbound",
+          "name": "mozilla-inbound"
+        },
+        "index": 430041
+      },
+      "build": {
+        "task": {},
+        "revision12": "67c4ed3c73d7",
+        "url": "https://queue.taskcluster.net/v1/task/X0V49J-mTruFjOoersKrVw/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "mozilla-inbound",
+        "date": 1533315540,
+        "type": "opt",
+        "revision": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+      },
+      "action": {
+        "duration": 422.2819998264313,
+        "start_time": 1533316819.002,
+        "end_time": 1533317241.284
+      },
+      "_id": "tc.1706644:170663563.68.18",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "X",
+        "collection": {
+          "opt": true
+        },
+        "machine": {
+          "platform": "linux64"
+        },
+        "groupName": "Xpcshell tests",
+        "tier": 1,
+        "symbol": "X3"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533337916.563923,
+        "machine": {
+          "python": "CPython",
+          "pid": 10486,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-165"
+        },
+        "source": {
+          "name": "public/test_info//xpcshell_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/GEpnUub2Sg-QcjMJL77CGg/artifacts/public/test_info//xpcshell_raw.log",
+          "timestamp": 1533337916.335482,
+          "machine": {
+            "python": "CPython",
+            "pid": 10486,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-165"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10498,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-210"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533317245.290432,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170663563,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170663563
+              },
+              "type": "aggregation",
+              "id": 1706644
+            },
+            "type": "join",
+            "id": 81,
+            "timestamp": 1533326276.294951
+          },
+          "type": "join",
+          "id": 68,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 0.22799897193908691,
+        "type": "join",
+        "id": 18,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "PASS",
+        "ok": true,
+        "start_time": 1533317219.145,
+        "expected": "PASS",
+        "end_time": 1533317220.215,
+        "test": "js/xpconnect/tests/unit/test_file.js",
+        "duration": 1.0699999332427979,
+        "result": "PASS"
+      }
+    },
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "parent": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-large",
+          "group": "us-west-2",
+          "id": "i-0d8734837856f6fd2"
+        },
+        "priority": "low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533402055.087,
+        "scheduler": {
+          "id": "gecko-level-3"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "X0V49J-mTruFjOoersKrVw",
+          "bFBMLR9HSVCa8R-fEBrh4A"
+        ],
+        "requires": "all-completed",
+        "id": "GEpnUub2Sg-QcjMJL77CGg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 4,
+            "pass": 401
+          },
+          "ok": 405,
+          "lines": 825,
+          "start_time": 1533317139.153,
+          "bytes": 184562,
+          "duration": 93.87899994850159,
+          "end_time": 1533317233.032,
+          "action": {
+            "log": 11
+          },
+          "total": 405
+        },
+        "name": "test-linux64/opt-xpcshell-3",
+        "timestamp": 1533316819.002,
+        "chunk": 3,
+        "machine": {
+          "platform": "linux64",
+          "aws": {
+            "instance_type": "m3.large"
+          },
+          "tc_worker_type": "gecko-t-linux-large"
+        },
+        "key": "test-linux64/opt-xpcshell-3",
+        "suite": "xpcshell"
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533315540,
+          "id": 106045,
+          "user": "bvandyk@mozilla.com"
+        },
+        "changeset": {
+          "description": "Bug 1404977 - Tests P2: Add test to ensure multiple, concurrent gUM calls in a single window succeed. r=pehrsons\n\nMozReview-Commit-ID: HGwcu6Z2mDn",
+          "author": "Bryce Van Dyk <bvandyk@mozilla.com>",
+          "bug": 1404977,
+          "id12": "67c4ed3c73d7",
+          "date": 1533306900,
+          "id": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+        },
+        "rev": 430041,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/integration/mozilla-inbound",
+          "name": "mozilla-inbound"
+        },
+        "index": 430041
+      },
+      "build": {
+        "task": {},
+        "revision12": "67c4ed3c73d7",
+        "url": "https://queue.taskcluster.net/v1/task/X0V49J-mTruFjOoersKrVw/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "mozilla-inbound",
+        "date": 1533315540,
+        "type": "opt",
+        "revision": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+      },
+      "action": {
+        "duration": 422.2819998264313,
+        "start_time": 1533316819.002,
+        "end_time": 1533317241.284
+      },
+      "_id": "tc.1706644:170663563.68.32",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "X",
+        "collection": {
+          "opt": true
+        },
+        "machine": {
+          "platform": "linux64"
+        },
+        "groupName": "Xpcshell tests",
+        "tier": 1,
+        "symbol": "X3"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533337916.563923,
+        "machine": {
+          "python": "CPython",
+          "pid": 10486,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-165"
+        },
+        "source": {
+          "name": "public/test_info//xpcshell_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/GEpnUub2Sg-QcjMJL77CGg/artifacts/public/test_info//xpcshell_raw.log",
+          "timestamp": 1533337916.335482,
+          "machine": {
+            "python": "CPython",
+            "pid": 10486,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-165"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10498,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-210"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533317245.290432,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170663563,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170663563
+              },
+              "type": "aggregation",
+              "id": 1706644
+            },
+            "type": "join",
+            "id": 81,
+            "timestamp": 1533326276.294951
+          },
+          "type": "join",
+          "id": 68,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 0.22799897193908691,
+        "type": "join",
+        "id": 32,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "PASS",
+        "ok": true,
+        "start_time": 1533317156.227,
+        "expected": "PASS",
+        "end_time": 1533317156.806,
+        "test": "dom/plugins/test/unit/test_allowed_types.js",
+        "duration": 0.5789999961853027,
+        "result": "PASS"
+      }
+    },
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "parent": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-large",
+          "group": "us-west-2",
+          "id": "i-0d8734837856f6fd2"
+        },
+        "priority": "low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533402055.087,
+        "scheduler": {
+          "id": "gecko-level-3"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "X0V49J-mTruFjOoersKrVw",
+          "bFBMLR9HSVCa8R-fEBrh4A"
+        ],
+        "requires": "all-completed",
+        "id": "GEpnUub2Sg-QcjMJL77CGg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 4,
+            "pass": 401
+          },
+          "ok": 405,
+          "lines": 825,
+          "start_time": 1533317139.153,
+          "bytes": 184562,
+          "duration": 93.87899994850159,
+          "end_time": 1533317233.032,
+          "action": {
+            "log": 11
+          },
+          "total": 405
+        },
+        "name": "test-linux64/opt-xpcshell-3",
+        "timestamp": 1533316819.002,
+        "chunk": 3,
+        "machine": {
+          "platform": "linux64",
+          "aws": {
+            "instance_type": "m3.large"
+          },
+          "tc_worker_type": "gecko-t-linux-large"
+        },
+        "key": "test-linux64/opt-xpcshell-3",
+        "suite": "xpcshell"
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533315540,
+          "id": 106045,
+          "user": "bvandyk@mozilla.com"
+        },
+        "changeset": {
+          "description": "Bug 1404977 - Tests P2: Add test to ensure multiple, concurrent gUM calls in a single window succeed. r=pehrsons\n\nMozReview-Commit-ID: HGwcu6Z2mDn",
+          "author": "Bryce Van Dyk <bvandyk@mozilla.com>",
+          "bug": 1404977,
+          "id12": "67c4ed3c73d7",
+          "date": 1533306900,
+          "id": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+        },
+        "rev": 430041,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/integration/mozilla-inbound",
+          "name": "mozilla-inbound"
+        },
+        "index": 430041
+      },
+      "build": {
+        "task": {},
+        "revision12": "67c4ed3c73d7",
+        "url": "https://queue.taskcluster.net/v1/task/X0V49J-mTruFjOoersKrVw/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "mozilla-inbound",
+        "date": 1533315540,
+        "type": "opt",
+        "revision": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+      },
+      "action": {
+        "duration": 422.2819998264313,
+        "start_time": 1533316819.002,
+        "end_time": 1533317241.284
+      },
+      "_id": "tc.1706644:170663563.68.126",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "X",
+        "collection": {
+          "opt": true
+        },
+        "machine": {
+          "platform": "linux64"
+        },
+        "groupName": "Xpcshell tests",
+        "tier": 1,
+        "symbol": "X3"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533337916.563923,
+        "machine": {
+          "python": "CPython",
+          "pid": 10486,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-165"
+        },
+        "source": {
+          "name": "public/test_info//xpcshell_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/GEpnUub2Sg-QcjMJL77CGg/artifacts/public/test_info//xpcshell_raw.log",
+          "timestamp": 1533337916.335482,
+          "machine": {
+            "python": "CPython",
+            "pid": 10486,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-165"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10498,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-210"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533317245.290432,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170663563,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170663563
+              },
+              "type": "aggregation",
+              "id": 1706644
+            },
+            "type": "join",
+            "id": 81,
+            "timestamp": 1533326276.294951
+          },
+          "type": "join",
+          "id": 68,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 0.22799897193908691,
+        "type": "join",
+        "id": 126,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "PASS",
+        "ok": true,
+        "start_time": 1533317210.85,
+        "expected": "PASS",
+        "end_time": 1533317211.829,
+        "test": "intl/uconv/tests/unit/test_encode_8859-6.js",
+        "duration": 0.9790000915527344,
+        "result": "PASS"
+      }
+    },
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "parent": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-large",
+          "group": "us-west-2",
+          "id": "i-0d8734837856f6fd2"
+        },
+        "priority": "low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533402055.087,
+        "scheduler": {
+          "id": "gecko-level-3"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "X0V49J-mTruFjOoersKrVw",
+          "bFBMLR9HSVCa8R-fEBrh4A"
+        ],
+        "requires": "all-completed",
+        "id": "GEpnUub2Sg-QcjMJL77CGg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 4,
+            "pass": 401
+          },
+          "ok": 405,
+          "lines": 825,
+          "start_time": 1533317139.153,
+          "bytes": 184562,
+          "duration": 93.87899994850159,
+          "end_time": 1533317233.032,
+          "action": {
+            "log": 11
+          },
+          "total": 405
+        },
+        "name": "test-linux64/opt-xpcshell-3",
+        "timestamp": 1533316819.002,
+        "chunk": 3,
+        "machine": {
+          "platform": "linux64",
+          "aws": {
+            "instance_type": "m3.large"
+          },
+          "tc_worker_type": "gecko-t-linux-large"
+        },
+        "key": "test-linux64/opt-xpcshell-3",
+        "suite": "xpcshell"
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533315540,
+          "id": 106045,
+          "user": "bvandyk@mozilla.com"
+        },
+        "changeset": {
+          "description": "Bug 1404977 - Tests P2: Add test to ensure multiple, concurrent gUM calls in a single window succeed. r=pehrsons\n\nMozReview-Commit-ID: HGwcu6Z2mDn",
+          "author": "Bryce Van Dyk <bvandyk@mozilla.com>",
+          "bug": 1404977,
+          "id12": "67c4ed3c73d7",
+          "date": 1533306900,
+          "id": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+        },
+        "rev": 430041,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/integration/mozilla-inbound",
+          "name": "mozilla-inbound"
+        },
+        "index": 430041
+      },
+      "build": {
+        "task": {},
+        "revision12": "67c4ed3c73d7",
+        "url": "https://queue.taskcluster.net/v1/task/X0V49J-mTruFjOoersKrVw/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "mozilla-inbound",
+        "date": 1533315540,
+        "type": "opt",
+        "revision": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+      },
+      "action": {
+        "duration": 422.2819998264313,
+        "start_time": 1533316819.002,
+        "end_time": 1533317241.284
+      },
+      "_id": "tc.1706644:170663563.68.140",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "X",
+        "collection": {
+          "opt": true
+        },
+        "machine": {
+          "platform": "linux64"
+        },
+        "groupName": "Xpcshell tests",
+        "tier": 1,
+        "symbol": "X3"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533337916.563923,
+        "machine": {
+          "python": "CPython",
+          "pid": 10486,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-165"
+        },
+        "source": {
+          "name": "public/test_info//xpcshell_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/GEpnUub2Sg-QcjMJL77CGg/artifacts/public/test_info//xpcshell_raw.log",
+          "timestamp": 1533337916.335482,
+          "machine": {
+            "python": "CPython",
+            "pid": 10486,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-165"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10498,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-210"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533317245.290432,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170663563,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170663563
+              },
+              "type": "aggregation",
+              "id": 1706644
+            },
+            "type": "join",
+            "id": 81,
+            "timestamp": 1533326276.294951
+          },
+          "type": "join",
+          "id": 68,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 0.22799897193908691,
+        "type": "join",
+        "id": 140,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "PASS",
+        "ok": true,
+        "start_time": 1533317211.284,
+        "expected": "PASS",
+        "end_time": 1533317212.096,
+        "test": "intl/uconv/tests/unit/test_encode_CP1251.js",
+        "duration": 0.812000036239624,
+        "result": "PASS"
+      }
+    },
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "parent": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-large",
+          "group": "us-west-2",
+          "id": "i-0d8734837856f6fd2"
+        },
+        "priority": "low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533402055.087,
+        "scheduler": {
+          "id": "gecko-level-3"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "X0V49J-mTruFjOoersKrVw",
+          "bFBMLR9HSVCa8R-fEBrh4A"
+        ],
+        "requires": "all-completed",
+        "id": "GEpnUub2Sg-QcjMJL77CGg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 4,
+            "pass": 401
+          },
+          "ok": 405,
+          "lines": 825,
+          "start_time": 1533317139.153,
+          "bytes": 184562,
+          "duration": 93.87899994850159,
+          "end_time": 1533317233.032,
+          "action": {
+            "log": 11
+          },
+          "total": 405
+        },
+        "name": "test-linux64/opt-xpcshell-3",
+        "timestamp": 1533316819.002,
+        "chunk": 3,
+        "machine": {
+          "platform": "linux64",
+          "aws": {
+            "instance_type": "m3.large"
+          },
+          "tc_worker_type": "gecko-t-linux-large"
+        },
+        "key": "test-linux64/opt-xpcshell-3",
+        "suite": "xpcshell"
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533315540,
+          "id": 106045,
+          "user": "bvandyk@mozilla.com"
+        },
+        "changeset": {
+          "description": "Bug 1404977 - Tests P2: Add test to ensure multiple, concurrent gUM calls in a single window succeed. r=pehrsons\n\nMozReview-Commit-ID: HGwcu6Z2mDn",
+          "author": "Bryce Van Dyk <bvandyk@mozilla.com>",
+          "bug": 1404977,
+          "id12": "67c4ed3c73d7",
+          "date": 1533306900,
+          "id": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+        },
+        "rev": 430041,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/integration/mozilla-inbound",
+          "name": "mozilla-inbound"
+        },
+        "index": 430041
+      },
+      "build": {
+        "task": {},
+        "revision12": "67c4ed3c73d7",
+        "url": "https://queue.taskcluster.net/v1/task/X0V49J-mTruFjOoersKrVw/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "mozilla-inbound",
+        "date": 1533315540,
+        "type": "opt",
+        "revision": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+      },
+      "action": {
+        "duration": 422.2819998264313,
+        "start_time": 1533316819.002,
+        "end_time": 1533317241.284
+      },
+      "_id": "tc.1706644:170663563.68.203",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "X",
+        "collection": {
+          "opt": true
+        },
+        "machine": {
+          "platform": "linux64"
+        },
+        "groupName": "Xpcshell tests",
+        "tier": 1,
+        "symbol": "X3"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533337916.563923,
+        "machine": {
+          "python": "CPython",
+          "pid": 10486,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-165"
+        },
+        "source": {
+          "name": "public/test_info//xpcshell_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/GEpnUub2Sg-QcjMJL77CGg/artifacts/public/test_info//xpcshell_raw.log",
+          "timestamp": 1533337916.335482,
+          "machine": {
+            "python": "CPython",
+            "pid": 10486,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-165"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10498,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-210"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533317245.290432,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170663563,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170663563
+              },
+              "type": "aggregation",
+              "id": 1706644
+            },
+            "type": "join",
+            "id": 81,
+            "timestamp": 1533326276.294951
+          },
+          "type": "join",
+          "id": 68,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 0.22799897193908691,
+        "type": "join",
+        "id": 203,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "PASS",
+        "ok": true,
+        "start_time": 1533317217.537,
+        "expected": "PASS",
+        "end_time": 1533317218.372,
+        "test": "js/xpconnect/tests/unit/test_bug1034262.js",
+        "duration": 0.8350000381469727,
+        "result": "PASS"
+      }
+    },
+    {
+      "task": {
+        "kind": "test",
+        "group": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "parent": {
+          "id": "fUM3vxG7TO2JKc2_decHfA"
+        },
+        "maxRunTime": 5400,
+        "worker": {
+          "type": "gecko-t-linux-large",
+          "group": "us-west-2",
+          "id": "i-0d8734837856f6fd2"
+        },
+        "priority": "low",
+        "state": "completed",
+        "version": 1,
+        "deadline": 1533402055.087,
+        "scheduler": {
+          "id": "gecko-level-3"
+        },
+        "provisioner": {
+          "id": "aws-provisioner-v1"
+        },
+        "dependencies": [
+          "X0V49J-mTruFjOoersKrVw",
+          "bFBMLR9HSVCa8R-fEBrh4A"
+        ],
+        "requires": "all-completed",
+        "id": "GEpnUub2Sg-QcjMJL77CGg"
+      },
+      "run": {
+        "stats": {
+          "status": {
+            "skip": 4,
+            "pass": 401
+          },
+          "ok": 405,
+          "lines": 825,
+          "start_time": 1533317139.153,
+          "bytes": 184562,
+          "duration": 93.87899994850159,
+          "end_time": 1533317233.032,
+          "action": {
+            "log": 11
+          },
+          "total": 405
+        },
+        "name": "test-linux64/opt-xpcshell-3",
+        "timestamp": 1533316819.002,
+        "chunk": 3,
+        "machine": {
+          "platform": "linux64",
+          "aws": {
+            "instance_type": "m3.large"
+          },
+          "tc_worker_type": "gecko-t-linux-large"
+        },
+        "key": "test-linux64/opt-xpcshell-3",
+        "suite": "xpcshell"
+      },
+      "worker": {},
+      "repo": {
+        "push": {
+          "date": 1533315540,
+          "id": 106045,
+          "user": "bvandyk@mozilla.com"
+        },
+        "changeset": {
+          "description": "Bug 1404977 - Tests P2: Add test to ensure multiple, concurrent gUM calls in a single window succeed. r=pehrsons\n\nMozReview-Commit-ID: HGwcu6Z2mDn",
+          "author": "Bryce Van Dyk <bvandyk@mozilla.com>",
+          "bug": 1404977,
+          "id12": "67c4ed3c73d7",
+          "date": 1533306900,
+          "id": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+        },
+        "rev": 430041,
+        "branch": {
+          "locale": "en-US",
+          "url": "https://hg.mozilla.org/integration/mozilla-inbound",
+          "name": "mozilla-inbound"
+        },
+        "index": 430041
+      },
+      "build": {
+        "task": {},
+        "revision12": "67c4ed3c73d7",
+        "url": "https://queue.taskcluster.net/v1/task/X0V49J-mTruFjOoersKrVw/artifacts/public/build/target.tar.bz2",
+        "platform": "linux64",
+        "branch": "mozilla-inbound",
+        "date": 1533315540,
+        "type": "opt",
+        "revision": "67c4ed3c73d7bb770edcbdffebfb5688a3822a5b"
+      },
+      "action": {
+        "duration": 422.2819998264313,
+        "start_time": 1533316819.002,
+        "end_time": 1533317241.284
+      },
+      "_id": "tc.1706644:170663563.68.296",
+      "treeherder": {
+        "jobKind": "test",
+        "groupSymbol": "X",
+        "collection": {
+          "opt": true
+        },
+        "machine": {
+          "platform": "linux64"
+        },
+        "groupName": "Xpcshell tests",
+        "tier": 1,
+        "symbol": "X3"
+      },
+      "etl": {
+        "name": "unittest",
+        "timestamp": 1533337916.563923,
+        "machine": {
+          "python": "CPython",
+          "pid": 10486,
+          "os": "Linux4.4.0-1020-aws",
+          "name": "ip-172-31-2-165"
+        },
+        "source": {
+          "name": "public/test_info//xpcshell_raw.log",
+          "url": "https://queue.taskcluster.net/v1/task/GEpnUub2Sg-QcjMJL77CGg/artifacts/public/test_info//xpcshell_raw.log",
+          "timestamp": 1533337916.335482,
+          "machine": {
+            "python": "CPython",
+            "pid": 10486,
+            "os": "Linux4.4.0-1020-aws",
+            "name": "ip-172-31-2-165"
+          },
+          "source": {
+            "machine": {
+              "python": "CPython",
+              "pid": 10498,
+              "os": "Linux4.4.0-1020-aws",
+              "name": "ip-172-31-2-210"
+            },
+            "source": {
+              "name": "Pulse block",
+              "timestamp": 1533317245.290432,
+              "bucket": "active-data-task-cluster-logger",
+              "source": {
+                "count": 170663563,
+                "source": {
+                  "code": "tc"
+                },
+                "type": "join",
+                "id": 170663563
+              },
+              "type": "aggregation",
+              "id": 1706644
+            },
+            "type": "join",
+            "id": 81,
+            "timestamp": 1533326276.294951
+          },
+          "type": "join",
+          "id": 68,
+          "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+        },
+        "duration": 0.22799897193908691,
+        "type": "join",
+        "id": 296,
+        "revision": "abb7bef30a00b39245251526b56f2396f6f87811"
+      },
+      "result": {
+        "status": "PASS",
+        "ok": true,
+        "start_time": 1533317222.184,
+        "expected": "PASS",
+        "end_time": 1533317223.516,
+        "test": "dom/push/test/xpcshell/test_permissions.js",
+        "duration": 1.3320000171661377,
+        "result": "PASS"
+      }
+    }
