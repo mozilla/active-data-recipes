@@ -69,6 +69,10 @@ ARGUMENT_GROUPS = {
           }],
     ],
 }
+"""
+These are commonly used arguments which can be re-used. They are shared to
+provide a consistent CLI across recipes.
+"""
 
 
 class RecipeParser(ArgumentParser):
