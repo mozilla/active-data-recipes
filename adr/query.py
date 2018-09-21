@@ -6,7 +6,6 @@ import logging
 import os
 import sys
 from argparse import ArgumentParser
-
 import jsone
 import requests
 import yaml
@@ -16,13 +15,14 @@ from adr.formatter import all_formatters
 from adr.cli import log
 
 here = os.path.abspath(os.path.dirname(__file__))
-if len(sys.argv)>2:
-    if(sys.argv[2]=='--url'):
-        ACTIVE_DATA_URL=sys.argv[3]
-else:
-    ACTIVE_DATA_URL = 'http://activedata.allizom.org/query'
-    
+
+ACTIVE_DATA_URL = ''
 QUERY_DIR = os.path.join(here, 'queries')
+
+
+def set_active_data_url(url):
+    global ACTIVE_DATA_URL
+    ACTIVE_DATA_URL = url
 
 
 def query_activedata(query):
