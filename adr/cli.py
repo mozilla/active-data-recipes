@@ -92,7 +92,7 @@ def _build_parser_arguments(parser):
     parser.add_argument('-u', '--url', default='http://activedata.allizom.org/query',
                         help="Endpoint URL")
     # positional arguments
-    parser.add_argument('task', nargs='*', help='Task(s) to run.')
+    parser.add_argument('task', nargs='*')
     return parser
 
 
@@ -153,6 +153,10 @@ def main(args=sys.argv[1:]):
     # create parsers and subparsers.
     parser = ArgumentParser(description='Runs adr recipes and/or queries.')
 
+    # check that adr is invoked with at least a recipe or subcommand.
+    _check_tasks_exist(args)
+
+    # determine if subparser are necessary.
     if 'query' in args or 'recipe' in args:
         subparser = parser.add_subparsers()
 
