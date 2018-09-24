@@ -4,7 +4,6 @@ import datetime
 import json
 import logging
 import os
-
 import jsone
 import requests
 import yaml
@@ -15,7 +14,7 @@ from adr.formatter import all_formatters
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 
-ACTIVE_DATA_URL = 'http://activedata.allizom.org/query'
+ACTIVE_DATA_URL = ''
 QUERY_DIR = os.path.join(here, 'queries')
 FAKE_CONTEXT = {
     'branch': 'mozilla-central',
@@ -31,6 +30,11 @@ FAKE_CONTEXT = {
 
 def format_date(timestamp, interval='day'):
     return datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
+
+
+def set_active_data_url(url):
+    global ACTIVE_DATA_URL
+    ACTIVE_DATA_URL = url
 
 
 def query_activedata(query):

@@ -3,11 +3,14 @@ from __future__ import print_function, absolute_import
 import logging
 import os
 import sys
+
 from argparse import ArgumentParser
 
 from adr.formatter import all_formatters
 from adr.query import run_query
+from adr.query import set_active_data_url
 from adr.recipe import run_recipe
+
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -86,6 +89,8 @@ def _build_parser_arguments(parser):
                         help="Format to print data in, defaults to 'table'.")
     parser.add_argument('-v', '--verbose', action='store_true', default=False,
                         help="Print the query and other debugging information.")
+    parser.add_argument('-u', '--url', default='http://activedata.allizom.org/query',
+                        help="Endpoint URL")
     # positional arguments
     parser.add_argument('task', nargs='*', help='Task(s) to run.')
     return parser
@@ -152,6 +157,7 @@ def main(args=sys.argv[1:]):
         subparser = parser.add_subparsers()
 
     if args[0] != 'query':
+        # if subcommand query is not specified, default to recipe.
         if args[0] == 'recipe':
             recipe_parser = subparser.add_parser('recipe', help='Recipe subcommand.')
             recipe_parser = _build_parser_arguments(recipe_parser)
@@ -165,6 +171,7 @@ def main(args=sys.argv[1:]):
 
     # parse all arguments, then pass to appropriate handler.
     parsed_args, remainder = parser.parse_known_args()
+    set_active_data_url(parsed_args.url)
     parsed_args.func(parsed_args, remainder)
 
 
