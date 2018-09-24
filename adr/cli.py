@@ -1,14 +1,12 @@
 from __future__ import print_function, absolute_import
-
 import importlib
 import logging
 import os
 import sys
 from argparse import ArgumentParser
-
 from six import string_types
-
 from adr.formatter import all_formatters
+
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -108,6 +106,7 @@ def run_recipe(recipe, args, fmt='table'):
 
 
 def cli(args=sys.argv[1:]):
+    from adr.query import set_active_data_url
     parser = ArgumentParser()
     parser.add_argument('recipes', nargs='*', help="Recipe(s) to run.")
     parser.add_argument('-l', '--list', action='store_true', default=False,
@@ -117,8 +116,10 @@ def cli(args=sys.argv[1:]):
                         help="Format to print data in, defaults to 'table'.")
     parser.add_argument('-v', '--verbose', action='store_true', default=False,
                         help="Print the query and other debugging information.")
+    parser.add_argument('--url', default='http://activedata.allizom.org/query',
+                        help="Endpoint URL")
     args, remainder = parser.parse_known_args(args)
-
+    set_active_data_url(args.url)
     if args.verbose:
         log.setLevel(logging.DEBUG)
     else:
