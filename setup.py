@@ -33,7 +33,7 @@ setup(
     entry_points="""
     # -*- Entry points: -*-
     [console_scripts]
-    adr = adr.cli:cli
+    adr = adr.cli:main
     adr-query = adr.query:cli
     adr-gist = adr.export.gist:cli
     adr-test = adr.export.test:cli

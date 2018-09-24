@@ -7,7 +7,7 @@ See the number of tests that have a duration in pre-selected buckets.
 """
 from __future__ import print_function, absolute_import
 
-from ..cli import RecipeParser
+from ..recipe import RecipeParser
 from ..query import run_query
 
 

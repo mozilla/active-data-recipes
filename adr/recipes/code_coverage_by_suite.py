@@ -8,7 +8,7 @@ Both arguments are required.
 """
 from __future__ import print_function, absolute_import
 
-from ..cli import RecipeParser
+from ..recipe import RecipeParser
 from ..query import run_query
 
 
