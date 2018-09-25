@@ -2,7 +2,6 @@
 recipe: code_coverage_by_suite
 args: [--path, caps, --rev, 45715ece25fc]
 queries:
-  code_coverage_by_suite:
   - data:
     - [talos, caps/, 18]
     - [web-platform-tests, caps/, 18]

@@ -14,7 +14,7 @@ from adr.formatter import all_formatters
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 
-ACTIVE_DATA_URL = ''
+ACTIVE_DATA_URL = "http://activedata.allizom.org/query"
 QUERY_DIR = os.path.join(here, 'queries')
 FAKE_CONTEXT = {
     'branch': 'mozilla-central',

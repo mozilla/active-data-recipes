@@ -1,7 +1,6 @@
 recipe: try_efficiency
 args: []
 queries:
-  backout_rate:
   - data:
       push.id: [97847, 56305, 56319, 56302, 97878, 97874, 97880, 97876, 97889, 56364]
     edges:
@@ -22,7 +21,6 @@ queries:
       pull: fields.push\.id
       put: {child: ., index: 0, name: push.id}
       value: push.id
-  total_hours_spent_on_branch:
   - data: {hours: 209339.33646450416, tasks: 546191}
     select:
     - aggregate: sum
