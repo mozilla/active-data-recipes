@@ -7,7 +7,7 @@ import sys
 from argparse import ArgumentParser
 
 from adr.formatter import all_formatters
-from adr.query import run_query
+from adr.query import format_query
 from adr.query import set_active_data_url
 from adr.recipe import run_recipe
 
@@ -23,7 +23,7 @@ QUERY_DIR = os.path.join(here, 'queries')
 
 
 def query_handler(args, remainder):
-    """Runs queries.
+    """Runs, formats and prints queries.
 
     All functionality remains same as adr.query:cli.
 
@@ -44,7 +44,7 @@ def query_handler(args, remainder):
         if query not in queries:
             log.error("query '{}' not found!".format(query))
             continue
-        run_query(query, args, fmt=args.fmt)
+        print(format_query(query, args, fmt=args.fmt))
 
 
 def recipe_handler(args, remainder):

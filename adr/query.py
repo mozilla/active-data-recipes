@@ -69,7 +69,7 @@ def load_query(name):
             yield query
 
 
-def load_and_run_query(name, **context):
+def run_query(name, **context):
     """Loads and runs the specified query, yielding the result.
 
     Given name of a query, this method will first read the query
@@ -99,7 +99,7 @@ def load_and_run_query(name, **context):
         yield query_activedata(query_str)
 
 
-def run_query(query, args, fmt='table'):
+def format_query(query, args, fmt='table'):
     """Takes the output of the ActiveData query and performs formatting.
 
     The result(s) from a query call to ActiveData is returned,
@@ -112,12 +112,11 @@ def run_query(query, args, fmt='table'):
     if isinstance(fmt, string_types):
         fmt = all_formatters[fmt]
 
-    for result in load_and_run_query(query, **FAKE_CONTEXT):
+    for result in run_query(query, **FAKE_CONTEXT):
         data = result['data']
 
         if args.fmt == 'json':
-            print(fmt(result))
-            return
+            return fmt(result)
 
         if 'edges' in result:
             for edge in result['edges']:
@@ -127,4 +126,4 @@ def run_query(query, args, fmt='table'):
         if 'header' in result:
             data.insert(0, result['header'])
 
-        print(fmt(data))
+        return fmt(data)
