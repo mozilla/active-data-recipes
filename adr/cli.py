@@ -99,13 +99,14 @@ class RecipeParser(ArgumentParser):
 def run_recipe(recipe, args, fmt='table'):
     modname = '.recipes.{}'.format(recipe)
     mod = importlib.import_module(modname, package='adr')
-    output = mod.run(args)
 
-    if output == MissingDataError:
+    try:
+        output = mod.run(args)
+    except MissingDataError:
         return 'ActiveData didn\'t return any data.'
-    elif isinstance(fmt, string_types):
-        fmt = all_formatters[fmt]
 
+    if isinstance(fmt, string_types):
+        fmt = all_formatters[fmt]
     log.debug("Result:")
     return fmt(output)
 

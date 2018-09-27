@@ -29,7 +29,8 @@ def run(args):
     try:
         count['total'] = len(data['message'])
     except KeyError:
-        return MissingDataError
+        raise MissingDataError('ActiveData didn\'t return any data.')
+
     users = defaultdict(set)
     users['total'] = set(data['user'])
 
