@@ -2,7 +2,6 @@ from __future__ import print_function, absolute_import
 
 import os
 
-import pytest
 import yaml
 
 here = os.path.abspath(os.path.dirname(__file__))

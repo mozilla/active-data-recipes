@@ -11,7 +11,6 @@ from adr.query import format_query
 from adr.query import set_active_data_url
 from adr.recipe import run_recipe
 
-
 here = os.path.abspath(os.path.dirname(__file__))
 
 log = logging.getLogger('adr')
