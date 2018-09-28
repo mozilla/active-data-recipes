@@ -8,6 +8,7 @@ from argparse import ArgumentParser
 from six import string_types
 
 from adr.formatter import all_formatters
+from .errors import MissingDataError
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
@@ -103,7 +104,10 @@ def run_recipe(recipe, args, fmt='table'):
     """
     modname = '.recipes.{}'.format(recipe)
     mod = importlib.import_module(modname, package='adr')
-    output = mod.run(args)
+    try:
+        output = mod.run(args)
+    except MissingDataError:
+        return "ActiveData didn\'t return any data."
 
     if isinstance(fmt, string_types):
         fmt = all_formatters[fmt]

@@ -6,7 +6,6 @@ import sys
 
 from argparse import ArgumentParser
 
-from adr.errors import MissingDataError
 from adr.formatter import all_formatters
 from adr.query import format_query
 from adr.query import set_active_data_url

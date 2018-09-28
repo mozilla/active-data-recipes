@@ -1,7 +1,6 @@
 from __future__ import print_function, absolute_import
 
 import json
-import os
 import sys
 from imp import reload
 from io import BytesIO, StringIO
@@ -39,7 +38,6 @@ def test_recipe(monkeypatch, recipe_test):
     module = 'adr.recipes.{}'.format(recipe_test['recipe'])
     if module in sys.modules:
         reload(sys.modules[module])
-
 
     result = json.loads(run_recipe(recipe_test['recipe'], recipe_test['args'], fmt='json'))
 
