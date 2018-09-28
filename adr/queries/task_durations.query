@@ -6,7 +6,7 @@ groupby:
     - run.name
 where:
     and:
-        - in: {repo.branch.name: {$eval: branches}}
+        - in: {repo.branch.name: {$eval: branch}}
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
         - eq: {build.type: {$eval: build_type}}

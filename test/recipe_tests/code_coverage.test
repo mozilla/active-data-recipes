@@ -1,7 +1,6 @@
 recipe: code_coverage
 args: [--path, caps, --rev, 45715ece25fc]
 queries:
-  code_coverage:
   - data:
     - [caps/, 21, 52220.0, 64243.0]
     header: [file, source.file.name, source.file.total_uncovered, source.file.total_covered]

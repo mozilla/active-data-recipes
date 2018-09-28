@@ -9,7 +9,7 @@ See how many files in tree have any code coverage at all.
 """
 from __future__ import print_function, absolute_import
 
-from ..cli import RecipeParser
+from ..recipe import RecipeParser
 from ..query import run_query
 
 

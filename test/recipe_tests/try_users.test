@@ -1,20 +1,18 @@
 recipe: try_users
 args: []
 queries:
-    user_pushes:
-        - data:
-            - [a@example.com, 54]
-            - [b@example.com, 47]
-            - [c@example.com, 37]
-            - [d@example.com, 31]
-            - [e@example.com, 30]
-    user_tasks:
-        - data:
-            - [b@example.com, 32752]
-            - [e@example.com, 21522]
-            - [c@example.com, 19581]
-            - [f@example.com, 18912]
-            - [a@example.com, 17898]
+    - data:
+        - [a@example.com, 54]
+        - [b@example.com, 47]
+        - [c@example.com, 37]
+        - [d@example.com, 31]
+        - [e@example.com, 30]
+    - data:
+        - [b@example.com, 32752]
+        - [e@example.com, 21522]
+        - [c@example.com, 19581]
+        - [f@example.com, 18912]
+        - [a@example.com, 17898]
 expected: [
     ['User', 'Tasks', 'Pushes', 'Tasks / Push'],
     ['b@example.com', 32752, 47, 696.85],

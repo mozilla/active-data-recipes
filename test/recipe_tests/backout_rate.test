@@ -1,7 +1,6 @@
 recipe: backout_rate
 args: []
 queries:
-  backout_rate:
   - data:
       push.id: [97847, 56305, 56319, 56302, 97878, 97874, 97880, 97876, 97889, 56364]
     edges:

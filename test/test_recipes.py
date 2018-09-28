@@ -21,17 +21,20 @@ else:
 class new_run_query(object):
     def __init__(self, test):
         self.test = test
+        self.index = 0
 
     def __call__(self, query, *args, **kwargs):
-        if query not in self.test['queries']:
-            pytest.fail("no test data found for query '{}' in '{}.test'".format(
-                        query, self.test['recipe']))
-        for result in self.test['queries'][query]:
-            yield result
+        if len(self.test['queries']) <= self.index:
+            pytest.fail("not enough mocked query data found in '{}.test'".format(
+                        self.test['recipe']))
+
+        result = self.test['queries'][self.index]
+        self.index += 1
+        return result
 
 
 def test_recipe(monkeypatch, recipe_test):
-    monkeypatch.setattr(query, 'run_query', new_run_query(recipe_test))
+    monkeypatch.setattr(query, 'query_activedata', new_run_query(recipe_test))
 
     module = 'adr.recipes.{}'.format(recipe_test['recipe'])
     if module in sys.modules:

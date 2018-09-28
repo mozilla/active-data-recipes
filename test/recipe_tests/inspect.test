@@ -2,7 +2,6 @@
 recipe: inspect
 args: []
 queries:
-  meta:
   - data:
     - {name: saved_queries, timestamp: 1510934657.986817}
     - {name: coverage, timestamp: 1510908914.029275}
@@ -29,7 +28,6 @@ expected:
 recipe: inspect
 args: [--table, task]
 queries:
-  meta_columns:
   - data:
     - es_column: action.timings.harness
       es_index: task

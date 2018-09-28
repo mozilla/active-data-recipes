@@ -5,13 +5,13 @@ import logging
 import os
 import sys
 from argparse import ArgumentParser
-from collections import defaultdict, OrderedDict
+from collections import OrderedDict
 from copy import deepcopy
 
 import yaml
 
-from ..main import run_recipe
-from .. import query
+from adr.recipe import run_recipe
+from adr import query
 
 here = os.path.abspath(os.path.dirname(__file__))
 test_dir = os.path.join(here, os.pardir, os.pardir, 'test', 'recipe_tests')
@@ -26,7 +26,7 @@ def cli(args=sys.argv[1:]):
     args, remainder = parser.parse_known_args(args)
 
     orig_run_query = query.run_query
-    query_results = defaultdict(list)
+    query_results = []
 
     def new_run_query(name, **context):
         context['limit'] = 10
@@ -35,7 +35,7 @@ def cli(args=sys.argv[1:]):
         for result in qgen:
             mock_result = deepcopy(result)
             mock_result.pop('meta')
-            query_results[name].append(mock_result)
+            query_results.append(mock_result)
             yield result
 
     query.run_query = new_run_query
@@ -44,7 +44,7 @@ def cli(args=sys.argv[1:]):
     test = OrderedDict()
     test['recipe'] = args.recipe
     test['args'] = remainder
-    test['queries'] = dict(query_results)
+    test['queries'] = query_results
     test['expected'] = json.loads(result)
 
     # get pyyaml to preserve ordering of dict keys
