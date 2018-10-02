@@ -7,8 +7,7 @@ import sys
 from argparse import ArgumentParser
 
 from adr.formatter import all_formatters
-from adr.query import format_query
-from adr.query import set_active_data_url
+from adr.query import ACTIVE_DATA_URL, format_query, set_active_data_url
 from adr.recipe import run_recipe
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -88,7 +87,7 @@ def _build_parser_arguments(parser):
                         help="Format to print data in, defaults to 'table'.")
     parser.add_argument('-v', '--verbose', action='store_true', default=False,
                         help="Print the query and other debugging information.")
-    parser.add_argument('-u', '--url', default='http://activedata.allizom.org/query',
+    parser.add_argument('-u', '--url', default=ACTIVE_DATA_URL,
                         help="Endpoint URL")
     # positional arguments
     parser.add_argument('task', nargs='*')
