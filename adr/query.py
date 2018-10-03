@@ -9,10 +9,9 @@ import requests
 import yaml
 from six import string_types
 from adr.formatter import all_formatters
-import sys
-if sys.version_info >= (3, 0):
+try:
     from urllib.parse import urlparse
-elif sys.version_info < (3, 0) and sys.version_info >= (2, 5):
+except ImportError:
     from urlparse import urlparse
 
 log = logging.getLogger('adr')
