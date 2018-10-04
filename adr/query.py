@@ -8,13 +8,17 @@ import jsone
 import requests
 import yaml
 from six import string_types
-
 from adr.formatter import all_formatters
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 
 ACTIVE_DATA_URL = "http://activedata.allizom.org/query"
+DEBUG_URL = "{}://{}/tools/query.html#query_id={}"
 QUERY_DIR = os.path.join(here, 'queries')
 FAKE_CONTEXT = {
     'branch': 'mozilla-central',
@@ -69,7 +73,7 @@ def load_query(name):
             yield query
 
 
-def run_query(name, **context):
+def run_query(name, debug=False, **context):
     """Loads and runs the specified query, yielding the result.
 
     Given name of a query, this method will first read the query
@@ -82,6 +86,7 @@ def run_query(name, **context):
     inside the query_activedata method.
 
     :param str name: name of the query file to be loaded.
+    :param debug: enable debug mode.
     :param dict context: dictionary of ActiveData configs.
     :yields str: json-formatted string.
     """
@@ -92,6 +97,8 @@ def run_query(name, **context):
             query['limit'] = context['limit']
         if 'format' in context:
             query['format'] = context['format']
+        if debug:
+            query['meta'] = {"save": True}
 
         query = jsone.render(query, context)
         query_str = json.dumps(query, indent=2, separators=(',', ':'))
@@ -112,8 +119,13 @@ def format_query(query, args, fmt='table'):
     if isinstance(fmt, string_types):
         fmt = all_formatters[fmt]
 
-    for result in run_query(query, **FAKE_CONTEXT):
+    for result in run_query(query, args.debug, **FAKE_CONTEXT):
         data = result['data']
+        url = None
+        if 'saved_as' in result['meta']:
+            query_id = result['meta']['saved_as']
+            domain = urlparse(ACTIVE_DATA_URL)
+            url = DEBUG_URL.format(domain.scheme, domain.netloc, query_id)
 
         if args.fmt == 'json':
             return fmt(result)
@@ -126,4 +138,4 @@ def format_query(query, args, fmt='table'):
         if 'header' in result:
             data.insert(0, result['header'])
 
-        return fmt(data)
+        return fmt(data), url
