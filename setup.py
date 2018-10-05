@@ -15,6 +15,7 @@ DEPS = [
     'six >= 1.11.0',
     'terminaltables >= 3.1.0',
     'pyyaml',
+    'beautifulsoup4'
 ]
 
 setup(
