@@ -3,14 +3,14 @@ from __future__ import print_function, absolute_import
 import logging
 import os
 import sys
+import webbrowser
+import time
 
 from argparse import ArgumentParser
 
 from adr.formatter import all_formatters
-from adr.query import format_query
-from adr.query import set_active_data_url
+from adr.query import ACTIVE_DATA_URL, format_query, set_active_data_url
 from adr.recipe import run_recipe
-
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -44,7 +44,11 @@ def query_handler(args, remainder):
         if query not in queries:
             log.error("query '{}' not found!".format(query))
             continue
-        print(format_query(query, args, fmt=args.fmt))
+        data, url = format_query(query, args, fmt=args.fmt)
+        print(data)
+        if url:
+            time.sleep(2)
+            webbrowser.open(url, new=2)
 
 
 def recipe_handler(args, remainder):
@@ -89,8 +93,10 @@ def _build_parser_arguments(parser):
                         help="Format to print data in, defaults to 'table'.")
     parser.add_argument('-v', '--verbose', action='store_true', default=False,
                         help="Print the query and other debugging information.")
-    parser.add_argument('-u', '--url', default='http://activedata.allizom.org/query',
+    parser.add_argument('-u', '--url', default=ACTIVE_DATA_URL,
                         help="Endpoint URL")
+    parser.add_argument('-d', '--debug', action='store_true', default=False,
+                        help="Open a query in ActiveData query tool.")
     # positional arguments
     parser.add_argument('task', nargs='*')
     return parser
