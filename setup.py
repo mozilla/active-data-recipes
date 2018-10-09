@@ -16,6 +16,8 @@ DEPS = [
     'terminaltables >= 3.1.0',
     'pyyaml',
     'beautifulsoup4'
+    'flask',
+    'markdown',
 ]
 
 setup(
