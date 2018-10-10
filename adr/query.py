@@ -128,7 +128,7 @@ def format_query(query, args, fmt='table'):
             url = DEBUG_URL.format(domain.scheme, domain.netloc, query_id)
 
         if args.fmt == 'json':
-            return fmt(result)
+            return fmt(result), url
 
         if 'edges' in result:
             for edge in result['edges']:
