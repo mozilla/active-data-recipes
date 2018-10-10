@@ -13,6 +13,7 @@ try:
     from urllib.parse import urlparse
 except ImportError:
     from urlparse import urlparse
+from adr.errors import MissingDataError
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
@@ -51,6 +52,8 @@ def query_activedata(query):
                              data=query,
                              stream=True)
     response.raise_for_status()
+    if response.json().get('message') is None:
+        raise MissingDataError('ActiveData didn\'t return any data.')
     return response.json()
 
 
