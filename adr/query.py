@@ -53,7 +53,7 @@ def query_activedata(query):
                              stream=True)
     response.raise_for_status()
     if response.json().get('message') is None:
-        raise MissingDataError('ActiveData didn\'t return any data.')
+        raise MissingDataError("ActiveData didn't return any data.")
     return response.json()
 
 
