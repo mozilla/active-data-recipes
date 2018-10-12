@@ -9,11 +9,11 @@ import requests
 import yaml
 from six import string_types
 from adr.formatter import all_formatters
+from adr.errors import MissingDataError
 try:
     from urllib.parse import urlparse
 except ImportError:
     from urlparse import urlparse
-from adr.errors import MissingDataError
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
@@ -52,9 +52,10 @@ def query_activedata(query):
                              data=query,
                              stream=True)
     response.raise_for_status()
-    if response.json().get('message') is None:
+    json_response = response.json()
+    if not json_response.get('data'):
         raise MissingDataError("ActiveData didn't return any data.")
-    return response.json()
+    return json_response
 
 
 def load_query(name):
