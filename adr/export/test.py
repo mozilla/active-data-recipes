@@ -12,6 +12,7 @@ import yaml
 
 from adr.recipe import run_recipe
 from adr import query
+from adr.util.config import Configuration
 
 here = os.path.abspath(os.path.dirname(__file__))
 test_dir = os.path.join(here, os.pardir, os.pardir, 'test', 'recipe_tests')
@@ -39,8 +40,9 @@ def cli(args=sys.argv[1:]):
             yield result
 
     query.run_query = new_run_query
-
-    result = run_recipe(args.recipe, remainder, fmt='json')
+    cfg = Configuration()
+    cfg.format = 'json'
+    result = run_recipe(args.recipe, remainder, cfg.format)
     test = OrderedDict()
     test['recipe'] = args.recipe
     test['args'] = remainder

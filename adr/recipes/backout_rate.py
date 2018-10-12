@@ -14,12 +14,12 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('date')
     args = parser.parse_args(args)
 
     query_args = vars(args)
-    query = run_query('backout_rate', **query_args)
+    query = run_query('backout_rate', config, **query_args)
 
     pushes = len(set(next(query)['data']['push.id']))
     backouts = len(set(next(query)['data']['push.id']))

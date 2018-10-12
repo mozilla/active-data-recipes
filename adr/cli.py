@@ -9,8 +9,9 @@ import time
 from argparse import ArgumentParser
 
 from adr.formatter import all_formatters
-from adr.query import ACTIVE_DATA_URL, format_query, set_active_data_url
+from adr.query import format_query
 from adr.recipe import run_recipe
+from adr.util.config import Configuration
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -22,18 +23,19 @@ RECIPE_DIR = os.path.join(here, 'recipes')
 QUERY_DIR = os.path.join(here, 'queries')
 
 
-def query_handler(args, remainder):
+def query_handler(args, remainder, config):
     """Runs, formats and prints queries.
 
     All functionality remains same as adr.query:cli.
 
     :param Namespace args: Namespace object produced by main().
     :param list remainder: List of unknown arguments.
+    :param Configuration config: config object
     """
     queries = [os.path.splitext(item)[0] for item in os.listdir(
         QUERY_DIR) if item.endswith('.query')]
 
-    _set_logging_verbosity(args.verbose)
+    _set_logging_verbosity(config.verbose)
 
     if args.list:
         _list(queries)
@@ -44,25 +46,26 @@ def query_handler(args, remainder):
         if query not in queries:
             log.error("query '{}' not found!".format(query))
             continue
-        data, url = format_query(query, args, fmt=args.fmt)
+        data, url = format_query(query, config)
         print(data)
         if url:
             time.sleep(2)
             webbrowser.open(url, new=2)
 
 
-def recipe_handler(args, remainder):
+def recipe_handler(args, remainder, config):
     """Runs recipes.
 
     All functionality remains the same as the deprecated adr.cli:cli.
 
     :param Namespace args: Namespace object produced by main().
+    :param Configuration config: Config objects
     :param list remainder: List of unknown arguments.
     """
     recipes = [os.path.splitext(item)[0] for item in os.listdir(
                RECIPE_DIR) if item != '__init__.py' and item.endswith('.py')]
 
-    _set_logging_verbosity(args.verbose)
+    _set_logging_verbosity(config.verbose)
 
     if args.list:
         _list(recipes)
@@ -73,29 +76,30 @@ def recipe_handler(args, remainder):
         if recipe not in recipes:
             log.error("recipe '{}' not found!".format(recipe))
             continue
-        print(run_recipe(recipe, remainder, fmt=args.fmt))
+        print(run_recipe(recipe, remainder, config))
 
 
-def _build_parser_arguments(parser):
+def _build_parser_arguments(parser, config):
     """Builds the parser argument list.
 
     Given a ArgumentParser object, this method will populate the standard
     list of arguments.
 
     :param ArgumentParser parser: instance of an ArgumentParser.
+    :param Configuration config: config object.
     :returns: ArgumentParser
     """
     # optional arguments
     parser.add_argument('-l', '--list', action='store_true', default=False,
                         help="List available recipes.")
-    parser.add_argument('-f', '--format', dest='fmt', default='table',
+    parser.add_argument('-f', '--format', dest='fmt', default=config.fmt,
                         choices=all_formatters.keys(),
                         help="Format to print data in, defaults to 'table'.")
-    parser.add_argument('-v', '--verbose', action='store_true', default=False,
+    parser.add_argument('-v', '--verbose', action='store_true', default=config.verbose,
                         help="Print the query and other debugging information.")
-    parser.add_argument('-u', '--url', default=ACTIVE_DATA_URL,
+    parser.add_argument('-u', '--url', default=config.url,
                         help="Endpoint URL")
-    parser.add_argument('-d', '--debug', action='store_true', default=False,
+    parser.add_argument('-d', '--debug', action='store_true', default=config.debug,
                         help="Open a query in ActiveData query tool.")
     # positional arguments
     parser.add_argument('task', nargs='*')
@@ -156,6 +160,9 @@ def main(args=sys.argv[1:]):
 
     :param list args: command-line arguments.
     """
+    # load config from file
+    config = Configuration(os.path.join(here, 'config.yml'))
+
     # create parsers and subparsers.
     parser = ArgumentParser(description='Runs adr recipes and/or queries.')
 
@@ -170,19 +177,28 @@ def main(args=sys.argv[1:]):
         # if subcommand query is not specified, default to recipe.
         if args[0] == 'recipe':
             recipe_parser = subparser.add_parser('recipe', help='Recipe subcommand.')
-            recipe_parser = _build_parser_arguments(recipe_parser)
+            recipe_parser = _build_parser_arguments(recipe_parser, config)
         else:
-            parser = _build_parser_arguments(parser)
+            parser = _build_parser_arguments(parser, config)
         parser.set_defaults(func=recipe_handler)
     else:
         query_parser = subparser.add_parser('query', help='Query subcommand.')
-        query_parser = _build_parser_arguments(query_parser)
+        query_parser = _build_parser_arguments(query_parser, config)
         query_parser.set_defaults(func=query_handler)
 
     # parse all arguments, then pass to appropriate handler.
     parsed_args, remainder = parser.parse_known_args()
-    set_active_data_url(parsed_args.url)
-    parsed_args.func(parsed_args, remainder)
+
+    # Temporary disable debug if not query
+    if not ('query' in args):
+        parsed_args.debug = False
+
+    # store all non-recipe/query args into config
+    # From this point, only config stores all non-recipe/query args
+    # Additional args will go to remainder
+    config.update(vars(parsed_args))
+
+    parsed_args.func(parsed_args, remainder, config)
 
 
 if __name__ == '__main__':

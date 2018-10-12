@@ -9,16 +9,11 @@ import requests
 import yaml
 from six import string_types
 from adr.formatter import all_formatters
-try:
-    from urllib.parse import urlparse
-except ImportError:
-    from urlparse import urlparse
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 
-ACTIVE_DATA_URL = "http://activedata.allizom.org/query"
-DEBUG_URL = "{}://{}/tools/query.html#query_id={}"
+
 QUERY_DIR = os.path.join(here, 'queries')
 FAKE_CONTEXT = {
     'branch': 'mozilla-central',
@@ -36,18 +31,14 @@ def format_date(timestamp, interval='day'):
     return datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
 
 
-def set_active_data_url(url):
-    global ACTIVE_DATA_URL
-    ACTIVE_DATA_URL = url
-
-
-def query_activedata(query):
+def query_activedata(query, url):
     """Runs the provided query against the ActiveData endpoint.
 
     :param dict query: yaml-formatted query to be run.
+    :param str url: url to run query
     :returns str: json-formatted string.
     """
-    response = requests.post(ACTIVE_DATA_URL,
+    response = requests.post(url,
                              data=query,
                              stream=True)
     response.raise_for_status()
@@ -73,7 +64,7 @@ def load_query(name):
             yield query
 
 
-def run_query(name, debug=False, **context):
+def run_query(name, config, **context):
     """Loads and runs the specified query, yielding the result.
 
     Given name of a query, this method will first read the query
@@ -86,7 +77,7 @@ def run_query(name, debug=False, **context):
     inside the query_activedata method.
 
     :param str name: name of the query file to be loaded.
-    :param debug: enable debug mode.
+    :param Configuration config: config object.
     :param dict context: dictionary of ActiveData configs.
     :yields str: json-formatted string.
     """
@@ -97,38 +88,36 @@ def run_query(name, debug=False, **context):
             query['limit'] = context['limit']
         if 'format' in context:
             query['format'] = context['format']
-        if debug:
+        if config.debug:
             query['meta'] = {"save": True}
 
         query = jsone.render(query, context)
         query_str = json.dumps(query, indent=2, separators=(',', ':'))
         log.debug("Running query {}:\n{}".format(name, query_str))
-        yield query_activedata(query_str)
+        yield query_activedata(query_str, config.url)
 
 
-def format_query(query, args, fmt='table'):
+def format_query(query, config):
     """Takes the output of the ActiveData query and performs formatting.
 
     The result(s) from a query call to ActiveData is returned,
     which is then formatted as per the fmt argument.
 
     :param name query: name of the query file to be run.
-    :param Namespace args: object derived from parsing arguments.
-    :param str fmt: specifies the formatting of the output.
+    :param Configuration config: config object.
     """
-    if isinstance(fmt, string_types):
-        fmt = all_formatters[fmt]
+    if isinstance(config.fmt, string_types):
+        fmt = all_formatters[config.fmt]
 
-    for result in run_query(query, args.debug, **FAKE_CONTEXT):
+    for result in run_query(query, config, **FAKE_CONTEXT):
         data = result['data']
-        url = None
+        debug_url = None
         if 'saved_as' in result['meta']:
             query_id = result['meta']['saved_as']
-            domain = urlparse(ACTIVE_DATA_URL)
-            url = DEBUG_URL.format(domain.scheme, domain.netloc, query_id)
+            debug_url = config.build_debug_url(query_id)
 
-        if args.fmt == 'json':
-            return fmt(result), url
+        if config.fmt == 'json':
+            return fmt(result), debug_url
 
         if 'edges' in result:
             for edge in result['edges']:
@@ -138,4 +127,4 @@ def format_query(query, args, fmt='table'):
         if 'header' in result:
             data.insert(0, result['header'])
 
-        return fmt(data), url
+        return fmt(data), debug_url

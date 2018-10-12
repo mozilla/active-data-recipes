@@ -9,7 +9,8 @@ from distutils.spawn import find_executable
 
 import yaml
 
-from ..main import run_recipe, log
+from ..cli import run_recipe, log
+from ..util.config import Configuration
 
 DEFAULT_CONFIG = os.path.expanduser(os.path.join('~', '.adr-gist.yml'))
 
@@ -33,9 +34,11 @@ def cli(args=sys.argv[1:]):
         config = yaml.load(fh)
 
     output = None
+    cfg = Configuration()
+    cfg.format = 'markdown'
     for recipe in config['recipes']:
         recipe_args = config['recipes'][recipe]
-        table = bytes(run_recipe(recipe, recipe_args, fmt='markdown'), 'utf8')
+        table = bytes(run_recipe(recipe, recipe_args, cfg), 'utf8')
 
         filename = '{}.md'.format(recipe.replace('_', '-'))
         cmd = [

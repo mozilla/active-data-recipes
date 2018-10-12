@@ -15,7 +15,7 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('date')
     parser.add_argument('--limit', type=int, default=25,
                         help="Maximum number of users to return")
@@ -30,11 +30,11 @@ def run(args):
     query_args = vars(args)
     query_args['branch'] = 'try'
     limit = query_args.pop('limit')
-    pushes = next(run_query('user_pushes', **query_args))
+    pushes = next(run_query('user_pushes', config, **query_args))
     pushes = pushes['data']
 
     query_args['from'] = 'task'
-    tasks = next(run_query('user_tasks', **query_args))['data']
+    tasks = next(run_query('user_tasks', config, **query_args))['data']
 
     users = defaultdict(list)
     for user, num in tasks:
