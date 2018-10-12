@@ -112,13 +112,13 @@ the header is important, you can use a special `names` key to define the order:
 
 ### Running Queries
 
-To run a query, use the `adr.query.run_query(query, **context)` function. The first argument is the
+To run a query, use the `adr.query.run_query(query, config, **context)` function. The first argument is the
 string name of the query to run, and the second is the context to pass into that query. This returns
 a generator that will yield the result of the next query in the specified query file. Typically the
 information you'll need is under the data key. For example:
 
     from adr.query import run_query
-    query = run_query('backout_rate', **context)
+    query = run_query('backout_rate', config, **context)
     pushes = next(query)['data']['push.id']
     backouts = next(query)['data']['push.id']
     # post process results

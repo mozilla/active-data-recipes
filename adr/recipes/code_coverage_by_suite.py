@@ -12,7 +12,7 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     """
     THIS IS PRONE TO DOUBLE COUNTING, AS DIFFERENT TEST CHUNKS COVER COMMON LINES
     AT THE VERY LEAST YOU GET A ROUGH ESTIMATE OF COVERAGE
@@ -54,7 +54,7 @@ def run(args):
 
     retVal = {}
     counter = 0
-    result = next(run_query('code_coverage_by_suite', **query_args))
+    result = next(run_query('code_coverage_by_suite', config, **query_args))
     for line in result['data']:
         # line = [suite, filename, count]
         if line[1] not in retVal:

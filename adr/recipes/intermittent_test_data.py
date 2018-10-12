@@ -11,7 +11,7 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('branch', 'build', 'date', 'platform')
     parser.add_argument('-t', '--test', default='',
                         help="Filter on specific test name")
@@ -31,8 +31,8 @@ def run(args):
     result = []
     query_args = vars(args)
 
-    result = next(run_query('intermittent_tests', **query_args))['data']
-    total_runs = next(run_query('intermittent_test_rate', **query_args))['data']
+    result = next(run_query('intermittent_tests', config, **query_args))['data']
+    total_runs = next(run_query('intermittent_test_rate', config, **query_args))['data']
 
     intermittent_tests = []
     for item in result['run.key']:

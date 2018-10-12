@@ -17,12 +17,12 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('date')
     args = parser.parse_args(args)
 
     query_args = vars(args)
-    data = next(run_query('try_commit_messages', **query_args))['data']
+    data = next(run_query('try_commit_messages', config, **query_args))['data']
 
     count = defaultdict(int)
     count['total'] = len(data['message'])

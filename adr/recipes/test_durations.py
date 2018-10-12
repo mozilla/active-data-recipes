@@ -11,14 +11,14 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('branch', 'build', 'date', 'platform')
     args = parser.parse_args(args)
 
     result = []
     query_args = vars(args)
 
-    data = next(run_query('test_durations', **query_args))['data']['result.test']
+    data = next(run_query('test_durations', config, **query_args))['data']['result.test']
 
     duration = [1, 2, 5, 10, 20, 30, 45, 60, 90, 120, 150, 'max']
     for index in range(0, len(duration)):

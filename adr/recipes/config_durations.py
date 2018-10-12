@@ -11,7 +11,7 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('date', 'branch')
     parser.add_argument('--limit', type=int, default=50,
                         help="Maximum number of jobs to return")
@@ -22,7 +22,7 @@ def run(args):
     query_args = vars(args)
     limit = query_args.pop('limit')
 
-    data = next(run_query('config_durations', **query_args))['data']
+    data = next(run_query('config_durations', config, **query_args))['data']
     result = []
     for record in data:
         if isinstance(record[1], list):

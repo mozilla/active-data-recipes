@@ -41,7 +41,7 @@ def taskclusterName(jobname):
     return "test-linux64/debug-%s" % jobname
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('path', 'rev')
     parser.add_argument('--use-chunks', default=False, action="store_true",
                         help="use chunks in aggregating and reporting jobs.")
@@ -51,7 +51,7 @@ def run(args):
 
     def artifactCount(args):
         query_args = vars(args)
-        result = next(run_query('raw_coverage_count', **query_args))
+        result = next(run_query('raw_coverage_count', config, **query_args))
         for item in result['data']:
             return item[0]
 
@@ -110,9 +110,9 @@ def run(args):
         query_args = vars(args)
 
         if expected_count >= 50000:
-            result = next(run_query('raw_coverage_nosubdir', **query_args))
+            result = next(run_query('raw_coverage_nosubdir', config, **query_args))
         else:
-            result = next(run_query('raw_coverage', **query_args))
+            result = next(run_query('raw_coverage', config, **query_args))
 
         # format is: {sourcename: {lines: {}, suites: []}, sourcename: ...}
         retVal = {}

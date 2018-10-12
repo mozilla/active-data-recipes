@@ -11,7 +11,7 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('branch', 'build', 'date', 'platform')
     parser.add_argument('--min_seconds', default=120,
                         help="minimum seconds for runtime, default is: 120.")
@@ -22,6 +22,6 @@ def run(args):
     result = []
     query_args = vars(args)
 
-    result = next(run_query('tests_in_duration', **query_args))['data']
+    result = next(run_query('tests_in_duration', config, **query_args))['data']
     result.insert(0, ['Test Name', 'number of runs', 'average runtime'])
     return result

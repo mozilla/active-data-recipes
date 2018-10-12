@@ -92,25 +92,25 @@ class RecipeParser(ArgumentParser):
                 group.add_argument(*cli, **kwargs)
 
 
-def run_recipe(recipe, args, fmt='table'):
+def run_recipe(recipe, args, config):
     """Given a recipe, calls the appropriate query and returns the result.
 
     The provided recipe name is used to make a call to the modules.
 
     :param str recipe: name of the recipe to be run.
     :param list args: remainder arguments that were unparsed.
-    :param str fmt: output format.
+    :param Configuration config: config object.
     :returns: string
     """
     modname = '.recipes.{}'.format(recipe)
     mod = importlib.import_module(modname, package='adr')
     try:
-        output = mod.run(args)
+        output = mod.run(args, config)
     except MissingDataError:
         return "ActiveData didn\'t return any data."
 
-    if isinstance(fmt, string_types):
-        fmt = all_formatters[fmt]
+    if isinstance(config.fmt, string_types):
+        fmt = all_formatters[config.fmt]
 
     log.debug("Result:")
     return fmt(output)

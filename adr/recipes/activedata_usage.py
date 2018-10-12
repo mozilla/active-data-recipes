@@ -12,10 +12,10 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('date')
     args = parser.parse_args(args)
 
     query_args = vars(args)
-    response = next(run_query('activedata_usage', **query_args))
+    response = next(run_query('activedata_usage', config, **query_args))
     return [response['header']] + response['data']
