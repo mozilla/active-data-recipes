@@ -13,15 +13,15 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser()
     parser.add_argument('--limit', required=False, default=10, type=int,
                         help="Total number of revisions to report (default: 10).")
     args = parser.parse_args(args)
 
     header = ['Revision', 'Files With Coverage', 'Total Files', 'Percent with Coverage']
-    covered_files = next(run_query('covered_files'))['data']
-    total_files = next(run_query('total_files'))['data']
+    covered_files = next(run_query('covered_files', config))['data']
+    total_files = next(run_query('total_files', config))['data']
 
     by_revision = {}
     by_date = {}

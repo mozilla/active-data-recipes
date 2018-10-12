@@ -11,7 +11,7 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser('branch', 'build', 'date', 'platform')
     args = parser.parse_args(args)
 
@@ -25,9 +25,9 @@ def run(args):
     result = []
     query_args = vars(args)
 
-    jobs = next(run_query('intermittent_jobs', **query_args))['data']
-    result = next(run_query('intermittent_tests', **query_args))['data']
-    total_runs = next(run_query('intermittent_test_rate', **query_args))['data']
+    jobs = next(run_query('intermittent_jobs', config, **query_args))['data']
+    result = next(run_query('intermittent_tests', config, **query_args))['data']
+    total_runs = next(run_query('intermittent_test_rate', config, **query_args))['data']
 
     intermittent_tests = []
     # for each result, match up the revision/name with jobs, if a match, save testname

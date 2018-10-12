@@ -13,19 +13,19 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     parser = RecipeParser()
     parser.add_argument('--table', default=None,
                         help="Table to inspect.")
     args = parser.parse_args(args)
 
     if not args.table:
-        data = next(run_query('meta'))['data']
+        data = next(run_query('meta', config))['data']
         data = sorted([(d['name'],) for d in data])
         data.insert(0, ('Table',))
         return data
 
-    data = next(run_query('meta_columns', table=args.table))['data']
+    data = next(run_query('meta_columns', config, table=args.table))['data']
     data = sorted([(d['name'],) for d in data])
     data.insert(0, ('Column',))
     return data
