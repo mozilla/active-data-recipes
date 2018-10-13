@@ -31,7 +31,7 @@ def test_query(query_test, config):
         reload(sys.modules[module])
 
     result = json.loads(format_query(query_test['query'], config))
-    #Line 35 - having trouble converting format as when in terminal the 
+    #Line 33 - having trouble converting format to json as in terminal the 
     #following error appears:
     #TypeError: expected string or buffer
     #It could be because config is an object? Not sure how to resolve...
