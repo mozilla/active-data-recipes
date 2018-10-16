@@ -15,7 +15,9 @@ DEPS = [
     'six >= 1.11.0',
     'terminaltables >= 3.1.0',
     'pyyaml',
-    'beautifulsoup4'
+    'beautifulsoup4',
+    'flask',
+    'markdown',
 ]
 
 setup(
@@ -37,5 +39,6 @@ setup(
     adr = adr.cli:main
     adr-gist = adr.export.gist:cli
     adr-test = adr.export.test:cli
+    adr-app = app.app:main
     """,
 )
