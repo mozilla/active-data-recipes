@@ -22,7 +22,7 @@ DEFAULT_BRANCHES = [
 
 def run(args, config):
     parser = RecipeParser('build', 'date', 'platform')
-    parser.add_argument('-B', '--branch', default=DEFAULT_BRANCHES, action='append',
+    parser.add_argument('-B', '--branch', default=DEFAULT_BRANCHES, nargs='+',
                         help="Branches to gather backout rate on, can be specified "
                              "multiple times.")
     parser.add_argument('--limit', type=int, default=20,
@@ -32,6 +32,7 @@ def run(args, config):
 
     args = parser.parse_args(args)
     query_args = vars(args)
+    print(query_args)
     limit = query_args.pop('limit')
 
     data = next(run_query('task_durations', config, **query_args))['data']
