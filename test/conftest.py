@@ -15,6 +15,7 @@ def load_recipe_tests():
             for test in yaml.load_all(fh):
                 yield test
 
+
 def load_query_tests():
     query_dir = os.path.join(here, 'query_tests')
     queries = [os.path.join(query_dir, q) for q in os.listdir(query_dir) if q.endswith('.test')]
@@ -23,11 +24,14 @@ def load_query_tests():
             for test in yaml.load_all(fh):
                 yield test
 
+
 def recipe_idfn(val):
     return '{} {}'.format(val['recipe'], ' '.join(val['args'])).strip()
 
+
 def query_idfn(val):
     return '{} {}'.format(val['query'], ' '.join(val['args'])).strip()
+
 
 def pytest_generate_tests(metafunc):
     if 'recipe_test' in metafunc.fixturenames:

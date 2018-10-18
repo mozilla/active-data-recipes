@@ -8,15 +8,15 @@ from io import BytesIO, StringIO
 import pytest
 import yaml
 
-from adr import formatter
 from adr import query
-from adr.query import format_query, query_activedata
+from adr.query import format_query
 from adr.util.config import Configuration
 
 if sys.version_info > (3, 0):
     IO = StringIO
 else:
     IO = BytesIO
+
 
 @pytest.fixture
 def config():
@@ -26,12 +26,14 @@ def config():
     config.url = "http://activedata.allizom.org/query"
     return config
 
+
 class RunQuery(object):
     def __init__(self, query_test):
         self.query_test = query_test
 
     def __call__(self, query, *args, **kwargs):
         return self.query_test['mock_data']
+
 
 def test_query(monkeypatch, query_test, config):
 
@@ -41,7 +43,7 @@ def test_query(monkeypatch, query_test, config):
         reload(sys.modules[module])
 
     result = json.loads(format_query(query_test['query'], config)[0])
-   
+
     buf = IO()
     yaml.dump(result, buf)
     print("Yaml formatted result for copy/paste:")
@@ -52,4 +54,4 @@ def test_query(monkeypatch, query_test, config):
     print("\nYaml formatted expected:")
     print(buf.getvalue())
     assert result == query_test["expected"]
-
+    
