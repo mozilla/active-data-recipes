@@ -1,0 +1,153 @@
+query: total_files
+
+mock_data:
+  header:
+    - repo.changeset.id12
+    - repo.changeset.date
+    - count
+  meta:
+    timing:
+      save: 2.098e-05
+      translate: 0.4155
+      es_search: 0.3822169303894043
+      jsonification: 0.000495
+      formatting: 0.0013539791107177734
+      total: 0.418
+      preamble: 0.000699
+    es_query:
+      aggs:
+        _match:
+          terms:
+            field: repo.changeset.date
+            order:
+              _term: desc
+            size: 10
+          aggs:
+            _match:
+              terms:
+                field: repo.changeset.id12
+                size: 10
+            _missing:
+              missing:
+                field: repo.changeset.id12
+        _missing:
+          aggs:
+            _match:
+              terms:
+                field: repo.changeset.id12
+                size: 10
+            _missing:
+              missing:
+                field: repo.changeset.id12
+          missing:
+            field: repo.changeset.date
+      size: 0
+    content_type: application/json
+    format: table
+  data:
+  - - 20773596530b
+    - 1539192708
+    - 251364
+  - - 1a9cbc785296
+    - 1539189000
+    - 251364
+  - - 0f1d5395f801
+    - 1539187620
+    - 251336
+  - - 8dfeff72def3
+    - 1539186779
+    - 251334
+  - - 91b4c3687d75
+    - 1539168720
+    - 251337
+  - - 2d2dee08739f
+    - 1539154819
+    - 251334
+  - - f5681e1f56e6
+    - 1539152160
+    - 251334
+  - - bf31de5be0dc
+    - 1539146100
+    - 251337
+  - - 6f8701d1be0c
+    - 1539122340
+    - 251327
+  - - 4845f02cf354
+    - 1539122280
+    - 251320
+
+expected:
+  header:
+    - repo.changeset.id12
+    - repo.changeset.date
+    - count
+  meta:
+    timing:
+      save: 2.098e-05
+      translate: 0.4155
+      es_search: 0.3822169303894043
+      jsonification: 0.000495
+      formatting: 0.0013539791107177734
+      total: 0.418
+      preamble: 0.000699
+    es_query:
+      aggs:
+        _match:
+          terms:
+            field: repo.changeset.date
+            order:
+              _term: desc
+            size: 10
+          aggs:
+            _match:
+              terms:
+                field: repo.changeset.id12
+                size: 10
+            _missing:
+              missing:
+                field: repo.changeset.id12
+        _missing:
+          aggs:
+            _match:
+              terms:
+                field: repo.changeset.id12
+                size: 10
+            _missing:
+              missing:
+                field: repo.changeset.id12
+          missing:
+            field: repo.changeset.date
+      size: 0
+    content_type: application/json
+    format: table
+  data:
+  - - 20773596530b
+    - 1539192708
+    - 251364
+  - - 1a9cbc785296
+    - 1539189000
+    - 251364
+  - - 0f1d5395f801
+    - 1539187620
+    - 251336
+  - - 8dfeff72def3
+    - 1539186779
+    - 251334
+  - - 91b4c3687d75
+    - 1539168720
+    - 251337
+  - - 2d2dee08739f
+    - 1539154819
+    - 251334
+  - - f5681e1f56e6
+    - 1539152160
+    - 251334
+  - - bf31de5be0dc
+    - 1539146100
+    - 251337
+  - - 6f8701d1be0c
+    - 1539122340
+    - 251327
+  - - 4845f02cf354
+    - 1539122280
+    - 251320
