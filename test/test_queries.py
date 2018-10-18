@@ -54,4 +54,3 @@ def test_query(monkeypatch, query_test, config):
     print("\nYaml formatted expected:")
     print(buf.getvalue())
     assert result == query_test["expected"]
-    
