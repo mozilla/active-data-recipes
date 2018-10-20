@@ -1,6 +1,6 @@
 query: total_files
 
-debug: False
+debug: True
 
 mock_data:
   header:
@@ -16,6 +16,7 @@ mock_data:
       formatting: 0.0013539791107177734
       total: 0.418
       preamble: 0.000699
+    saved_as: WgLMgxzI
     es_query:
       aggs:
         _match:
@@ -92,6 +93,7 @@ expected:
       formatting: 0.0013539791107177734
       total: 0.418
       preamble: 0.000699
+    saved_as: WgLMgxzI
     es_query:
       aggs:
         _match:
