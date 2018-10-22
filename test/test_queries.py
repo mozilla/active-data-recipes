@@ -23,7 +23,7 @@ def config():
     config = Configuration()
     config.debug = False
     config.fmt = 'json'
-    config.url = "http://activedata.allizom.org/query"
+    config.url = "https://activedata.allizom.org/query"
     return config
 
 
