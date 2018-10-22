@@ -61,6 +61,12 @@ raw_coverage
 .. automodule:: adr.recipes.raw_coverage
     :no-undoc-members:
 
+seta_accuracy
+------------
+
+.. automodule:: adr.recipes.seta_accuracy
+    :no-undoc-members:
+
 task_durations
 --------------
 

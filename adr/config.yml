@@ -1,5 +1,5 @@
-url: http://activedata.allizom.org/query
-debug_url: http://activedata.allizom.org/tools/query.html#query_id={}
+url: https://activedata.allizom.org/query
+debug_url: https://activedata.allizom.org/tools/query.html#query_id={}
 verbose: false
 debug: false
 fmt: table
