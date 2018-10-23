@@ -29,9 +29,9 @@ def cli(args=sys.argv[1:]):
     orig_run_query = query.run_query
     query_results = []
 
-    def new_run_query(name, **context):
+    def new_run_query(name, config, **context):
         context['limit'] = 10
-        qgen = orig_run_query(name, **context)
+        qgen = orig_run_query(name, config, **context)
 
         for result in qgen:
             mock_result = deepcopy(result)
@@ -40,9 +40,10 @@ def cli(args=sys.argv[1:]):
             yield result
 
     query.run_query = new_run_query
-    cfg = Configuration()
-    cfg.format = 'json'
-    result = run_recipe(args.recipe, remainder, cfg.format)
+    cfg = Configuration(os.path.join(os.path.dirname(here), 'config.yml'))
+    cfg.fmt = 'json'
+
+    result = run_recipe(args.recipe, remainder, cfg)
     test = OrderedDict()
     test['recipe'] = args.recipe
     test['args'] = remainder
