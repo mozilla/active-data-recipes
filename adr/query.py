@@ -45,7 +45,7 @@ def query_activedata(query, url):
 
     if response.status_code != 200:
         print(response.content)
-        raise MissingDataError("ActiveData didn't return any data.")
+        response.raise_for_status()
 
     json_response = response.json()
     if not json_response.get('data'):
