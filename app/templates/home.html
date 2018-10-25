@@ -1,20 +1,27 @@
 {% extends 'layout.html' %}
 {% block body%}
-<h3>Active Data Recipes</h3><br>
-<div  style="display: flex;flex-direction: row;">
-  <div>
-    <ul>
-      {% for file in recipes %}
-        <div>
-          <li><a href='/runrecipe/{{file}}'>{{file}}</a></li>
-       </div>
-      {% endfor %}
-    </ul>
+<div class="android-more-section">
+  <div class="android-section-title mdl-typography--display-1-color-contrast">Queries</div>
+  <div class="android-card-container mdl-grid">
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--8-col-phone mdl-card mdl-shadow--3dp">
+      <div class="mdl-card__title">
+         <h4 class="mdl-card__title-text">Run</h4>
+      </div>
+      <span class="mdl-typography--font-light mdl-typography--subhead left-align">Run a query by clicking on its link; below.</span>
+      <ul class="recipe-list">
+        {% for file in recipes %}
+          <div>
+            <li><a href='/runrecipe/{{file}}'>{{file}}</a></li>
+         </div>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="mdl-cell mdl-cell--9-col mdl-cell--8-col-tablet mdl-cell--8-col-phone mdl-card mdl-shadow--3dp">
+      <div class="mdl-card__title">
+         <h4 class="mdl-card__title-text">Results</h4>
+      </div>
+      {{format}}
+    </div>
   </div>
-
-  <div class="table" style="margin-left:500px;">
-    {{format}}
-  </div>
-
 </div>
 {% endblock %}
