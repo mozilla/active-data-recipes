@@ -1,0 +1,111 @@
+query: activedata_usage
+
+debug: False
+
+mock_data:
+  header:
+    - timestamp
+    - count
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 1539907200
+      - 811
+    - - 1539993600
+      - 98
+    - - 1540080000
+      - 3367
+    - - 1540166400
+      - 1641
+    - - 1540252800
+      - 1166
+    - - 1540339200
+      - 1741
+    - - 1540425600
+      - 1399
+    - - 
+      - 714
+
+expected:
+  header:
+    - timestamp
+    - count
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 1539907200
+      - 811
+    - - 1539993600
+      - 98
+    - - 1540080000
+      - 3367
+    - - 1540166400
+      - 1641
+    - - 1540252800
+      - 1166
+    - - 1540339200
+      - 1741
+    - - 1540425600
+      - 1399
+    - - 
+      - 714
+
+---
+
+query: activedata_usage
+
+debug: True
+
+mock_data:
+  header:
+    - timestamp
+    - count
+  meta:
+    saved_as: QI3zxrQ0
+    content_type: application/json
+    format: table
+  data:
+    - - 1539907200
+      - 811
+    - - 1539993600
+      - 98
+    - - 1540080000
+      - 3367
+    - - 1540166400
+      - 1641
+    - - 1540252800
+      - 1166
+    - - 1540339200
+      - 1741
+    - - 1540425600
+      - 1399
+    - - 
+      - 714
+
+expected:
+  header:
+    - timestamp
+    - count
+  meta:
+    saved_as: QI3zxrQ0
+    content_type: application/json
+    format: table
+  data:
+    - - 1539907200
+      - 811
+    - - 1539993600
+      - 98
+    - - 1540080000
+      - 3367
+    - - 1540166400
+      - 1641
+    - - 1540252800
+      - 1166
+    - - 1540339200
+      - 1741
+    - - 1540425600
+      - 1399
+    - - 
+      - 714

@@ -1,0 +1,119 @@
+query: fixed_by_commit_jobs
+
+debug: False
+
+mock_data:
+  header:
+    - build.date
+    - job.type.name
+    - action.request_time
+    - build.revision12
+    - failure.notes.text
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 1540223414
+      - test-linux64/opt-mochitest-browser-chrome-e10s-2
+      - 1540223527
+      - f92df1fed274
+      - 
+    - - 1540223414
+      - test-linux64/debug-mochitest-browser-chrome-e10s-4
+      - 1540223508
+      - f92df1fed274
+      - 
+    - - 1540223414
+      - test-linux64-pgo/opt-mochitest-browser-chrome-e10s-2
+      - 1540223500
+      - f92df1fed274
+      - 
+
+expected:
+  header:
+    - build.date
+    - job.type.name
+    - action.request_time
+    - build.revision12
+    - failure.notes.text
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 1540223414
+      - test-linux64/opt-mochitest-browser-chrome-e10s-2
+      - 1540223527
+      - f92df1fed274
+      - 
+    - - 1540223414
+      - test-linux64/debug-mochitest-browser-chrome-e10s-4
+      - 1540223508
+      - f92df1fed274
+      - 
+    - - 1540223414
+      - test-linux64-pgo/opt-mochitest-browser-chrome-e10s-2
+      - 1540223500
+      - f92df1fed274
+      - 
+
+---
+
+query: fixed_by_commit_jobs
+
+debug: True
+
+mock_data:
+  header:
+    - build.date
+    - job.type.name
+    - action.request_time
+    - build.revision12
+    - failure.notes.text
+  meta:
+    saved_as: wx3KBH16
+    content_type: application/json
+    format: table
+  data:
+    - - 1540223414
+      - test-linux64/opt-mochitest-browser-chrome-e10s-2
+      - 1540223527
+      - f92df1fed274
+      - 
+    - - 1540223414
+      - test-linux64/debug-mochitest-browser-chrome-e10s-4
+      - 1540223508
+      - f92df1fed274
+      - 
+    - - 1540223414
+      - test-linux64-pgo/opt-mochitest-browser-chrome-e10s-2
+      - 1540223500
+      - f92df1fed274
+      - 
+
+expected:
+  header:
+    - build.date
+    - job.type.name
+    - action.request_time
+    - build.revision12
+    - failure.notes.text
+  meta:
+    saved_as: wx3KBH16
+    content_type: application/json
+    format: table
+  data:
+    - - 1540223414
+      - test-linux64/opt-mochitest-browser-chrome-e10s-2
+      - 1540223527
+      - f92df1fed274
+      - 
+    - - 1540223414
+      - test-linux64/debug-mochitest-browser-chrome-e10s-4
+      - 1540223508
+      - f92df1fed274
+      - 
+    - - 1540223414
+      - test-linux64-pgo/opt-mochitest-browser-chrome-e10s-2
+      - 1540223500
+      - f92df1fed274
+      - 

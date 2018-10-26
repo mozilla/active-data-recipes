@@ -1,0 +1,55 @@
+query: total_hours_spent_on_branch
+
+debug: False
+
+mock_data:
+  header:
+    - hours
+    - tasks
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 57315.846017776275
+      - 139444
+
+expected:
+  header:
+    - hours
+    - tasks
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 57315.846017776275
+      - 139444
+
+---
+
+query: total_hours_spent_on_branch
+
+debug: True
+
+mock_data:
+  header:
+    - hours
+    - tasks
+  meta:
+    saved_as: V2uSjlgv
+    content_type: application/json
+    format: table
+  data:
+    - - 57315.846017776275
+      - 139444
+
+expected:
+  header:
+    - hours
+    - tasks
+  meta:
+    saved_as: V2uSjlgv
+    content_type: application/json
+    format: table
+  data:
+    - - 57315.846017776275
+      - 139444

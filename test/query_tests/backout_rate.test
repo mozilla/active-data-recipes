@@ -1,0 +1,83 @@
+query: backout_rate
+
+debug: False
+
+mock_data:
+  header:
+    - push.id
+  meta:
+    content_type: application/json
+    format: table
+  data:
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+
+expected:
+  header:
+    - push.id
+  meta:
+    content_type: application/json
+    format: table
+  data:
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+
+---
+
+query: backout_rate
+
+debug: True
+
+mock_data:
+  header:
+    - push.id
+  meta:
+    saved_as: Cy+GPCTH
+    content_type: application/json
+    format: table
+  data:
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+
+expected:
+  header:
+    - push.id
+  meta:
+    saved_as: Cy+GPCTH
+    content_type: application/json
+    format: table
+  data:
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
+  - - 
