@@ -1,0 +1,192 @@
+recipe: seta_accuracy
+args: [--from, '2018-10-08', --to, '2018-10-15']
+queries:
+- data:
+    action.request_time: [1539288058, 1539288045, 1539375263, 1539383205, 1539359865,
+      1539359870, 1539356212, 1539470055, 1539358700, 1539358775]
+    build.date: [1539287956, 1539287956, 1539375160, 1539383074, 1539357933, 1539357933,
+      1539352657, 1539469948, 1539352093, 1539352093]
+    build.revision12: [7381bd2bb8eb, 7381bd2bb8eb, a0d97137f1d6, 25bff27f9944, 78a9a2adf32a,
+      78a9a2adf32a, 94ccc53c61a7, 440def3cf293, 5b5ed02f86c7, 5b5ed02f86c7]
+    failure.notes.text: [b9222b391f8960132c31d050d1843ffb32ac1693, 50d5dc05d31de264b9dac5193fe060336e80991b,
+      7571ffba8492b3d03a40c17368ebc1fb0921f10c, 4e77c1c74676, 9268ec81fb01ae1fd1162fc6866ef8f74cd3ea09,
+      9268ec81fb01ae1fd1162fc6866ef8f74cd3ea09, e9e765c5d7f7ec8b357f7c120aa153d1b5d18dfc,
+      null, 616ced661907ea3887314841df917cb783c36d1e, 616ced661907ea3887314841df917cb783c36d1e]
+    job.type.name: [test-linux64/debug-mochitest-browser-chrome-e10s-15, test-linux64/opt-mochitest-devtools-chrome-e10s-8,
+      test-linux64-pgo/opt-mochitest-browser-chrome-e10s-6, test-linux64/opt-mochitest-browser-chrome-e10s-4,
+      test-linux64/opt-mochitest-chrome-2, test-linux64/opt-mochitest-chrome-1, test-linux64/opt-mochitest-chrome-1,
+      test-linux64/opt-mochitest-media-e10s-2, test-linux64-pgo/opt-mochitest-devtools-chrome-e10s-7,
+      test-linux64/opt-mochitest-devtools-chrome-e10s-7]
+  edges:
+  - domain: {interval: 1, max: 10, min: 0, type: rownum}
+    name: rownum
+  select:
+  - name: build.date
+    pull: <function output at 0x7fe704ee6398>
+    put: {child: ., index: 0, name: build.date}
+    value: build.date.~n~
+  - name: job.type.name
+    pull: <function output at 0x7fe704ee6cf8>
+    put: {child: ., index: 1, name: job.type.name}
+    value: job.type.name.~s~
+  - name: action.request_time
+    pull: <function output at 0x7fe704ee6a28>
+    put: {child: ., index: 2, name: action.request_time}
+    value: action.request_time.~n~
+  - name: build.revision12
+    pull: <function output at 0x7fe704ee6c80>
+    put: {child: ., index: 3, name: build.revision12}
+    value: build.revision12.~s~
+  - name: failure.notes.text
+    pull: <function output at 0x7fe704ee6050>
+    put: {child: ., index: 4, name: failure.notes.text}
+    value: failure.notes.text.~s~
+  - name: failure.notes.text
+    pull: <function output at 0x7fe704ee60c8>
+    put: {child: ., index: 4, name: failure.notes.text}
+    value: failure.notes.text
+- data:
+    action.request_time: [1539806134, 1539816704, 1539811194, 1539530491, 1539530492,
+      1539530493, 1539634716, 1539803175, 1539809028, 1539808011]
+    build.date: [1539803085, 1539816619, 1539807899, 1539530372, 1539530372, 1539530372,
+      1539634512, 1539803085, 1539808902, 1539807899]
+    build.revision12: [b94a2aa50ef2, 2e10a4e70394, 37647eaadbc2, 0b8bcd97f254, 0b8bcd97f254,
+      0b8bcd97f254, 0bf7bb3f9e58, b94a2aa50ef2, b77bde545276, 37647eaadbc2]
+    failure.notes.text: [943c79ca40a960aeb293e812838ec8bea6762cb5, 0d9b7b7a5aa5d30412233ffbbabe24dd26df97d0,
+      2e10a4e7039458e8e20c71d9ff03cecb81b33869, 45299a26e20a51f8b616a97024f6204d4210ecd1,
+      45299a26e20a51f8b616a97024f6204d4210ecd1, 45299a26e20a51f8b616a97024f6204d4210ecd1,
+      b2cd2ffe4ec85aad87f3445cd1e6badad0a45010, 0623ed3cb752851d5f96618b6a5f7c3048b49b60,
+      943c79ca40a960aeb293e812838ec8bea6762cb5, 2e10a4e7039458e8e20c71d9ff03cecb81b33869]
+    job.type.name: [test-linux64/debug-mochitest-browser-chrome-e10s-11, test-linux64/opt-mochitest-devtools-chrome-e10s-6,
+      test-linux64/opt-mochitest-browser-chrome-e10s-7, test-linux64/opt-mochitest-browser-chrome-e10s-3,
+      test-linux64/opt-mochitest-browser-chrome-e10s-1, test-linux64/opt-mochitest-browser-chrome-e10s-2,
+      test-linux64/debug-mochitest-browser-chrome-e10s-6, test-linux64/debug-mochitest-e10s-6,
+      test-linux64/debug-mochitest-browser-chrome-e10s-11, test-linux64-pgo/opt-mochitest-browser-chrome-e10s-7]
+  edges:
+  - domain: {interval: 1, max: 10, min: 0, type: rownum}
+    name: rownum
+  select:
+  - name: build.date
+    pull: <function output at 0x7fe7051481b8>
+    put: {child: ., index: 0, name: build.date}
+    value: build.date.~n~
+  - name: job.type.name
+    pull: <function output at 0x7fe705148ed8>
+    put: {child: ., index: 1, name: job.type.name}
+    value: job.type.name.~s~
+  - name: action.request_time
+    pull: <function output at 0x7fe705148f50>
+    put: {child: ., index: 2, name: action.request_time}
+    value: action.request_time.~n~
+  - name: build.revision12
+    pull: <function output at 0x7fe705148230>
+    put: {child: ., index: 3, name: build.revision12}
+    value: build.revision12.~s~
+  - name: failure.notes.text
+    pull: <function output at 0x7fe7051480c8>
+    put: {child: ., index: 4, name: failure.notes.text}
+    value: failure.notes.text.~s~
+  - name: failure.notes.text
+    pull: <function output at 0x7fe704930758>
+    put: {child: ., index: 4, name: failure.notes.text}
+    value: failure.notes.text
+expected:
+- [week of, '# regressions', '# seta missed']
+- ['2018-10-07', 7, 3]
+- ['2018-10-14', 6, 1]
+recipe: seta_accuracy
+args: [--from, '2018-10-08', --to, '2018-10-17']
+queries:
+- data:
+    action.request_time: [1539288058, 1539288045, 1539375263, 1539383205, 1539359865,
+      1539359870, 1539356212, 1539470055, 1539358700, 1539358775]
+    build.date: [1539287956, 1539287956, 1539375160, 1539383074, 1539357933, 1539357933,
+      1539352657, 1539469948, 1539352093, 1539352093]
+    build.revision12: [7381bd2bb8eb, 7381bd2bb8eb, a0d97137f1d6, 25bff27f9944, 78a9a2adf32a,
+      78a9a2adf32a, 94ccc53c61a7, 440def3cf293, 5b5ed02f86c7, 5b5ed02f86c7]
+    failure.notes.text: [b9222b391f8960132c31d050d1843ffb32ac1693, 50d5dc05d31de264b9dac5193fe060336e80991b,
+      7571ffba8492b3d03a40c17368ebc1fb0921f10c, 4e77c1c74676, 9268ec81fb01ae1fd1162fc6866ef8f74cd3ea09,
+      9268ec81fb01ae1fd1162fc6866ef8f74cd3ea09, e9e765c5d7f7ec8b357f7c120aa153d1b5d18dfc,
+      null, 616ced661907ea3887314841df917cb783c36d1e, 616ced661907ea3887314841df917cb783c36d1e]
+    job.type.name: [test-linux64/debug-mochitest-browser-chrome-e10s-15, test-linux64/opt-mochitest-devtools-chrome-e10s-8,
+      test-linux64-pgo/opt-mochitest-browser-chrome-e10s-6, test-linux64/opt-mochitest-browser-chrome-e10s-4,
+      test-linux64/opt-mochitest-chrome-2, test-linux64/opt-mochitest-chrome-1, test-linux64/opt-mochitest-chrome-1,
+      test-linux64/opt-mochitest-media-e10s-2, test-linux64-pgo/opt-mochitest-devtools-chrome-e10s-7,
+      test-linux64/opt-mochitest-devtools-chrome-e10s-7]
+  edges:
+  - domain: {interval: 1, max: 10, min: 0, type: rownum}
+    name: rownum
+  select:
+  - name: build.date
+    pull: <function output at 0x7fe705c04230>
+    put: {child: ., index: 0, name: build.date}
+    value: build.date.~n~
+  - name: job.type.name
+    pull: <function output at 0x7fe7041bcde8>
+    put: {child: ., index: 1, name: job.type.name}
+    value: job.type.name.~s~
+  - name: action.request_time
+    pull: <function output at 0x7fe7041bc9b0>
+    put: {child: ., index: 2, name: action.request_time}
+    value: action.request_time.~n~
+  - name: build.revision12
+    pull: <function output at 0x7fe7041bc140>
+    put: {child: ., index: 3, name: build.revision12}
+    value: build.revision12.~s~
+  - name: failure.notes.text
+    pull: <function output at 0x7fe7041bc8c0>
+    put: {child: ., index: 4, name: failure.notes.text}
+    value: failure.notes.text.~s~
+  - name: failure.notes.text
+    pull: <function output at 0x7fe705c047d0>
+    put: {child: ., index: 4, name: failure.notes.text}
+    value: failure.notes.text
+- data:
+    action.request_time: [1539806134, 1539816704, 1539811194, 1539530491, 1539530492,
+      1539530493, 1539634716, 1539803175, 1539809028, 1539808011]
+    build.date: [1539803085, 1539816619, 1539807899, 1539530372, 1539530372, 1539530372,
+      1539634512, 1539803085, 1539808902, 1539807899]
+    build.revision12: [b94a2aa50ef2, 2e10a4e70394, 37647eaadbc2, 0b8bcd97f254, 0b8bcd97f254,
+      0b8bcd97f254, 0bf7bb3f9e58, b94a2aa50ef2, b77bde545276, 37647eaadbc2]
+    failure.notes.text: [943c79ca40a960aeb293e812838ec8bea6762cb5, 0d9b7b7a5aa5d30412233ffbbabe24dd26df97d0,
+      2e10a4e7039458e8e20c71d9ff03cecb81b33869, 45299a26e20a51f8b616a97024f6204d4210ecd1,
+      45299a26e20a51f8b616a97024f6204d4210ecd1, 45299a26e20a51f8b616a97024f6204d4210ecd1,
+      b2cd2ffe4ec85aad87f3445cd1e6badad0a45010, 0623ed3cb752851d5f96618b6a5f7c3048b49b60,
+      943c79ca40a960aeb293e812838ec8bea6762cb5, 2e10a4e7039458e8e20c71d9ff03cecb81b33869]
+    job.type.name: [test-linux64/debug-mochitest-browser-chrome-e10s-11, test-linux64/opt-mochitest-devtools-chrome-e10s-6,
+      test-linux64/opt-mochitest-browser-chrome-e10s-7, test-linux64/opt-mochitest-browser-chrome-e10s-3,
+      test-linux64/opt-mochitest-browser-chrome-e10s-1, test-linux64/opt-mochitest-browser-chrome-e10s-2,
+      test-linux64/debug-mochitest-browser-chrome-e10s-6, test-linux64/debug-mochitest-e10s-6,
+      test-linux64/debug-mochitest-browser-chrome-e10s-11, test-linux64-pgo/opt-mochitest-browser-chrome-e10s-7]
+  edges:
+  - domain: {interval: 1, max: 10, min: 0, type: rownum}
+    name: rownum
+  select:
+  - name: build.date
+    pull: <function output at 0x7fe7043fdc80>
+    put: {child: ., index: 0, name: build.date}
+    value: build.date.~n~
+  - name: job.type.name
+    pull: <function output at 0x7fe7043fd230>
+    put: {child: ., index: 1, name: job.type.name}
+    value: job.type.name.~s~
+  - name: action.request_time
+    pull: <function output at 0x7fe7043fde60>
+    put: {child: ., index: 2, name: action.request_time}
+    value: action.request_time.~n~
+  - name: build.revision12
+    pull: <function output at 0x7fe7043fda28>
+    put: {child: ., index: 3, name: build.revision12}
+    value: build.revision12.~s~
+  - name: failure.notes.text
+    pull: <function output at 0x7fe7043fdde8>
+    put: {child: ., index: 4, name: failure.notes.text}
+    value: failure.notes.text.~s~
+  - name: failure.notes.text
+    pull: <function output at 0x7fe7043fdd70>
+    put: {child: ., index: 4, name: failure.notes.text}
+    value: failure.notes.text
+expected:
+- [week of, '# regressions', '# seta missed']
+- ['2018-10-07', 7, 3]
+- ['2018-10-14', 6, 1]

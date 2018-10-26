@@ -42,7 +42,11 @@ def query_activedata(query, url):
     response = requests.post(url,
                              data=query,
                              stream=True)
-    response.raise_for_status()
+
+    if response.status_code != 200:
+        print(response.content)
+        response.raise_for_status()
+
     json_response = response.json()
     if not json_response.get('data'):
         raise MissingDataError("ActiveData didn't return any data.")

@@ -38,7 +38,7 @@ name> [arguments]``. You can see the help for a recipe by running ``adr <recipe 
 
 
 .. _ActiveData: https://github.com/mozilla/ActiveData/blob/dev/docs/GettingStarted.md
-.. _query tool: http://activedata.allizom.org/tools/query.html
+.. _query tool: https://activedata.allizom.org/tools/query.html
 
 .. toctree::
    :maxdepth: 2

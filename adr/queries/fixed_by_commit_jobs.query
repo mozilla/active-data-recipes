@@ -1,0 +1,22 @@
+from: treeherder
+limit: 10000
+select:
+    - build.date
+    - job.type.name
+    - action.request_time
+    - build.revision12
+    - failure.notes.text
+where:
+    and:
+        - lte:
+            repo.push.date:
+                date: {$eval: to_date}
+        - gte:
+            repo.push.date:
+                date: {$eval: from_date}
+        - in: {build.branch: {$eval: branch}}
+        - in: {job.type.group.symbol: ["M","M-e10s","X"]}
+        - neq: {build.type: "asan"}
+        - eq: {run.machine.platform: "linux64"}
+        - eq: {failure.classification: "fixed by commit"}
+limit: 50000
