@@ -1,20 +1,29 @@
 {% extends 'layout.html' %}
 {% block body%}
-<h3>Active Data Recipes</h3><br>
+<br>
 <div  style="display: flex;flex-direction: row;">
-  <div>
+  <div class="btn-group">
+  <button type="button" class="btn btn-secondary">Run</button>
+  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu scrollable-menu">
     <ul>
       {% for file in recipes %}
-        <div>
-          <li><a href='/runrecipe/{{file}}'>{{file}}</a></li>
-       </div>
+        <li><a href='/runrecipe/{{file}}'>{{file}}</a></li>
       {% endfor %}
     </ul>
+    
+  </div>
+</div>
+      
   </div>
 
-  <div class="table" style="margin-left:500px;">
+  
+  <div class="table thead-dark table-hover table-bordered">
     {{format}}
   </div>
 
 </div>
 {% endblock %}
+

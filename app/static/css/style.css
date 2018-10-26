@@ -1,0 +1,37 @@
+.nav-tabs{
+    height: 20px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+.dropdown-menu li{
+    list-style:none;
+}
+
+.table{
+    margin-left: 300px;
+}
+
+.nav-link {
+    color: #fff;
+}
+
+
