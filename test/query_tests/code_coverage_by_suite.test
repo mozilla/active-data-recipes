@@ -1,0 +1,63 @@
+query: code_coverage_by_suite
+
+debug: False
+
+mock_data:
+  header:
+    - run.suite.fullname
+    - file
+    - source.file.name
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 
+    - 
+    - 0
+
+expected:
+  header:
+    - run.suite.fullname
+    - file
+    - source.file.name
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 
+    - 
+    - 0
+
+---
+
+query: code_coverage_by_suite
+
+debug: True
+
+mock_data:
+  header:
+    - run.suite.fullname
+    - file
+    - source.file.name
+  meta:
+    saved_as: TFRxzzIo
+    content_type: application/json
+    format: table
+  data:
+    - - 
+    - 
+    - 0
+
+expected:
+  header:
+    - run.suite.fullname
+    - file
+    - source.file.name
+  meta:
+    saved_as: TFRxzzIo
+    content_type: application/json
+    format: table
+  data:
+    - - 
+    - 
+    - 0

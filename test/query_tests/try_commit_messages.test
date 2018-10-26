@@ -1,0 +1,127 @@
+query: try_commit_messages
+
+debug: False
+
+mock_data:
+  header:
+    - user
+    - message
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - wptsync@mozilla.com
+      - 
+    - - wptsync@mozilla.com
+      - 
+    - - gwatson@mozilla.com
+      - 
+    - - mh@glandium.org
+      - 
+    - - emilio@crisal.io
+      - 
+    - - dwillcoxon@mozilla.com
+      - 
+    - - pbone@mozilla.com
+      - 
+    - - gwatson@mozilla.com
+      - 
+    - - ktomlinson@mozilla.com
+      - 
+    - - dhouse@mozilla.com
+      - 
+
+expected:
+  header:
+    - user
+    - message
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - wptsync@mozilla.com
+      - 
+    - - wptsync@mozilla.com
+      - 
+    - - gwatson@mozilla.com
+      - 
+    - - mh@glandium.org
+      - 
+    - - emilio@crisal.io
+      - 
+    - - dwillcoxon@mozilla.com
+      - 
+    - - pbone@mozilla.com
+      - 
+    - - gwatson@mozilla.com
+      - 
+    - - ktomlinson@mozilla.com
+      - 
+    - - dhouse@mozilla.com
+      - 
+
+---
+
+query: try_commit_messages
+
+debug: True
+
+mock_data:
+  header:
+    - user
+    - message
+  meta:
+    saved_as: N5HAdEC6
+    content_type: application/json
+    format: table
+  data:
+    - - wptsync@mozilla.com
+      - 
+    - - wptsync@mozilla.com
+      - 
+    - - gwatson@mozilla.com
+      - 
+    - - mh@glandium.org
+      - 
+    - - emilio@crisal.io
+      - 
+    - - dwillcoxon@mozilla.com
+      - 
+    - - pbone@mozilla.com
+      - 
+    - - gwatson@mozilla.com
+      - 
+    - - ktomlinson@mozilla.com
+      - 
+    - - dhouse@mozilla.com
+      - 
+
+expected:
+  header:
+    - user
+    - message
+  meta:
+    saved_as: N5HAdEC6
+    content_type: application/json
+    format: table
+  data:
+    - - wptsync@mozilla.com
+      - 
+    - - wptsync@mozilla.com
+      - 
+    - - gwatson@mozilla.com
+      - 
+    - - mh@glandium.org
+      - 
+    - - emilio@crisal.io
+      - 
+    - - dwillcoxon@mozilla.com
+      - 
+    - - pbone@mozilla.com
+      - 
+    - - gwatson@mozilla.com
+      - 
+    - - ktomlinson@mozilla.com
+      - 
+    - - dhouse@mozilla.com
+      - 
