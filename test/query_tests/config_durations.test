@@ -1,0 +1,167 @@
+query: config_durations
+
+debug: False
+
+mock_data:
+  header:
+    - run.machine.platform
+    - build.type
+    - tasks
+    - average minutes
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 
+      - debug
+      - 56634
+      - 34.12843307126895
+    - - 
+      - ccov
+      - 10702
+      - 44.94336809332461
+    - - 
+      - opt
+      - 6971
+      - 25.775530884392786
+    - - 
+      - asan
+      - 6841
+      - 25.97513403031632
+    - - 
+      - qr
+      - 4441
+      - 28.653650785237527
+    - - 
+      - aarch64
+      - 130
+      - 15.27487
+    - - 
+      - 
+      - 47458
+      - 20.133876863095093
+
+expected:
+  header:
+    - run.machine.platform
+    - build.type
+    - tasks
+    - average minutes
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 
+      - debug
+      - 56634
+      - 34.12843307126895
+    - - 
+      - ccov
+      - 10702
+      - 44.94336809332461
+    - - 
+      - opt
+      - 6971
+      - 25.775530884392786
+    - - 
+      - asan
+      - 6841
+      - 25.97513403031632
+    - - 
+      - qr
+      - 4441
+      - 28.653650785237527
+    - - 
+      - aarch64
+      - 130
+      - 15.27487
+    - - 
+      - 
+      - 47458
+      - 20.133876863095093
+
+---
+
+query: config_durations
+
+debug: True
+
+mock_data:
+  header:
+    - run.machine.platform
+    - build.type
+    - tasks
+    - average minutes
+  meta:
+    saved_as: iClMppfV
+    content_type: application/json
+    format: table
+  data:
+    - - 
+      - debug
+      - 56634
+      - 34.12843307126895
+    - - 
+      - ccov
+      - 10702
+      - 44.94336809332461
+    - - 
+      - opt
+      - 6971
+      - 25.775530884392786
+    - - 
+      - asan
+      - 6841
+      - 25.97513403031632
+    - - 
+      - qr
+      - 4441
+      - 28.653650785237527
+    - - 
+      - aarch64
+      - 130
+      - 15.27487
+    - - 
+      - 
+      - 47458
+      - 20.133876863095093
+
+expected:
+  header:
+    - run.machine.platform
+    - build.type
+    - tasks
+    - average minutes
+  meta:
+    saved_as: iClMppfV
+    content_type: application/json
+    format: table
+  data:
+    - - 
+      - debug
+      - 56634
+      - 34.12843307126895
+    - - 
+      - ccov
+      - 10702
+      - 44.94336809332461
+    - - 
+      - opt
+      - 6971
+      - 25.775530884392786
+    - - 
+      - asan
+      - 6841
+      - 25.97513403031632
+    - - 
+      - qr
+      - 4441
+      - 28.653650785237527
+    - - 
+      - aarch64
+      - 130
+      - 15.27487
+    - - 
+      - 
+      - 47458
+      - 20.133876863095093
