@@ -4,9 +4,11 @@ import datetime
 import json
 import logging
 import os
+
 import jsone
 import requests
 import yaml
+
 from adr.formatter import all_formatters
 from adr.errors import MissingDataError
 
@@ -43,7 +45,10 @@ def query_activedata(query, url):
                              stream=True)
 
     if response.status_code != 200:
-        print(response.content)
+        try:
+            print(json.dumps(response.json(), indent=2))
+        except ValueError:
+            print(response.text)
         response.raise_for_status()
 
     json_response = response.json()
