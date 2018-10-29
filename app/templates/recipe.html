@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block body %}
+<a href="{{ url_for('home') }}">Home</a>
+<h3>{{ recipe.title() }}</h3>
+<div class="alert alert-secondary" role="alert">
+    {{ docstring }}
+</div>
+<div>
+    <form action="#" method="POST">
+        <div class="form-group">
+            <label for="arguments">Arguments</label>
+            <input type="text" class="form-control" name="arguments" maxlength="250"
+                id="arguments"
+                placeholder="Enter recipe arguments">
+                </div>
+        <button type="submit" class="btn btn-primary">Run</button>
+    </form>
+    <div class="table" style="margin-left:500px;">
+        {% if format != None %}
+        {{ format }}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

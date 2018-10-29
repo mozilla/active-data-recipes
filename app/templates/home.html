@@ -1,20 +1,13 @@
 {% extends 'layout.html' %}
-{% block body%}
+{% block body %}
 <h3>Active Data Recipes</h3><br>
-<div  style="display: flex;flex-direction: row;">
-  <div>
-    <ul>
-      {% for file in recipes %}
-        <div>
-          <li><a href='/runrecipe/{{file}}'>{{file}}</a></li>
-       </div>
-      {% endfor %}
-    </ul>
-  </div>
-
-  <div class="table" style="margin-left:500px;">
-    {{format}}
-  </div>
-
+<div style="display: flex;flex-direction: row;">
+    <div>
+        <ul>
+            {% for recipe in recipes %}
+            <li><a href={{ url_for('showrecipe', recipe=recipe) }}>{{ recipe }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

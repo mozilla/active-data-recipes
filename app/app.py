@@ -1,6 +1,8 @@
-from flask import Flask, render_template, Markup
+from flask import Flask, render_template, Markup, request, abort
 import os
+import importlib
 import markdown
+import inspect
 from adr import recipes
 from adr.recipe import run_recipe
 from adr.util.config import Configuration
@@ -35,16 +37,26 @@ def home():
     return render_template('home.html', recipes=recipe_names)
 
 
-@app.route('/runrecipe/<recipename>')
-def runrecipe(recipename):
+@app.route('/showrecipe/<recipe>', methods=['POST', 'GET'])
+def showrecipe(recipe):
     """
-    :param list recipename:the name of the selected recipe file
+    :param string recipename:the name of the selected recipe
     :returns: template
     """
-    config.fmt = 'markdown'
-    result_md = run_recipe(recipename, [], config)
-    table_html = markdown.markdown(result_md, extensions=['markdown.extensions.tables'])
-    return render_template('home.html', recipes=recipe_names, format=Markup(table_html))
+    if recipe not in recipe_names:
+        abort(404)
+    module_name = '.recipes.{}'.format(recipe)
+    mod = importlib.import_module(module_name, package='adr')
+    format = None
+    if request.method == 'POST':
+        args = []
+        if request.form['arguments'] != '':
+            args = request.form['arguments'].split(' ')
+        config.fmt = 'markdown'
+        result_md = run_recipe(recipe, args, config)
+        table_html = markdown.markdown(result_md, extensions=['markdown.extensions.tables'])
+        format = Markup(table_html)
+    return render_template('recipe.html', recipe=recipe, format=format, docstring=inspect.getdoc(mod))
 
 
 def main():
