@@ -56,7 +56,11 @@ def showrecipe(recipe):
         result_md = run_recipe(recipe, args, config)
         table_html = markdown.markdown(result_md, extensions=['markdown.extensions.tables'])
         format = Markup(table_html)
-    return render_template('recipe.html', recipe=recipe, format=format, docstring=inspect.getdoc(mod))
+    return render_template(
+        'recipe.html',
+        recipe=recipe,
+        format=format,
+        docstring=inspect.getdoc(mod))
 
 
 def main():
