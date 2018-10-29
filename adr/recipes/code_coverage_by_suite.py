@@ -53,7 +53,6 @@ def run(args, config):
                        'jit', 'Wd', 'Wr']
 
     retVal = {}
-    counter = 0
     result = next(run_query('code_coverage_by_suite', config, **query_args))
     for line in result['data']:
         # line = [suite, filename, count]

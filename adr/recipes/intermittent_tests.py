@@ -22,7 +22,6 @@ def run(args, config):
     args.result = ["F"]
     args.platform_config = "test-%s/%s" % (args.platform, args.build_type)
 
-    result = []
     query_args = vars(args)
 
     jobs = next(run_query('intermittent_jobs', config, **query_args))['data']

@@ -28,7 +28,6 @@ def run(args, config):
         args.groupby = 'run.key'
         args.result = ["T", "F"]
 
-    result = []
     query_args = vars(args)
 
     result = next(run_query('intermittent_tests', config, **query_args))['data']
