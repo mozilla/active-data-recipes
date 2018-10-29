@@ -19,7 +19,6 @@ def run(args, config):
                         help="maximum seconds for runtime, default is: 1200.")
     args = parser.parse_args(args)
 
-    result = []
     query_args = vars(args)
 
     result = next(run_query('tests_in_duration', config, **query_args))['data']
