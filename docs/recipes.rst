@@ -67,6 +67,12 @@ seta_accuracy
 .. automodule:: adr.recipes.seta_accuracy
     :no-undoc-members:
 
+skipped_tests
+------------
+
+.. automodule:: adr.recipes.skipped_tests
+    :no-undoc-members:
+
 task_durations
 --------------
 
