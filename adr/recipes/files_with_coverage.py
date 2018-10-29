@@ -30,7 +30,8 @@ def run(args, config):
         if item[2] >= 100:
             # default total files=-1, in some cases this is reported
             by_revision[item[0]] = {'covered': item[3], 'total': -1}
-            by_date[item[1]] = item[0]
+            if item[1] is not None:
+                by_date[item[1]] = item[0]
 
     for item in total_files:
         if item[0] in by_revision:
