@@ -10,7 +10,7 @@ mock_data:
     content_type: application/json
     format: table
   data:
-    - - aciure@mozilla.com
+    - - mock@example.com
       - 3962
     - - 
       - 148315
@@ -23,7 +23,7 @@ expected:
     content_type: application/json
     format: table
   data:
-    - - aciure@mozilla.com
+    - - mock@example.com
       - 3962
     - - 
       - 148315
@@ -43,7 +43,7 @@ mock_data:
     content_type: application/json
     format: table
   data:
-    - - aciure@mozilla.com
+    - - mock@example.com
       - 3962
     - - 
       - 148315
@@ -57,7 +57,7 @@ expected:
     content_type: application/json
     format: table
   data:
-    - - aciure@mozilla.com
+    - - mock@example.com
       - 3962
     - - 
       - 148315
