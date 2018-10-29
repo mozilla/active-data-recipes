@@ -21,7 +21,7 @@ else:
 @pytest.fixture
 def config():
     config = Configuration()
-    config.fmt = 'json'
+    config.fmt = 'table'
     config.debug_url = "https://activedata.allizom.org/tools/query.html#query_id={}"
     return config
 
@@ -42,35 +42,31 @@ def test_query(monkeypatch, query_test, config):
         reload(sys.modules[module])
 
     def print_diff():
-
-        buf = IO()
-        yaml.dump(result, buf)
-        print("Yaml formatted result for copy/paste:")
-        print(buf.getvalue())
-
-        buf = IO()
-        yaml.dump(query_test['expected'], buf)
-        print("\nYaml formatted expected:")
-        print(buf.getvalue())
+        print(query_test["query"])
+        print(result)
+        print(debug_url)
+        print(query_test["expected"]["data"])
 
     if query_test['debug']:
 
         config.debug = True
         formatted_query = format_query(query_test['query'], config)
-        result = json.loads(formatted_query[0])
+        result = formatted_query[0]
         debug_url = formatted_query[1]
+        expected = query_test["expected"]["data"]
 
         print_diff()
-        assert result == query_test["expected"]
+        assert result == expected
         assert debug_url == config.build_debug_url(query_test["expected"]["meta"]["saved_as"])
 
     else:
 
         config.debug = False
         formatted_query = format_query(query_test['query'], config)
-        result = json.loads(formatted_query[0])
+        result = formatted_query[0]
         debug_url = formatted_query[1]
+        expected = query_test["expected"]["data"]
 
         print_diff()
-        assert result == query_test["expected"]
+        assert result == expected
         assert debug_url is None
