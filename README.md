@@ -10,6 +10,11 @@ output can sometimes be post-processed.
 
 Each recipe should try to answer a single question.
 
+# Software requirements
+
+- You will need python 3.6 and pip for python 3.6 installed on your machine to run the program.
+
+
 # Installation
 
     pip install active-data-recipes
