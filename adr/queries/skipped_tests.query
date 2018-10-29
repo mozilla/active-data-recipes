@@ -1,0 +1,11 @@
+from: unittest
+select:
+    - result.test
+    - run.name
+    - result.status
+where:
+    eq:
+        result.status: SKIP
+limit: 50000
+format: table
+
