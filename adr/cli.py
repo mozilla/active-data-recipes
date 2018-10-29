@@ -72,6 +72,11 @@ def recipe_handler(args, remainder, config):
     else:
         _check_tasks_exist(args.task)
 
+    if len(args.task) == 2 and args.task[1] == '--help':
+        print('Usage for adr ' + args.task[0] + ':')
+        run_recipe(args.task[0], [args.task[1]], config)
+        sys.exit()
+
     for recipe in args.task:
         if recipe not in recipes:
             log.error("recipe '{}' not found!".format(recipe))
