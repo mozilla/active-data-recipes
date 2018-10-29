@@ -7,7 +7,6 @@ import os
 import jsone
 import requests
 import yaml
-from six import string_types
 from adr.formatter import all_formatters
 from adr.errors import MissingDataError
 
@@ -114,7 +113,7 @@ def format_query(query, config):
     :param name query: name of the query file to be run.
     :param Configuration config: config object.
     """
-    if isinstance(config.fmt, string_types):
+    if isinstance(config.fmt, str):
         fmt = all_formatters[config.fmt]
 
     for result in run_query(query, config, **FAKE_CONTEXT):

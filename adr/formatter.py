@@ -1,7 +1,7 @@
 from __future__ import print_function, absolute_import
 
 import json
-from six.moves import zip_longest
+from itertools import zip_longest
 
 from terminaltables import GithubFlavoredMarkdownTable, SingleTable
 

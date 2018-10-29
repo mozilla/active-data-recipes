@@ -32,7 +32,6 @@ def run(args, config):
 
     args = parser.parse_args(args)
     query_args = vars(args)
-    print(query_args)
     limit = query_args.pop('limit')
 
     data = next(run_query('task_durations', config, **query_args))['data']

@@ -4,9 +4,6 @@ import importlib
 import logging
 import os
 from argparse import ArgumentParser
-
-from six import string_types
-
 from adr.formatter import all_formatters
 from .errors import MissingDataError
 
@@ -109,7 +106,7 @@ def run_recipe(recipe, args, config):
     except MissingDataError:
         return "ActiveData didn\'t return any data."
 
-    if isinstance(config.fmt, string_types):
+    if isinstance(config.fmt, str):
         fmt = all_formatters[config.fmt]
 
     log.debug("Result:")

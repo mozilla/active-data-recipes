@@ -16,7 +16,7 @@ DEPS = [
     'pyyaml',
     'beautifulsoup4',
     'flask',
-    'markdown',
+    'markdown'
 ]
 
 setup(
