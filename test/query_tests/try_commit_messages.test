@@ -10,25 +10,7 @@ mock_data:
     content_type: application/json
     format: table
   data:
-    - - wptsync@mozilla.com
-      - 
-    - - wptsync@mozilla.com
-      - 
-    - - gwatson@mozilla.com
-      - 
-    - - mh@glandium.org
-      - 
-    - - emilio@crisal.io
-      - 
-    - - dwillcoxon@mozilla.com
-      - 
-    - - pbone@mozilla.com
-      - 
-    - - gwatson@mozilla.com
-      - 
-    - - ktomlinson@mozilla.com
-      - 
-    - - dhouse@mozilla.com
+    - - mock@example.com
       - 
 
 expected:
@@ -39,25 +21,7 @@ expected:
     content_type: application/json
     format: table
   data:
-    - - wptsync@mozilla.com
-      - 
-    - - wptsync@mozilla.com
-      - 
-    - - gwatson@mozilla.com
-      - 
-    - - mh@glandium.org
-      - 
-    - - emilio@crisal.io
-      - 
-    - - dwillcoxon@mozilla.com
-      - 
-    - - pbone@mozilla.com
-      - 
-    - - gwatson@mozilla.com
-      - 
-    - - ktomlinson@mozilla.com
-      - 
-    - - dhouse@mozilla.com
+    - - mock@example.com
       - 
 
 ---
@@ -75,25 +39,7 @@ mock_data:
     content_type: application/json
     format: table
   data:
-    - - wptsync@mozilla.com
-      - 
-    - - wptsync@mozilla.com
-      - 
-    - - gwatson@mozilla.com
-      - 
-    - - mh@glandium.org
-      - 
-    - - emilio@crisal.io
-      - 
-    - - dwillcoxon@mozilla.com
-      - 
-    - - pbone@mozilla.com
-      - 
-    - - gwatson@mozilla.com
-      - 
-    - - ktomlinson@mozilla.com
-      - 
-    - - dhouse@mozilla.com
+    - - mock@example.com
       - 
 
 expected:
@@ -105,23 +51,5 @@ expected:
     content_type: application/json
     format: table
   data:
-    - - wptsync@mozilla.com
-      - 
-    - - wptsync@mozilla.com
-      - 
-    - - gwatson@mozilla.com
-      - 
-    - - mh@glandium.org
-      - 
-    - - emilio@crisal.io
-      - 
-    - - dwillcoxon@mozilla.com
-      - 
-    - - pbone@mozilla.com
-      - 
-    - - gwatson@mozilla.com
-      - 
-    - - ktomlinson@mozilla.com
-      - 
-    - - dhouse@mozilla.com
+    - - mock@example.com
       - 
