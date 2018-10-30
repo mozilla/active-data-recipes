@@ -105,7 +105,8 @@ def _build_parser_arguments(parser, config):
                         help="Open a query in ActiveData query tool.")
     # positional arguments
     parser.add_argument('task', nargs='*')
-    parser.add_argument('-h', '--help', action='store_true', help='with_some_message')
+    parser.add_argument('-h', '--help', action='store_true',
+                        help="Type --help to get help.\nType <recipe> --help to get help with a recipe.")
     return parser
 
 
@@ -141,7 +142,6 @@ def _help(items, recipes, config, parser):
                 continue
             print('Usage for adr ' + recipe + ':')
             run_recipe(recipe, ['--help'], config)
-        print("doing job")
     return
 
 
