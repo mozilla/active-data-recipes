@@ -23,7 +23,7 @@ RECIPE_DIR = os.path.join(here, 'recipes')
 QUERY_DIR = os.path.join(here, 'queries')
 
 
-def query_handler(args, remainder, config):
+def query_handler(args, remainder, config, parser):
     """Runs, formats and prints queries.
 
     All functionality remains same as adr.query:cli.
@@ -53,7 +53,7 @@ def query_handler(args, remainder, config):
             webbrowser.open(url, new=2)
 
 
-def recipe_handler(args, remainder, config):
+def recipe_handler(args, remainder, config, parser):
     """Runs recipes.
 
     All functionality remains the same as the deprecated adr.cli:cli.
@@ -69,6 +69,8 @@ def recipe_handler(args, remainder, config):
 
     if args.list:
         _list(recipes)
+    elif args.help:
+        return _help(args.task, recipes, config, parser)
     else:
         _check_tasks_exist(args.task)
 
@@ -103,6 +105,7 @@ def _build_parser_arguments(parser, config):
                         help="Open a query in ActiveData query tool.")
     # positional arguments
     parser.add_argument('task', nargs='*')
+    parser.add_argument('-h', '--help', action='store_true', help='with_some_message')
     return parser
 
 
@@ -125,6 +128,20 @@ def _list(items):
     :returns None
     """
     log.info('\n'.join(sorted(items)))
+    return
+
+
+def _help(items, recipes, config, parser):
+    if(len(items) == 0):
+        parser.print_help()
+    else:
+        for recipe in items:
+            if recipe not in recipes:
+                log.error("recipe '{}' not found!".format(recipe))
+                continue
+            print('Usage for adr ' + recipe + ':')
+            run_recipe(recipe, ['--help'], config)
+        print("doing job")
     return
 
 
@@ -164,7 +181,9 @@ def main(args=sys.argv[1:]):
     config = Configuration(os.path.join(here, 'config.yml'))
 
     # create parsers and subparsers.
-    parser = ArgumentParser(description='Runs adr recipes and/or queries.')
+    parser = ArgumentParser(
+        description='Runs adr recipes and/or queries.',
+        conflict_handler='resolve')
 
     # check that adr is invoked with at least a recipe or subcommand.
     _check_tasks_exist(args)
@@ -198,7 +217,7 @@ def main(args=sys.argv[1:]):
     # Additional args will go to remainder
     config.update(vars(parsed_args))
 
-    parsed_args.func(parsed_args, remainder, config)
+    parsed_args.func(parsed_args, remainder, config, parser)
 
 
 if __name__ == '__main__':
