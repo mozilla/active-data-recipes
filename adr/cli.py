@@ -198,13 +198,15 @@ def main(args=sys.argv[1:]):
     if args[0] != 'query':
         # if subcommand query is not specified, default to recipe.
         if args[0] == 'recipe':
-            recipe_parser = subparser.add_parser('recipe', help='Recipe subcommand.')
+            recipe_parser = subparser.add_parser(
+                'recipe', help='Recipe subcommand.', conflict_handler='resolve')
             recipe_parser = _build_parser_arguments(recipe_parser, config)
         else:
             parser = _build_parser_arguments(parser, config)
         parser.set_defaults(func=recipe_handler)
     else:
-        query_parser = subparser.add_parser('query', help='Query subcommand.')
+        query_parser = subparser.add_parser(
+            'query', help='Query subcommand.', conflict_handler='resolve')
         query_parser = _build_parser_arguments(query_parser, config)
         query_parser.set_defaults(func=query_handler)
 
