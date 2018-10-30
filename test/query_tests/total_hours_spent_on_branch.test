@@ -1,6 +1,6 @@
 query: total_hours_spent_on_branch
 
-debug: False
+args: []
 
 mock_data:
   header:
@@ -28,7 +28,7 @@ expected:
 
 query: total_hours_spent_on_branch
 
-debug: True
+args: [--debug]
 
 mock_data:
   header:

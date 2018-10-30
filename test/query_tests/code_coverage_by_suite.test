@@ -1,6 +1,6 @@
 query: code_coverage_by_suite
 
-debug: False
+args: []
 
 mock_data:
   header:
@@ -32,7 +32,7 @@ expected:
 
 query: code_coverage_by_suite
 
-debug: True
+args: [--debug]
 
 mock_data:
   header:

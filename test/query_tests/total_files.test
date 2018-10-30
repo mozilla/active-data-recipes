@@ -1,6 +1,6 @@
 query: total_files
 
-debug: False
+args: []
 
 mock_data:
   header:
@@ -86,7 +86,7 @@ expected:
 
 query: total_files
 
-debug: True
+args: [--debug]
 
 mock_data:
   header:
