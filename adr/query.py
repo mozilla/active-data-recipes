@@ -4,10 +4,11 @@ import datetime
 import json
 import logging
 import os
+
 import jsone
 import requests
 import yaml
-from six import string_types
+
 from adr.formatter import all_formatters
 from adr.errors import MissingDataError
 
@@ -44,7 +45,10 @@ def query_activedata(query, url):
                              stream=True)
 
     if response.status_code != 200:
-        print(response.content)
+        try:
+            print(json.dumps(response.json(), indent=2))
+        except ValueError:
+            print(response.text)
         response.raise_for_status()
 
     json_response = response.json()
@@ -114,7 +118,7 @@ def format_query(query, config):
     :param name query: name of the query file to be run.
     :param Configuration config: config object.
     """
-    if isinstance(config.fmt, string_types):
+    if isinstance(config.fmt, str):
         fmt = all_formatters[config.fmt]
 
     for result in run_query(query, config, **FAKE_CONTEXT):

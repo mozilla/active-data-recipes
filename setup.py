@@ -12,12 +12,11 @@ with open(os.path.join(here, 'README.md')) as fh:
 DEPS = [
     'json-e >= 2.3.2',
     'requests >= 2.18.3',
-    'six >= 1.11.0',
     'terminaltables >= 3.1.0',
     'pyyaml',
     'beautifulsoup4',
     'flask',
-    'markdown',
+    'markdown'
 ]
 
 setup(

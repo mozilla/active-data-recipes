@@ -1,0 +1,63 @@
+query: user_tasks
+
+debug: False
+
+mock_data:
+  header:
+    - repo.push.user
+    - count
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - mock@example.com
+      - 3962
+    - - 
+      - 148315
+
+expected:
+  header:
+    - repo.push.user
+    - count
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - mock@example.com
+      - 3962
+    - - 
+      - 148315
+
+---
+
+query: user_tasks
+
+debug: True
+
+mock_data:
+  header:
+    - repo.push.user
+    - count
+  meta:
+    saved_as: rhwaxTxR
+    content_type: application/json
+    format: table
+  data:
+    - - mock@example.com
+      - 3962
+    - - 
+      - 148315
+
+expected:
+  header:
+    - repo.push.user
+    - count
+  meta:
+    saved_as: rhwaxTxR
+    content_type: application/json
+    format: table
+  data:
+    - - mock@example.com
+      - 3962
+    - - 
+      - 148315

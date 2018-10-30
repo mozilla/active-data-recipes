@@ -1,0 +1,55 @@
+query: user_pushes
+
+debug: False
+
+mock_data:
+  header:
+    - push.user
+    - count
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 
+    - 1045
+
+expected:
+  header:
+    - push.user
+    - count
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 
+    - 1045
+
+---
+
+query: user_pushes
+
+debug: True
+
+mock_data:
+  header:
+    - push.user
+    - count
+  meta:
+    saved_as: LtvqATgh
+    content_type: application/json
+    format: table
+  data:
+    - - 
+    - 1045
+
+expected:
+  header:
+    - push.user
+    - count
+  meta:
+    saved_as: LtvqATgh
+    content_type: application/json
+    format: table
+  data:
+    - - 
+    - 1045

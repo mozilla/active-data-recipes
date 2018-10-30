@@ -1,0 +1,47 @@
+query: raw_coverage_count
+
+debug: False
+
+mock_data:
+  header:
+    - count
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 0
+
+expected:
+  header:
+    - count
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - 0
+
+---
+
+query: raw_coverage_count
+
+debug: True
+
+mock_data:
+  header:
+    - count
+  meta:
+    saved_as: 7EhkQLm5
+    content_type: application/json
+    format: table
+  data:
+    - - 0
+
+expected:
+  header:
+    - count
+  meta:
+    saved_as: 7EhkQLm5
+    content_type: application/json
+    format: table
+  data:
+    - - 0

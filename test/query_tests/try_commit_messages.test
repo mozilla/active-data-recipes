@@ -1,0 +1,55 @@
+query: try_commit_messages
+
+debug: False
+
+mock_data:
+  header:
+    - user
+    - message
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - mock@example.com
+      - 
+
+expected:
+  header:
+    - user
+    - message
+  meta:
+    content_type: application/json
+    format: table
+  data:
+    - - mock@example.com
+      - 
+
+---
+
+query: try_commit_messages
+
+debug: True
+
+mock_data:
+  header:
+    - user
+    - message
+  meta:
+    saved_as: N5HAdEC6
+    content_type: application/json
+    format: table
+  data:
+    - - mock@example.com
+      - 
+
+expected:
+  header:
+    - user
+    - message
+  meta:
+    saved_as: N5HAdEC6
+    content_type: application/json
+    format: table
+  data:
+    - - mock@example.com
+      - 
