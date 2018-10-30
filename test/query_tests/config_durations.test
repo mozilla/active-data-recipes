@@ -1,6 +1,6 @@
 query: config_durations
 
-debug: False
+args: []
 
 mock_data:
   header:
@@ -84,7 +84,7 @@ expected:
 
 query: config_durations
 
-debug: True
+args: [--debug]
 
 mock_data:
   header:

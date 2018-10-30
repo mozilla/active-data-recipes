@@ -1,6 +1,6 @@
 query: activedata_usage
 
-debug: False
+args: []
 
 mock_data:
   header:
@@ -56,7 +56,7 @@ expected:
 
 query: activedata_usage
 
-debug: True
+args: [--debug]
 
 mock_data:
   header:

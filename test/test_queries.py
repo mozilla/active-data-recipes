@@ -53,7 +53,7 @@ def test_query(monkeypatch, query_test, config):
         print("\nYaml formatted expected:")
         print(buf.getvalue())
 
-    if query_test['debug']:
+    if query_test['args']:
 
         config.debug = True
         formatted_query = format_query(query_test['query'], config)
