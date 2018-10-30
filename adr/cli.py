@@ -105,8 +105,11 @@ def _build_parser_arguments(parser, config):
                         help="Open a query in ActiveData query tool.")
     # positional arguments
     parser.add_argument('task', nargs='*')
-    parser.add_argument('-h', '--help', action='store_true',
-                        help="Type --help to get help.\nType <recipe> --help to get help with a recipe.")
+    parser.add_argument(
+        '-h',
+        '--help',
+        action='store_true',
+        help="Type --help to get help.\nType <recipe> --help to get help with a recipe.")
     return parser
 
 
