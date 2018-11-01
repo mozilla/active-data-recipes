@@ -13,6 +13,7 @@ from ..recipe import RecipeParser
 from ..query import run_query
 from ..errors import MissingDataError
 
+
 def run(args, config):
     parser = RecipeParser()
     parser.add_argument('--limit', required=False, default=10, type=int,
@@ -21,14 +22,15 @@ def run(args, config):
 
     header = ['Revision', 'Files With Coverage', 'Total Files', 'Percent with Coverage']
     covered_files = next(run_query('covered_files', config))['data']
+
+    if None in [item for items in covered_files for item in items]:
+        raise MissingDataError("ActiveData returned null value.")
+
     total_files = next(run_query('total_files', config))['data']
-    
-    if None in  [item for items in covered_files for item in items]:
+
+    if None in [item for items in total_files for item in items]:
         raise MissingDataError("ActiveData returned null value.")
-    
-    if None in  [item for items in total_files for item in items]:
-        raise MissingDataError("ActiveData returned null value.")
-    
+
     by_revision = {}
     by_date = {}
     for item in covered_files:
