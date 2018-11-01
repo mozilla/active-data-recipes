@@ -22,6 +22,7 @@ else:
 def config():
     config = Configuration()
     config.fmt = 'json'
+    config.debug = False
     config.debug_url = "https://activedata.allizom.org/tools/query.html#query_id={}"
     return config
 
@@ -53,7 +54,7 @@ def test_query(monkeypatch, query_test, config):
         print("\nYaml formatted expected:")
         print(buf.getvalue())
 
-    if query_test['args']:
+    if "--debug" in query_test["args"]:
 
         config.debug = True
         formatted_query = format_query(query_test['query'], config)
@@ -64,9 +65,23 @@ def test_query(monkeypatch, query_test, config):
         assert result == query_test["expected"]
         assert debug_url == config.build_debug_url(query_test["expected"]["meta"]["saved_as"])
 
+    elif "--table" in query_test["args"]:
+
+        config.fmt = "table"
+        formatted_query = format_query(query_test['query'], config)
+        result = formatted_query[0]
+        debug_url = formatted_query[1]
+        expected = query_test["expected"]["data"]
+
+        print("Table formatted result:")
+        print(result)
+        print("Table formatted expected:")
+        print(expected)
+        assert result == expected
+        assert debug_url is None
+
     else:
 
-        config.debug = False
         formatted_query = format_query(query_test['query'], config)
         result = json.loads(formatted_query[0])
         debug_url = formatted_query[1]
