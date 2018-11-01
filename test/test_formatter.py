@@ -140,4 +140,3 @@ class TestTableFormatter(unittest.TestCase):
 | jobs                | 55       |
 | repo                | 100      |"""
         self.assertEqual(f(actual), expected)
-
