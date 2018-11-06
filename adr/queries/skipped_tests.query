@@ -3,11 +3,14 @@ select:
     - {aggregate: count}
 groupby:
     - {value: result.test}
-    - {value: run.suite}
+    - {value: run.suite.fullname}
 where:
     and:
+        - in: {run.suite.fullname: {$eval: suite}}
+        - in: {build.platform: {$eval: platform}}
+        - eq: {repo.branch.name: "mozilla-central"}
         - eq: {result.status: SKIP}
         - gte: {run.stats.end_time: {date: {$eval: from_date}}}
         - lte: {run.stats.end_time: {date: {$eval: to_date}}}
-limit: 1000
 format: table
+limit: 100
