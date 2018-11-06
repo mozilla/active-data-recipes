@@ -1,0 +1,21 @@
+format: json
+
+args: [sample]
+
+actual: 
+  - !!python/tuple [Table]
+  - !!python/tuple [coverage]
+  - !!python/tuple [firefox-files]
+  - !!python/tuple [fx-test]
+  - !!python/tuple [repo]
+  - !!python/tuple [saved_queries]
+  - !!python/tuple [task]
+  - !!python/tuple [treeherder]
+  - !!python/tuple [unittest]
+  
+
+expected:
+  "[\n  [\n    \"Table\"\n  ],\n  [\n    \"coverage\"\n  ],\n  [\n    \"firefox-files\"\
+  \n  ],\n  [\n    \"fx-test\"\n  ],\n  [\n    \"repo\"\n  ],\n  [\n    \"saved_queries\"\
+  \n  ],\n  [\n    \"task\"\n  ],\n  [\n    \"treeherder\"\n  ],\n  [\n    \"unittest\"\
+  \n  ]\n]"
