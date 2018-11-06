@@ -103,7 +103,7 @@ def run(args, config):
 
     start = date(int(from_date[0]), int(from_date[1]), int(from_date[2]))
     end = date(int(to_date[0]), int(to_date[1]), int(to_date[2]))
-    day = start + timedelta(days=(6-start.weekday()))
+    day = start + timedelta(days=(6 - start.weekday()))
     day -= timedelta(days=7)
     results = []
     while day < end:

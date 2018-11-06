@@ -24,7 +24,7 @@ def run(args, config):
     args = parser.parse_args(args)
 
     header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
-    if args.sort_key < 0 or len(header)-1 < args.sort_key:
+    if args.sort_key < 0 or len(header) - 1 < args.sort_key:
         parser.error("invalid value for 'sort_key'")
 
     query_args = vars(args)
@@ -47,7 +47,7 @@ def run(args, config):
         if len(value) != 2:
             continue
         tasks, pushes = value
-        data.append([user, tasks, pushes, round(float(tasks)/pushes, 2)])
+        data.append([user, tasks, pushes, round(float(tasks) / pushes, 2)])
 
     data = sorted(data, key=lambda k: k[args.sort_key], reverse=True)
     data = data[:limit]
