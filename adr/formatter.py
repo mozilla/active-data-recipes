@@ -53,7 +53,7 @@ class TabFormatter(object):
             data = json.loads(data)
 
         if not isinstance(data, list):
-            raise Exception("expecting a list")
+            raise TypeError("expecting a list")
 
         return "\n".join(
             "\t".join(str(c) for c in row)
