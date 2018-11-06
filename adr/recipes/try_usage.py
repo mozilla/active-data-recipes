@@ -66,7 +66,7 @@ def run(args, config):
 
     def fmt(key):
         percent = round(float(count[key]) / count['total'] * 100, 1)
-        return [d[key]['method'], count[key], percent, len(users[key]), round(float(count[key])/len(users[key]), 2)]  # noqa
+        return [d[key]['method'], count[key], percent, len(users[key]), round(float(count[key]) / len(users[key]), 2)]  # noqa
 
     data = [['Method', 'Pushes', 'Percent', 'Users', 'Push / User']]
     for k, v in sorted(count.items(), key=lambda t: t[1], reverse=True):
