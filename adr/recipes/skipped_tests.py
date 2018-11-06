@@ -45,15 +45,18 @@ all_platforms = ["linux64",
 def run(args, config):
     parser = ArgumentParser()
     parser.add_argument('--from', default='today', dest='from_date',
-                        help="Starting date to pull data from, defaults to the beginning of today in GMT.")
+                        help="Starting date to pull data from,"
+                        + " defaults to the beginning of today in GMT.")
     parser.add_argument('--to', default='eod', dest='to_date',
                         help="Ending date to pull data from, defaults to end of the day")
     parser.add_argument('--limit', type=int, default=100, dest='limit',
                         help="Maximum number of tests to return")
     parser.add_argument('--suite', default=all_suites, dest='suite',
-                        help="Select suite to get skipped tests from. By default, gets data from all suites.")
+                        help="Select suite to get skipped tests from." +
+                        "By default, gets data from all suites.")
     parser.add_argument('--platform', default=all_platforms, dest='platform',
-                        help="Select platform to get skipped tests from. By default, gets information about tests across all platforms.")
+                        help="Select platform to get skipped tests from." +
+                        "By default, gets information about tests across all platforms.")
     args = parser.parse_args(args)
     query_args = vars(args)
     result = next(run_query('skipped_tests', config, **query_args))['data']
