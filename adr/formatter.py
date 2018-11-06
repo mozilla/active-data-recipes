@@ -21,6 +21,7 @@ class TableFormatter(object):
         self.table_cls = table_cls
 
     def __call__(self, data):
+        print(data)
         if isinstance(data, bytes):
             data = json.loads(data)
 

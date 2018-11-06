@@ -1,0 +1,1 @@
+{"expected_json": ["[\n  [\n    \"Heading A\",\n    \"Heading B\"\n  ],\n  [\n    1,\n    2\n  ],\n  [\n    3,\n    4\n  ],\n  [\n    5,\n    6\n  ]\n]", "{\n  \"names\": [\n    \"Heading A\",\n    \"Heading B\",\n    \"Heading C\"\n  ],\n  \"Heading A\": [\n    \"x\",\n    \"y\"\n  ],\n  \"Heading B\": [\n    11,\n    20.5\n  ],\n  \"Heading C\": [\n    12,\n    30.5\n  ]\n}"]}
