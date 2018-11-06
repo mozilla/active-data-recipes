@@ -71,7 +71,7 @@ def load_query(name):
     :param str name: name of the query to be run.
     :yields dict query: dictionary representation of yaml query.
     """
-    with open(os.path.join(QUERY_DIR, name+'.query')) as fh:
+    with open(os.path.join(QUERY_DIR, name + '.query')) as fh:
         for query in yaml.load_all(fh):
             yield query
 

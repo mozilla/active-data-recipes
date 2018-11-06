@@ -1,8 +1,6 @@
 from adr.formatter import JSONFormatter, TabFormatter, TableFormatter
 from terminaltables import GithubFlavoredMarkdownTable, SingleTable
 import json
-import pytest
-import yaml
 
 
 class TestJSONFormatter(object):
@@ -28,7 +26,7 @@ class TestJSONFormatter(object):
         assert actual == expected
 
 
-class TestTabFormatter():
+class TestTabFormatter(object):
 
     def test_call(self, tab_formatter_test):
         f = TabFormatter()
@@ -43,7 +41,7 @@ class TestTabFormatter():
         assert actual == expected
 
 
-class TestTableFormatter():
+class TestTableFormatter(object):
     def test_init(self):
         f = TableFormatter()
         assert f.table_cls == SingleTable
