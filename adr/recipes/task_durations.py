@@ -39,7 +39,7 @@ def run(args, config):
     for record in data:
         if record[2] is None:
             continue
-        record[2] = round(record[2]/60, 2)
+        record[2] = round(record[2] / 60, 2)
         record.append(int(round(record[1] * record[2], 0)))
         result.append(record)
 

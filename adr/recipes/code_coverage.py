@@ -21,5 +21,5 @@ def run(args, config):
     query_args = vars(args)
 
     result = next(run_query('code_coverage', config, **query_args))
-    output = [result['header']]+result['data']
+    output = [result['header']] + result['data']
     return output

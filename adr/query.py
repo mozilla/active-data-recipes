@@ -1,6 +1,7 @@
 from __future__ import print_function, absolute_import
 
 import datetime
+import time
 import json
 import logging
 import os
@@ -40,9 +41,12 @@ def query_activedata(query, url):
     :param str url: url to run query
     :returns str: json-formatted string.
     """
+    start_time = time.clock()
     response = requests.post(url,
                              data=query,
                              stream=True)
+    log.debug("Query execution time: "
+              + "{:.3f} ms".format((time.clock() - start_time) * 1000.0))
 
     if response.status_code != 200:
         try:
@@ -71,7 +75,7 @@ def load_query(name):
     :param str name: name of the query to be run.
     :yields dict query: dictionary representation of yaml query.
     """
-    with open(os.path.join(QUERY_DIR, name+'.query')) as fh:
+    with open(os.path.join(QUERY_DIR, name + '.query')) as fh:
         for query in yaml.load_all(fh):
             yield query
 
