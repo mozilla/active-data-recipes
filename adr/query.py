@@ -41,12 +41,12 @@ def query_activedata(query, url):
     :param str url: url to run query
     :returns str: json-formatted string.
     """
-    start_time = time.clock()
+    start_time = time.time()
     response = requests.post(url,
                              data=query,
                              stream=True)
     log.debug("Query execution time: "
-              + "{:.3f} ms".format((time.clock() - start_time) * 1000.0))
+              + "{:.3f} ms".format((time.time() - start_time) * 1000.0))
 
     if response.status_code != 200:
         try:
