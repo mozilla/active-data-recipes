@@ -1,0 +1,87 @@
+format: table
+
+args: [markdown]
+
+actual:
+  - !!python/tuple [Table]
+  - !!python/tuple [activedata_requests]
+  - !!python/tuple [coverage]
+  - !!python/tuple [firefox-files]
+  - !!python/tuple [fx-test]
+  - !!python/tuple [jobs]
+  - !!python/tuple [repo]
+  - !!python/tuple [saved_queries]
+  - !!python/tuple [task]
+  - !!python/tuple [treeherder]
+  - !!python/tuple [unittest]
+
+expected:
+  '| Table               |
+
+  |---------------------|
+
+  | activedata_requests |
+
+  | coverage            |
+
+  | firefox-files       |
+
+  | fx-test             |
+
+  | jobs                |
+
+  | repo                |
+
+  | saved_queries       |
+
+  | task                |
+
+  | treeherder          |
+
+  | unittest            |'
+
+---
+
+format: table
+
+args: [dict]
+
+actual:
+  Table: [activedata_requests, coverage, jobs, repo]
+
+expected:
+  '| Table               |
+
+  |---------------------|
+
+  | activedata_requests |
+
+  | coverage            |
+
+  | jobs                |
+
+  | repo                |'
+
+---
+
+format: table
+
+args: [dict2]
+
+actual:
+  Coverage: [0, 15, 55, 100]
+  Table: [activedata_requests, coverage, jobs, repo]
+  names: [Table, Coverage]
+
+expected:
+  '| Table               | Coverage |
+
+  |---------------------|----------|
+
+  | activedata_requests | 0        |
+
+  | coverage            | 15       |
+
+  | jobs                | 55       |
+
+  | repo                | 100      |'

@@ -1,0 +1,42 @@
+format: tab
+
+args: [sample]
+
+actual:
+  - !!python/tuple [Table]
+  - !!python/tuple [activedata_requests]
+  - !!python/tuple [coverage]
+  - !!python/tuple [firefox-files]
+  - !!python/tuple [fx-test]
+  - !!python/tuple [jobs]
+  - !!python/tuple [repo]
+  - !!python/tuple [saved_queries]
+  - !!python/tuple [task]
+  - !!python/tuple [treeherder]
+  - !!python/tuple [unittest]
+  
+
+
+expected:
+  'Table
+  
+  activedata_requests
+  
+  coverage
+  
+  firefox-files
+  
+  fx-test
+  
+  jobs
+  
+  repo
+  
+  saved_queries
+  
+  task
+  
+  treeherder
+  
+  unittest'
+  
