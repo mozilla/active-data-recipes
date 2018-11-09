@@ -19,3 +19,14 @@ def run(args, config):
     query_args = vars(args)
     response = next(run_query('activedata_usage', config, **query_args))
     return [response['header']] + response['data']
+
+
+def get_recipe_desc():
+    return """
+        Show ActiveData query usage, by day.
+        Enter date in mm-dd-yyyy
+    """
+
+
+def get_recipe_args():
+    return ['--from', '--to']

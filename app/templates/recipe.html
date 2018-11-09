@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block body%}
+<div>
+  <h2> Recipe Name: {{recipe_name}} </h2>
+  <br/>
+  <br/>
+  <p> {{recipe_desc}} </p>
+</div>
+<br>
+<form method='POST' action='/runrecipe/{{recipe_name}}'>
+  {% for arg in recipe_args %}
+    <b>{{arg}} :</b> <input type='text'  name={{arg}}>
+  {% endfor %}
+  <button type='submit'>Run Recipe</button>
+</form>
+<br>
+<br>
+  <div class="table" style="margin-left:500px;">
+    {{format}}
+  </div>
+{% endblock %}

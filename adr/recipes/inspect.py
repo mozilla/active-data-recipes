@@ -29,3 +29,15 @@ def run(args, config):
     data = sorted([(d['name'],) for d in data])
     data.insert(0, ('Column',))
     return data
+
+
+def get_recipe_desc():
+    return """
+        Get information on the ActiveData schema. The above command returns the
+        available tables. You can see the columns of each table by using
+        --table <table_name>
+    """
+
+
+def get_recipe_args():
+    return ['--table']

@@ -21,3 +21,14 @@ def run(args, config):
     result = next(run_query('tests_config_times', config, **query_args))['data']
     result.insert(0, ['Config Name', '# of green runs', 'max runtime'])
     return result
+
+
+def get_recipe_desc():
+    return """
+    Get runtimes for a specific test file broken across platforms.
+    -t: <path to test>
+    """
+
+
+def get_recipe_args():
+    return ['-t']

@@ -29,3 +29,15 @@ def run(args, config):
         ['Pushes', 'Backouts', 'Backout Rate'],
         [pushes, backouts, backout_rate],
     )
+
+
+def get_recipe_desc():
+    return """
+        Get information on the backout rate on autoland and mozilla-inbound
+        over the given time period.
+        Enter date in mm-dd-yyyy
+    """
+
+
+def get_recipe_args():
+    return ['--from', '--to']

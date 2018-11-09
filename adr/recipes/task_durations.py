@@ -46,3 +46,14 @@ def run(args, config):
     result = sorted(result, key=lambda k: k[args.sort_key], reverse=True)[:limit]
     result.insert(0, ['Taskname', 'Num Jobs', 'Average Hours', 'Total Hours'])
     return result
+
+
+def get_recipe_desc():
+    return """
+    Get information on the longest running tasks. Returns the total count, average
+    runtime and total runtime over a given date range and set of branches.
+    """
+
+
+def get_recipe_args():
+    return []

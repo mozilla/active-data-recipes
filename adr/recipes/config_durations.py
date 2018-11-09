@@ -38,3 +38,13 @@ def run(args, config):
     result = sorted(result, key=lambda k: k[args.sort_key], reverse=True)[:limit]
     result.insert(0, ['Platform', 'Type', 'Num Jobs', 'Average Hours', 'Total Hours'])
     return result
+
+
+def get_recipe_desc():
+    return """
+        Get the average and total runtime for build platforms and types.
+    """
+
+
+def get_recipe_args():
+    return ['--branch']

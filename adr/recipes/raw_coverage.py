@@ -203,3 +203,13 @@ def run(args, config):
     else:
         output, jsonOutput = minimumJobs(args)
         return output
+
+
+def get_recipe_desc():
+    return """
+        This is currently broken.
+    """
+
+
+def get_recipe_args():
+    return []

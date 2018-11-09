@@ -79,3 +79,14 @@ def run(args, config):
         counter += 1
 
     return output
+
+
+def get_recipe_desc():
+    return """
+        Get code coverage information for the given `path` at `rev` aggregated by suite.
+        Both arguments are required.
+    """
+
+
+def get_recipe_args():
+    return ['--path', '--rev']

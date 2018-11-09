@@ -25,3 +25,13 @@ def run(args, config):
         result.append([duration[index], data[index]])
     result.insert(0, ['Max Duration (seconds)', 'number of tests'])
     return result
+
+
+def get_recipe_desc():
+    return """
+    See the number of tests that have a duration in pre-selected buckets.
+    """
+
+
+def get_recipe_args():
+    return []

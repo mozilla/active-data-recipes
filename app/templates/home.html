@@ -6,15 +6,10 @@
     <ul>
       {% for file in recipes %}
         <div>
-          <li><a href='/runrecipe/{{file}}'>{{file}}</a></li>
+          <li><a href='/{{file}}'>{{file}}</a></li>
        </div>
       {% endfor %}
     </ul>
   </div>
-
-  <div class="table" style="margin-left:500px;">
-    {{format}}
-  </div>
-
 </div>
 {% endblock %}

@@ -53,3 +53,14 @@ def run(args, config):
     data = data[:limit]
     data.insert(0, header)
     return data
+
+
+def get_recipe_desc():
+    return """
+    Prints stats on how often individual users are pushing to try over the last
+    week. The date range can be modified the same as the `hours_on_try` recipe.
+    """
+
+
+def get_recipe_args():
+    return []

@@ -56,3 +56,13 @@ def run(args, config):
         data.append([rev, covered, total, round((float(covered) / total) * 100, 1)])
     data.insert(0, header)
     return data
+
+
+def get_recipe_desc():
+    return """
+        See how many files in tree have any code coverage at all.
+    """
+
+
+def get_recipe_args():
+    return []

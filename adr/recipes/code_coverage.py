@@ -23,3 +23,14 @@ def run(args, config):
     result = next(run_query('code_coverage', config, **query_args))
     output = [result['header']] + result['data']
     return output
+
+
+def get_recipe_desc():
+    return """
+        Get code coverage information for the given `path` at `rev`.
+        Both arguments are required.
+    """
+
+
+def get_recipe_args():
+    return ['--path', '--rev']

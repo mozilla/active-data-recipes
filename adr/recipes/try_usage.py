@@ -72,3 +72,15 @@ def run(args, config):
     for k, v in sorted(count.items(), key=lambda t: t[1], reverse=True):
         data.append(fmt(k))
     return data
+
+
+def get_recipe_desc():
+    return """
+    Prints stats on what percentage of try pushes are being scheduled with various
+    different mechanisms over the last week. The date range can be modified the
+    same as the `hours_on_try` recipe.
+    """
+
+
+def get_recipe_args():
+    return []

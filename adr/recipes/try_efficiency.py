@@ -37,3 +37,15 @@ def run(args, config):
         ['Backout Rate', 'Total Compute Hours on Try', 'Try Efficiency'],
         [backout_rate, try_hours, try_efficiency],
     )
+
+
+def get_recipe_desc():
+    return """
+    Prints information on try effifiency. This is a measure of how effective try is
+    at preventing backouts. It is roughly:
+        1000000 / (total_compute_hours_on_try * backout_rate)
+    """
+
+
+def get_recipe_args():
+    return []

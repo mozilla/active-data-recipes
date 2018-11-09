@@ -118,3 +118,16 @@ def run(args, config):
     header = ['week of', '# regressions', '# seta missed']
     results.insert(0, header)
     return results
+
+
+def get_recipe_desc():
+    return """
+    Show CI regressions found and SETA miss rate by week.
+    -B :<branchname>
+    --from: <date>
+    --to: <date>
+    """
+
+
+def get_recipe_args():
+    return ['-B', '--from', '--to']

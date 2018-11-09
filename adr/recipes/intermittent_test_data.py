@@ -58,3 +58,13 @@ def run(args, config):
         result.append(val)
     result.insert(0, ['Config', 'Failures', 'Runs'])
     return result
+
+
+def get_recipe_desc():
+    return """
+        This is currently broken.
+    """
+
+
+def get_recipe_args():
+    return []

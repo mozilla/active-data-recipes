@@ -24,3 +24,13 @@ def run(args, config):
     result = next(run_query('tests_in_duration', config, **query_args))['data']
     result.insert(0, ['Test Name', 'number of runs', 'average runtime'])
     return result
+
+
+def get_recipe_desc():
+    return """
+    This is currently broken.
+    """
+
+
+def get_recipe_args():
+    return []
