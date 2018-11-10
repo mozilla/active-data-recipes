@@ -34,6 +34,51 @@ def format_date(timestamp, interval='day'):
     return datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
 
 
+def clean_missing_context(query, missing_context):
+    """
+        Cleans query from optional variables which were not
+        provided within user input.
+
+        :param dict query: yaml-formatted query loaded from the disk.
+        :param list missing_context: variable filters
+        which were not provided on user input.
+    """
+    if query == missing_context:
+        query.clear()
+    else:
+        for line in query:
+            if isinstance(query[line], dict):
+                clean_missing_context(query[line], missing_context)
+        for line in list(query):
+            if isinstance(query[line], dict) and len(query[line]) is 0:
+                del query[line]
+        for line in query:
+            if isinstance(query[line], list):
+                for element in query[line]:
+                    clean_missing_context(element, missing_context)
+        for line in list(query):
+            if isinstance(query[line], list):
+                while {} in query[line]:
+                    query[line].remove({})
+
+
+def update_query(query, context, optional_arguments):
+    """
+        Updates query according to user input. If optional arguments
+        were not provided within use input
+        query is being cleaned from optional filters.
+
+        :param dict query: yaml-formatted query loaded from the disk.
+        :param list context: dictionary of provided ActiveData configs.
+        :param list optional_arguments: filters which are optional
+        for user input.
+    """
+    for variable in optional_arguments:
+        if variable in context.keys() and context[variable] is None:
+            missing_context = {"$eval": variable}
+            clean_missing_context(query, missing_context)
+
+
 def query_activedata(query, url):
     """Runs the provided query against the ActiveData endpoint.
 
@@ -80,7 +125,7 @@ def load_query(name):
             yield query
 
 
-def run_query(name, config, **context):
+def run_query(name, config, optional_arguments=[], **context):
     """Loads and runs the specified query, yielding the result.
 
     Given name of a query, this method will first read the query
@@ -106,7 +151,7 @@ def run_query(name, config, **context):
             query['format'] = context['format']
         if config.debug:
             query['meta'] = {"save": True}
-
+        update_query(query, context, optional_arguments)
         query = jsone.render(query, context)
         query_str = json.dumps(query, indent=2, separators=(',', ':'))
         log.debug("Running query {}:\n{}".format(name, query_str))
