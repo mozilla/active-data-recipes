@@ -6,8 +6,8 @@ groupby:
     - {value: run.suite.fullname}
 where:
     and:
-        - in: {run.suite.fullname: {$eval: suite}}
-        - in: {build.platform: {$eval: platform}}
+        - eq: {run.suite.fullname: {$eval: suite}}
+        - eq: {build.platform: {$eval: platform}}
         - eq: {repo.branch.name: "mozilla-central"}
         - eq: {result.status: SKIP}
         - gte: {run.stats.end_time: {date: {$eval: from_date}}}
