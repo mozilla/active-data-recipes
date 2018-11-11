@@ -1,4 +1,4 @@
-[
+---
   {
     "query": {
       "from": "repo",
@@ -43,7 +43,8 @@
     \      --from=<from_date>  Starting date to pull data from, defaults to a week ago.\
     \ [default: today-week]\n      --to=<to_date>  Ending date to pull data from, defaults\
     \ to now. [default: eod]\n"
-  },
+  }
+---
   {
     "query": {
       "from": "repo",
@@ -92,4 +93,3 @@
     \ [default: today-week]\n      --to=<to_date>  Ending date to pull data from, defaults\
     \ to now. [default: eod]\n"
   }
-]
