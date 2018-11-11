@@ -80,11 +80,10 @@ def load_query(name):
             try:
                 yield record["argument_parser"], record["query"]
             except KeyError:
-                yield '', record["query"]
+                yield '', record
 
 
-
-def run_query(name, config, args):
+def run_query(name, config, *args, **kwargs):
     """Loads and runs the specified query, yielding the result.
 
     Given name of a query, this method will first read the query
@@ -104,8 +103,11 @@ def run_query(name, config, args):
     for argument_parser, query in load_query(name):
         # If limit is in the context, override the queries' value. We do this
         # to keep the results down to a sane level when testing queries.
-        parsed_arguments = docopt(argument_parser, argv=args)
-        context = { k.replace('--', ''): v for k, v in parsed_arguments.items() }
+        if len(argument_parser) != 0:
+            parsed_arguments = docopt(argument_parser, argv=args)
+            context = {k.replace('--', ''): v for k, v in parsed_arguments.items()}
+        else:
+            context = kwargs
         if 'limit' in context:
             query['limit'] = context['limit']
         if 'format' in context:

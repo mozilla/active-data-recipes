@@ -13,6 +13,7 @@ DEPS = [
     'json-e >= 2.3.2',
     'requests >= 2.18.3',
     'terminaltables >= 3.1.0',
+    'docopt==0.6.2',
     'pyyaml',
     'beautifulsoup4',
     'flask',
