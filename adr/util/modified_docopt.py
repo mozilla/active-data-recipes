@@ -1,5 +1,6 @@
 from docopt import DocoptExit, Option, AnyOptions, TokenStream, Dict
-from docopt import printable_usage, parse_defaults, parse_pattern, formal_usage, parse_argv, extras
+from docopt import parse_defaults, parse_pattern, parse_argv, extras
+from docopt import formal_usage, printable_usage, sys
 
 
 def docopt(doc, argv=None, help=True, version=None, options_first=False):
@@ -17,4 +18,4 @@ def docopt(doc, argv=None, help=True, version=None, options_first=False):
     matched, left, collected = pattern.fix().match(argv)
     if matched:
         return Dict((a.name, a.value) for a in (pattern.flat() + collected))
-    raise DocoptExit()
+    DocoptExit()
