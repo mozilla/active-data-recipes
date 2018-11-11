@@ -1,14 +1,32 @@
 {
-  "from":"activedata_requests",
-  "edges":{
-    "value":"timestamp",
-    "domain":{
-      "type":"time",
-      "min":{$eval: from_date},
-      "max":{$eval: to_date},
-      "interval":"day"
-    }
-  },
-  "where":{"gt":{"timestamp":{"date":{$eval: from_date}}}},
-  "format":"table"
+  "query": {
+    "from": "activedata_requests",
+    "edges": {
+      "value": "timestamp",
+      "domain": {
+        "type": "time",
+        "min": {
+          $eval: from
+        },
+        "max": {
+          $eval: to
+        },
+        "interval": "day"
+      }
+    },
+    "where": {
+      "gt": {
+        "timestamp": {
+          "date": {
+            $eval: from
+          }
+        }
+      }
+    },
+    "format": "table"
+  }, "argument_parser": "\n    Usage:\n      active_data [--from <from_date>] [--to <to_date>]\n\n    Options:\n\
+  \      --from=<from_date>  Starting date to pull data from, defaults to a week ago.\
+  \ [default: today-week]\n      --to=<to_date>  Ending date to pull data from, defaults\
+  \ to now. [default: eod]\n"
+
 }
