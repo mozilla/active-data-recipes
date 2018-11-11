@@ -9,7 +9,7 @@ import os
 import jsone
 import requests
 import yaml
-from docopt import docopt
+from adr.util.modified_docopt import docopt
 from adr.formatter import all_formatters
 from adr.errors import MissingDataError
 
