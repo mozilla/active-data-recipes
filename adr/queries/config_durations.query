@@ -1,15 +1,91 @@
-from: task
-select:
-    - {aggregate: count, name: tasks}
-    - {aggregate: avg, name: "average minutes", value: {div: {action.duration: 60}}}
-groupby:
-    - "run.machine.platform"
-    - "build.type"
-where:
-    and:
-        - in: {repo.branch.name: {$eval: branch}}
-        - gte: [repo.push.date, {date: {$eval: from_date}}]
-        - lte: [repo.push.date, {date: {$eval: to_date}}]
-        - in: {run.suite.name: ["mochitest", "reftest", "web-platform-tests", "web-platform-tests-reftests", "xpcshell", "marionette", "firefox-ui", "cppunittest", "gtest", "jittest", "awsy", "web-platform-tests-wdspec", "test-verification"]}
-        - in: {build.type: ["opt","debug","pgo","asan"]}
-limit: 10000
+{
+  "query": {
+    "from": "task",
+    "select": [
+      {
+        "aggregate": "count",
+        "name": "tasks"
+      },
+      {
+        "aggregate": "avg",
+        "name": "average minutes",
+        "value": {
+          "div": {
+            "action.duration": 60
+          }
+        }
+      }
+    ],
+    "groupby": [
+      "run.machine.platform",
+      "build.type"
+    ],
+    "where": {
+      "and": [
+        {
+          "in": {
+            "repo.branch.name": {
+              $eval: branch
+            }
+          }
+        },
+        {
+          "gte": [
+            "repo.push.date",
+            {
+              "date": {
+                $eval: from
+              }
+            }
+          ]
+        },
+        {
+          "lte": [
+            "repo.push.date",
+            {
+              "date": {
+                $eval: to
+              }
+            }
+          ]
+        },
+        {
+          "in": {
+            "run.suite.name": [
+              "mochitest",
+              "reftest",
+              "web-platform-tests",
+              "web-platform-tests-reftests",
+              "xpcshell",
+              "marionette",
+              "firefox-ui",
+              "cppunittest",
+              "gtest",
+              "jittest",
+              "awsy",
+              "web-platform-tests-wdspec",
+              "test-verification"
+            ]
+          }
+        },
+        {
+          "in": {
+            "build.type": [
+              "opt",
+              "debug",
+              "pgo",
+              "asan"
+            ]
+          }
+        }
+      ]
+    },
+    "limit": 10000
+  },
+  "argument_parser": "\n    Argument parser for the config_durations query.\n    \n    Usage:\n    config_durations\
+  \ [--from FROM_DATE] [--to TO_DATE] [--branch BRANCH...]\n    \n    Options:\n \
+  \   --from=FROM_DATE  Starting date to pull data from, defaults to a week ago. [default:\
+  \ today-week]\n    --to=TO_DATE  Ending date to pull data from, defaults to now.\
+\ [default: eod]\n    --branch=BRANCH  Branches to query results from. [default:\
+\ mozilla-central]\n    "
+}
