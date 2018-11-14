@@ -17,6 +17,15 @@ from ..recipe import RecipeParser
 from ..query import run_query
 
 
+def subcommand(name):
+    return {
+        name: {
+            'test': 'Pushed via `mach try {}`'.format(name),
+            'method': 'mach try {}'.format(name),
+        }
+    }
+
+
 def run(args, config):
     parser = RecipeParser('date')
     args = parser.parse_args(args)
@@ -30,26 +39,20 @@ def run(args, config):
     users = defaultdict(set)
     users['total'] = set(data['user'])
 
+    # Order is important as the search stops after the first successful test.
     d = OrderedDict()
-    d['syntax'] = {
-        'test': 'Pushed via `mach try syntax`',
-        'method': 'mach try syntax',
-    }
+    d.update(subcommand('syntax'))
     d['vanilla'] = {
         'test': 'try:',
         'method': 'vanilla try syntax',
     }
-    d['fuzzy'] = {
-        'test': 'Pushed via `mach try fuzzy`',
-        'method': 'mach try fuzzy',
-    }
-    d['again'] = {
-        'test': 'Pushed via `mach try again`',
-        'method': 'mach try again',
-    }
-    d['empty'] = {
+    d.update(subcommand('fuzzy'))
+    d.update(subcommand('again'))
+    d.update(subcommand('empty'))
+    d.update(subcommand('release'))
+    d['other'] = {
         'test': '',
-        'method': 'empty',
+        'method': 'other',
     }
     d['total'] = {
         'test': None,
