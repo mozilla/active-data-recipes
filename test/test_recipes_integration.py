@@ -1,38 +1,29 @@
-import pytest
 import os
 import subprocess
 import json
+from pytest import mark, param
 
-# Each test with recipe and appropriate parameters in one line
-# Using bracket annotation to set it optional (xfail)
 TEST_CASES = [
     "activedata_usage",
     "backout_rate",
-    ["code_coverage --path caps --rev 45715ece25fc"],
+    param("code_coverage --path caps --rev 45715ece25fc", marks=mark.xfail),
     "code_coverage_by_suite --path caps --rev 45715ece25fc",
     "config_durations",
     "files_with_coverage",
     "intermittent_tests",
     "intermittent_test_data",
-    ["raw_coverage --path caps --rev 45715ece25fc"],
+    param("raw_coverage --path caps --rev 45715ece25fc", marks=mark.xfail),
     "test_durations",
-    ["tests_config_times -t test-windows10-64/opt-awsy-e10s"],
+    param("tests_config_times -t test-windows10-64/opt-awsy-e10s", marks=mark.xfail),
     "tests_in_duration",
     "try_efficiency",
     "try_usage",
-    ["try_users"]
+    param("try_users", marks=mark.xfail),
 ]
 
 
-def load_tests(tests):
-    return [pytest.param(test[0], marks=pytest.mark.xfail)
-            if isinstance(test, list)
-            else test
-            for test in tests]
-
-
-@pytest.mark.skipif(os.getenv("TRAVIS_EVENT_TYPE") != "cron", reason="Not run by cron job")
-@pytest.mark.parametrize("recipe", load_tests(TEST_CASES))
+@mark.skipif(os.getenv("TRAVIS_EVENT_TYPE") != "cron", reason="Not run by cron job")
+@mark.parametrize("recipe", TEST_CASES)
 def test_recipe_integration(recipe):
     command = ['adr', '--format', 'json']
     command.extend(recipe.split(" "))
