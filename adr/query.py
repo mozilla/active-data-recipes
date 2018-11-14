@@ -9,7 +9,7 @@ import os
 import jsone
 import requests
 import yaml
-
+from adr.util.modified_docopt import docopt
 from adr.formatter import all_formatters
 from adr.errors import MissingDataError
 
@@ -76,11 +76,14 @@ def load_query(name):
     :yields dict query: dictionary representation of yaml query.
     """
     with open(os.path.join(QUERY_DIR, name + '.query')) as fh:
-        for query in yaml.load_all(fh):
-            yield query
+        for record in yaml.load_all(fh):
+            try:
+                yield record["argument_parser"], record["query"]
+            except KeyError:
+                yield '', record
 
 
-def run_query(name, config, **context):
+def run_query(name, config, *args, **kwargs):
     """Loads and runs the specified query, yielding the result.
 
     Given name of a query, this method will first read the query
@@ -97,9 +100,14 @@ def run_query(name, config, **context):
     :param dict context: dictionary of ActiveData configs.
     :yields str: json-formatted string.
     """
-    for query in load_query(name):
+    for argument_parser, query in load_query(name):
         # If limit is in the context, override the queries' value. We do this
         # to keep the results down to a sane level when testing queries.
+        if len(argument_parser) != 0:
+            parsed_arguments = docopt(argument_parser, argv=args)
+            context = {k.replace('--', ''): v for k, v in parsed_arguments.items()}
+        else:
+            context = kwargs
         if 'limit' in context:
             query['limit'] = context['limit']
         if 'format' in context:

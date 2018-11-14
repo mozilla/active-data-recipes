@@ -9,18 +9,12 @@ Get information on the backout rate on autoland and mozilla-inbound over the giv
 `View Results <https://mozilla.github.io/active-data-recipes/#backout-rate>`__
 """
 from __future__ import print_function, absolute_import
-
-from ..recipe import RecipeParser
 from ..query import run_query
 
 
 def run(args, config):
-    parser = RecipeParser('date')
-    args = parser.parse_args(args)
 
-    query_args = vars(args)
-    query = run_query('backout_rate', config, **query_args)
-
+    query = run_query('backout_rate', config, *args)
     pushes = len(set(next(query)['data']['push.id']))
     backouts = len(set(next(query)['data']['push.id']))
     backout_rate = round((float(backouts) / pushes) * 100, 2)

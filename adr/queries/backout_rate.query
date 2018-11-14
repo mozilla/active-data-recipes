@@ -1,24 +1,95 @@
 ---
-# all push ids
-from: repo
-select:
-    - push.id
-where:
-    and:
-        - in: {branch.name: ["autoland", "mozilla-inbound"]}
-        - gte: [push.date, {date: {$eval: from_date}}]
-        - lte: [push.date, {date: {$eval: to_date}}]
-limit: 100000
-
+  {
+    "query": {
+      "from": "repo",
+      "select": [
+        "push.id"
+      ],
+      "where": {
+        "and": [
+          {
+            "in": {
+              "branch.name": [
+                "autoland",
+                "mozilla-inbound"
+              ]
+            }
+          },
+          {
+            "gte": [
+              "push.date",
+              {
+                "date": {
+                  $eval: from
+                }
+              }
+            ]
+          },
+          {
+            "lte": [
+              "push.date",
+              {
+                "date": {
+                  $eval: to
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "limit": 100000
+    },
+    "argument_parser": "\n    Usage:\n      all_push_ids [--from <from_date>] [--to <to_date>]\n\n    Options:\n\
+    \      --from=<from_date>  Starting date to pull data from, defaults to a week ago.\
+    \ [default: today-week]\n      --to=<to_date>  Ending date to pull data from, defaults\
+    \ to now. [default: eod]\n"
+  }
 ---
-# backout push ids
-from: repo
-select:
-    - push.id
-where:
-    and:
-        - in: {branch.name: ["autoland", "mozilla-inbound"]}
-        - gte: [push.date, {date: {$eval: from_date}}]
-        - lte: [push.date, {date: {$eval: to_date}}]
-        - exists: changeset.backedoutby
-limit: 100000
+  {
+    "query": {
+      "from": "repo",
+      "select": [
+        "push.id"
+      ],
+      "where": {
+        "and": [
+          {
+            "in": {
+              "branch.name": [
+                "autoland",
+                "mozilla-inbound"
+              ]
+            }
+          },
+          {
+            "gte": [
+              "push.date",
+              {
+                "date": {
+                  $eval: from
+                }
+              }
+            ]
+          },
+          {
+            "lte": [
+              "push.date",
+              {
+                "date": {
+                  $eval: to
+                }
+              }
+            ]
+          },
+          {
+            "exists": "changeset.backedoutby"
+          }
+        ]
+      },
+      "limit": 100000
+    },
+    "argument_parser": "\n    Usage:\n      backout_push_ids [--from <from_date>] [--to <to_date>]\n\n    Options:\n\
+    \      --from=<from_date>  Starting date to pull data from, defaults to a week ago.\
+    \ [default: today-week]\n      --to=<to_date>  Ending date to pull data from, defaults\
+    \ to now. [default: eod]\n"
+  }
