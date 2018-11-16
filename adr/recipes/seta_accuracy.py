@@ -49,7 +49,7 @@ def get_stats_for_week(query_args, config):
         if isinstance(item, list):
             i = None
             iter = 0
-            while i is None:
+            while i is None and iter < len(item):
                 i = item[iter]
                 iter += 1
             if i is None:
@@ -57,7 +57,6 @@ def get_stats_for_week(query_args, config):
             item = i
 
         item = item[0:12]
-
         if item not in fbc:
             fbc[item] = {}
 
