@@ -50,6 +50,8 @@ def run(args, config):
     d.update(subcommand('again'))
     d.update(subcommand('empty'))
     d.update(subcommand('release'))
+    d.update(subcommand('coverage'))
+    d.update(subcommand('chooser'))
     d['other'] = {
         'test': '',
         'method': 'other',
