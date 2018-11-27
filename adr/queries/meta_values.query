@@ -1,0 +1,3 @@
+from: {$eval: table}
+groupby: {$eval: attribute}
+limit: 10000

@@ -17,6 +17,8 @@ def run(args, config):
     parser = RecipeParser()
     parser.add_argument('--table', default=None,
                         help="Table to inspect.")
+    parser.add_argument('attribute', nargs='?', default=None,
+                        help="Display values of specified attribute within --table.")
     args = parser.parse_args(args)
 
     if not args.table:
@@ -25,7 +27,12 @@ def run(args, config):
         data.insert(0, ('Table',))
         return data
 
-    data = next(run_query('meta_columns', config, table=args.table))['data']
-    data = sorted([(d['name'],) for d in data])
-    data.insert(0, ('Column',))
+    if not args.attribute:
+        data = next(run_query('meta_columns', config, table=args.table))['data']
+        data = sorted([(d['name'],) for d in data])
+        data.insert(0, ('Column',))
+        return data
+
+    data = next(run_query('meta_values', config, **vars(args)))['data']
+    data.insert(0, (args.attribute, 'count'))
     return data
