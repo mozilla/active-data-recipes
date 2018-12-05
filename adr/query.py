@@ -10,6 +10,7 @@ import jsone
 import requests
 import yaml
 
+from adr import context
 from adr.formatter import all_formatters
 from adr.errors import MissingDataError
 
@@ -80,6 +81,39 @@ def load_query(name):
             yield query
 
 
+def load_query_context(name):
+    """
+    Get query context from yaml file.
+    Args:
+        name (str): name of query
+    Returns:
+        query_context_def (list): mixed array of strings (name of common contexts)
+         and dictionaries (full definition of specific contexts)
+    """
+    with open(os.path.join(QUERY_DIR, name + '.query')) as fh:
+        query = yaml.load(fh)
+        # Extract query and context
+        specific_contexts = query.pop("context") if "context" in query else []
+        contexts = context.extract_context_names(query)
+        specific_contexts.extend(contexts)
+        query_context_def = context.get_context_definitions(specific_contexts)
+        return query_context_def
+
+
+def updated_load_query(name):
+    """
+    load_query function
+    :param name: name of query
+    :return: the query content (exclude the context)
+    """
+    with open(os.path.join(QUERY_DIR, name + '.query')) as fh:
+        query = yaml.load(fh)
+        # Remove the context
+        if "context" in query:
+            query.pop("context")
+        return query
+
+
 def run_query(name, config, **context):
     """Loads and runs the specified query, yielding the result.
 
@@ -97,6 +131,21 @@ def run_query(name, config, **context):
     :param dict context: dictionary of ActiveData configs.
     :yields str: json-formatted string.
     """
+    if name == "config_durations":
+        query = updated_load_query(name)
+        if 'limit' in context:
+            query['limit'] = context['limit']
+        if 'format' in context:
+            query['format'] = context['format']
+        if config.debug:
+            query['meta'] = {"save": True}
+
+        query = jsone.render(query, context)
+        query_str = json.dumps(query, indent=2, separators=(',', ':'))
+        log.debug("Running query {}:\n{}".format(name, query_str))
+        yield query_activedata(query_str, config.url)
+        return
+
     for query in load_query(name):
         # If limit is in the context, override the queries' value. We do this
         # to keep the results down to a sane level when testing queries.
