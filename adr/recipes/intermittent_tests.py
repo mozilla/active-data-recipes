@@ -7,26 +7,22 @@ This is currently broken.
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import RecipeParser
-from ..query import run_query
+from ..recipe import execute_query
 
 
-def run(args, config):
-    parser = RecipeParser('branch', 'build', 'date', 'platform')
-    args = parser.parse_args(args)
-
+def run(args):
     # These 4 args are defined so that we can share the queries with the
     # 'intermittent_test_data' recipe.
-    args.test = '(~(file.*|http.*))'
+    args.test_name = '(~(file.*|http.*))'
     args.groupby = 'result.test'
     args.result = ["F"]
     args.platform_config = "test-%s/%s" % (args.platform, args.build_type)
 
     query_args = vars(args)
 
-    jobs = next(run_query('intermittent_jobs', config, **query_args))['data']
-    result = next(run_query('intermittent_tests', config, **query_args))['data']
-    total_runs = next(run_query('intermittent_test_rate', config, **query_args))['data']
+    jobs = execute_query('intermittent_jobs', query_args)['data']
+    result = execute_query('intermittent_tests', query_args)['data']
+    total_runs = execute_query('intermittent_test_rate', query_args)['data']
 
     intermittent_tests = []
     # for each result, match up the revision/name with jobs, if a match, save testname
