@@ -7,31 +7,21 @@ This is currently broken.
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import RecipeParser
-from ..query import run_query
+from ..recipe import execute_query
 
 
-def run(args, config):
-    parser = RecipeParser('branch', 'build', 'date', 'platform')
-    parser.add_argument('-t', '--test', default='',
-                        help="Filter on specific test name")
-    args = parser.parse_args(args)
+def run(args):
 
-    if args.test == '':
-        args.test = '(~(file.*|http.*))'
-        args.platform_config = "test-%s/%s" % (args.platform, args.build_type)
-        args.groupby = 'result.test'
-        args.result = ["F"]
+    if args.test_name == '':
+        platform_config = "test-%s/%s" % (args.platform, args.build_type)
+        new_context = {'test_name': '(~(file.*|http.*))', 'platform_config': platform_config}
     else:
-        args.test = '.*%s.*' % args.test
-        args.platform_config = "test-"
-        args.groupby = 'run.key'
-        args.result = ["T", "F"]
+        test_name = '.*%s.*' % args.test_name
+        new_context = {'test_name': test_name, 'platform_config': "test-",
+                       'groupby': 'run.key', 'result': ["T", "F"]}
 
-    query_args = vars(args)
-
-    result = next(run_query('intermittent_tests', config, **query_args))['data']
-    total_runs = next(run_query('intermittent_test_rate', config, **query_args))['data']
+    result = execute_query('intermittent_tests', new_context)['data']
+    total_runs = execute_query('intermittent_test_rate', new_context)['data']
 
     intermittent_tests = []
     for item in result['run.key']:
