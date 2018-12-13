@@ -16,3 +16,6 @@ select:
     - {aggregate: count, name: tasks}
     - {aggregate: avg, name: "average seconds", value: result.duration}
 from: unittest
+context:
+    min_seconds: [["--min_seconds"], {default: 120, help: "minimum seconds for runtime, default is: 120."}]
+    max_seconds: [["--max_seconds"], {default: 1200, help: "maximum seconds for runtime, default is: 1200."}]

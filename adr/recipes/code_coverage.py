@@ -7,19 +7,15 @@ Get code coverage information for the given `path` at `rev`. Both arguments are 
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import RecipeParser
-from ..query import run_query
+from ..recipe import execute_query
 
 
-def run(args, config):
+def run(args):
     """
     THIS IS PRONE TO DOUBLE COUNTING, AS DIFFERENT TEST CHUNKS COVER COMMON LINES
     AT THE VERY LEAST YOU GET A ROUGH ESTIMATE OF COVERAGE
     """
-    parser = RecipeParser('path', 'rev')
-    args = parser.parse_args(args)
-    query_args = vars(args)
 
-    result = next(run_query('code_coverage', config, **query_args))
+    result = execute_query('code_coverage')
     output = [result['header']] + result['data']
     return output

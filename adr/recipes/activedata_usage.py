@@ -8,14 +8,10 @@ Show ActiveData query usage, by day
 
 from __future__ import print_function, absolute_import
 
-from ..recipe import RecipeParser
-from ..query import run_query
+from ..recipe import execute_query
 
 
-def run(args, config):
-    parser = RecipeParser('date')
-    args = parser.parse_args(args)
+def run(args):
 
-    query_args = vars(args)
-    response = next(run_query('activedata_usage', config, **query_args))
+    response = execute_query('activedata_usage')
     return [response['header']] + response['data']

@@ -8,18 +8,14 @@ Both arguments are required.
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import RecipeParser
-from ..query import run_query
+from ..recipe import execute_query
 
 
-def run(args, config):
+def run(args):
     """
     THIS IS PRONE TO DOUBLE COUNTING, AS DIFFERENT TEST CHUNKS COVER COMMON LINES
     AT THE VERY LEAST YOU GET A ROUGH ESTIMATE OF COVERAGE
     """
-    parser = RecipeParser('path', 'rev')
-    args = parser.parse_args(args)
-    query_args = vars(args)
 
     all_suites = [
         'gtest',
@@ -53,7 +49,7 @@ def run(args, config):
                        'jit', 'Wd', 'Wr']
 
     retVal = {}
-    result = next(run_query('code_coverage_by_suite', config, **query_args))
+    result = execute_query('code_coverage_by_suite')
     for line in result['data']:
         # line = [suite, filename, count]
         if line[1] not in retVal:

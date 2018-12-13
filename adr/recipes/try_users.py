@@ -11,30 +11,39 @@ from __future__ import print_function, absolute_import
 
 from collections import defaultdict
 
-from ..recipe import RecipeParser
-from ..query import run_query
+from ..recipe import RecipeParser, execute_query
 
 
-def run(args, config):
-    parser = RecipeParser('date')
-    parser.add_argument('--limit', type=int, default=25,
-                        help="Maximum number of users to return")
-    parser.add_argument('--sort-key', type=int, default=1,
-                        help="Key to sort on (int, 0-based index)")
-    args = parser.parse_args(args)
+def get_run_contexts():
+    return ['from_date', 'to_date',
+            {'limit': [['--limit'],
+                       {'type': int,
+                        'default': 25,
+                        'help': "Maximum number of users in result"
+                        }]},
+            {'sort_key': [['--sort-key'],
+                          {'type': int,
+                           'default': 1,
+                           'help': "Key to sort on (int, 0-based index)",
+                           }]}
+
+            ]
+
+
+def run(args):
 
     header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
     if args.sort_key < 0 or len(header) - 1 < args.sort_key:
-        parser.error("invalid value for 'sort_key'")
+        RecipeParser.error("invalid value for 'sort_key'")
 
-    query_args = vars(args)
-    query_args['branch'] = 'try'
-    limit = query_args.pop('limit')
-    pushes = next(run_query('user_pushes', config, **query_args))
+    new_context = {'branch': 'try'}
+
+    limit = args.limit
+    pushes = execute_query('user_pushes', new_context)
     pushes = pushes['data']
 
-    query_args['from'] = 'task'
-    tasks = next(run_query('user_tasks', config, **query_args))['data']
+    new_context.update({'from': 'task'})
+    tasks = execute_query('user_tasks', new_context)['data']
 
     users = defaultdict(list)
     for user, num in tasks:

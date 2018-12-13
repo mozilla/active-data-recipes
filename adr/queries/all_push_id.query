@@ -6,5 +6,4 @@ where:
         - in: {branch.name: ["autoland", "mozilla-inbound"]}
         - gte: [push.date, {date: {$eval: from_date}}]
         - lte: [push.date, {date: {$eval: to_date}}]
-        - exists: changeset.backedoutby
 limit: 100000

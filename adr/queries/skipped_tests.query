@@ -14,3 +14,5 @@ where:
         - lte: {run.stats.end_time: {date: {$eval: to_date}}}
 limit: 1000
 format: table
+context:
+    suite: [["--suite"], {help: "Select suite to get skipped tests from. By default, gets data from all suites."}]
