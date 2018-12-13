@@ -10,8 +10,7 @@ runtime and total runtime over a given date range and set of branches.
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import RecipeParser
-from ..query import run_query
+from ..recipe import execute_query
 
 DEFAULT_BRANCHES = [
     'autoland',
@@ -20,21 +19,33 @@ DEFAULT_BRANCHES = [
 ]
 
 
-def run(args, config):
-    parser = RecipeParser('build', 'date', 'platform')
-    parser.add_argument('-B', '--branch', default=DEFAULT_BRANCHES, nargs='+',
-                        help="Branches to gather backout rate on, can be specified "
-                             "multiple times.")
-    parser.add_argument('--limit', type=int, default=20,
-                        help="Maximum number of jobs to return")
-    parser.add_argument('--sort-key', type=int, default=2,
-                        help="Key to sort on (int, 0-based index)")
+def get_run_contexts():
+    return ['from_date', 'to_date', 'platform',
+            {'limit': [['--limit'],
+                       {'type': int,
+                        'default': 20,
+                        'help': "Maximum number of jobs in result"
+                        }]},
+            {'sort_key': [['--sort-key'],
+                          {'type': int,
+                           'default': 2,
+                           'help': "Key to sort on (int, 0-based index)",
+                           }]},
+            {'branch': [['--branch'],
+                        {'default': DEFAULT_BRANCHES,
+                         'nargs': '+',
+                         'help': "Branches to gather backout rate on, can be specified "
+                                 "multiple times."
+                         }]}
+            ]
 
-    args = parser.parse_args(args)
-    query_args = vars(args)
-    limit = query_args.pop('limit')
 
-    data = next(run_query('task_durations', config, **query_args))['data']
+def run(args):
+
+    limit = args.limit
+    delattr(args, 'limit')
+
+    data = execute_query('task_durations')['data']
     result = []
     for record in data:
         if record[2] is None:

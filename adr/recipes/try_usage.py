@@ -13,8 +13,7 @@ from __future__ import print_function, absolute_import
 
 from collections import defaultdict, OrderedDict
 
-from ..recipe import RecipeParser
-from ..query import run_query
+from ..recipe import execute_query
 
 
 def subcommand(name):
@@ -26,12 +25,9 @@ def subcommand(name):
     }
 
 
-def run(args, config):
-    parser = RecipeParser('date')
-    args = parser.parse_args(args)
+def run(args):
 
-    query_args = vars(args)
-    data = next(run_query('try_commit_messages', config, **query_args))['data']
+    data = execute_query('try_commit_messages')['data']
 
     count = defaultdict(int)
     count['total'] = len(data['message'])
