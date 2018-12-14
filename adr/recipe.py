@@ -3,6 +3,7 @@ from __future__ import print_function, absolute_import
 import importlib
 import logging
 import os
+import markdown
 from .query import run_query, load_query_context
 from argparse import ArgumentParser, Namespace
 from adr.formatter import all_formatters
@@ -61,22 +62,16 @@ class RecipeParser(ArgumentParser):
                 raise AttributeError("Definition of {} should be list of length 2".format(name))
 
 
-def run_recipe(recipe, args, config):
-    """Given a recipe, calls the appropriate query and returns the result.
+def cli_args_transform(recipe_context_def, args):
+    # get value of query parameters and post-processing parameters
+    parsed_args = RecipeParser(recipe_context_def).parse_args(args)
+    return vars(parsed_args)
 
-    The provided recipe name is used to make a call to the modules.
 
-    Args:
-        recipe (str): name of the recipe to be run.
-        args (list): remainder arguments that were unparsed.
-        config (Configuration): config object.
-
-    Returns:
-        output (str): output after formatted.
-
-    """
-    modname = '.recipes.{}'.format(recipe)
-    mod = importlib.import_module(modname, package='adr')
+def get_recipe_contexts(recipe, mod=None):
+    if not mod:
+        modname = '.recipes.{}'.format(recipe)
+        mod = importlib.import_module(modname, package='adr')
 
     # try to extract name of query and run contexts automatically from run function
     queries, run_contexts = context.extract_arguments(mod.run, "execute_query")
@@ -94,19 +89,35 @@ def run_recipe(recipe, args, config):
 
     run_context_def = context.get_context_definitions(run_contexts)
 
-    recipe_context_def = {}
-    # get run_context first so that the value of context in run_context has higher priority
-    recipe_context_def.update(run_context_def)
-    recipe_context_def.update(query_context_def)
+    return query_context_def, run_context_def
 
-    # get value of query parameters and post-processing parameters
-    parsed_args = RecipeParser(recipe_context_def).parse_args(args)
+
+def run_recipe(recipe, args, config, from_cli=True):
+    """Given a recipe, calls the appropriate query and returns the result.
+
+    The provided recipe name is used to make a call to the modules.
+
+    Args:
+        recipe (str): name of the recipe to be run.
+        args (list): remainder arguments that were unparsed.
+        config (Configuration): config object.
+        from_cli (bool): true if run recipe from cli
+    Returns:
+        output (str): output after formatted.
+
+    """
     set_config(config)
 
+    modname = '.recipes.{}'.format(recipe)
+    mod = importlib.import_module(modname, package='adr')
+
+    query_context_def, run_context_def = get_recipe_contexts(recipe)
+    recipe_context_def = {**query_context_def, **run_context_def}
+    parsed_args = cli_args_transform(recipe_context_def, args) if from_cli else args
+
     # Split recipe_args into query_args and recipe_args while keep --help works correctly
-    parsed_args_items = vars(parsed_args).items()
-    query_args = {k: v for k, v in parsed_args_items if k in query_context_def}
-    run_args = {k: v for k, v in parsed_args_items if k in run_context_def}
+    query_args = {k: v for k, v in parsed_args.items() if k in query_context_def}
+    run_args = {k: v for k, v in parsed_args.items() if k in run_context_def}
 
     set_query_context(query_args)
 
@@ -120,3 +131,9 @@ def run_recipe(recipe, args, config):
 
     log.debug("Result:")
     return fmt(output)
+
+
+def get_docstring(recipe):
+    modname = '.recipes.{}'.format(recipe)
+    mod = importlib.import_module(modname, package='adr')
+    return markdown.markdown(mod.__doc__)
