@@ -4,12 +4,13 @@ from jsone.interpreter import ExpressionEvaluator
 from jsone.prattparser import prefix
 
 COMMON_CONTEXTS = {
-    'attribute': {'nargs': '?',
-                  'default': None,
-                  'help': "Display values of specified attribute within --table."},
+    'attribute': [['--at'],
+                  {'nargs': '?',
+                      'default': None,
+                      'help': "Display values of specified attribute within --table."}],
     'branch': [['-B', '--branch'],
                {'default': 'mozilla-central',
-                'help': "Branches to query results from",
+                'help': "Btributeranches to query results from",
                 }],
     'build_type': [['-b', '--build-type'],
                    {'default': 'opt',
