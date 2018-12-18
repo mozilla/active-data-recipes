@@ -116,10 +116,6 @@ def run_recipe(recipe, args, config, from_cli=True):
     else:
         parsed_args = args
 
-    # # Split recipe_args into query_args and recipe_args while keep --help works correctly
-    # query_args = {k: v for k, v in parsed_args.items() if k in query_context_def}
-    # run_args = {k: v for k, v in parsed_args.items() if k in run_context_def}
-
     set_query_context(parsed_args)
 
     try:
