@@ -3,7 +3,7 @@ from __future__ import print_function, absolute_import
 import importlib
 import logging
 import os
-import markdown
+from docutils.core import publish_parts
 from .query import run_query, load_query_context
 from argparse import ArgumentParser, Namespace
 from adr.formatter import all_formatters
@@ -13,6 +13,9 @@ log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 
 RECIPE_DIR = os.path.join(here, 'recipes')
+
+RUN_CONTEXTS = []
+QUERY_LIST = []
 
 
 def set_config(config):
@@ -62,12 +65,6 @@ class RecipeParser(ArgumentParser):
                 raise AttributeError("Definition of {} should be list of length 2".format(name))
 
 
-def cli_args_transform(recipe_context_def, args):
-    # get value of query parameters and post-processing parameters
-    parsed_args = RecipeParser(recipe_context_def).parse_args(args)
-    return vars(parsed_args)
-
-
 def get_recipe_contexts(recipe, mod=None):
     if not mod:
         modname = '.recipes.{}'.format(recipe)
@@ -77,10 +74,10 @@ def get_recipe_contexts(recipe, mod=None):
     queries, run_contexts = context.extract_arguments(mod.run, "execute_query")
 
     # Get name of queries and/or run context definitions by function
-    if hasattr(mod, 'get_queries'):
-        queries = mod.get_queries()
-    if hasattr(mod, 'get_run_contexts'):
-        run_contexts = mod.get_run_contexts()
+    if hasattr(mod, 'QUERRY_LIST'):
+        queries = mod.QUERRY_LIST
+    if hasattr(mod, 'RUN_CONTEXTS'):
+        run_contexts = mod.RUN_CONTEXTS
 
     query_context_def = {}
     for query_name in set(queries):
@@ -113,16 +110,21 @@ def run_recipe(recipe, args, config, from_cli=True):
 
     query_context_def, run_context_def = get_recipe_contexts(recipe)
     recipe_context_def = {**query_context_def, **run_context_def}
-    parsed_args = cli_args_transform(recipe_context_def, args) if from_cli else args
 
-    # Split recipe_args into query_args and recipe_args while keep --help works correctly
-    query_args = {k: v for k, v in parsed_args.items() if k in query_context_def}
-    run_args = {k: v for k, v in parsed_args.items() if k in run_context_def}
+    if from_cli:
+        parsed_args = vars(RecipeParser(recipe_context_def).parse_args(args))
+    else:
+        parsed_args = args
 
-    set_query_context(query_args)
+    # # Split recipe_args into query_args and recipe_args while keep --help works correctly
+    # query_args = {k: v for k, v in parsed_args.items() if k in query_context_def}
+    # run_args = {k: v for k, v in parsed_args.items() if k in run_context_def}
+
+    set_query_context(parsed_args)
 
     try:
-        output = mod.run(Namespace(**run_args))
+        # output = mod.run(Namespace(**run_args))
+        output = mod.run(Namespace(**parsed_args))
     except MissingDataError:
         return "ActiveData didn\'t return any data."
 
@@ -136,4 +138,4 @@ def run_recipe(recipe, args, config, from_cli=True):
 def get_docstring(recipe):
     modname = '.recipes.{}'.format(recipe)
     mod = importlib.import_module(modname, package='adr')
-    return markdown.markdown(mod.__doc__)
+    return publish_parts(mod.__doc__, writer_name='html')['html_body']

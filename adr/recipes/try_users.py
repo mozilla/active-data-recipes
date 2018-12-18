@@ -13,21 +13,19 @@ from collections import defaultdict
 
 from ..recipe import RecipeParser, execute_query
 
+RUN_CONTEXTS = ['from_date', 'to_date',
+                {'limit': [['--limit'],
+                           {'type': int,
+                            'default': 25,
+                            'help': "Maximum number of users in result"
+                            }]},
+                {'sort_key': [['--sort-key'],
+                              {'type': int,
+                               'default': 1,
+                               'help': "Key to sort on (int, 0-based index)",
+                               }]}
 
-def get_run_contexts():
-    return ['from_date', 'to_date',
-            {'limit': [['--limit'],
-                       {'type': int,
-                        'default': 25,
-                        'help': "Maximum number of users in result"
-                        }]},
-            {'sort_key': [['--sort-key'],
-                          {'type': int,
-                           'default': 1,
-                           'help': "Key to sort on (int, 0-based index)",
-                           }]}
-
-            ]
+                ]
 
 
 def run(args):

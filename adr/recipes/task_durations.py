@@ -18,26 +18,24 @@ DEFAULT_BRANCHES = [
     'mozilla-central',
 ]
 
-
-def get_run_contexts():
-    return ['from_date', 'to_date', 'platform',
-            {'limit': [['--limit'],
-                       {'type': int,
-                        'default': 20,
-                        'help': "Maximum number of jobs in result"
-                        }]},
-            {'sort_key': [['--sort-key'],
-                          {'type': int,
-                           'default': 2,
-                           'help': "Key to sort on (int, 0-based index)",
-                           }]},
-            {'branch': [['--branch'],
-                        {'default': DEFAULT_BRANCHES,
-                         'nargs': '+',
-                         'help': "Branches to gather backout rate on, can be specified "
-                                 "multiple times."
-                         }]}
-            ]
+RUN_CONTEXTS = ['from_date', 'to_date', 'platform',
+                {'limit': [['--limit'],
+                           {'type': int,
+                            'default': 20,
+                            'help': "Maximum number of jobs in result"
+                            }]},
+                {'sort_key': [['--sort-key'],
+                              {'type': int,
+                               'default': 2,
+                               'help': "Key to sort on (int, 0-based index)",
+                               }]},
+                {'branch': [['--branch'],
+                            {'default': DEFAULT_BRANCHES,
+                             'nargs': '+',
+                             'help': "Branches to gather backout rate on, can be specified "
+                                     "multiple times."
+                             }]}
+                ]
 
 
 def run(args):
