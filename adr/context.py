@@ -10,7 +10,7 @@ COMMON_CONTEXTS = {
                       'help': "Display values of specified attribute within --table."}],
     'branch': [['-B', '--branch'],
                {'default': 'mozilla-central',
-                'help': "Btributeranches to query results from",
+                'help': "Branches to query results from",
                 }],
     'build_type': [['-b', '--build-type'],
                    {'default': 'opt',
