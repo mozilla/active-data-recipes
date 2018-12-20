@@ -7,10 +7,10 @@ This is currently broken.
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import execute_query
+from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     # These 4 args are defined so that we can share the queries with the
     # 'intermittent_test_data' recipe.
     args.test_name = '(~(file.*|http.*))'
@@ -19,10 +19,9 @@ def run(args):
     args.platform_config = "test-%s/%s" % (args.platform, args.build_type)
 
     query_args = vars(args)
-
-    jobs = execute_query('intermittent_jobs', query_args)['data']
-    result = execute_query('intermittent_tests', query_args)['data']
-    total_runs = execute_query('intermittent_test_rate', query_args)['data']
+    jobs = run_query('intermittent_jobs', config, **query_args)['data']
+    result = run_query('intermittent_tests', config, **query_args)['data']
+    total_runs = run_query('intermittent_test_rate', config, **query_args)['data']
 
     intermittent_tests = []
     # for each result, match up the revision/name with jobs, if a match, save testname

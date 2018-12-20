@@ -9,23 +9,24 @@ available tables. To see the columns in a table, run:
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import execute_query
+from ..query import run_query
 
 
-def run(args):
+def run(args, config):
 
+    query_args = vars(args)
     if not args.table:
-        data = execute_query('meta')['data']
+        data = run_query('meta', config, **query_args)['data']
         data = sorted([(d['name'],) for d in data])
         data.insert(0, ('Table',))
         return data
 
     if not args.attribute:
-        data = execute_query('meta_columns')['data']
+        data = run_query('meta_columns', config, **query_args)['data']
         data = sorted([(d['name'],) for d in data])
         data.insert(0, ('Column',))
         return data
 
-    data = execute_query('meta_values')['data']
+    data = run_query('meta_values', config, **query_args)['data']
     data.insert(0, (args.attribute, 'count'))
     return data

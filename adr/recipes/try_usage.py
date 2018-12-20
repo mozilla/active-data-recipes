@@ -13,7 +13,7 @@ from __future__ import print_function, absolute_import
 
 from collections import defaultdict, OrderedDict
 
-from ..recipe import execute_query
+from ..query import run_query
 
 
 def subcommand(name):
@@ -25,9 +25,9 @@ def subcommand(name):
     }
 
 
-def run(args):
+def run(args, config):
 
-    data = execute_query('try_commit_messages')['data']
+    data = run_query('try_commit_messages', config, **vars(args))['data']
 
     count = defaultdict(int)
     count['total'] = len(data['message'])

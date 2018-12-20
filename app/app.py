@@ -59,8 +59,7 @@ def recipe_handler(recipe):
         return handle_recipe(recipe, request)
     # Otherwise, just show recipe web
 
-    query_context_def, run_context_def = get_recipe_contexts(recipe)
-    recipe_contexts = {**query_context_def, **run_context_def}
+    recipe_contexts = get_recipe_contexts(recipe)
 
     return render_template('recipe.html', recipes=recipe_lists, recipe=recipe,
                            recipe_contexts=recipe_contexts,
@@ -68,8 +67,7 @@ def recipe_handler(recipe):
 
 
 def handle_recipe(recipename, request):
-    query_context_def, run_context_def = get_recipe_contexts(recipename)
-    recipe_contexts = {**query_context_def, **run_context_def}
+    recipe_contexts = get_recipe_contexts(recipename)
 
     args = request.args.to_dict(flat=True)
     for key in args:

@@ -3,8 +3,9 @@ from __future__ import print_function, absolute_import
 import importlib
 import logging
 import os
+
 from docutils.core import publish_parts
-from .query import run_query, load_query_context
+from .query import load_query_context
 from argparse import ArgumentParser, Namespace
 from adr.formatter import all_formatters
 from .errors import MissingDataError
@@ -14,40 +15,6 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 RECIPE_DIR = os.path.join(here, 'recipes')
 
-RUN_CONTEXTS = []
-QUERY_LIST = []
-
-
-def set_config(config):
-    global G_CONFIG
-    G_CONFIG = config
-
-
-def set_query_context(query_args):
-    global G_CONTEXT
-    G_CONTEXT = query_args
-
-
-def execute_query(query_name, override_context=None):
-    """
-    Set the query context, then run query
-    Args:
-        query_name (str): name of query
-        override_context (dict): updated context from previous query
-    Returns: (str)
-
-    """
-
-    if not override_context:
-        override_context = G_CONTEXT
-    else:
-        if type(override_context) is not dict:
-            override_context = vars(override_context)
-        for key, value in G_CONTEXT.items():
-            if not (key in override_context):
-                override_context[key] = value
-    return run_query(query_name, G_CONFIG, **override_context)
-
 
 class RecipeParser(ArgumentParser):
 
@@ -55,6 +22,7 @@ class RecipeParser(ArgumentParser):
         ArgumentParser.__init__(self)
 
         for name, definition in definitions.items():
+            # definition of a context: {name: [[],{}]}
             if isinstance(definition, dict):
                 self.add_argument(name, **definition)
             elif len(definition) >= 2:
@@ -66,27 +34,37 @@ class RecipeParser(ArgumentParser):
 
 
 def get_recipe_contexts(recipe, mod=None):
+    """
+    Extract list of recipe context definition from the recipe file and related query files
+    Args:
+        recipe (str): name of recipe
+        mod (module): module of recipe
+    Returns:
+        recipe_context_def (dict): definition of all contexts needed for recipe
+    """
     if not mod:
         modname = '.recipes.{}'.format(recipe)
         mod = importlib.import_module(modname, package='adr')
 
     # try to extract name of query and run contexts automatically from run function
-    queries, run_contexts = context.extract_arguments(mod.run, "execute_query")
+    queries, run_contexts = context.extract_arguments(mod.run, "run_query")
 
-    # Get name of queries and/or run context definitions by function
+    # get name of queries and/or run contexts by function
     if hasattr(mod, 'QUERRY_LIST'):
         queries = mod.QUERRY_LIST
     if hasattr(mod, 'RUN_CONTEXTS'):
         run_contexts = mod.RUN_CONTEXTS
 
-    query_context_def = {}
+    # get full definition of all contexts needed for recipe
+    recipe_context_def = {}
     for query_name in set(queries):
-        query_contexts = load_query_context(query_name)
-        query_context_def.update(query_contexts)
+        query_context_def = load_query_context(query_name)
+        recipe_context_def.update(query_context_def)
 
     run_context_def = context.get_context_definitions(run_contexts)
+    recipe_context_def.update(run_context_def)
 
-    return query_context_def, run_context_def
+    return recipe_context_def
 
 
 def run_recipe(recipe, args, config, from_cli=True):
@@ -103,24 +81,20 @@ def run_recipe(recipe, args, config, from_cli=True):
         output (str): output after formatted.
 
     """
-    set_config(config)
 
     modname = '.recipes.{}'.format(recipe)
     mod = importlib.import_module(modname, package='adr')
 
-    query_context_def, run_context_def = get_recipe_contexts(recipe)
-    recipe_context_def = {**query_context_def, **run_context_def}
+    recipe_context_def = get_recipe_contexts(recipe, mod)
 
     if from_cli:
         parsed_args = vars(RecipeParser(recipe_context_def).parse_args(args))
     else:
         parsed_args = args
 
-    set_query_context(parsed_args)
-
     try:
         # output = mod.run(Namespace(**run_args))
-        output = mod.run(Namespace(**parsed_args))
+        output = mod.run(Namespace(**parsed_args), config)
     except MissingDataError:
         return "ActiveData didn\'t return any data."
 
@@ -132,6 +106,13 @@ def run_recipe(recipe, args, config, from_cli=True):
 
 
 def get_docstring(recipe):
+    """
+    Get docstring of a recipe
+    Args:
+        recipe(str): name of recipe
+    Result:
+        html (transformed from rst)
+    """
     modname = '.recipes.{}'.format(recipe)
     mod = importlib.import_module(modname, package='adr')
     return publish_parts(mod.__doc__, writer_name='html')['html_body']

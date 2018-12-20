@@ -11,7 +11,8 @@ from __future__ import print_function, absolute_import
 
 from collections import defaultdict
 
-from ..recipe import RecipeParser, execute_query
+from ..query import run_query
+from ..recipe import RecipeParser
 
 RUN_CONTEXTS = ['from_date', 'to_date',
                 {'limit': [['--limit'],
@@ -28,20 +29,20 @@ RUN_CONTEXTS = ['from_date', 'to_date',
                 ]
 
 
-def run(args):
+def run(args, config):
 
     header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
     if args.sort_key < 0 or len(header) - 1 < args.sort_key:
         RecipeParser.error("invalid value for 'sort_key'")
 
-    new_context = {'branch': 'try'}
-
-    limit = args.limit
-    pushes = execute_query('user_pushes', new_context)
+    query_args = vars(args)
+    query_args['branch'] = 'try'
+    limit = query_args.pop('limit')
+    pushes = run_query('user_pushes', config, **query_args)
     pushes = pushes['data']
 
-    new_context.update({'from': 'task'})
-    tasks = execute_query('user_tasks', new_context)['data']
+    query_args['from'] = 'task'
+    tasks = run_query('user_tasks', config, **query_args)['data']
 
     users = defaultdict(list)
     for user, num in tasks:
