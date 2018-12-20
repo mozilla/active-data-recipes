@@ -9,19 +9,20 @@ See how many files in tree have any code coverage at all.
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import execute_query
+from ..query import run_query
 from ..errors import MissingDataError
 
 
-def run(args):
+def run(args, config):
 
+    query_args = vars(args)
     header = ['Revision', 'Files With Coverage', 'Total Files', 'Percent with Coverage']
-    covered_files = execute_query('covered_files')['data']
+    covered_files = run_query('covered_files', config, **query_args)['data']
 
     if None in [item for items in covered_files for item in items]:
         raise MissingDataError("ActiveData returned null value.")
 
-    total_files = execute_query('total_files')['data']
+    total_files = run_query('total_files', config, **query_args)['data']
 
     if None in [item for items in total_files for item in items]:
         raise MissingDataError("ActiveData returned null value.")

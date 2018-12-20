@@ -7,12 +7,12 @@ Get the average and total runtime for build platforms and types.
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import execute_query
+from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     # process config data
-    data = execute_query('config_durations')["data"]
+    data = run_query('config_durations', config, **vars(args))["data"]
     result = []
     for record in data:
         if isinstance(record[1], list):

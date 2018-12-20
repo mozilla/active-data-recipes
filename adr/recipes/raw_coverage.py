@@ -51,7 +51,7 @@ def run(args, config):
 
     def artifactCount(args):
         query_args = vars(args)
-        result = next(run_query('raw_coverage_count', config, **query_args))
+        result = run_query('raw_coverage_count', config, **query_args)
         for item in result['data']:
             return item[0]
 
@@ -110,9 +110,9 @@ def run(args, config):
         query_args = vars(args)
 
         if expected_count >= 50000:
-            result = next(run_query('raw_coverage_nosubdir', config, **query_args))
+            result = run_query('raw_coverage_nosubdir', config, **query_args)
         else:
-            result = next(run_query('raw_coverage', config, **query_args))
+            result = run_query('raw_coverage', config, **query_args)
 
         # format is: {sourcename: {lines: {}, suites: []}, sourcename: ...}
         retVal = {}

@@ -12,7 +12,7 @@ import logging
 
 from datetime import date, timedelta
 
-from ..recipe import execute_query
+from ..query import run_query
 
 log = logging.getLogger('adr')
 BRANCH_WHITELIST = [
@@ -21,10 +21,10 @@ BRANCH_WHITELIST = [
 ]
 
 
-def get_stats_for_week():
+def get_stats_for_week(args, config):
     # query all jobs that are fixed by commit- build a map and determine for each regression:
     # <fixed_rev>: [{<broken_rev>: "time_from_build_to_job", "job_name">}, ...]
-    backouts = execute_query('fixed_by_commit_jobs')['data']
+    backouts = run_query('fixed_by_commit_jobs', config, **vars(args))['data']
     if backouts == {}:
         return []
     builddate = backouts['build.date']
@@ -76,7 +76,7 @@ def get_stats_for_week():
     return results
 
 
-def run(args):
+def run(args, config):
 
     # Between these dates on a particular branch
     to_date = args.to_date
@@ -105,7 +105,7 @@ def run(args):
         args.from_date = str(day)
         day += timedelta(days=7)
         args.to_date = str(day)
-        retVal = get_stats_for_week()
+        retVal = get_stats_for_week(args, config)
         results.append([args.from_date,
                         len(retVal),
                         len([x for x in retVal if x[1] == 'fail'])])

@@ -10,7 +10,7 @@ runtime and total runtime over a given date range and set of branches.
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import execute_query
+from ..query import run_query
 
 DEFAULT_BRANCHES = [
     'autoland',
@@ -38,12 +38,12 @@ RUN_CONTEXTS = ['from_date', 'to_date', 'platform',
                 ]
 
 
-def run(args):
+def run(args, config):
 
     limit = args.limit
     delattr(args, 'limit')
 
-    data = execute_query('task_durations')['data']
+    data = run_query('task_durations', config, **vars(args))['data']
     result = []
     for record in data:
         if record[2] is None:

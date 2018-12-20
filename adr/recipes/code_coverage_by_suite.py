@@ -8,10 +8,10 @@ Both arguments are required.
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import execute_query
+from ..query import run_query
 
 
-def run(args):
+def run(args, config):
     """
     THIS IS PRONE TO DOUBLE COUNTING, AS DIFFERENT TEST CHUNKS COVER COMMON LINES
     AT THE VERY LEAST YOU GET A ROUGH ESTIMATE OF COVERAGE
@@ -49,7 +49,7 @@ def run(args):
                        'jit', 'Wd', 'Wr']
 
     retVal = {}
-    result = execute_query('code_coverage_by_suite')
+    result = run_query('code_coverage_by_suite', config, **vars(args))
     for line in result['data']:
         # line = [suite, filename, count]
         if line[1] not in retVal:

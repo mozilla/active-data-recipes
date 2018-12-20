@@ -8,7 +8,7 @@ test suites and their count which were skipped/disabled between specified period
 """
 from __future__ import print_function, absolute_import
 
-from ..recipe import execute_query
+from ..query import run_query
 
 RUN_CONTEXTS = [{'limit': [['--limit'],
                            {'type': int,
@@ -23,9 +23,9 @@ RUN_CONTEXTS = [{'limit': [['--limit'],
                 ]
 
 
-def run(args):
+def run(args, config):
 
-    result = execute_query('skipped_tests')['data']
+    result = run_query('skipped_tests', config, **vars(args))['data']
 
     result.sort(key=lambda x: x[0])
     result.insert(0, ['Result test', 'run suite', 'count'])
