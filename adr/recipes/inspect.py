@@ -12,7 +12,7 @@ from __future__ import print_function, absolute_import
 from ..query import run_query
 
 
-def run(args, config):
+def run(config, args):
 
     if not args.table:
         data = run_query('meta', config, args)['data']

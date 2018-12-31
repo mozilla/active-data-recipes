@@ -29,7 +29,7 @@ RUN_CONTEXTS = ['from_date', 'to_date',
                 ]
 
 
-def run(args, config):
+def run(config, args):
 
     header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
     if args.sort_key < 0 or len(header) - 1 < args.sort_key:

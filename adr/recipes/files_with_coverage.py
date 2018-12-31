@@ -13,7 +13,7 @@ from ..query import run_query
 from ..errors import MissingDataError
 
 
-def run(args, config):
+def run(config, args):
 
     header = ['Revision', 'Files With Coverage', 'Total Files', 'Percent with Coverage']
     covered_files = run_query('covered_files', config, args)['data']

@@ -23,7 +23,7 @@ RUN_CONTEXTS = [{'limit': [['--limit'],
                 ]
 
 
-def run(args, config):
+def run(config, args):
 
     result = run_query('skipped_tests', config, args)['data']
 

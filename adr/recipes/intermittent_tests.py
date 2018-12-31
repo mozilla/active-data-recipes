@@ -10,7 +10,7 @@ from __future__ import print_function, absolute_import
 from ..query import run_query
 
 
-def run(args, config):
+def run(config, args):
     # These 4 args are defined so that we can share the queries with the
     # 'intermittent_test_data' recipe.
     args.test_name = '(~(file.*|http.*))'

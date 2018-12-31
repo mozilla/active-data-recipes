@@ -15,7 +15,7 @@ from __future__ import print_function, absolute_import
 from ..query import run_query
 
 
-def run(args, config):
+def run(config, args):
 
     pushes = len(set(run_query('all_push_id', config, args)['data']['push.id']))
     backouts = len(set(run_query('backout_rate', config, args)['data']['push.id']))
