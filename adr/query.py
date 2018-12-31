@@ -10,6 +10,7 @@ import jsone
 import requests
 import yaml
 
+from argparse import Namespace
 from adr import context
 from adr.formatter import all_formatters
 from adr.errors import MissingDataError
@@ -107,7 +108,7 @@ def load_query_context(name):
         return query_contexts
 
 
-def run_query(name, config, **context):
+def run_query(name, config, args):
     """Loads and runs the specified query, yielding the result.
 
     Given name of a query, this method will first read the query
@@ -121,10 +122,11 @@ def run_query(name, config, **context):
 
     :param str name: name of the query file to be loaded.
     :param Configuration config: config object.
-    :param dict context: dictionary of ActiveData configs.
+    :param Namespace args: dictionary of ActiveData configs.
     :return str: json-formatted string.
     """
 
+    context = vars(args)
     query = load_query(name)
 
     if 'limit' in context:
@@ -152,7 +154,7 @@ def format_query(query, config):
     if isinstance(config.fmt, str):
         fmt = all_formatters[config.fmt]
 
-    result = run_query(query, config, **FAKE_CONTEXT)
+    result = run_query(query, config, Namespace(**FAKE_CONTEXT))
     data = result['data']
     debug_url = None
     if 'saved_as' in result['meta']:

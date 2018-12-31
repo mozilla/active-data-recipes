@@ -13,6 +13,5 @@ from ..query import run_query
 
 def run(args, config):
 
-    query_args = vars(args)
-    response = run_query('activedata_usage', config, **query_args)
+    response = run_query('activedata_usage', config, args)
     return [response['header']] + response['data']

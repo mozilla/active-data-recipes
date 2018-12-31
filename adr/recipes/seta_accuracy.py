@@ -24,7 +24,7 @@ BRANCH_WHITELIST = [
 def get_stats_for_week(args, config):
     # query all jobs that are fixed by commit- build a map and determine for each regression:
     # <fixed_rev>: [{<broken_rev>: "time_from_build_to_job", "job_name">}, ...]
-    backouts = run_query('fixed_by_commit_jobs', config, **vars(args))['data']
+    backouts = run_query('fixed_by_commit_jobs', config, args)['data']
     if backouts == {}:
         return []
     builddate = backouts['build.date']

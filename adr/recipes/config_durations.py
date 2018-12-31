@@ -12,7 +12,7 @@ from ..query import run_query
 
 def run(args, config):
     # process config data
-    data = run_query('config_durations', config, **vars(args))["data"]
+    data = run_query('config_durations', config, args)["data"]
     result = []
     for record in data:
         if isinstance(record[1], list):

@@ -14,7 +14,7 @@ def run(args, config):
 
     result = []
 
-    data = run_query('test_durations', config, **vars(args))['data']['result.test']
+    data = run_query('test_durations', config, args)['data']['result.test']
 
     duration = [1, 2, 5, 10, 20, 30, 45, 60, 90, 120, 150, 'max']
     for index in range(0, len(duration)):
