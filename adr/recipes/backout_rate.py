@@ -15,9 +15,8 @@ from ..query import run_query
 
 def run(args, config):
 
-    query_arg = vars(args)
-    pushes = len(set(run_query('all_push_id', config, **query_arg)['data']['push.id']))
-    backouts = len(set(run_query('backout_rate', config, **query_arg)['data']['push.id']))
+    pushes = len(set(run_query('all_push_id', config, args)['data']['push.id']))
+    backouts = len(set(run_query('backout_rate', config, args)['data']['push.id']))
     backout_rate = round((float(backouts) / pushes) * 100, 2)
 
     return (

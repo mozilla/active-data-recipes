@@ -43,7 +43,7 @@ def run(args, config):
     limit = args.limit
     delattr(args, 'limit')
 
-    data = run_query('task_durations', config, **vars(args))['data']
+    data = run_query('task_durations', config, args)['data']
     result = []
     for record in data:
         if record[2] is None:

@@ -12,6 +12,6 @@ from ..query import run_query
 
 def run(args, config):
 
-    result = run_query('tests_config_times', config, **vars(args))['data']
+    result = run_query('tests_config_times', config, args)['data']
     result.insert(0, ['Config Name', '# of green runs', 'max runtime'])
     return result

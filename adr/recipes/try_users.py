@@ -35,14 +35,13 @@ def run(args, config):
     if args.sort_key < 0 or len(header) - 1 < args.sort_key:
         RecipeParser.error("invalid value for 'sort_key'")
 
-    query_args = vars(args)
-    query_args['branch'] = 'try'
-    limit = query_args.pop('limit')
-    pushes = run_query('user_pushes', config, **query_args)
+    args.branch = 'try'
+    limit = args.limit
+    delattr(args, 'limit')
+    pushes = run_query('user_pushes', config, args)
     pushes = pushes['data']
 
-    query_args['from'] = 'task'
-    tasks = run_query('user_tasks', config, **query_args)['data']
+    tasks = run_query('user_tasks', config, args)['data']
 
     users = defaultdict(list)
     for user, num in tasks:

@@ -21,10 +21,8 @@ def run(args, config):
         args.groupby = 'run.key'
         args.result = ["T", "F"]
 
-    query_args = vars(args)
-
-    result = run_query('intermittent_tests', config, **query_args)['data']
-    total_runs = run_query('intermittent_test_rate', config, **query_args)['data']
+    result = run_query('intermittent_tests', config, args)['data']
+    total_runs = run_query('intermittent_test_rate', config, args)['data']
 
     intermittent_tests = []
     for item in result['run.key']:

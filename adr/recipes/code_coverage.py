@@ -16,6 +16,6 @@ def run(args, config):
     AT THE VERY LEAST YOU GET A ROUGH ESTIMATE OF COVERAGE
     """
 
-    result = run_query('code_coverage', config, **vars(args))
+    result = run_query('code_coverage', config, args)
     output = [result['header']] + result['data']
     return output

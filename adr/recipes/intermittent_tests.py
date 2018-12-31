@@ -18,10 +18,9 @@ def run(args, config):
     args.result = ["F"]
     args.platform_config = "test-%s/%s" % (args.platform, args.build_type)
 
-    query_args = vars(args)
-    jobs = run_query('intermittent_jobs', config, **query_args)['data']
-    result = run_query('intermittent_tests', config, **query_args)['data']
-    total_runs = run_query('intermittent_test_rate', config, **query_args)['data']
+    jobs = run_query('intermittent_jobs', config, args)['data']
+    result = run_query('intermittent_tests', config, args)['data']
+    total_runs = run_query('intermittent_test_rate', config, args)['data']
 
     intermittent_tests = []
     # for each result, match up the revision/name with jobs, if a match, save testname
