@@ -25,7 +25,7 @@ def subcommand(name):
     }
 
 
-def run(args, config):
+def run(config, args):
 
     data = run_query('try_commit_messages', config, args)['data']
 

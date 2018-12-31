@@ -76,7 +76,7 @@ def get_stats_for_week(args, config):
     return results
 
 
-def run(args, config):
+def run(config, args):
 
     # Between these dates on a particular branch
     to_date = args.to_date

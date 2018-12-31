@@ -41,7 +41,7 @@ def taskclusterName(jobname):
     return "test-linux64/debug-%s" % jobname
 
 
-def run(args, config):
+def run(config, args):
     parser = RecipeParser('path', 'rev')
     parser.add_argument('--use-chunks', default=False, action="store_true",
                         help="use chunks in aggregating and reporting jobs.")

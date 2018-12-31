@@ -38,7 +38,7 @@ RUN_CONTEXTS = ['from_date', 'to_date', 'platform',
                 ]
 
 
-def run(args, config):
+def run(config, args):
 
     limit = args.limit
     delattr(args, 'limit')

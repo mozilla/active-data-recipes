@@ -122,7 +122,7 @@ def run_query(name, config, args):
 
     :param str name: name of the query file to be loaded.
     :param Configuration config: config object.
-    :param Namespace args: dictionary of ActiveData configs.
+    :param Namespace args: namespace of ActiveData configs.
     :return str: json-formatted string.
     """
 

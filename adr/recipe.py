@@ -94,7 +94,7 @@ def run_recipe(recipe, args, config, from_cli=True):
 
     try:
         # output = mod.run(Namespace(**run_args))
-        output = mod.run(Namespace(**parsed_args), config)
+        output = mod.run(config, Namespace(**parsed_args))
     except MissingDataError:
         return "ActiveData didn\'t return any data."
 
