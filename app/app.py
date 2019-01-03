@@ -34,11 +34,12 @@ def home():
     Render a template with the list of availble recipes
     :returns: template
     """
-    return render_template('error.html',
+    return render_template('home.html',
                            recipes=recipe_lists,
-                           type="is-warning",
-                           recipe="Warning",
-                           error="Please choose recipe to run")
+                           type="is-info",
+                           recipe="Welcome",
+                           welcome="Welcome to Active Data Recipe Tool."
+                                   " Please choose recipe to run!")
 
 
 @app.route('/<recipe>')
@@ -48,7 +49,7 @@ def recipe_handler(recipe):
     :returns: template
     """
     if recipe not in recipe_lists:
-        return render_template('error.html',
+        return render_template('home.html',
                                recipes=recipe_lists,
                                type="is-warning",
                                recipe="Warning",
