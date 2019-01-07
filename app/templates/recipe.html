@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block recipe_input %}
+    <script src="{{url_for('static', filename='recipe.js')}}"></script>
     <div class="column is-one-third">
     <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
@@ -17,13 +18,13 @@
             {{docstring}}
         </div>
     </article>
-    <form action="/{{ recipe }}" method="GET">
+    <form id="recipe_input" recipe="{{recipe}}" method="GET">
         {% for key, value in recipe_contexts.items() %}
                 <div class="field">
                     <label class="label">{{key}}</label>
                     <p class="help">{{value[1].help}}</p>
-                    <div class="control">
-                        <input class="input" name={{key}} type="text" placeholder="Text input"
+                    <div id="recipe_contexts" class="control">
+                        <input class="input" id={{key}} name={{key}} type="text" placeholder="Text input"
                                {% if ("default" in value[1]) and (value[1].default != None) %}
                                    value={{value[1].default}}
                                {% endif %}  >
@@ -31,9 +32,8 @@
                 </div>
         {% endfor %}
         <div align="right">
-            <input class="button is-link" type="submit" value="Run">
+            <button id="submit_button" class="button is-link" type="submit">Run</button>
         </div>
-
     </form>
 
 
@@ -47,7 +47,8 @@
             <div class="message-header">
                 <p>Result</p>
             </div>
-            {{result}}
+            <table id="recipe_result" class="table is-bordered is-striped is-hoverable is-fullwidth"> </table>
+
         </article>
     </div>
 {% endblock recipe_result %}

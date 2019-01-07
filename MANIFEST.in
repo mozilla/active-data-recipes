@@ -2,3 +2,4 @@ include adr/queries/*
 include adr/recipes/*
 include adr/util/*
 include adr/*.yml
+include app/*

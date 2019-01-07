@@ -31,7 +31,7 @@ setup(
     author_email='ahalberstadt@mozilla.com',
     url='https://github.com/ahal/active-data-recipes',
     license='MPL',
-    packages=['adr'],
+    packages=['adr', 'app'],
     include_package_data=True,
     install_requires=DEPS,
     entry_points="""
