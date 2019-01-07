@@ -1,8 +1,6 @@
-from flask import Flask, request, render_template, Markup
+from flask import Flask, request, render_template, Markup, make_response
 import os
-import markdown
-from adr import recipes
-from adr.recipe import run_recipe, get_docstring, get_recipe_contexts
+from adr import recipes, recipe
 from adr.util.config import Configuration
 import adr
 
@@ -42,47 +40,51 @@ def home():
                                    " Please choose recipe to run!")
 
 
-@app.route('/<recipe>')
-def recipe_handler(recipe):
+@app.route('/<recipe_name>')
+def recipe_handler(recipe_name):
     """
     :param list recipe:the name of the selected recipe file
     :returns: template
     """
-    if recipe not in recipe_lists:
+    if recipe_name not in recipe_lists:
         return render_template('home.html',
                                recipes=recipe_lists,
                                type="is-warning",
                                recipe="Warning",
                                error="Please choose recipe to run"), 404
 
+    recipe_contexts = recipe.get_recipe_contexts(recipe_name)
+
     # If having args, mean running recipe
     if len(request.args) > 0:
-        return handle_recipe(recipe, request)
-    # Otherwise, just show recipe web
+        # Update value of context
+        for k, v in recipe_contexts.items():
+            if k in request.args:
+                v[1]['default'] = request.args[k]
 
-    recipe_contexts = get_recipe_contexts(recipe)
-
-    return render_template('recipe.html', recipes=recipe_lists, recipe=recipe,
+    return render_template('recipe.html', recipes=recipe_lists, recipe=recipe_name,
                            recipe_contexts=recipe_contexts,
-                           docstring=Markup(get_docstring(recipe)))
+                           docstring=Markup(recipe.get_docstring(recipe_name)))
 
 
-def handle_recipe(recipename, request):
-    recipe_contexts = get_recipe_contexts(recipename)
+def run_recipe(recipe_name, request, fmt='json'):
+    recipe_contexts = recipe.get_recipe_contexts(recipe_name)
 
     args = request.args.to_dict(flat=True)
     for key in args:
         context_type = recipe_contexts[key][1].get('type')
         args[key] = context_type(args[key]) if context_type else args[key]
 
-    config.fmt = 'markdown'
-    result_md = run_recipe(recipename, args, config, False)
-    table_html = markdown.markdown(result_md, extensions=['markdown.extensions.tables'])
-    table_style = "<table class=\"table is-bordered is-striped is-hoverable is-fullwidth\">"
-    table_html = table_html.replace("<table>", table_style)
-    return render_template('recipe.html', recipes=recipe_lists, recipe=recipename,
-                           recipe_contexts=recipe_contexts,
-                           docstring=Markup(get_docstring(recipename)), result=Markup(table_html))
+    config.fmt = fmt
+    return recipe.run_recipe(recipe_name, args, config, False)
+
+
+@app.route("/api/v1/<recipe_name>")
+def run_recipe_api(recipe_name):
+    data = run_recipe(recipe_name, request)
+    result = make_response(data)
+    result.mimetype = 'application/json'
+    return result
 
 
 def main():
