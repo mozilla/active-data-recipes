@@ -32,7 +32,7 @@ function buildHtmlTable(output, response) {
     });
 }
 
-function run_recipe(url, params) {
+function runRecipe(url, params) {
     var recipe = url.substr(url.lastIndexOf('/') + 1);
     var api_url = "api/v1/" + recipe + "?" + params;
     $("#submit_button").addClass("is-loading");
@@ -59,7 +59,7 @@ $(function(){
     var url = loc[0];
     var params = loc[1];
     if (params) {
-        run_recipe(url, params);
+        runRecipe(url, params);
     }
 
     $("#recipe_input").submit(function(event) {
@@ -68,6 +68,6 @@ $(function(){
 
         // get the action attribute from the <form action=""> element
         var form = $(this);
-        run_recipe(url, form.serialize());
+        runRecipe(url, form.serialize());
     });
 });
