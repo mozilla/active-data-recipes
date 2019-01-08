@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block recipe_input %}
-    <script src="{{url_for('static', filename='recipe.js')}}"></script>
+
     <div class="column is-one-third">
     <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
@@ -52,3 +52,7 @@
         </article>
     </div>
 {% endblock recipe_result %}
+
+{% block specific_script %}
+    <script src="{{url_for('static', filename='recipe.js')}}"></script>
+{% endblock specific_script %}

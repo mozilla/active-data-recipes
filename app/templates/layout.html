@@ -5,12 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Active Data Recipe Runner</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-        <script
-            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
-            crossorigin="anonymous"></script>
-        <script src="{{url_for('static', filename='adr.js') }}"></script>
+
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -92,6 +87,13 @@
         {% endblock %}
     </body>
 
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='adr.js') }}"></script>
+    {% block specific_script %} {% endblock %}
 
 
 </html>
