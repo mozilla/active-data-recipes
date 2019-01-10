@@ -116,3 +116,9 @@ def get_docstring(recipe):
     modname = '.recipes.{}'.format(recipe)
     mod = importlib.import_module(modname, package='adr')
     return publish_parts(mod.__doc__, writer_name='html')['html_body']
+
+
+def is_fail(recipe):
+    modname = '.recipes.{}'.format(recipe)
+    mod = importlib.import_module(modname, package='adr')
+    return hasattr(mod, "is_fail") and mod.is_fail()

@@ -10,6 +10,10 @@ from __future__ import print_function, absolute_import
 from ..query import run_query
 
 
+def is_fail():
+    return True
+
+
 def run(config, args):
     """
     THIS IS PRONE TO DOUBLE COUNTING, AS DIFFERENT TEST CHUNKS COVER COMMON LINES

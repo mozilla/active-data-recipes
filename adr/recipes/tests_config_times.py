@@ -10,6 +10,10 @@ from __future__ import print_function, absolute_import
 from ..query import run_query
 
 
+def is_fail():
+    return True
+
+
 def run(config, args):
 
     result = run_query('tests_config_times', config, args)['data']

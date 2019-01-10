@@ -29,6 +29,10 @@ RUN_CONTEXTS = ['from_date', 'to_date',
                 ]
 
 
+def is_fail():
+    return True
+
+
 def run(config, args):
 
     header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
