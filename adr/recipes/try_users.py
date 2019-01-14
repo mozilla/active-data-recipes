@@ -29,8 +29,7 @@ RUN_CONTEXTS = ['from_date', 'to_date',
                 ]
 
 
-def is_fail():
-    return True
+BROKEN = True
 
 
 def run(config, args):

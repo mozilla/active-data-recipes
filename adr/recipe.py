@@ -67,6 +67,18 @@ def get_recipe_contexts(recipe, mod=None):
     return recipe_context_def
 
 
+def get_module(name):
+    """
+    Get module of a recipe
+    Args:
+        name (str): name of recipe
+    :return: module
+    """
+    modname = '.recipes.{}'.format(name)
+    mod = importlib.import_module(modname, package='adr')
+    return mod
+
+
 def run_recipe(recipe, args, config, from_cli=True):
     """Given a recipe, calls the appropriate query and returns the result.
 
@@ -82,8 +94,7 @@ def run_recipe(recipe, args, config, from_cli=True):
 
     """
 
-    modname = '.recipes.{}'.format(recipe)
-    mod = importlib.import_module(modname, package='adr')
+    mod = get_module(recipe)
 
     recipe_context_def = get_recipe_contexts(recipe, mod)
 
@@ -113,12 +124,10 @@ def get_docstring(recipe):
     Result:
         html (transformed from rst)
     """
-    modname = '.recipes.{}'.format(recipe)
-    mod = importlib.import_module(modname, package='adr')
+    mod = get_module(recipe)
     return publish_parts(mod.__doc__, writer_name='html')['html_body']
 
 
 def is_fail(recipe):
-    modname = '.recipes.{}'.format(recipe)
-    mod = importlib.import_module(modname, package='adr')
-    return hasattr(mod, "is_fail") and mod.is_fail()
+    mod = get_module(recipe)
+    return getattr(mod, "BROKEN", False)

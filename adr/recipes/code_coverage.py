@@ -10,8 +10,7 @@ from __future__ import print_function, absolute_import
 from ..query import run_query
 
 
-def is_fail():
-    return True
+BROKEN = True
 
 
 def run(config, args):

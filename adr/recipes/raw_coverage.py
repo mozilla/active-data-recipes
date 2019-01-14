@@ -18,6 +18,7 @@ from ..query import run_query
 
 OUTPUTFILE_PREFIX = 'coverage_map'
 log = logging.getLogger('adr')
+BROKEN = True
 
 
 def removeJob(lines, jobname):
@@ -39,10 +40,6 @@ def taskclusterName(jobname):
     # output data to .json file, create format like: test-linux64/debug-<jobname>
     # todo, there are a lot of exceptions.
     return "test-linux64/debug-%s" % jobname
-
-
-def is_fail():
-    return True
 
 
 def run(config, args):
