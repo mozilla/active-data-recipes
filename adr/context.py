@@ -42,7 +42,7 @@ COMMON_CONTEXTS = {
                'help': "limit the number of rows in result"
                }],
 
-    'rev': [['-r', '--revision'],
+    'rev': [['-r', '--revision', '--rev'],
             {'default': '5b33b070378a',
              'help': "Revision to limit results to",
              }],
