@@ -76,8 +76,12 @@ def recipe_handler(recipe_name):
 
 def run_recipe(recipe_name, request, fmt='json'):
     recipe_contexts = recipe.get_recipe_contexts(recipe_name)
-
     args = request.args.to_dict(flat=True)
+
+    for key, value in recipe_contexts.items():
+        if "default" in value[1]:
+            args.setdefault(key, value[1]["default"])
+
     for key in args:
         context_type = recipe_contexts[key][1].get('type')
         args[key] = context_type(args[key]) if context_type else args[key]
