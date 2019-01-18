@@ -65,11 +65,6 @@ def recipe_handler(recipe_name):
         for k, v in recipe_contexts.items():
             if k in request.args:
                 v[1]['default'] = request.args[k]
-    else:
-        # Transform type into string
-        for k, v in recipe_contexts.items():
-            if 'type' in v[1]:
-                v[1]['type'] = v[1]['type'].__name__
 
     return render_template('recipe.html', recipes=recipe_lists, recipe=recipe_name,
                            recipe_contexts=recipe_contexts,
