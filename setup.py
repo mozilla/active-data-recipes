@@ -18,7 +18,7 @@ DEPS = [
     'flask',
     'markdown',
     'docutils',
-    'pygments'
+    'pygments',
 ]
 
 setup(

@@ -20,16 +20,6 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 
 QUERY_DIR = os.path.join(here, 'queries')
-FAKE_CONTEXT = {
-    'branches': ['mozilla-central'],
-    'build_type': 'opt',
-    'from_date': 'today-week',
-    'to_date': 'today',
-    'rev': '5b33b070378a',
-    'path': 'dom/indexedDB',
-    'limit': 10,
-    'format': 'table',
-}
 
 
 def format_date(timestamp, interval='day'):
@@ -141,19 +131,38 @@ def run_query(name, config, args):
     return query_activedata(query_str, config.url)
 
 
-def format_query(query, config):
+def format_query(query, config, remainder=[]):
     """Takes the output of the ActiveData query and performs formatting.
 
     The result(s) from a query call to ActiveData is returned,
     which is then formatted as per the fmt argument.
 
     :param name query: name of the query file to be run.
+    :param remainder: user contexts
     :param Configuration config: config object.
     """
     if isinstance(config.fmt, str):
         fmt = all_formatters[config.fmt]
 
-    result = run_query(query, config, Namespace(**FAKE_CONTEXT))
+    # change list to dict
+    args = {}
+    i = 0
+    while i < len(remainder):
+        args[remainder[i]] = remainder[i+1]
+        i += 2
+
+    # get contexts from cli, if not get default value
+    real_contexts = {}
+    query_context = load_query_context(query)
+    for key, value in query_context.items():
+        for name in value[0]:
+            if name in args:
+                real_contexts[key] = args[name]
+                pass
+            elif 'default' in value[1]:
+                real_contexts[key] = value[1]['default']
+
+    result = run_query(query, config, Namespace(**real_contexts))
     data = result['data']
     debug_url = None
     if 'saved_as' in result['meta']:
