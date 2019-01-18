@@ -13,6 +13,11 @@ backout_rate
 .. automodule:: adr.recipes.backout_rate
     :no-undoc-members:
 
+branch_usage
+------------
+
+.. automodule:: adr.recipes.branch_usage
+
 code_coverage
 -------------
 

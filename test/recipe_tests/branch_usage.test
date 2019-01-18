@@ -1,0 +1,39 @@
+recipe: branch_usage
+args: []
+queries:
+- data: {hours: 65303.79794892947, tasks: 183252}
+  select:
+  - aggregate: sum
+    name: hours
+    pull: <function output at 0x7f9148113aa0>
+    query_path: .
+    value:
+      div: [3600, action.duration]
+  - {aggregate: count, default: 0, name: tasks, pull: <function output at 0x7f9123994f50>,
+    query_path: ., value: .}
+- data: {hours: 22482.91951333649, tasks: 76093}
+  select:
+  - aggregate: sum
+    name: hours
+    pull: <function output at 0x7f9122764de8>
+    query_path: .
+    value:
+      div: [3600, action.duration]
+  - {aggregate: count, default: 0, name: tasks, pull: <function output at 0x7f9123994758>,
+    query_path: ., value: .}
+- data: {hours: 29298.853640273162, tasks: 83916}
+  select:
+  - aggregate: sum
+    name: hours
+    pull: <function output at 0x7f9122764410>
+    query_path: .
+    value:
+      div: [3600, action.duration]
+  - {aggregate: count, default: 0, name: tasks, pull: <function output at 0x7f9148e116e0>,
+    query_path: ., value: .}
+expected:
+- [Branch, Total Compute Hours, Percentage]
+- [total, 117083, 100.0]
+- [autoland, 65303, 55.8]
+- [mozilla-inbound, 29298, 25.0]
+- [mozilla-central, 22482, 19.2]

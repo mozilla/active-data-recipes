@@ -9,4 +9,8 @@ where:
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
         - lte: [action.duration, 18000]
+        - eq: {build.type: {$eval: build_type}}
 limit: 1000
+
+context:
+    build_type: [["-b", "--build-type"], {default: "all", help: "Build type (default: all)"}]

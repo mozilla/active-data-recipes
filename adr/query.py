@@ -22,6 +22,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 QUERY_DIR = os.path.join(here, 'queries')
 FAKE_CONTEXT = {
     'branches': ['mozilla-central'],
+    'build_type': 'opt',
     'from_date': 'today-week',
     'to_date': 'today',
     'rev': '5b33b070378a',
@@ -132,6 +133,10 @@ def run_query(name, config, args):
 
     query = jsone.render(query, context)
     query_str = json.dumps(query, indent=2, separators=(',', ':'))
+
+    # translate "all" to a null value (which ActiveData will treat as all)
+    query_str = query_str.replace('"all"', 'null')
+
     log.debug("Running query {}:\n{}".format(name, query_str))
     return query_activedata(query_str, config.url)
 
