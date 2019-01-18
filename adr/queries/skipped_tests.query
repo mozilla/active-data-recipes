@@ -15,4 +15,4 @@ where:
 limit: 1000
 format: table
 context:
-    suite: [["--suite"], {default: "null", help: "Select suite to get skipped tests from. By default, gets data from all suites."}]
+    suite: [["--suite"], {default: "all", help: "Select suite to get skipped tests from (default all)."}]

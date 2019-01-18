@@ -29,15 +29,13 @@ def cli(args=sys.argv[1:]):
     orig_run_query = query.run_query
     query_results = []
 
-    def new_run_query(name, config, **context):
-        context['limit'] = 10
-        qgen = orig_run_query(name, config, **context)
-
-        for result in qgen:
-            mock_result = deepcopy(result)
-            mock_result.pop('meta')
-            query_results.append(mock_result)
-            yield result
+    def new_run_query(name, config, context):
+        context.limit = 10
+        result = orig_run_query(name, config, context)
+        mock_result = deepcopy(result)
+        mock_result.pop('meta')
+        query_results.append(mock_result)
+        return result
 
     query.run_query = new_run_query
     cfg = Configuration(os.path.join(os.path.dirname(here), 'config.yml'))
