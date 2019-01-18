@@ -84,9 +84,13 @@ def run_recipe(recipe_name, request, fmt='json'):
         if "default" in value[1]:
             args.setdefault(key, value[1]["default"])
 
-    for key in args:
-        context_type = recipe_contexts[key][1].get('type')
-        args[key] = context_type(args[key]) if context_type else args[key]
+    for key, value in args.items():
+        context = recipe_contexts[key][1]
+
+        if context.get('action') == 'append' and isinstance(value, str):
+            args[key] = value.split()
+        elif context.get('type'):
+            args[key] = context['type'](value)
 
     config.fmt = fmt
     return recipe.run_recipe(recipe_name, args, config, False)
