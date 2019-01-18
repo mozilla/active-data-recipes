@@ -1,12 +1,16 @@
 from __future__ import print_function, absolute_import
 
 import os
-
+import sys
+import pytest
 import yaml
 
-here = os.path.abspath(os.path.dirname(__file__))
+from imp import reload
+from io import StringIO
 
-pytest_plugins = ["test.fixtures"]
+import adr
+
+here = os.path.abspath(os.path.dirname(__file__))
 
 
 def load_recipe_tests():
@@ -72,3 +76,45 @@ def pytest_generate_tests(metafunc):
             list(
                 load_formatter_tests('table_')),
             ids=formatter_idfn)
+
+
+@pytest.fixture
+def patch_active_data(monkeypatch):
+    class new_run_query(object):
+        def __init__(self, test):
+            self.test = test
+            self.index = 0
+
+        def __call__(self, query, *args, **kwargs):
+            if len(self.test['queries']) <= self.index:
+                pytest.fail("not enough mocked query data found in '{}.test'".format(
+                    self.test['recipe']))
+
+            result = self.test['queries'][self.index]
+            self.index += 1
+            return result
+
+    def patch(recipe_test):
+        monkeypatch.setattr(adr.query, 'query_activedata',
+                            new_run_query(recipe_test))
+        module = 'adr.recipes.{}'.format(recipe_test['recipe'])
+        if module in sys.modules:
+            reload(sys.modules[module])
+
+    return patch
+
+
+@pytest.fixture
+def validate():
+    def do_validate(recipe_test, actual):
+        buf = StringIO()
+        yaml.dump(actual, buf)
+        print("Yaml formatted result for copy/paste:")
+        print(buf.getvalue())
+
+        buf = StringIO()
+        yaml.dump(recipe_test['expected'], buf)
+        print("\nYaml formatted expected:")
+        print(buf.getvalue())
+        assert actual == recipe_test['expected']
+    return do_validate
