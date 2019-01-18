@@ -1,5 +1,6 @@
 import ast
 import inspect
+from copy import deepcopy
 
 from jsone.interpreter import ExpressionEvaluator
 from jsone.prattparser import prefix
@@ -70,6 +71,24 @@ COMMON_CONTEXTS = {
 These are commonly used arguments which can be re-used. They are shared to
 provide a consistent CLI across recipes/queries. Ordered by alphabet.
 """
+
+
+def override(name, **overrides):
+    """Use a common context and override some of the argparse parameters.
+
+    Args:
+        name (str): Name of the common context to wrap.
+        overrides (kwargs): Overrides the specified parameters to
+                           argparse.add_argument().
+
+    Returns:
+        A context entry with the updated values.
+    """
+    assert name in COMMON_CONTEXTS
+
+    context = deepcopy(COMMON_CONTEXTS[name])
+    context[1].update(**overrides)
+    return {name: context}
 
 
 class ContextExtractor(ExpressionEvaluator):

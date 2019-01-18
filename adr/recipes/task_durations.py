@@ -10,6 +10,7 @@ runtime and total runtime over a given date range and set of branches.
 """
 from __future__ import absolute_import, print_function
 
+from ..context import override
 from ..query import run_query
 
 DEFAULT_BRANCHES = [
@@ -18,24 +19,27 @@ DEFAULT_BRANCHES = [
     'mozilla-central',
 ]
 
-RUN_CONTEXTS = ['from_date', 'to_date', 'platform',
-                {'limit': [['--limit'],
-                           {'type': int,
-                            'default': 20,
-                            'help': "Maximum number of jobs in result"
-                            }]},
-                {'sort_key': [['--sort-key'],
-                              {'type': int,
-                               'default': 2,
-                               'help': "Key to sort on (int, 0-based index)",
-                               }]},
-                {'branch': [['--branch'],
-                            {'default': DEFAULT_BRANCHES,
-                             'nargs': '+',
-                             'help': "Branches to gather backout rate on, can be specified "
-                                     "multiple times."
-                             }]}
-                ]
+RUN_CONTEXTS = [
+    'from_date',
+    'to_date',
+    'platform',
+    override('branch', **{
+        'default': DEFAULT_BRANCHES,
+        'nargs': '+',
+        'help': "Branches to gather backout rate on, can be specified "
+                "multiple times."
+    }),
+    {'limit': [['--limit'],
+               {'type': int,
+                'default': 20,
+                'help': "Maximum number of jobs in result"
+                }]},
+    {'sort_key': [['--sort-key'],
+                  {'type': int,
+                   'default': 2,
+                   'help': "Key to sort on (int, 0-based index)",
+                   }]},
+]
 
 
 def run(config, args):
