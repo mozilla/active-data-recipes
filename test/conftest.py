@@ -6,6 +6,8 @@ import yaml
 
 here = os.path.abspath(os.path.dirname(__file__))
 
+pytest_plugins = ["test.fixtures"]
+
 
 def load_recipe_tests():
     recipe_dir = os.path.join(here, 'recipe_tests')

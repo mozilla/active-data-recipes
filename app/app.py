@@ -90,7 +90,10 @@ def run_recipe(recipe_name, request, fmt='json'):
     return recipe.run_recipe(recipe_name, args, config, False)
 
 
-@app.route("/api/v1/<recipe_name>")
+API_BASE_PATH = "/api/v1/"
+
+
+@app.route(API_BASE_PATH + "<recipe_name>")
 def run_recipe_api(recipe_name):
     data = run_recipe(recipe_name, request)
     result = make_response(data)
