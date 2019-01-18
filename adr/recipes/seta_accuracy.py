@@ -6,10 +6,9 @@ Show CI regressions found and SETA miss rate by week
     adr seta_accuracy [-B <branch>] [--from <date> [--to <date>]]
 """
 
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 import logging
-
 from datetime import date, timedelta
 
 from ..query import run_query

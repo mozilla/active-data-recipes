@@ -5,10 +5,9 @@ Get code coverage information for the given `path` at `rev`. Both arguments are 
 
     adr code_coverage --path <path> --rev <rev>
 """
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 from ..query import run_query
-
 
 BROKEN = True
 

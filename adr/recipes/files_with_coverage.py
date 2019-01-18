@@ -7,10 +7,10 @@ See how many files in tree have any code coverage at all.
 
 `View Results <https://mozilla.github.io/active-data-recipes/#files-with-coverage>`__
 """
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
-from ..query import run_query
 from ..errors import MissingDataError
+from ..query import run_query
 
 
 def run(config, args):

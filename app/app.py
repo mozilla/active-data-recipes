@@ -1,8 +1,10 @@
-from flask import Flask, request, render_template, Markup, make_response
 import os
-from adr import recipes, recipe
-from adr.util.config import Configuration
+
+from flask import Flask, Markup, make_response, render_template, request
+
 import adr
+from adr import recipe, recipes
+from adr.util.config import Configuration
 
 
 app = Flask(__name__)

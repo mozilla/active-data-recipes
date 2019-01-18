@@ -7,7 +7,7 @@ week. The date range can be modified the same as the `hours_on_try` recipe.
     adr try_users
 """
 
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 from collections import defaultdict
 

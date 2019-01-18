@@ -1,9 +1,10 @@
+import json
+from urllib.parse import urlencode
+
 import pytest
 
-import json
-from app import app
-from urllib.parse import urlencode
 from adr.recipe import get_recipe_contexts
+from app import app
 
 
 @pytest.fixture

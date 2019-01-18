@@ -5,7 +5,7 @@ See the number of tests that have a duration in pre-selected buckets.
 
     adr test_durations
 """
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 from ..query import run_query
 

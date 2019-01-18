@@ -5,7 +5,7 @@ Get the average and total runtime for build platforms and types.
 
     adr config_durations [--branch <branch>]
 """
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 from ..query import run_query
 

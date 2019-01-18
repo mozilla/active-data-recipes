@@ -1,4 +1,4 @@
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 import logging
 import os
@@ -9,7 +9,7 @@ from distutils.spawn import find_executable
 
 import yaml
 
-from ..cli import run_recipe, log
+from ..cli import log, run_recipe
 from ..util.config import Configuration
 
 DEFAULT_CONFIG = os.path.expanduser(os.path.join('~', '.adr-gist.yml'))

@@ -1,6 +1,6 @@
+import requests
 from bs4 import BeautifulSoup
 
-import requests
 MOZILLA_CENTRAL_URL = "https://hg.mozilla.org/mozilla-central/file"
 
 

@@ -1,7 +1,9 @@
+import json
 import os
 import subprocess
-import json
+
 from pytest import mark, xfail
+
 from adr.recipe import is_fail
 
 TEST_CASES = [

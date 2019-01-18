@@ -6,7 +6,7 @@ Both arguments are required.
 
     adr code_coverage_by_suite --path <path> --rev <rev>
 """
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 from ..query import run_query
 

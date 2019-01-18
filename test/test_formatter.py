@@ -1,6 +1,8 @@
-from adr.formatter import JSONFormatter, TabFormatter, TableFormatter
-from terminaltables import GithubFlavoredMarkdownTable, SingleTable
 import json
+
+from terminaltables import GithubFlavoredMarkdownTable, SingleTable
+
+from adr.formatter import JSONFormatter, TabFormatter, TableFormatter
 
 
 class TestJSONFormatter(object):

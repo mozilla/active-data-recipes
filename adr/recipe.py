@@ -1,15 +1,17 @@
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 import importlib
 import logging
 import os
+from argparse import ArgumentParser, Namespace
 
 from docutils.core import publish_parts
-from .query import load_query_context
-from argparse import ArgumentParser, Namespace
-from adr.formatter import all_formatters
-from .errors import MissingDataError
+
 from adr import context
+from adr.errors import MissingDataError
+from adr.formatter import all_formatters
+from adr.query import load_query_context
+
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 

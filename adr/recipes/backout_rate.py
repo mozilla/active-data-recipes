@@ -8,7 +8,7 @@ Get information on the backout rate on autoland and mozilla-inbound over the giv
 
 `View Results <https://mozilla.github.io/active-data-recipes/#backout-rate>`__
 """
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 from ..query import run_query
 

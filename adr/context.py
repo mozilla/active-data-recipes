@@ -1,5 +1,6 @@
 import ast
 import inspect
+
 from jsone.interpreter import ExpressionEvaluator
 from jsone.prattparser import prefix
 

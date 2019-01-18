@@ -9,9 +9,9 @@ same as the `hours_on_try` recipe.
 
 `View Results <https://mozilla.github.io/active-data-recipes/#try-usage>`__
 """
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
-from collections import defaultdict, OrderedDict
+from collections import OrderedDict, defaultdict
 
 from ..query import run_query
 

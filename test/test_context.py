@@ -1,5 +1,6 @@
-from adr import context
 import pytest
+
+from adr import context
 
 CONTEXTS = [
     ({
