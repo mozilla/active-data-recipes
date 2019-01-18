@@ -2,7 +2,7 @@ where:
     and:
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
-        - in: {repo.branch.name: {$eval: branch}}
+        - in: {repo.branch.name: {$eval: branches}}
         - regex: {result.test: ".*/.*"}
         - regex: {result.test: {$eval: test_name}}
         - prefix: {run.key: {$eval: platform_config}}

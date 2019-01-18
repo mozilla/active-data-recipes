@@ -88,12 +88,8 @@ def run(config, args):
         from_date = str(date.today())
     from_date = from_date.split('-')
 
-    branch = args.branch
-
-    if not branch or branch == ['mozilla-central']:
-        branch = BRANCH_WHITELIST
-
-    args.branch = branch
+    if not args.branches or args.branches == ['mozilla-central']:
+        args.branches = BRANCH_WHITELIST
 
     start = date(int(from_date[0]), int(from_date[1]), int(from_date[2]))
     end = date(int(to_date[0]), int(to_date[1]), int(to_date[2]))

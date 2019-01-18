@@ -2,7 +2,7 @@ where:
     and:
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
-        - in: {repo.branch.name: {$eval: branch}}
+        - in: {repo.branch.name: {$eval: branches}}
         - prefix: {job.type.name: {$eval: platform_config}}
         - in: {failure.classification: ["intermittent", "autoclassified intermittent"]}
 limit: 5000

@@ -7,7 +7,7 @@ groupby:
     - "build.type"
 where:
     and:
-        - in: {repo.branch.name: {$eval: branch}}
+        - in: {repo.branch.name: {$eval: branches}}
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
         - in: {run.suite.name: ["mochitest", "reftest", "web-platform-tests", "web-platform-tests-reftests", "xpcshell", "marionette", "firefox-ui", "cppunittest", "gtest", "jittest", "awsy", "web-platform-tests-wdspec", "test-verification"]}

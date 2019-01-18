@@ -2,8 +2,8 @@ from: unittest
 format: cube
 edges:
     - {domain: {
-        type: range, 
-        key: name, 
+        type: range,
+        key: name,
         partitions: [
             {max: 1, min: 0, dataIndex: 0, name: 1sec},
             {max: 2, min: 1, dataIndex: 1, name: 2sec},
@@ -22,7 +22,7 @@ edges:
 limit: 10000
 where:
     and:
-        - in: {repo.branch.name: {$eval: branch}}
+        - in: {repo.branch.name: {$eval: branches}}
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
         - eq: {build.type: {$eval: build_type}}

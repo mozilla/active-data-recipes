@@ -23,12 +23,7 @@ RUN_CONTEXTS = [
     'from_date',
     'to_date',
     'platform',
-    override('branch', **{
-        'default': DEFAULT_BRANCHES,
-        'nargs': '+',
-        'help': "Branches to gather backout rate on, can be specified "
-                "multiple times."
-    }),
+    override('branches', default=DEFAULT_BRANCHES),
     {'limit': [['--limit'],
                {'type': int,
                 'default': 20,
