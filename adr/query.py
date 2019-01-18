@@ -21,7 +21,6 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 QUERY_DIR = os.path.join(here, 'queries')
 FAKE_CONTEXT = {
-    'branch': 'mozilla-central',
     'branches': ['mozilla-central'],
     'from_date': 'today-week',
     'to_date': 'today',

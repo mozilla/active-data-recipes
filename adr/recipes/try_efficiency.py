@@ -21,7 +21,7 @@ def run(config, args):
     backouts = len(set(run_query('backout_rate', config, args)['data']['push.id']))
     backout_rate = round((float(backouts) / pushes) * 100, 2)
 
-    args.branch = 'try'
+    args.branches = ['try']
     data = run_query('total_hours_spent_on_branch', config, args)['data']
 
     try_hours = int(data['hours'])

@@ -2,7 +2,7 @@ where:
     and:
         - gte: {result.duration: {$eval: min_seconds}}
         - lt: {result.duration: {$eval: max_seconds}}
-        - in: {repo.branch.name: {$eval: branch}}
+        - in: {repo.branch.name: {$eval: branches}}
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
         - eq: {build.type: {$eval: build_type}}
