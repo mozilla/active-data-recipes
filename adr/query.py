@@ -66,13 +66,8 @@ def query_activedata(query, url):
 def load_query(name):
     """Loads the specified query from the disk.
 
-    Given name of a query, the file is opened using a monad.
-
     No checks are necessary as adr.cli:query_handler filters
     requests for queries that do not exist.
-
-    Generator is created to the calling method to handle cases
-    where a single query file contains more than one query.
 
     Args:
         name (str): name of the query to be run.

@@ -51,9 +51,6 @@ def get_recipe_contexts(recipe, mod=None):
     # try to extract name of query and run contexts automatically from run function
     queries, run_contexts = context.extract_arguments(mod.run, "run_query")
 
-    # get name of queries and/or run contexts by function
-    if hasattr(mod, 'QUERRY_LIST'):
-        queries = mod.QUERRY_LIST
     if hasattr(mod, 'RUN_CONTEXTS'):
         run_contexts = mod.RUN_CONTEXTS
 
