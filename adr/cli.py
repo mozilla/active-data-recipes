@@ -18,8 +18,6 @@ log = logging.getLogger('adr')
 log.setLevel(logging.DEBUG)
 log.addHandler(logging.StreamHandler())
 
-MAPPING = {'query': 'queries', 'recipe': 'recipes'}
-
 
 def format_request(request, config, remainder, request_type):
 
@@ -39,17 +37,17 @@ def request_handler(args, remainder, config, parser, request_type):
     :param Namespace args: Namespace object produced by main().
     :param list remainder: List of unknown arguments.
     :param Configuration config: config object
-    :param parser: parser object
+    :param parser: ArgumentParser object
     :param str request_type: "query"/"recipe"
     :return: None
     """
 
-    request_dir = os.path.join(here, MAPPING[request_type])
-
     if request_type == 'query':
+        request_dir = os.path.join(here, "queries")
         request_list = [os.path.splitext(item)[0] for item in os.listdir(
             request_dir) if item.endswith('.query')]
     else:
+        request_dir = os.path.join(here, "recipes")
         request_list = [os.path.splitext(item)[0] for item in os.listdir(
             request_dir) if item != '__init__.py' and item.endswith('.py')]
 
@@ -150,71 +148,6 @@ def _set_logging_verbosity(is_verbose):
     :param bool is_verbose: Speciies if -v flag has been supplied when adr was invoked.
     """
     log.setLevel(logging.DEBUG) if is_verbose else log.setLevel(logging.INFO)
-
-
-# def main(args=sys.argv[1:]):
-#     """Entry point for the adr module.
-#
-#     When the adr module is called, this method is run.
-#
-#     The argument list is parsed, and the appropriate parser or subparser is created.
-#
-#     Using the argument list, arguments are parsed and grouped into a Namespace object
-#     representing known arguments, and a remainder list representing unknown arguments.
-#
-#     The method then calls the appropriate method for the action specified.
-#
-#     Supported use cases:
-#
-#     $ adr recipe <recipe_name>
-#     $ adr query <query_name>
-#     $ adr <recipe_name>
-#
-#     :param list args: command-line arguments.
-#     """
-#     # load config from file
-#     config = Configuration(os.path.join(here, 'config.yml'))
-#
-#     # create parsers and subparsers.
-#     parser = ArgumentParser(
-#         description='Runs adr recipes and/or queries.',
-#         conflict_handler='resolve')
-#
-#     # check that adr is invoked with at least a recipe or subcommand.
-#     _check_tasks_exist(args)
-#
-#     # determine if subparser are necessary.
-#     if 'query' in args or 'recipe' in args:
-#         subparser = parser.add_subparsers()
-#
-#     if args[0] != 'query':
-#         # if subcommand query is not specified, default to recipe.
-#         if args[0] == 'recipe':
-#             recipe_parser = subparser.add_parser(
-#                 'recipe', help='Recipe subcommand.', conflict_handler='resolve')
-#             recipe_parser = _build_parser_arguments(recipe_parser, config)
-#         else:
-#             parser = _build_parser_arguments(parser, config)
-#         parser.set_defaults(func=recipe_handler)
-#     else:
-#         query_parser = subparser.add_parser(
-#             'query', help='Query subcommand.', conflict_handler='resolve')
-#         query_parser = _build_parser_arguments(query_parser, config)
-#         query_parser.set_defaults(func=query_handler)
-#
-#     # parse all arguments, then pass to appropriate handler.
-#     parsed_args, remainder = parser.parse_known_args()
-#
-#     # Temporary disable debug if not query
-#     if not ('query' in args):
-#         parsed_args.debug = False
-#
-#     # store all non-recipe/query args into config
-#     # From this point, only config stores all non-recipe/query args
-#     # Additional args will go to remainder
-#     config.update(vars(parsed_args))
-#
-#     parsed_args.func(parsed_args, remainder, config, parser)
 
 
 def main(args=sys.argv[1:]):
