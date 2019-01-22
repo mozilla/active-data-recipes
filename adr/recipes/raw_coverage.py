@@ -12,8 +12,7 @@ import json
 import logging
 import os
 
-from ..query import run_query
-from ..recipe import RecipeParser
+from ..query import RequestParser, run_query
 
 OUTPUTFILE_PREFIX = 'coverage_map'
 log = logging.getLogger('adr')
@@ -42,7 +41,7 @@ def taskclusterName(jobname):
 
 
 def run(config, args):
-    parser = RecipeParser('path', 'rev')
+    parser = RequestParser('path', 'rev')
     parser.add_argument('--use-chunks', default=False, action="store_true",
                         help="use chunks in aggregating and reporting jobs.")
     parser.add_argument('--no-perf', default=False, action="store_true",

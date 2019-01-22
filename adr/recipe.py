@@ -3,36 +3,19 @@ from __future__ import absolute_import, print_function
 import importlib
 import logging
 import os
-from argparse import ArgumentParser, Namespace
+from argparse import Namespace
 
 from docutils.core import publish_parts
 
 from adr import context
 from adr.errors import MissingDataError
 from adr.formatter import all_formatters
-from adr.query import load_query_context
+from adr.query import RequestParser, load_query_context
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 
 RECIPE_DIR = os.path.join(here, 'recipes')
-
-
-class RecipeParser(ArgumentParser):
-
-    def __init__(self, definitions):
-        ArgumentParser.__init__(self)
-
-        for name, definition in definitions.items():
-            # definition of a context: {name: [[],{}]}
-            if isinstance(definition, dict):
-                self.add_argument(name, **definition)
-            elif len(definition) >= 2:
-                # Set destination from name
-                definition[1]['dest'] = name
-                self.add_argument(*definition[0], **definition[1])
-            else:
-                raise AttributeError("Definition of {} should be list of length 2".format(name))
 
 
 def get_recipe_contexts(recipe, mod=None):
@@ -98,7 +81,7 @@ def run_recipe(recipe, args, config, from_cli=True):
     recipe_context_def = get_recipe_contexts(recipe, mod)
 
     if from_cli:
-        parsed_args = vars(RecipeParser(recipe_context_def).parse_args(args))
+        parsed_args = vars(RequestParser(recipe_context_def).parse_args(args))
     else:
         parsed_args = args
 
