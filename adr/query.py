@@ -22,7 +22,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 QUERY_DIR = os.path.join(here, 'queries')
 
 
-class QueryParser(ArgumentParser):
+class RequestParser(ArgumentParser):
 
     def __init__(self, definitions):
         ArgumentParser.__init__(self)
@@ -162,7 +162,7 @@ def format_query(query, config, remainder=[]):
         fmt = all_formatters[config.fmt]
 
     query_context = load_query_context(query)
-    args = vars(QueryParser(query_context).parse_args(remainder))
+    args = vars(RequestParser(query_context).parse_args(remainder))
 
     # get contexts from cli, if not get default value
     real_contexts = {}

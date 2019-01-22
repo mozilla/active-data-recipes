@@ -12,7 +12,7 @@ from __future__ import absolute_import, print_function
 from collections import defaultdict
 
 from ..query import run_query
-from ..recipe import RecipeParser
+from ..recipe import RequestParser
 
 RUN_CONTEXTS = [
     'from_date',
@@ -38,7 +38,7 @@ def run(config, args):
 
     header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
     if args.sort_key < 0 or len(header) - 1 < args.sort_key:
-        RecipeParser.error("invalid value for 'sort_key'")
+        RequestParser.error("invalid value for 'sort_key'")
 
     args.branch = 'try'
     limit = args.limit
