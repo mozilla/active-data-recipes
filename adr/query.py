@@ -5,7 +5,7 @@ import json
 import logging
 import os
 import time
-from argparse import Namespace
+from argparse import ArgumentParser, Namespace
 
 import jsone
 import requests
@@ -20,6 +20,23 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 
 QUERY_DIR = os.path.join(here, 'queries')
+
+
+class QueryParser(ArgumentParser):
+
+    def __init__(self, definitions):
+        ArgumentParser.__init__(self)
+
+        for name, definition in definitions.items():
+            # definition of a context: {name: [[],{}]}
+            if isinstance(definition, dict):
+                self.add_argument(name, **definition)
+            elif len(definition) >= 2:
+                # Set destination from name
+                definition[1]['dest'] = name
+                self.add_argument(*definition[0], **definition[1])
+            else:
+                raise AttributeError("Definition of {} should be list of length 2".format(name))
 
 
 def format_date(timestamp, interval='day'):
@@ -144,16 +161,12 @@ def format_query(query, config, remainder=[]):
     if isinstance(config.fmt, str):
         fmt = all_formatters[config.fmt]
 
-    # change list to dict
-    args = {}
-    i = 0
-    while i < len(remainder):
-        args[remainder[i]] = remainder[i+1]
-        i += 2
+    query_context = load_query_context(query)
+    args = vars(QueryParser(query_context).parse_args(remainder))
 
     # get contexts from cli, if not get default value
     real_contexts = {}
-    query_context = load_query_context(query)
+
     for key, value in query_context.items():
         for name in value[0]:
             if name in args:
