@@ -8,7 +8,7 @@ _adr_completion() {
     local cur dir ext targets
     COMPREPLY=()
 
-    dir="$PWD/adr"
+    dir=$(python -c "import adr, os; print(os.path.dirname(adr.__file__))")
     if [[ $COMP_LINE == *" query"* ]]; then
         dir="$dir/queries"
         ext="query"
