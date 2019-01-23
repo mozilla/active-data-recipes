@@ -11,7 +11,7 @@ COMMON_CONTEXTS = {
                       'default': None,
                       'help': "Display values of specified attribute within --table."}],
     'branches': [['-B', '--branch'],
-                 {'default': [],
+                 {'default': ["mozilla-central"],
                   'action': 'append',
                   'help': "Branches to query results from",
                   }],
