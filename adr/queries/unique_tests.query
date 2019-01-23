@@ -1,0 +1,16 @@
+from: unittest
+limit: 100000
+select:
+    - aggregate: cardinality
+      name: num
+      value: result.test
+groupby:
+    - build.platform
+where:
+    and:
+        $if: pushid
+        then:
+            - eq: {repo.push.id: {$eval: pushid}}
+        else:
+            - gte: {repo.push.date: {date: today-day}}
+            - eq: {repo.branch.name: "mozilla-central"}
