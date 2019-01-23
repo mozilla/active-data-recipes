@@ -1,5 +1,5 @@
 """
-Get information on the ActiveData schema. The command returns the
+The command returns the
 list of failure tests of a push based on push id. To see the columns in a table, run:
 
 .. code-block:: bash

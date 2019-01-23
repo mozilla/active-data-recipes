@@ -1,5 +1,5 @@
 recipe: push_failure
-args: [--pushid, '76618']
+args: [--push, '76618']
 queries:
 - data:
     build.platform: [macosx64, macosx64, linux64, macosx64, macosx64, macosx64]
