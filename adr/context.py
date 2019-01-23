@@ -39,7 +39,7 @@ COMMON_CONTEXTS = {
                   'help': "Platform to limit results to (default: windows10-64)",
                   }],
     'platform_config': [['--platform-config'], {'default': 'test-'}],
-    'pushid': [['--pushid'],
+    'pushid': [['--push'],
                {'type': int,
                 'required': True,
                 'help': "id of push to unittest"
