@@ -1,0 +1,37 @@
+recipe: push_failure
+args: [--pushid, '76618']
+queries:
+- data:
+    build.platform: [macosx64, macosx64, linux64, macosx64, macosx64, macosx64]
+    result.test: [browser/components/urlbar/tests/browser/browser_bug1025195_switchToTabHavingURI_aOpenParams.js,
+      browser/components/urlbar/tests/browser/browser_page_action_menu_add_search_engine.js,
+      docshell/test/mochitest/test_bug580069.html, browser/components/urlbar/tests/browser/browser_urlbar_blanking.js,
+      browser/components/extensions/test/browser/test-oop-extensions/browser_ext_browserAction_context.js,
+      browser/components/urlbar/tests/browser/browser_urlbarPlaceholder.js]
+    run.suite.fullname: [mochitest-browser-chrome, mochitest-browser-chrome, mochitest-plain,
+      mochitest-browser-chrome, mochitest-browser-chrome, mochitest-browser-chrome]
+  edges:
+  - domain: {interval: 1, max: 6, min: 0, type: rownum}
+    name: rownum
+  select:
+  - name: result.test
+    pull: <function output at 0x7f555a879d70>
+    put: {child: ., index: 0, name: result.test}
+    value: result.test.~s~
+  - name: build.platform
+    pull: <function output at 0x7f555807ea28>
+    put: {child: ., index: 1, name: build.platform}
+    value: build.platform.~s~
+  - name: run.suite.fullname
+    pull: <function output at 0x7f555807e5f0>
+    put: {child: ., index: 2, name: run.suite.fullname}
+    value: run.suite.fullname.~s~
+expected:
+  build.platform: [macosx64, macosx64, linux64, macosx64, macosx64, macosx64]
+  result.test: [browser/components/urlbar/tests/browser/browser_bug1025195_switchToTabHavingURI_aOpenParams.js,
+    browser/components/urlbar/tests/browser/browser_page_action_menu_add_search_engine.js,
+    docshell/test/mochitest/test_bug580069.html, browser/components/urlbar/tests/browser/browser_urlbar_blanking.js,
+    browser/components/extensions/test/browser/test-oop-extensions/browser_ext_browserAction_context.js,
+    browser/components/urlbar/tests/browser/browser_urlbarPlaceholder.js]
+  run.suite.fullname: [mochitest-browser-chrome, mochitest-browser-chrome, mochitest-plain,
+    mochitest-browser-chrome, mochitest-browser-chrome, mochitest-browser-chrome]

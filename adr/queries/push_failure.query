@@ -1,0 +1,12 @@
+from: unittest
+select:
+    - result.test
+    - build.platform
+    - run.suite.fullname
+where:
+    and:
+        - eq: {repo.push.id: {$eval: pushid}}
+        - ne: {run.suite.name: robocop}
+        - not: result.ok
+        - exists: result.test
+limit: 1000
