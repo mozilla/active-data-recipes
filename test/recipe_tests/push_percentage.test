@@ -1,0 +1,30 @@
+recipe: push_percentage
+args: [--push, '76618']
+queries:
+- data:
+  - [win64, 33596]
+  - [win32, 29652]
+  - [macosx64, 28092]
+  - [linux64, 12967]
+  - [linux32, 7897]
+  - [android, 4329]
+  - [null, 0]
+  header: [build.platform, num]
+- data:
+  - [linux64, 107453]
+  - [win64, 109245]
+  - [win32, 109224]
+  - [linux32, 107050]
+  - [macosx64, 107975]
+  - [android, 57846]
+  - [null, 0]
+  header: [build.platform, num]
+expected:
+- [Platform, Percentage of Tests Run]
+- [android, 7.5]
+- [linux32, 7.4]
+- [linux64, 12.1]
+- [macosx64, 26.0]
+- [win32, 27.1]
+- [win64, 30.8]
+- [total, 19.5]

@@ -66,6 +66,12 @@ push_failure
 .. automodule:: adr.recipes.push_failure
     :no-undoc-members:
 
+push_percentage
+---------------
+
+.. automodule:: adr.recipes.push_percentage
+    :no-undoc-members:
+
 raw_coverage
 ------------
 
