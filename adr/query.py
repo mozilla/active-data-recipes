@@ -29,6 +29,7 @@ FAKE_CONTEXT = {
     'path': 'dom/indexedDB',
     'limit': 10,
     'format': 'table',
+    'pushid': 76618,
 }
 
 
@@ -59,6 +60,8 @@ def query_activedata(query, url):
 
     json_response = response.json()
     if not json_response.get('data'):
+        log.debug("JSON Response:")
+        log.debug(json.dumps(json_response, indent=2))
         raise MissingDataError("ActiveData didn't return any data.")
     return json_response
 
