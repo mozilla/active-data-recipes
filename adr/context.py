@@ -8,8 +8,8 @@ from jsone.prattparser import prefix
 COMMON_CONTEXTS = {
     'attribute': [['--at'],
                   {'nargs': '?',
-                      'default': None,
-                      'help': "Display values of specified attribute within --table."}],
+                   'default': None,
+                   'help': "Display values of specified attribute within --table."}],
     'branches': [['-B', '--branch'],
                  {'default': ["mozilla-central"],
                   'action': 'append',
@@ -39,6 +39,11 @@ COMMON_CONTEXTS = {
                   'help': "Platform to limit results to (default: windows10-64)",
                   }],
     'platform_config': [['--platform-config'], {'default': 'test-'}],
+    'pushid': [['--pushid'],
+               {'type': int,
+                'required': True,
+                'help': "id of push to unittest"
+                }],
     'limit': [['--limit'],
               {'type': int,
                'default': 10,

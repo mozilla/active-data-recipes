@@ -59,6 +59,12 @@ intermittent_tests
 
 .. automodule:: adr.recipes.intermittent_tests
     :no-undoc-members:
+    
+push_failure
+------------------
+
+.. automodule:: adr.recipes.push_failure
+    :no-undoc-members:
 
 raw_coverage
 ------------
