@@ -7,18 +7,18 @@ CONTEXTS = [
         "from": "mozilla"
     }, []),
     ({
-        "$eval": "branch"
-    }, ["branch"]),
+        "$eval": "branches"
+    }, ["branches"]),
     ({
-        "in": {"repo.branch.name": {"$eval": "branch"}}
-    }, ["branch"]),
+        "in": {"repo.branch.name": {"$eval": "branches"}}
+    }, ["branches"]),
     ({
-        "in": {"repo.branch.name": {"$eval": "branch"}},
-        "where": {"condition": {"$eval": "branch + build"}}
-    }, ["branch", "build"]),
+        "in": {"repo.branch.name": {"$eval": "branches"}},
+        "where": {"condition": {"$eval": "branches + build"}}
+    }, ["branches", "build"]),
     ({
-        "$eval": "branch + type"
-    }, ["branch", "type"]),
+        "$eval": "branches + type"
+    }, ["branches", "type"]),
 ]
 
 
@@ -31,7 +31,7 @@ def test_extract_context_names(query, expected_contexts):
 DEFINITIONS = [
     (["branches"],
      {'branches': [['-B', '--branch'],
-                   {'default': [],
+                   {'default': ["mozilla-central"],
                     'action': 'append',
                     'help': "Branches to query results from",
                     }]}),
@@ -40,7 +40,7 @@ DEFINITIONS = [
                                'help': "Custom value not in common",
                                }]}],
      {'branches': [['-B', '--branch'],
-                   {'default': [],
+                   {'default': ["mozilla-central"],
                     'action': 'append',
                     'help': "Branches to query results from",
                     }],
