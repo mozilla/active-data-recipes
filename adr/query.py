@@ -106,6 +106,7 @@ def load_query_context(name):
         # Extract query and context
         specific_contexts = query.pop("context") if "context" in query else {}
         contexts = context.extract_context_names(query)
+        contexts.update(["limit", "format"])
         query_contexts = context.get_context_definitions(contexts, specific_contexts)
         return query_contexts
 
