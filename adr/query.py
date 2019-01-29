@@ -91,22 +91,23 @@ def load_query(name):
         return query
 
 
-def load_query_context(name):
+def load_query_context(query_name, add_contexts=[]):
     """
     Get query context from yaml file.
     Args:
-        name (str): name of query
+        query_name (str): name of query
+        add_contexts (list): additional contexts if needed
     Returns:
         query_contexts (list): mixed array of strings (name of common contexts)
          and dictionaries (full definition of specific contexts)
     """
 
-    with open(os.path.join(QUERY_DIR, name + '.query')) as fh:
+    with open(os.path.join(QUERY_DIR, query_name + '.query')) as fh:
         query = yaml.load(fh)
         # Extract query and context
         specific_contexts = query.pop("context") if "context" in query else {}
         contexts = context.extract_context_names(query)
-        contexts.update(["limit", "format"])
+        contexts.update(add_contexts)
         query_contexts = context.get_context_definitions(contexts, specific_contexts)
         return query_contexts
 
@@ -132,9 +133,9 @@ def run_query(name, config, args):
     context = vars(args)
     query = load_query(name)
 
-    if 'limit' in context:
+    if 'limit' not in query and 'limit' in context:
         query['limit'] = context['limit']
-    if 'format' in context:
+    if 'format' not in query and 'format' in context:
         query['format'] = context['format']
     if config.debug:
         query['meta'] = {"save": True}
@@ -162,7 +163,7 @@ def format_query(query, config, remainder=[]):
     if isinstance(config.fmt, str):
         fmt = all_formatters[config.fmt]
 
-    query_context = load_query_context(query)
+    query_context = load_query_context(query, ["limit", "format"])
     args = vars(RequestParser(query_context).parse_args(remainder))
 
     # get contexts from cli, if not get default value
