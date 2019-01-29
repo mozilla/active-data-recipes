@@ -56,7 +56,7 @@ def request_handler(args, remainder, config, parser, request_type):
     if args.list:
         _list(request_list)
     elif args.help:
-        return _help(args.task, request_list, config, parser)
+        return _help(args.task, request_list, config, parser, request_type)
     else:
         _check_tasks_exist(args.task)
 
@@ -125,16 +125,20 @@ def _list(items):
     return
 
 
-def _help(items, recipes, config, parser):
+def _help(items, request_list, config, parser, request_type):
     if len(items) == 0:
         parser.print_help()
     else:
-        for recipe in items:
-            if recipe not in recipes:
-                log.error("recipe '{}' not found!".format(recipe))
+        for request in items:
+            if request not in request_list:
+                log.error("{} '{}' not found!".format(request_type, request))
                 continue
-            print('Usage for adr ' + recipe + ':')
-            run_recipe(recipe, ['--help'], config)
+            if request_type == "recipe":
+                print('Usage for adr ' + request + ':')
+                run_recipe(request, ['--help'], config)
+            else:
+                print('Usage for adr query ' + request + ':')
+                format_query(request, config, ['--help'])
     return
 
 
