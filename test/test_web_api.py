@@ -2,8 +2,9 @@ import json
 from urllib.parse import urlencode
 
 import pytest
+from pytest import xfail
 
-from adr.recipe import get_recipe_contexts
+from adr.recipe import get_recipe_contexts, is_fail
 from app import app
 
 
@@ -47,13 +48,19 @@ def client():
 
 
 def test_api(patch_active_data, api_url_func, client, recipe_test, validate):
-    patch_active_data(recipe_test)
+    try:
+        patch_active_data(recipe_test)
 
-    url = api_url_func(recipe_test)
-    response = client.get(url)
+        url = api_url_func(recipe_test)
+        response = client.get(url)
 
-    assert response.status_code == 200
-    assert response.is_json
+        assert response.status_code == 200
+        assert response.is_json
 
-    actual = json.loads(response.data)
-    validate(recipe_test, actual)
+        actual = json.loads(response.data)
+        validate(recipe_test, actual)
+    except Exception as e:
+        if is_fail(recipe_test['recipe']):
+            xfail(str(e))
+        else:
+            raise e

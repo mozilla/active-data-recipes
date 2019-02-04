@@ -5,7 +5,7 @@ import json
 import logging
 import os
 import time
-from argparse import ArgumentParser, Namespace
+from argparse import ArgumentParser, Namespace, SUPPRESS
 
 import jsone
 import requests
@@ -34,7 +34,10 @@ class RequestParser(ArgumentParser):
             elif len(definition) >= 2:
                 # Set destination from name
                 definition[1]['dest'] = name
-                self.add_argument(*definition[0], **definition[1])
+                if ("hidden" in definition[1]) and (definition[1]['hidden'] is True):
+                    self.add_argument(*definition[0], help=SUPPRESS)
+                else:
+                    self.add_argument(*definition[0], **definition[1])
             else:
                 raise AttributeError("Definition of {} should be list of length 2".format(name))
 
@@ -165,7 +168,7 @@ def format_query(query, config, remainder=[]):
     if isinstance(config.fmt, str):
         fmt = all_formatters[config.fmt]
 
-    query_context = load_query_context(query, ["limit", "format"])
+    query_context = load_query_context(query, ["format"])
     args = vars(RequestParser(query_context).parse_args(remainder))
 
     # get contexts from cli, if not get default value

@@ -34,8 +34,11 @@ def get_recipe_contexts(recipe, mod=None):
     # try to extract name of query and run contexts automatically from run function
     queries, run_contexts = context.extract_arguments(mod.run, "run_query")
 
+    specific_contexts = {}
     if hasattr(mod, 'RUN_CONTEXTS'):
-        run_contexts = mod.RUN_CONTEXTS
+        context_info = mod.RUN_CONTEXTS
+        for item in context_info:
+            specific_contexts.update(item)
 
     # get full definition of all contexts needed for recipe
     recipe_context_def = {}
@@ -43,7 +46,7 @@ def get_recipe_contexts(recipe, mod=None):
         query_context_def = load_query_context(query_name)
         recipe_context_def.update(query_context_def)
 
-    run_context_def = context.get_context_definitions(run_contexts)
+    run_context_def = context.get_context_definitions(run_contexts, specific_contexts)
     recipe_context_def.update(run_context_def)
 
     return recipe_context_def
