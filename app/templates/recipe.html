@@ -20,6 +20,7 @@
     </article>
     <form id="recipe_input" recipe="{{recipe}}" method="GET">
         {% for key, value in recipe_contexts.items() %}
+            {% if "hidden" not in value[1] or value[1].hidden == False %}
                 <div class="field">
                     <label class="label">{{key}} </label>
                     <p class="help">{{value[1].help}}</p>
@@ -39,6 +40,7 @@
                         {% endif %}
                     </div>
                 </div>
+            {% endif %}
         {% endfor %}
         <div align="right">
             <button id="submit_button" class="button is-link" type="submit">Run</button>

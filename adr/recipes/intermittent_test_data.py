@@ -7,7 +7,10 @@ This is currently broken.
 """
 from __future__ import absolute_import, print_function
 
+from ..context import override
 from ..query import run_query
+
+RUN_CONTEXTS = [override('platform_config', hidden=True)]
 
 
 def run(config, args):
