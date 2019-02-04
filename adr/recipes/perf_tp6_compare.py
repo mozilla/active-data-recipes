@@ -3,7 +3,7 @@ Compare subtest performance across all suites for two revisions
 
 .. code-block:: bash
 
-    adr perf_tp6_compare -r <revision1> -r <revision2> [-t <subtest>]
+    adr perf_tp6_compare -r1 <revision1> -r2 <revision2> [-t <subtest>]
 
 <subtest> defaults to "-loadtime"
 
