@@ -7,10 +7,13 @@ edges:
 where:
     and:
     -   or:
-        - {prefix: {repo.changeset.id: {$eval: r1}}}
-        - {prefix: {repo.changeset.id: {$eval: r2}}}
-#    - {in: {repo.branch.name: {$eval: branch}}}
+        - {prefix: {repo.changeset.id: {$eval: rev1}}}
+        - {prefix: {repo.changeset.id: {$eval: rev2}}}
     - {suffix: {result.test: {$eval: subtest}}}
-    - {prefix: {result.suite: "raptor-tp6-"}}
+    - {prefix: {result.suite: "raptor-tp6"}}
 format: cube
 limit: 1000
+context:
+    rev1: [["--r1", "--rev1"], {"type": str, "help": "Revision to compare"}]
+    rev2: [["--r2", "--rev2"], {"type": str, "help": "Revision to compare"}]
+    subtest: [["-t", "--test", "--subtest"], {"type": str, "default": "-loadtime", "help": "the subtest name (or suffix)"}]

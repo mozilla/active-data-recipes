@@ -15,19 +15,20 @@ from ..query import run_query
 from ..recipe import RequestParser
 
 RUN_CONTEXTS = [
-    'from_date',
-    'to_date',
-    {'limit': [['--limit'],
-               {'type': int,
-                'default': 25,
-                'help': "Maximum number of users in result"
-                }]},
-    {'sort_key': [['--sort-key'],
-                  {'type': int,
-                   'default': 1,
-                   'help': "Key to sort on (int, 0-based index)",
-                   }]}
-
+    "from_date",
+    "to_date",
+    {
+        "limit": [
+            ["--limit"],
+            {"type": int, "default": 25, "help": "Maximum number of users in result"},
+        ]
+    },
+    {
+        "sort_key": [
+            ["--sort-key"],
+            {"type": int, "default": 1, "help": "Key to sort on (int, 0-based index)"},
+        ]
+    },
 ]
 
 
@@ -36,17 +37,17 @@ BROKEN = True
 
 def run(config, args):
 
-    header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
+    header = ["User", "Tasks", "Pushes", "Tasks / Push"]
     if args.sort_key < 0 or len(header) - 1 < args.sort_key:
         RequestParser.error("invalid value for 'sort_key'")
 
-    args.branch = 'try'
+    args.branch = "try"
     limit = args.limit
-    delattr(args, 'limit')
-    pushes = run_query('user_pushes', config, args)
-    pushes = pushes['data']
+    delattr(args, "limit")
+    pushes = run_query("user_pushes", config, args)
+    pushes = pushes["data"]
 
-    tasks = run_query('user_tasks', config, args)['data']
+    tasks = run_query("user_tasks", config, args)["data"]
 
     users = defaultdict(list)
     for user, num in tasks:
