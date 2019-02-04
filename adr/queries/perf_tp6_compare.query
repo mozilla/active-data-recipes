@@ -1,0 +1,21 @@
+{
+    "from":"perf",
+    "select":[
+        {"value": "result.stats.median", "aggregate":"average"}
+    ],
+    "edges":[
+        "result.test",
+        {"value":"repo.changeset.id12","allowNulls":false}
+    ],
+    "where":{"and":[
+        {"or":[
+            {"prefix":{"repo.changeset.id":{$eval: rev1}}},
+            {"prefix":{"repo.changeset.id":{$eval: rev2}}},
+        ]}
+        {"in":{"repo.branch.name":{$eval: branch}},
+        {"suffix":{"result.test":{$eval: subtest}}},
+        {"prefix":{"result.suite":"raptor-tp6-"}}
+    ]},
+    "format":"cube",
+    "limit":1000
+}
