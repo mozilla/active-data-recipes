@@ -20,22 +20,24 @@ log = logging.getLogger("adr")
 RUN_CONTEXTS = [
     {"rev1": [["--r1", "--rev1"], {"type": str, "help": "Revision to compare"}]},
     {"rev2": [["--r2", "--rev2"], {"type": str, "help": "Revision to compare"}]},
-    {"subtest": [["-t", "--test"], {"type": str, "help": "the subtest name (or suffix)"}]},
+    {"subtest": [["-t", "--test", "--subtest"], {"type": str, "default": "-loadtime", "help": "the subtest name (or suffix)"}]},
 ]
 
 
-def run(args, config):
-    # PULL DATA FOR REVISIONS
+def run(config, args):
 
-    data = run_query("perf_tp6_compare", config, args)["data"]
-    result = []
-    for record in data:
-        if record[2] is None:
-            continue
-        record[2] = round(record[2] / 60, 2)
-        record.append(int(round(record[1] * record[2], 0)))
-        result.append(record)
+    result = run_query("perf_tp6_compare", config, args)
 
-    result = sorted(result, key=lambda k: k[args.sort_key], reverse=True)[:limit]
-    result.insert(0, ["Taskname", "Num Jobs", "Average Hours", "Total Hours"])
-    return result
+    tests, revisions = result['edges']
+    header = ["Subtest"] + [p['name'] for p in revisions['domain']['partitions']]
+
+    data = list(
+        [n] + v
+        for n, v in zip(
+            [p['name'] for p in tests['domain']['partitions']],
+            result['data']['result.stats.median']
+        )
+    )
+
+    data.insert(0, header)
+    return data
