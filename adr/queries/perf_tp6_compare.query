@@ -2,8 +2,8 @@ from: perf
 select:
 - {value: result.stats.median, aggregate: average}
 edges:
-- result.test
-- {value: repo.changeset.id12, allowNulls: false}
+- {name: test, value: [result.suite, result.test]}
+- {name: rev, value: repo.changeset.id12, allowNulls: false}
 where:
     and:
     -   or:
