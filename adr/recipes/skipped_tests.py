@@ -11,16 +11,9 @@ from __future__ import absolute_import, print_function
 from ..context import override
 from ..query import run_query
 
-# RUN_CONTEXTS = {'limit': {'default': 25,
-#                           'help': "Maximum number of users in result"},
-#                 'sort_key': {'default': 1,
-#                              'help': "Key to sort on (int, 0-based index)",
-#                              }
-#                 }
-
 RUN_CONTEXTS = [
-    override('limit', default=20),
-    override('sort_key', default=2),
+    override('limit', default=25, help="Maximum number of users in result"),
+    override('sort_key', default=1, help="Key to sort on (int, 0-based index)"),
 ]
 
 
