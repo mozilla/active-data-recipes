@@ -34,10 +34,10 @@ class RequestParser(ArgumentParser):
             elif len(definition) >= 2:
                 # Set destination from name
                 definition[1]['dest'] = name
-                if ("hidden" in definition[1]) and (definition[1]['hidden'] is True):
-                    self.add_argument(*definition[0], help=SUPPRESS)
-                else:
-                    self.add_argument(*definition[0], **definition[1])
+                if definition[1].get('hidden'):
+                    del definition[1]['hidden']
+                    definition[1]['help'] = SUPPRESS
+                self.add_argument(*definition[0], **definition[1])
             else:
                 raise AttributeError("Definition of {} should be list of length 2".format(name))
 
