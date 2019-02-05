@@ -1,5 +1,6 @@
 from __future__ import absolute_import, print_function
 
+import collections
 import importlib
 import logging
 import os
@@ -25,7 +26,7 @@ def get_recipe_contexts(recipe, mod=None):
         recipe (str): name of recipe
         mod (module): module of recipe
     Returns:
-        recipe_context_def (dict): definition of all contexts needed for recipe
+        result (dict): definition of all contexts needed for recipe
     """
     if not mod:
         modname = '.recipes.{}'.format(recipe)
@@ -49,7 +50,9 @@ def get_recipe_contexts(recipe, mod=None):
     run_context_def = context.get_context_definitions(run_contexts, specific_contexts)
     recipe_context_def.update(run_context_def)
 
-    return recipe_context_def
+    result = collections.OrderedDict()
+    result = context.sort_context_dict(recipe_context_def)
+    return result
 
 
 def get_module(name):

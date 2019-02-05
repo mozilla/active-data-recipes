@@ -1,5 +1,6 @@
 from __future__ import absolute_import, print_function
 
+import collections
 import datetime
 import json
 import logging
@@ -113,7 +114,10 @@ def load_query_context(query_name, add_contexts=[]):
         specific_contexts = query.pop("context") if "context" in query else {}
         contexts = context.extract_context_names(query)
         contexts.update(add_contexts)
-        query_contexts = context.get_context_definitions(contexts, specific_contexts)
+        tmp_contexts = context.get_context_definitions(contexts, specific_contexts)
+
+        query_contexts = collections.OrderedDict
+        query_contexts = context.sort_context_dict(tmp_contexts)
         return query_contexts
 
 
