@@ -1,9 +1,11 @@
+import collections
 import os
 
 from flask import Flask, Markup, make_response, render_template, request
 
 import adr
 from adr import recipe, recipes
+from adr.context import COMMON_CONTEXTS
 from adr.util.config import Configuration
 
 
@@ -57,7 +59,11 @@ def recipe_handler(recipe_name):
                                recipe="Warning",
                                error="Please choose recipe to run"), 404
 
-    recipe_contexts = recipe.get_recipe_contexts(recipe_name)
+    recipe_contexts = collections.OrderedDict()
+    tmp_recipe_contexts = recipe.get_recipe_contexts(recipe_name)
+    for key in COMMON_CONTEXTS:
+        if key in tmp_recipe_contexts:
+            recipe_contexts.update({key: tmp_recipe_contexts[key]})
 
     # If having args, mean running recipe
     if len(request.args) > 0:
