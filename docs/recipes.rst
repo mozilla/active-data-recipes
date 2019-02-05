@@ -59,7 +59,13 @@ intermittent_tests
 
 .. automodule:: adr.recipes.intermittent_tests
     :no-undoc-members:
-    
+
+perf_tp6_compare
+----------------
+
+.. automodule:: adr.recipes.perf_tp6_compare
+    :no-undoc-members:
+
 push_failure
 ------------------
 
