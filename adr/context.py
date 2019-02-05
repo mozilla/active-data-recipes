@@ -193,6 +193,19 @@ def extract_context_names(query):
     return contexts
 
 
+def sort_context_dict(context_dict):
+    """
+    sort contexts, according to COMMON_CONTEXTS
+    :param context_dict: unordered dictionary of context definitions
+    :return: ordered dictionary, same order with COMMON_CONTEXTS
+    """
+    result = collections.OrderedDict()
+    for key in COMMON_CONTEXTS:
+        if key in context_dict:
+            result.update({key: context_dict[key]})
+    return result
+
+
 def get_context_definitions(definitions, specific_defs={}):
     """
     Build full context definitions from list of contexts with pre-defined definitions
