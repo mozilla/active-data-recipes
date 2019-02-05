@@ -19,13 +19,14 @@ Attribute "hidden": if a context of a recipe has "hidden=True",
                     it will not be listed on webapp and cli
 """
 import ast
+import collections
 import inspect
 from copy import deepcopy
 
 from jsone.interpreter import ExpressionEvaluator
 from jsone.prattparser import prefix
 
-
+COMMON_CONTEXTS = collections.OrderedDict()
 COMMON_CONTEXTS = {
     'attribute': [['--at'],
                   {'nargs': '?',
@@ -45,11 +46,6 @@ COMMON_CONTEXTS = {
                 'default': 'table',
                 'help': "format of result"
                 }],
-    'from_date': [['--from'],
-                  {'default': 'today-week',
-                   'help': "Starting date to pull data from, defaults "
-                           "to a week ago",
-                   }],
     'groupby': [['--groupby'], {'default': 'result.test'}],
     'path': [['--path'],
              {'default': 'dom/indexedDB',
@@ -87,6 +83,11 @@ COMMON_CONTEXTS = {
     'test_name': [['-t', '--test'],
                   {'default': '',
                    'help': "Path to a test file",
+                   }],
+    'from_date': [['--from'],
+                  {'default': 'today-week',
+                   'help': "Starting date to pull data from, defaults "
+                           "to a week ago",
                    }],
     'to_date': [['--to'],
                 {'default': 'eod',  # end of day
