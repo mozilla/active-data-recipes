@@ -1,3 +1,23 @@
+"""
+Full definition of a context:
+'key': [[--long-form, -short-form],
+         {'type': type_name,
+          'default': default_value,
+          'choices': range,
+          'action': 'append',
+          'required': True/False,
+          'hidden': True/False,
+          'help': help_text
+         }]
+]
+The display order of contexts on webapp follows the order of contexts in COMMON_CONTEXTS
+If action is append, this context on webapp will be multiple-choices
+Define context in query/recipe:
+1. If define a new context (not in COMMON_CONTEXTS), follow full definition template
+2. If override some attribute of an existing context, use override function
+Attribute "hidden": if a context of a recipe has "hidden=True",
+                    it will not be listed on webapp and cli
+"""
 import ast
 import inspect
 from copy import deepcopy
@@ -5,25 +25,6 @@ from copy import deepcopy
 from jsone.interpreter import ExpressionEvaluator
 from jsone.prattparser import prefix
 
-
-# Full definition of a context:
-# 'key': [[--long-form, -short-form],
-#          {'type': type_name,
-#           'default': default_value,
-#           'choices': range,
-#           'action': 'append',
-#           'required': True/False,
-#           'hidden': True/False,
-#           'help': help_text
-#          }]
-# ]
-# The display order of contexts on webapp follows the order of contexts in COMMON_CONTEXTS
-# If action is append, this context on webapp will be multiple-choices
-# Define context in query/recipe:
-# 1. If define a new context (not in COMMON_CONTEXTS), follow full definition template
-# 2. If override some attribute of an existing context, use override function
-# Attribute "hidden": if a context of a recipe has "hidden: True",
-#                     it will not be listed on webapp and cli
 
 COMMON_CONTEXTS = {
     'attribute': [['--at'],
