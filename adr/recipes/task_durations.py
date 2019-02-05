@@ -19,17 +19,10 @@ DEFAULT_BRANCHES = [
     'mozilla-central',
 ]
 
-# RUN_CONTEXTS = {'branches': {'default': DEFAULT_BRANCHES},
-#                 'limit': {'default': 20,
-#                           'help': "Maximum number of jobs in result"},
-#                 'sort_key': {'default': 2,
-#                              'help': "Key to sort on (int, 0-based index)"}
-#                 }
-
 RUN_CONTEXTS = [
     override('branches', default=DEFAULT_BRANCHES),
-    override('limit', default=20),
-    override('sort_key', default=2),
+    override('limit', default=20, help="Maximum number of jobs in result"),
+    override('sort_key', default=2, help="Key to sort on (int, 0-based index)"),
 ]
 
 
