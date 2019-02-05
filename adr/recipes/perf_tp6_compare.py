@@ -25,7 +25,7 @@ RUN_CONTEXTS = [
             ["-t", "--test", "--subtest"],
             {
                 "type": str,
-                "default": "-loadtime",
+                "default": "loadtime",
                 "help": "the subtest name (or suffix)",
             },
         ]
@@ -39,20 +39,27 @@ def run(config, args):
 
     tests, revisions = result["edges"]
     header = (
-        ["Subtest"]
+        ["Test", "Subtest"]
         + [p["name"] for p in revisions["domain"]["partitions"]]
         + ["Change"]
     )
-    test_names = [p["name"] for p in tests["domain"]["partitions"]]
+    suites, tests = zip(*(p["value"] for p in tests["domain"]["partitions"]))
     values = result["data"]["result.stats.median"]
 
     data = list(
-        [n] + [round(v) if v is not None else None for v in row] + [change(*row)]
-        for n, row in zip(test_names, values)
+        [s, scrub_suite(s, t)] + [round(v) if v is not None else None for v in row] + [change(*row)]
+        for s, t, row in zip(suites, tests, values)
     )
 
     data.insert(0, header)
     return data
+
+
+def scrub_suite(s, t):
+    if t.startswith(s):
+        return t[len(s):].lstrip("-")
+    else:
+        return t
 
 
 def change(r1, r2):
