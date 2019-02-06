@@ -11,8 +11,6 @@ Compare subtest performance across all suites for two revisions
 
 from __future__ import absolute_import, print_function
 
-import logging
-
 from ..query import run_query
 
 
