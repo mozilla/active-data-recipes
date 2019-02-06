@@ -15,23 +15,6 @@ import logging
 
 from ..query import run_query
 
-log = logging.getLogger("adr")
-
-RUN_CONTEXTS = [
-    {"rev1": [["--r1", "--rev1"], {"type": str, "help": "Revision to compare"}]},
-    {"rev2": [["--r2", "--rev2"], {"type": str, "help": "Revision to compare"}]},
-    {
-        "subtest": [
-            ["-t", "--test", "--subtest"],
-            {
-                "type": str,
-                "default": "loadtime",
-                "help": "the subtest name (or suffix)",
-            },
-        ]
-    },
-]
-
 
 def run(config, args):
 
