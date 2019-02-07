@@ -27,76 +27,74 @@ from jsone.interpreter import ExpressionEvaluator
 from jsone.prattparser import prefix
 
 COMMON_CONTEXTS = collections.OrderedDict()
-COMMON_CONTEXTS = {
-    'attribute': [['--at'],
-                  {'nargs': '?',
-                   'default': None,
-                   'help': "Display values of specified attribute within --table."}],
-    'branches': [['-B', '--branch'],
-                 {'default': ["mozilla-central"],
-                  'action': 'append',
-                  'help': "Branches to query results from",
-                  }],
-    'build_type': [['-b', '--build-type'],
-                   {'default': 'opt',
-                    'help': "Build type (default: opt)",
-                    }],
-    'format': [['--format'],
-               {'type': str,
-                'default': 'table',
-                'help': "format of result"
-                }],
-    'groupby': [['--groupby'], {'default': 'result.test'}],
-    'path': [['--path'],
-             {'default': 'dom/indexedDB',
-              'help': "Path relative to repository root (file or directory)",
-              }],
-    'platform': [['-p', '--platform'],
-                 {'default': 'windows10-64',
-                  'help': "Platform to limit results to (default: windows10-64)",
-                  }],
-    'platform_config': [['--platform-config'], {'default': 'test-'}],
-    'pushid': [['--push'],
-               {'type': int,
-                'required': True,
-                'help': "id of push to unittest"
-                }],
-    'limit': [['--limit'],
-              {'type': int,
-               'default': 10,
-               'help': "limit the number of rows in result"
-               }],
+COMMON_CONTEXTS['attribute'] = [['--at'],
+                                {'nargs': '?',
+                                 'default': None,
+                                 'help': "Display values of specified attribute within --table."}]
+COMMON_CONTEXTS['branches'] = [['-B', '--branch'],
+                               {'default': ["mozilla-central"],
+                                'action': 'append',
+                                'help': "Branches to query results from",
+                                }]
+COMMON_CONTEXTS['build_type'] = [['-b', '--build-type'],
+                                 {'default': 'opt',
+                                  'help': "Build type (default: opt)",
+                                  }]
+COMMON_CONTEXTS['format'] = [['--format'],
+                             {'type': str,
+                              'default': 'table',
+                              'help': "format of result"
+                              }]
+COMMON_CONTEXTS['groupby'] = [['--groupby'], {'default': 'result.test'}],
+COMMON_CONTEXTS['path'] = [['--path'],
+                           {'default': 'dom/indexedDB',
+                            'help': "Path relative to repository root (file or directory)",
+                            }]
+COMMON_CONTEXTS['platform'] = [['-p', '--platform'],
+                               {'default': 'windows10-64',
+                                'help': "Platform to limit results to (default: windows10-64)",
+                                }]
+COMMON_CONTEXTS['platform_config'] = [['--platform-config'], {'default': 'test-'}]
+COMMON_CONTEXTS['pushid'] = [['--push'],
+                             {'type': int,
+                              'required': True,
+                              'help': "id of push to unittest"
+                              }]
+COMMON_CONTEXTS['limit'] = [['--limit'],
+                            {'type': int,
+                             'default': 10,
+                             'help': "limit the number of rows in result"
+                             }]
 
-    'rev': [['-r', '--revision', '--rev'],
-            {'default': '5b33b070378a',
-             'help': "Revision to limit results to",
-             }],
-    'result': [['--result'], {'default': "F"}],
-    'sort_key': [['--sort-key'],
-                 {'type': int,
-                  'default': 4,
-                  'help': "Key to sort on (int, 0-based index)",
-                  }],
-    'table': [['--table'],
-              {'default': None,
-               'help': "Table to inspect."}],
-    'test_name': [['-t', '--test'],
-                  {'default': '',
-                   'help': "Path to a test file",
-                   }],
-    'from_date': [['--from'],
-                  {'default': 'today-week',
-                   'help': "Starting date to pull data from, defaults "
-                           "to a week ago",
-                   }],
-    'to_date': [['--to'],
-                {'default': 'eod',  # end of day
-                 'help': "Ending date to pull data from, defaults "
-                         "to now",
-                 }],
-}
+COMMON_CONTEXTS['rev'] = [['-r', '--revision', '--rev'],
+                          {'default': '5b33b070378a',
+                           'help': "Revision to limit results to",
+                           }]
+COMMON_CONTEXTS['result'] = [['--result'], {'default': "F"}]
+COMMON_CONTEXTS['sort_key'] = [['--sort-key'],
+                               {'type': int,
+                                'default': 4,
+                                'help': "Key to sort on (int, 0-based index)",
+                                }]
+COMMON_CONTEXTS['table'] = [['--table'],
+                            {'default': None,
+                             'help': "Table to inspect."}]
+COMMON_CONTEXTS['test_name'] = [['-t', '--test'],
+                                {'default': '',
+                                 'help': "Path to a test file",
+                                 }]
+COMMON_CONTEXTS['from_date'] = [['--from'],
+                                {'default': 'today-week',
+                                 'help': "Starting date to pull data from, defaults "
+                                         "to a week ago",
+                                 }]
+COMMON_CONTEXTS['to_date'] = [['--to'],
+                              {'default': 'eod',  # end of day
+                               'help': "Ending date to pull data from, defaults "
+                                       "to now",
+                               }]
 """
-These are commonly used arguments which can be re-used. They are shared to
+COMMON_CONTEXTS are commonly used arguments which can be re-used. They are shared to
 provide a consistent CLI across recipes/queries. Ordered by alphabet.
 """
 
@@ -197,7 +195,7 @@ def sort_context_dict(context_dict):
     """
     sort contexts, according to COMMON_CONTEXTS
     :param context_dict: unordered dictionary of context definitions
-    :return: ordered dictionary, same order with COMMON_CONTEXTS
+    :return result (OrderedDict): ordered dictionary, same order with COMMON_CONTEXTS
     """
     result = collections.OrderedDict()
     for key in COMMON_CONTEXTS:
