@@ -225,23 +225,6 @@ def get_context_definitions(definitions, specific_defs={}):
     return result
 
 
-def _extract_func(name, members):
-    """
-    Extract function whose name is `name` from list of members objects
-
-    Args:
-        name (str): func name to extract
-        members (list): list of member object
-
-    Returns: function object
-
-    """
-    for member in members:
-        if member[0] == name:
-            return member[1]
-    return None
-
-
 def extract_arguments(func, call, members=None):
     """
     Extract children calls and arguments attributes from a function object
@@ -259,6 +242,7 @@ def extract_arguments(func, call, members=None):
     module = inspect.getmodule(func)
     if not members:
         members = inspect.getmembers(module, inspect.isfunction)
+
     # Get source from function
     source = inspect.getsource(func)
     # Get ast tree for this source code
@@ -280,17 +264,11 @@ def extract_arguments(func, call, members=None):
             if hasattr(node.value, 'id') and node.value.id == root_arg:
                 attrs.add(node.attr)
             continue
+
         # Early termination if not Call node with Name function
         elif not isinstance(node, ast.Call) or not isinstance(node.func, ast.Name):
             continue
 
         if node.func.id == call:
             calls.add(node.args[0].s)
-        else:
-            # Check recursively from member if member is in the same module
-            member = _extract_func(node.func.id, members)
-            if member:
-                _calls, _attrs = extract_arguments(member, call, members)
-                calls.update(_calls)
-                attrs.update(_attrs)
     return calls, attrs
