@@ -14,6 +14,6 @@ where:
 format: cube
 limit: 1000
 context:
-    rev1: [["--r1", "--rev1"], {"type": str, "help": "Revision to compare"}]
-    rev2: [["--r2", "--rev2"], {"type": str, "help": "Revision to compare"}]
-    subtest: [["-t", "--test", "--subtest"], {"type": str, "default": "-loadtime", "help": "the subtest name (or suffix)"}]
+    rev1: [["--r1", "--rev1"], {"help": "Revision to compare"}]
+    rev2: [["--r2", "--rev2"], {"help": "Revision to compare"}]
+    subtest: [["-t", "--test", "--subtest"], {"default": "-loadtime", "help": "the subtest name (or suffix)"}]
