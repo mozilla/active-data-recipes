@@ -1,11 +1,11 @@
-import collections
+import json
 import os
 
 from flask import Flask, Markup, make_response, render_template, request
+from requests.exceptions import HTTPError
 
 import adr
 from adr import recipe, recipes
-from adr.context import sort_context_dict
 from adr.util.config import Configuration
 
 
@@ -59,8 +59,7 @@ def recipe_handler(recipe_name):
                                recipe="Warning",
                                error="Please choose recipe to run"), 404
 
-    recipe_contexts = collections.OrderedDict()
-    recipe_contexts = sort_context_dict(recipe.get_recipe_contexts(recipe_name))
+    recipe_contexts = recipe.get_recipe_contexts(recipe_name)
 
     # If having args, mean running recipe
     if len(request.args) > 0:
@@ -99,10 +98,14 @@ API_BASE_PATH = "/api/v1/"
 
 @app.route(API_BASE_PATH + "<recipe_name>")
 def run_recipe_api(recipe_name):
-    data = run_recipe(recipe_name, request)
-    result = make_response(data)
-    result.mimetype = 'application/json'
-    return result
+    try:
+        data = run_recipe(recipe_name, request)
+        result = make_response(data)
+        result.mimetype = 'application/json'
+        return result
+    except HTTPError as e:
+        content = json.loads(e.response.content)
+        return make_response(content['cause']['cause']['template'], e.response.status_code)
 
 
 def main():

@@ -1,8 +1,11 @@
 function handleErrors(response) {
     if (!response.ok) {
-        throw Error(response.statusText);
+        return response.text().then(function (value) {
+            throw Error(value);
+        })
+
     }
-    return response.json();
+    else return response.json();
 }
 
 function get(url, callback, error) {
@@ -49,7 +52,7 @@ function runRecipe(url, params) {
         }
     }, function(error){
         // Clear loading, show error message
-        console.log(error);
+        $("#error_msg").html(error.message);
         $("#submit_button").removeClass("is-loading");
     });
 }

@@ -59,11 +59,12 @@
                 <p>Result</p>
             </div>
             <table id="recipe_result" class="table is-bordered is-striped is-hoverable is-fullwidth"> </table>
-
+            <p id="error_msg" class="message is-danger" ></p>
         </article>
     </div>
 {% endblock recipe_result %}
 
 {% block specific_script %}
-    <script src="{{url_for('static', filename='recipe.js')}}"></script>
+    {% set url = 'recipe.js?' + (range(1, 1000) | random | string) %}
+    <script src="{{url_for('static', filename= url) | replace('%3F', '?')}}"></script>
 {% endblock specific_script %}
