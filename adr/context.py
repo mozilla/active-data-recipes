@@ -1,7 +1,7 @@
 """
 Full definition of a context:
 'key': [[--long-form, -short-form],
-         {'type': type_name,
+         {'type': int/str/bool/date/...,
           'default': default_value,
           'choices': range,
           'action': 'append',

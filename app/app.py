@@ -61,6 +61,14 @@ def recipe_handler(recipe_name):
 
     recipe_contexts = recipe.get_recipe_contexts(recipe_name)
 
+    for k, v in recipe_contexts.items():
+        if "type" in v[1]:
+            context_type = v[1]["type"]
+            if context_type == int:
+                v[1]["type"] = "number"
+        else:
+            v[1]["type"] = "text"
+
     # If having args, mean running recipe
     if len(request.args) > 0:
         # Update value of context
