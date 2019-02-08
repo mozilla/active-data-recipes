@@ -22,17 +22,14 @@
         {% for key, value in recipe_contexts.items() %}
             {% if "hidden" not in value[1] or value[1].hidden == False %}
                 <div class="field">
-                    <label class="label">{{key}} </label>
+                    <label class="label">{{key}}</label>
                     <p class="help">{{value[1].help}}</p>
                     <div id="recipe_contexts" class="control">
                         {% if "action" in value[1] and value[1].action == "append" %}
                         <textarea class="input" rows="4" name={{key}} form="recipe_input">{{ value[1].default|join("\n") }}</textarea>
                         {% else %}
                         <input class="input" id={{key}} name={{key}} placeholder="Text input"
-                            {% if ("type" in value[1]) and (value[1].type == 'int') %}
-                               type="number"
-                            {% else %} type="text"
-                            {% endif %}
+                               type={{ value[1].type }}
 
                             {% if ("default" in value[1]) and (value[1].default != None) %}
                                value={{value[1].default}}
