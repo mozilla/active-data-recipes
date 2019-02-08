@@ -1,5 +1,6 @@
 from __future__ import absolute_import, print_function
 
+import collections
 import importlib
 import logging
 import os
@@ -34,14 +35,14 @@ def get_recipe_contexts(recipe, mod=None):
     # try to extract name of query and run contexts automatically from run function
     queries, run_contexts = context.extract_arguments(mod.run, "run_query")
 
-    specific_contexts = {}
+    specific_contexts = collections.OrderedDict()
     if hasattr(mod, 'RUN_CONTEXTS'):
         context_info = mod.RUN_CONTEXTS
         for item in context_info:
             specific_contexts.update(item)
 
     # get full definition of all contexts needed for recipe
-    recipe_context_def = {}
+    recipe_context_def = collections.OrderedDict()
     for query_name in set(queries):
         query_context_def = load_query_context(query_name)
         recipe_context_def.update(query_context_def)
@@ -49,8 +50,7 @@ def get_recipe_contexts(recipe, mod=None):
     run_context_def = context.get_context_definitions(run_contexts, specific_contexts)
     recipe_context_def.update(run_context_def)
 
-    result = context.sort_context_dict(recipe_context_def)
-    return result
+    return recipe_context_def
 
 
 def get_module(name):
