@@ -19,6 +19,7 @@ DEPS = [
     'markdown',
     'docutils',
     'pygments',
+    'orderedset'
 ]
 
 setup(

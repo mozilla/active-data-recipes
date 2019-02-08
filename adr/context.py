@@ -25,6 +25,7 @@ from copy import deepcopy
 
 from jsone.interpreter import ExpressionEvaluator
 from jsone.prattparser import prefix
+from orderedset import OrderedSet
 
 COMMON_CONTEXTS = collections.OrderedDict()
 COMMON_CONTEXTS['attribute'] = [['--at'],
@@ -130,7 +131,7 @@ class ContextExtractor(ExpressionEvaluator):
         for k, v in super(ContextExtractor, self).prefix_rules.items():
             self.prefix_rules.setdefault(k, v)
         # Init empty context set
-        self.contexts = set()
+        self.contexts = OrderedSet()
 
     @prefix("identifier")
     def identifier(self, token, pc):
@@ -177,7 +178,7 @@ def extract_context_names(query):
         contexts (set): set of context names
 
     """
-    contexts = set()
+    contexts = OrderedSet()
     if isinstance(query, dict):
         for k, v in query.items():
             if k == "$eval":
@@ -201,23 +202,27 @@ def sort_context_dict(context_dict):
     for key in COMMON_CONTEXTS:
         if key in context_dict:
             result.update({key: context_dict[key]})
+    # Add remained contexts not in COMMON_CONTEXTS
+    for key in context_dict:
+        if key not in result:
+            result.update({key: context_dict[key]})
     return result
 
 
-def get_context_definitions(definitions, specific_defs={}):
+def get_context_definitions(definitions, specific_defs=collections.OrderedDict()):
     """
     Build full context definitions from list of contexts with pre-defined definitions
 
     Args:
         definitions (list): mixed array of string and context definitions
-        specific_defs (dict): specific definitions of contexts not in COMMON_CONTEXTS
+        specific_defs (OrderedDict): specific definitions of contexts not in COMMON_CONTEXTS
 
     Returns:
         result (dict): a full dictionary of context definitions,
      each context definition has a name as key and attributes as value
     """
 
-    result = {}
+    result = collections.OrderedDict()
 
     for item in definitions:
         if isinstance(item, dict):
