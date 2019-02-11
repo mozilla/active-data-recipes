@@ -34,6 +34,8 @@ COMMON_CONTEXTS['attribute'] = [['--at'],
                                  'help': "Display values of specified attribute within --table."}]
 COMMON_CONTEXTS['branches'] = [['-B', '--branch'],
                                {'default': ["mozilla-central"],
+                                'type': str,
+                                'choices': ["mozilla-central", "mozilla-inbound", "autoland", "beta", "release"],
                                 'action': 'append',
                                 'help': "Branches to query results from",
                                 }]
@@ -44,6 +46,7 @@ COMMON_CONTEXTS['build_type'] = [['-b', '--build-type'],
 COMMON_CONTEXTS['format'] = [['--format'],
                              {'type': str,
                               'default': 'table',
+                              'choices': ['table', 'json'],
                               'help': "format of result"
                               }]
 COMMON_CONTEXTS['groupby'] = [['--groupby'],
