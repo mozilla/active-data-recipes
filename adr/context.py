@@ -46,7 +46,9 @@ COMMON_CONTEXTS['format'] = [['--format'],
                               'default': 'table',
                               'help': "format of result"
                               }]
-COMMON_CONTEXTS['groupby'] = [['--groupby'], {'default': 'result.test'}],
+COMMON_CONTEXTS['groupby'] = [['--groupby'],
+                              {'default': 'result.test'
+                               }]
 COMMON_CONTEXTS['path'] = [['--path'],
                            {'default': 'dom/indexedDB',
                             'help': "Path relative to repository root (file or directory)",
@@ -190,23 +192,6 @@ def extract_context_names(query):
             contexts.update(extract_context_names(v))
 
     return contexts
-
-
-def sort_context_dict(context_dict):
-    """
-    sort contexts, according to COMMON_CONTEXTS
-    :param context_dict: unordered dictionary of context definitions
-    :return result (OrderedDict): ordered dictionary, same order with COMMON_CONTEXTS
-    """
-    result = collections.OrderedDict()
-    for key in COMMON_CONTEXTS:
-        if key in context_dict:
-            result.update({key: context_dict[key]})
-    # Add remained contexts not in COMMON_CONTEXTS
-    for key in context_dict:
-        if key not in result:
-            result.update({key: context_dict[key]})
-    return result
 
 
 def get_context_definitions(definitions, specific_defs=collections.OrderedDict()):
