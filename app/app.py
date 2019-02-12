@@ -16,6 +16,41 @@ config_path = os.path.join(os.path.dirname(adr.__file__), 'config.yml')
 config = Configuration(config_path)
 
 
+def transform_context_attributes(recipe_contexts, request_args):
+    """
+    Transform attibutes of contexts into useful information for displaying in web app
+    :param recipe_contexts: OrderedDict
+    :param request_args: ImmutableMultiDict
+    :return: recipe_contexts
+    """
+
+    for k, v in recipe_contexts.items():
+        # context with "choices" will be a single choice drop-down
+        # context with "choices" & "append" will be a multiple choice drop-down
+        if "choices" in v[1]:
+            v[1]["type"] = "dropdown"
+            if ("action" in v[1]) and (v[1]["action"] == "append"):
+                v[1]["action"] = ["is-multiple","multiple"]
+            else:
+                v[1]["action"] = ["",""]
+        elif "type" in v[1]:
+            # with normal input, set to number if type is int
+            context_type = v[1]["type"]
+            if context_type == int:
+                v[1]["type"] = "number"
+        else:
+            v[1]["type"] = "text"
+
+    # If having args, mean running recipe
+    if len(request_args) > 0:
+        # Update value of context
+        for k, v in recipe_contexts.items():
+            if k in request_args:
+                v[1]['default'] = request_args[k]
+
+    return recipe_contexts
+
+
 def get_recipes():
     """
     Return a list of recipes located in /adr/recipes path
@@ -60,21 +95,7 @@ def recipe_handler(recipe_name):
                                error="Please choose recipe to run"), 404
 
     recipe_contexts = recipe.get_recipe_contexts(recipe_name)
-
-    for k, v in recipe_contexts.items():
-        if "type" in v[1]:
-            context_type = v[1]["type"]
-            if context_type == int:
-                v[1]["type"] = "number"
-        else:
-            v[1]["type"] = "text"
-
-    # If having args, mean running recipe
-    if len(request.args) > 0:
-        # Update value of context
-        for k, v in recipe_contexts.items():
-            if k in request.args:
-                v[1]['default'] = request.args[k]
+    transform_context_attributes(recipe_contexts, request.args)
 
     return render_template('recipe.html', recipes=recipe_lists, recipe=recipe_name,
                            recipe_contexts=recipe_contexts,
@@ -94,8 +115,8 @@ def run_recipe(recipe_name, request, fmt='json'):
 
         if context.get('action') == 'append' and isinstance(value, str):
             args[key] = value.split()
-        elif context.get('type'):
-            args[key] = context['type'](value)
+        elif context.get('type') == 'number':
+            args[key] = int(value)
 
     config.fmt = fmt
     return recipe.run_recipe(recipe_name, args, config, False)

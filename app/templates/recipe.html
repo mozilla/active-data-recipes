@@ -25,8 +25,16 @@
                     <label class="label">{{key}}</label>
                     <p class="help">{{value[1].help}}</p>
                     <div id="recipe_contexts" class="control">
-                        {% if "action" in value[1] and value[1].action == "append" %}
-                        <textarea class="input" rows="4" name={{key}} form="recipe_input">{{ value[1].default|join("\n") }}</textarea>
+                        {% if value[1].type == "dropdown" %}
+{#                        <textarea class="input" id="{{ key }}" name={{key}} form="recipe_input">#}
+{#                            {{ value[1].default|join("\n") }}</textarea>#}
+                            <div class="select {{ value[1].action[0] }}">
+                                <select {{ value[1].action[1] }}>
+                                {% for item in value[1].choices %}
+                                    <option>{{ item }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
                         {% else %}
                         <input class="input" id={{key}} name={{key}} placeholder="Text input"
                                type={{ value[1].type }}
