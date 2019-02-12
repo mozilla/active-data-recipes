@@ -113,9 +113,9 @@ def run_recipe(recipe_name, request, fmt='json'):
     for key, value in args.items():
         context = recipe_contexts[key][1]
 
-        if context.get('action') == 'append' and isinstance(value, str):
-            args[key] = value.split()
-        elif context.get('type') == 'number':
+        # if context.get('action') == 'append' and isinstance(value, str):
+        #     args[key] = value.split()
+        if context.get('type') == 'number':
             args[key] = int(value)
 
     config.fmt = fmt
