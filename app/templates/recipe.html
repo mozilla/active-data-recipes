@@ -26,10 +26,8 @@
                     <p class="help">{{value[1].help}}</p>
                     <div id="recipe_contexts" class="control">
                         {% if value[1].type == "dropdown" %}
-{#                        <textarea class="input" id="{{ key }}" name={{key}} form="recipe_input">#}
-{#                            {{ value[1].default|join("\n") }}</textarea>#}
                             <div class="select {{ value[1].action[0] }}">
-                                <select {{ value[1].action[1] }}>
+                                <select {{ value[1].action[1] }} size={{ value[1].choices|length }}>
                                 {% for item in value[1].choices %}
                                     <option>{{ item }}</option>
                                 {% endfor %}
