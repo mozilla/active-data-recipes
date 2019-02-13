@@ -29,10 +29,22 @@ def transform_context_attributes(recipe_contexts, request_args):
         # context with "choices" & "append" will be a multiple choice drop-down
         if "choices" in v[1]:
             v[1]["type"] = "dropdown"
+
+            if "default" in v[1]:
+                default_value = set()
+                for item in v[1]["default"]:
+                    default_value.add(item)
+                for i in range(len(v[1]["choices"])):
+                    value = v[1]["choices"][i]
+                    if value in default_value:
+                        v[1]["choices"][i] = [value, "selected"]
+                    else:
+                        v[1]["choices"][i] = [value, ""]
+
             if ("action" in v[1]) and (v[1]["action"] == "append"):
-                v[1]["action"] = ["is-multiple","multiple"]
+                v[1]["action"] = ["is-multiple", "multiple"]
             else:
-                v[1]["action"] = ["",""]
+                v[1]["action"] = ["", ""]
         elif "type" in v[1]:
             # with normal input, set to number if type is int
             context_type = v[1]["type"]

@@ -4,21 +4,21 @@ from adr import context
 
 CONTEXTS = [
     ({
-        "from": "mozilla"
-    }, []),
+         "from": "mozilla"
+     }, []),
     ({
-        "$eval": "branches"
-    }, ["branches"]),
+         "$eval": "branches"
+     }, ["branches"]),
     ({
-        "in": {"repo.branch.name": {"$eval": "branches"}}
-    }, ["branches"]),
+         "in": {"repo.branch.name": {"$eval": "branches"}}
+     }, ["branches"]),
     ({
-        "in": {"repo.branch.name": {"$eval": "branches"}},
-        "where": {"condition": {"$eval": "branches + build"}}
-    }, ["branches", "build"]),
+         "in": {"repo.branch.name": {"$eval": "branches"}},
+         "where": {"condition": {"$eval": "branches + build"}}
+     }, ["branches", "build"]),
     ({
-        "$eval": "branches + type"
-    }, ["branches", "type"]),
+         "$eval": "branches + type"
+     }, ["branches", "type"]),
 ]
 
 
@@ -32,6 +32,9 @@ DEFINITIONS = [
     (["branches"],
      {'branches': [['-B', '--branch'],
                    {'default': ["mozilla-central"],
+                    'type': str,
+                    'choices': ["mozilla-central", "mozilla-inbound", "autoland",
+                                "beta", "release"],
                     'action': 'append',
                     'help': "Branches to query results from",
                     }]}),
@@ -41,6 +44,9 @@ DEFINITIONS = [
                                }]}],
      {'branches': [['-B', '--branch'],
                    {'default': ["mozilla-central"],
+                    'type': str,
+                    'choices': ["mozilla-central", "mozilla-inbound", "autoland",
+                                "beta", "release"],
                     'action': 'append',
                     'help': "Branches to query results from",
                     }],

@@ -29,7 +29,7 @@
                             <div class="select {{ value[1].action[0] }}">
                                 <select {{ value[1].action[1] }} size={{ value[1].choices|length }}>
                                 {% for item in value[1].choices %}
-                                    <option>{{ item }}</option>
+                                    <option {{ item[1] }}>{{ item[0] }}</option>
                                 {% endfor %}
                                 </select>
                             </div>
