@@ -7,6 +7,9 @@ from io import StringIO
 
 import pytest
 import yaml
+from requests.exceptions import HTTPError
+from requests import Response
+import json
 
 import adr
 
@@ -99,6 +102,36 @@ def patch_active_data(monkeypatch):
                             new_run_query(recipe_test))
         module = 'adr.recipes.{}'.format(recipe_test['recipe'])
         if module in sys.modules:
+            reload(sys.modules[module])
+
+    return patch
+
+
+@pytest.fixture
+def patch_active_data_exception(monkeypatch):
+    class exception_run_query(object):
+        def __init__(self, exception):
+            self.response = Response()
+            self.response.status_code = 400
+            content = json.dumps({
+                'cause': {
+                    'cause': {
+                        'template': exception
+                    }
+                }
+            })
+            self.response._content = content
+
+        def __call__(self, query, *args, **kwargs):
+            raise HTTPError(self.response)
+
+
+    def patch(recipe_test, exception):
+        monkeypatch.setattr(adr.query, 'query_activedata',
+                            exception_run_query(exception))
+        module = 'adr.recipes.{}'.format(recipe_test['recipe'])
+        if module in sys.modules:
+            reload(sys.modules[module])
             reload(sys.modules[module])
 
     return patch

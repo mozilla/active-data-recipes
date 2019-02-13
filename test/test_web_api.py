@@ -64,3 +64,17 @@ def test_api(patch_active_data, api_url_func, client, recipe_test, validate):
             xfail(str(e))
         else:
             raise e
+
+
+def test_api_error(patch_active_data_exception, api_url_func, client, recipe_test):
+    try:
+        patch_active_data_exception(recipe_test, 'programmer error expr = {{value|quote}}')
+
+        url = api_url_func(recipe_test)
+        response = client.get(url)
+    except Exception as e:
+        print(e)
+        if is_fail(recipe_test['recipe']):
+            xfail(str(e))
+        else:
+            raise e
