@@ -66,14 +66,19 @@ def test_api(patch_active_data, api_url_func, client, recipe_test, validate):
             raise e
 
 
-def test_api_error(patch_active_data_exception, api_url_func, client, recipe_test):
-    try:
-        patch_active_data_exception(recipe_test, 'programmer error expr = {{value|quote}}')
+@pytest.fixture
+def mock_error():
+    return 'Mock error'
 
+
+def test_api_error(patch_active_data_exception, api_url_func, client, recipe_test, mock_error):
+    try:
+        patch_active_data_exception(recipe_test, mock_error)
         url = api_url_func(recipe_test)
         response = client.get(url)
+        assert response.status_code == 400
+        assert response.data.decode() == mock_error
     except Exception as e:
-        print(e)
         if is_fail(recipe_test['recipe']):
             xfail(str(e))
         else:
