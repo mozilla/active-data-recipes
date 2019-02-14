@@ -1,5 +1,6 @@
 from __future__ import absolute_import, print_function
 
+import json
 import os
 import sys
 from imp import reload
@@ -7,9 +8,8 @@ from io import StringIO
 
 import pytest
 import yaml
-from requests.exceptions import HTTPError
 from requests import Response
-import json
+from requests.exceptions import HTTPError
 
 import adr
 
@@ -83,7 +83,7 @@ def pytest_generate_tests(metafunc):
 
 @pytest.fixture
 def patch_active_data(monkeypatch):
-    class new_run_query(object):
+    class MockQueryRunner(object):
         def __init__(self, test):
             self.test = test
             self.index = 0
@@ -99,7 +99,7 @@ def patch_active_data(monkeypatch):
 
     def patch(recipe_test):
         monkeypatch.setattr(adr.query, 'query_activedata',
-                            new_run_query(recipe_test))
+                            MockQueryRunner(recipe_test))
         module = 'adr.recipes.{}'.format(recipe_test['recipe'])
         if module in sys.modules:
             reload(sys.modules[module])
@@ -109,7 +109,7 @@ def patch_active_data(monkeypatch):
 
 @pytest.fixture
 def patch_active_data_exception(monkeypatch):
-    class exception_run_query(object):
+    class ExceptionQueryRunner(object):
         def __init__(self, exception):
             self.response = Response()
             self.response.status_code = 400
@@ -123,12 +123,11 @@ def patch_active_data_exception(monkeypatch):
             self.response._content = content
 
         def __call__(self, query, *args, **kwargs):
-            raise HTTPError(self.response)
-
+            raise HTTPError(response=self.response)
 
     def patch(recipe_test, exception):
         monkeypatch.setattr(adr.query, 'query_activedata',
-                            exception_run_query(exception))
+                            ExceptionQueryRunner(exception))
         module = 'adr.recipes.{}'.format(recipe_test['recipe'])
         if module in sys.modules:
             reload(sys.modules[module])
@@ -150,4 +149,5 @@ def validate():
         print("\nYaml formatted expected:")
         print(buf.getvalue())
         assert actual == recipe_test['expected']
+
     return do_validate
