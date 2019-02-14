@@ -11,25 +11,14 @@ from __future__ import absolute_import, print_function
 
 from collections import defaultdict
 
+from ..context import override
 from ..query import run_query
 from ..recipe import RequestParser
 
 RUN_CONTEXTS = [
-    'from_date',
-    'to_date',
-    {'limit': [['--limit'],
-               {'type': int,
-                'default': 25,
-                'help': "Maximum number of users in result"
-                }]},
-    {'sort_key': [['--sort-key'],
-                  {'type': int,
-                   'default': 1,
-                   'help': "Key to sort on (int, 0-based index)",
-                   }]}
-
+    override('limit', default=25, help="Maximum number of users in result"),
+    override('sort_key', default=1, help="Key to sort on (int, 0-based index)"),
 ]
-
 
 BROKEN = True
 
@@ -40,7 +29,7 @@ def run(config, args):
     if args.sort_key < 0 or len(header) - 1 < args.sort_key:
         RequestParser.error("invalid value for 'sort_key'")
 
-    args.branch = 'try'
+    args.branches = 'try'
     limit = args.limit
     delattr(args, 'limit')
     pushes = run_query('user_pushes', config, args)
