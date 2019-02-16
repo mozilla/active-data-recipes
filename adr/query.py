@@ -38,6 +38,9 @@ class RequestParser(ArgumentParser):
                 if definition[1].get('hidden'):
                     del definition[1]['hidden']
                     definition[1]['help'] = SUPPRESS
+                elif not(definition[1].get('default')):
+                    # if a context is not hidden and has no default value
+                    definition[1]['required'] = True
                 self.add_argument(*definition[0], **definition[1])
             else:
                 raise AttributeError("Definition of {} should be list of length 2".format(name))
