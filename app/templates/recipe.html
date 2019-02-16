@@ -34,12 +34,13 @@
                                 </select>
                             </div>
                         {% else %}
-                        <input class="input" id={{key}} name={{key}} placeholder="Text input"
-                               type={{ value[1].type }}
+                        <input class="input" id={{key}} name={{key}} required
+                               placeholder="Text input" type={{ value[1].type }}
 
                             {% if ("default" in value[1]) and (value[1].default != None) %}
                                value={{value[1].default}}
-                            {% endif %}  />
+                            {% endif %}
+                        />
                         {% endif %}
                     </div>
                 </div>
