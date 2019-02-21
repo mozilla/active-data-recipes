@@ -38,7 +38,7 @@ class RequestParser(ArgumentParser):
                 if definition[1].get('hidden'):
                     del definition[1]['hidden']
                     definition[1]['help'] = SUPPRESS
-                elif not(definition[1].get('default')):
+                elif not('default' in definition[1]):
                     # if a context is not hidden and has no default value
                     definition[1]['required'] = True
                 self.add_argument(*definition[0], **definition[1])
