@@ -33,6 +33,12 @@
                                 {% endfor %}
                                 </select>
                             </div>
+                        {% elif value[1].type == "datetime" %}
+                            <input type="text" name="daterange" id={{key}}
+                                {% if ("default" in value[1]) and (value[1].default != None) %}
+                                    value={{value[1].default}}
+                                {% endif %}
+                            />
                         {% else %}
                         <input class="input" id={{key}} name={{key}} required
                                placeholder="Text input" type={{ value[1].type }}
@@ -46,8 +52,6 @@
                 </div>
             {% endif %}
         {% endfor %}
-
-        <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" align="right" />
 
         <div align="right">
             <button id="submit_button" class="button is-link" type="submit">Run</button>

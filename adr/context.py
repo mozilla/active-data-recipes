@@ -20,6 +20,7 @@ Attribute "hidden": if a context of a recipe has "hidden=True",
 """
 import ast
 import collections
+import datetime
 import inspect
 from copy import deepcopy
 
@@ -92,11 +93,13 @@ COMMON_CONTEXTS['test_name'] = [['-t', '--test'],
                                  }]
 COMMON_CONTEXTS['from_date'] = [['--from'],
                                 {'default': 'today-week',
+                                 'type': datetime,
                                  'help': "Starting date to pull data from, defaults "
                                          "to a week ago",
                                  }]
 COMMON_CONTEXTS['to_date'] = [['--to'],
                               {'default': 'eod',  # end of day
+                               'type': datetime,
                                'help': "Ending date to pull data from, defaults "
                                        "to now",
                                }]

@@ -82,15 +82,16 @@ $(function() {
         "singleDatePicker": true,
         "showDropdowns": true,
         ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            //Relative time: https://github.com/mozilla/ActiveData/blob/dev/docs/jx_time.md
+            'now': [moment()],
+            'today': [moment().startOf('day')],
+            'eod': [moment().endOf('day')],
+            'today-week': [moment().startOf('day').subtract(7, 'days')],
+            // 'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         },
-        "startDate": "02/21/2019",
-        "endDate": "02/27/2019"
+        // TODO: set as default value
+        "startDate": moment().format("MM/DD/YYYY"),
+        "endDate": moment().format("MM/DD/YYYY")
     }, function(start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
