@@ -1,4 +1,5 @@
 import json
+import datetime
 import os
 
 from flask import Flask, Markup, make_response, render_template, request
@@ -50,6 +51,8 @@ def transform_context_attributes(recipe_contexts, request_args):
             context_type = v[1]["type"]
             if context_type == int:
                 v[1]["type"] = "number"
+            elif context_type == datetime:
+                v[1]["type"] = "datetime"
         else:
             v[1]["type"] = "text"
 
