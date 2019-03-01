@@ -77,10 +77,48 @@ $(function(){
 
 
 $(function() {
+    var time_format = "YYYY-MM-DD HH:MM:SS";
 
-    $('input[name="daterange"]').daterangepicker({
+    $('input[id^="datepicker"]').daterangepicker({
+
         "singleDatePicker": true,
         "showDropdowns": true,
+        // "timePicker": true,
+        "showCustomRangeLabel": false,
+        "locale": {
+            "format": "YYYY-MM-DD",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": [
+                "Su",
+                "Mo",
+                "Tu",
+                "We",
+                "Th",
+                "Fr",
+                "Sa"
+            ],
+            "monthNames": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ],
+            "firstDay": 1
+        },
         ranges: {
             //Relative time: https://github.com/mozilla/ActiveData/blob/dev/docs/jx_time.md
             'now': [moment()],
@@ -90,11 +128,15 @@ $(function() {
             // 'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         },
         // TODO: set as default value
-        "startDate": moment().format("MM/DD/YYYY"),
-        "endDate": moment().format("MM/DD/YYYY")
+        "startDate": moment(),
     }, function(start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+        console.log('New date range selected: ' + start.format(time_format) + ' to ' +
+            end.format(time_format) + ' (predefined range: ' + label + ')');
+
+        console.log(start.toString());
+        $(this).val(start.toString());
     });
+
 });
 
 
