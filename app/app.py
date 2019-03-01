@@ -1,5 +1,5 @@
-import json
 import datetime
+import json
 import os
 
 from flask import Flask, Markup, make_response, render_template, request
@@ -15,6 +15,23 @@ recipe_lists = []
 recipe_path = os.path.dirname(recipes.__file__)
 config_path = os.path.join(os.path.dirname(adr.__file__), 'config.yml')
 config = Configuration(config_path)
+
+
+def transform_time(time_string):
+    # now, today, eod, today-week, today-month
+
+    current = datetime.datetime.now()
+    if time_string == 'now':
+        result = current
+    if time_string == 'today':
+        result = current.replace(current.year, current.month, current.day, 0, 0, 0, 0)
+    if time_string == 'eod':
+        result = current.replace(current.year, current.month, current.day, 23, 59, 59)
+    if time_string == 'today-week':
+        result = current - datetime.timedelta(days=7)
+
+    result = '{:%Y-%m-%d %H:%M:%S}'.format(result)
+    return result
 
 
 def transform_context_attributes(recipe_contexts, request_args):
@@ -47,12 +64,12 @@ def transform_context_attributes(recipe_contexts, request_args):
             else:
                 v[1]["action"] = ["", ""]
         elif "type" in v[1]:
-            # with normal input, set to number if type is int
             context_type = v[1]["type"]
             if context_type == int:
                 v[1]["type"] = "number"
             elif context_type == datetime:
                 v[1]["type"] = "datetime"
+                v[1]["default"] = transform_time(v[1]["default"])
         else:
             v[1]["type"] = "text"
 

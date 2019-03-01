@@ -101,7 +101,7 @@ COMMON_CONTEXTS['to_date'] = [['--to'],
                               {'default': 'eod',  # end of day
                                'type': datetime,
                                'help': "Ending date to pull data from, defaults "
-                                       "to now",
+                                       "to end of day",
                                }]
 """
 COMMON_CONTEXTS are commonly used arguments which can be re-used. They are shared to

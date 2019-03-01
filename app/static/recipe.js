@@ -77,13 +77,11 @@ $(function(){
 
 
 $(function() {
-    var time_format = "YYYY-MM-DD HH:MM:SS";
 
     $('input[id^="datepicker"]').daterangepicker({
 
         "singleDatePicker": true,
         "showDropdowns": true,
-        // "timePicker": true,
         "showCustomRangeLabel": false,
         "locale": {
             "format": "YYYY-MM-DD",
@@ -125,15 +123,9 @@ $(function() {
             'today': [moment().startOf('day')],
             'eod': [moment().endOf('day')],
             'today-week': [moment().startOf('day').subtract(7, 'days')],
-            // 'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         },
-        // TODO: set as default value
-        "startDate": moment(),
     }, function(start, end, label) {
-        console.log('New date range selected: ' + start.format(time_format) + ' to ' +
-            end.format(time_format) + ' (predefined range: ' + label + ')');
 
-        console.log(start.toString());
         $(this).val(start.toString());
     });
 
