@@ -34,7 +34,7 @@
                                 </select>
                             </div>
                         {% elif value[1].type == "datetime" %}
-                            <input type="text" name="daterange" id={{key}}
+                            <input class="input" type="text" name={{key}} id={{ 'datepicker_' + key}}
                                 {% if ("default" in value[1]) and (value[1].default != None) %}
                                     value={{value[1].default}}
                                 {% endif %}
@@ -78,4 +78,7 @@
 {% block specific_script %}
     {% set url = 'recipe.js?' + (range(1, 1000) | random | string) %}
     <script src="{{url_for('static', filename= url) | replace('%3F', '?')}}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
 {% endblock specific_script %}
