@@ -7,6 +7,7 @@ from requests.exceptions import HTTPError
 
 import adr
 from adr import recipe, recipes
+from adr.context import validdatetime
 from adr.util.config import Configuration
 
 
@@ -67,7 +68,7 @@ def transform_context_attributes(recipe_contexts, request_args):
             context_type = v[1]["type"]
             if context_type == int:
                 v[1]["type"] = "number"
-            elif context_type == datetime:
+            elif context_type == validdatetime:
                 v[1]["type"] = "datetime"
                 v[1]["default"] = transform_time(v[1]["default"])
         else:

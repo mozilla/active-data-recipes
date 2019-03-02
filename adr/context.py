@@ -20,13 +20,18 @@ Attribute "hidden": if a context of a recipe has "hidden=True",
 """
 import ast
 import collections
-import datetime
 import inspect
+from argparse import ArgumentParser, SUPPRESS
 from copy import deepcopy
 
 from jsone.interpreter import ExpressionEvaluator
 from jsone.prattparser import prefix
 from orderedset import OrderedSet
+
+
+def validdatetime(string):
+    return string
+
 
 COMMON_CONTEXTS = collections.OrderedDict()
 COMMON_CONTEXTS['attribute'] = [['--at'],
@@ -93,13 +98,13 @@ COMMON_CONTEXTS['test_name'] = [['-t', '--test'],
                                  }]
 COMMON_CONTEXTS['from_date'] = [['--from'],
                                 {'default': 'today-week',
-                                 'type': datetime,
+                                 'type': validdatetime,
                                  'help': "Starting date to pull data from, defaults "
                                          "to a week ago",
                                  }]
 COMMON_CONTEXTS['to_date'] = [['--to'],
                               {'default': 'eod',  # end of day
-                               'type': datetime,
+                               'type': validdatetime,
                                'help': "Ending date to pull data from, defaults "
                                        "to end of day",
                                }]
@@ -107,6 +112,29 @@ COMMON_CONTEXTS['to_date'] = [['--to'],
 COMMON_CONTEXTS are commonly used arguments which can be re-used. They are shared to
 provide a consistent CLI across recipes/queries. Ordered by alphabet.
 """
+
+
+class RequestParser(ArgumentParser):
+
+    def __init__(self, definitions):
+        ArgumentParser.__init__(self)
+
+        for name, definition in definitions.items():
+            # definition of a context: {name: [[],{}]}
+            if isinstance(definition, dict):
+                self.add_argument(name, **definition)
+            elif len(definition) >= 2:
+                # Set destination from name
+                definition[1]['dest'] = name
+                if definition[1].get('hidden'):
+                    del definition[1]['hidden']
+                    definition[1]['help'] = SUPPRESS
+                elif not('default' in definition[1]):
+                    # if a context is not hidden and has no default value
+                    definition[1]['required'] = True
+                self.add_argument(*definition[0], **definition[1])
+            else:
+                raise AttributeError("Definition of {} should be list of length 2".format(name))
 
 
 def override(name, **overrides):

@@ -9,9 +9,10 @@ from argparse import Namespace
 from docutils.core import publish_parts
 
 from adr import context
+from adr.context import RequestParser
 from adr.errors import MissingDataError
 from adr.formatter import all_formatters
-from adr.query import RequestParser, load_query_context
+from adr.query import load_query_context
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
