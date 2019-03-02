@@ -6,13 +6,14 @@ import json
 import logging
 import os
 import time
-from argparse import ArgumentParser, Namespace, SUPPRESS
+from argparse import Namespace
 
 import jsone
 import requests
 import yaml
 
 from adr import context
+from adr.context import RequestParser
 from adr.errors import MissingDataError
 from adr.formatter import all_formatters
 
@@ -21,29 +22,6 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 
 QUERY_DIR = os.path.join(here, 'queries')
-
-
-class RequestParser(ArgumentParser):
-
-    def __init__(self, definitions):
-        ArgumentParser.__init__(self)
-
-        for name, definition in definitions.items():
-            # definition of a context: {name: [[],{}]}
-            if isinstance(definition, dict):
-                self.add_argument(name, **definition)
-            elif len(definition) >= 2:
-                # Set destination from name
-                definition[1]['dest'] = name
-                if definition[1].get('hidden'):
-                    del definition[1]['hidden']
-                    definition[1]['help'] = SUPPRESS
-                elif not('default' in definition[1]):
-                    # if a context is not hidden and has no default value
-                    definition[1]['required'] = True
-                self.add_argument(*definition[0], **definition[1])
-            else:
-                raise AttributeError("Definition of {} should be list of length 2".format(name))
 
 
 def format_date(timestamp, interval='day'):
