@@ -19,8 +19,7 @@ log.setLevel(logging.DEBUG)
 log.addHandler(logging.StreamHandler())
 
 
-def print_to_file(data, filename):
-    filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
+def print_to_file(data, filepath):
     f = open(filepath, "x")
     f.write(data)
     f.close()
@@ -108,7 +107,7 @@ def _build_parser_arguments(parser, config):
         '-h', '--help', action='store_true',
         help="Type --help to get help.\nType <recipe> --help to get help with a recipe.")
     parser.add_argument('-of', '--output-file', type=str,
-                        help="Name of output file")
+                        help="Full path of the output file")
     return parser
 
 
