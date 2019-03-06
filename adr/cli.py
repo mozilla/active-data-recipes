@@ -19,6 +19,14 @@ log.setLevel(logging.DEBUG)
 log.addHandler(logging.StreamHandler())
 
 
+def print_to_file(data):
+    filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'results.json')
+    f = open(filepath, "x")
+    for i in data:
+        f.write("This is line {}\n".format(i))
+    f.close()
+
+
 def format_request(request, config, remainder, request_type):
 
     if request_type == "query":
@@ -26,6 +34,8 @@ def format_request(request, config, remainder, request_type):
     else:
         data = run_recipe(request, remainder, config)
         url = None
+    if config.output_file:
+        print_to_file(data)
     return data, url
 
 
@@ -93,6 +103,8 @@ def _build_parser_arguments(parser, config):
                         help="Endpoint URL")
     parser.add_argument('-d', '--debug', action='store_true', default=config.debug,
                         help="Open a query in ActiveData query tool.")
+    parser.add_argument('-of', '--output-file', action='store_true', default=config.output_file,
+                        help="Send the result to file instead of stdout.")
     # positional arguments
     parser.add_argument('task', nargs='*')
     parser.add_argument(
