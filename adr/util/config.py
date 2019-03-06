@@ -7,7 +7,8 @@ class Configuration(object):
         "verbose",
         "debug",
         "debug_url",
-        "fmt"
+        "fmt",
+        "output_file"
     ]
 
     def __init__(self, yml_file=None):

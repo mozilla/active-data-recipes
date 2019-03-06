@@ -3,3 +3,4 @@ debug_url: https://activedata.allizom.org/tools/query.html#query_id={}
 verbose: false
 debug: false
 fmt: table
+output_file: false
