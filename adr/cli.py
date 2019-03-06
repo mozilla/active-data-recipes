@@ -19,11 +19,10 @@ log.setLevel(logging.DEBUG)
 log.addHandler(logging.StreamHandler())
 
 
-def print_to_file(data):
-    filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'results.json')
+def print_to_file(data, filename):
+    filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
     f = open(filepath, "x")
-    for i in data:
-        f.write("This is line {}\n".format(i))
+    f.write(data)
     f.close()
 
 
@@ -35,7 +34,7 @@ def format_request(request, config, remainder, request_type):
         data = run_recipe(request, remainder, config)
         url = None
     if config.output_file:
-        print_to_file(data)
+        print_to_file(data, config.output_file)
     return data, url
 
 
@@ -103,15 +102,13 @@ def _build_parser_arguments(parser, config):
                         help="Endpoint URL")
     parser.add_argument('-d', '--debug', action='store_true', default=config.debug,
                         help="Open a query in ActiveData query tool.")
-    parser.add_argument('-of', '--output-file', action='store_true', default=config.output_file,
-                        help="Send the result to file instead of stdout.")
     # positional arguments
     parser.add_argument('task', nargs='*')
     parser.add_argument(
-        '-h',
-        '--help',
-        action='store_true',
+        '-h', '--help', action='store_true',
         help="Type --help to get help.\nType <recipe> --help to get help with a recipe.")
+    parser.add_argument('-of', '--output-file', type=str,
+                        help="Name of output file")
     return parser
 
 
