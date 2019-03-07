@@ -77,12 +77,11 @@ $(function(){
 
 
 $(function() {
-
+    // TODO: add a textbox for custom strings such as eod, today, today-week
     $('input[id^="datepicker"]').daterangepicker({
 
         "singleDatePicker": true,
         "showDropdowns": true,
-        "showCustomRangeLabel": false,
         "locale": {
             "format": "YYYY-MM-DD",
             "separator": " - ",
@@ -90,40 +89,9 @@ $(function() {
             "cancelLabel": "Cancel",
             "fromLabel": "From",
             "toLabel": "To",
-            "customRangeLabel": "Custom",
-            "weekLabel": "W",
-            "daysOfWeek": [
-                "Su",
-                "Mo",
-                "Tu",
-                "We",
-                "Th",
-                "Fr",
-                "Sa"
-            ],
-            "monthNames": [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December"
-            ],
+            "daysOfWeek": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sa"],
             "firstDay": 1
-        },
-        ranges: {
-            //Relative time: https://github.com/mozilla/ActiveData/blob/dev/docs/jx_time.md
-            'now': [moment()],
-            'today': [moment().startOf('day')],
-            'eod': [moment().endOf('day')],
-            'today-week': [moment().startOf('day').subtract(7, 'days')],
-        },
+        }
     }, function(start, end, label) {
 
         $(this).val(start.toString());
