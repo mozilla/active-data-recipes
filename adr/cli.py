@@ -19,12 +19,6 @@ log.setLevel(logging.DEBUG)
 log.addHandler(logging.StreamHandler())
 
 
-def print_to_file(data, filepath):
-    f = open(filepath, "x")
-    f.write(data)
-    f.close()
-
-
 def format_request(request, config, remainder, request_type):
 
     if request_type == "query":
@@ -33,7 +27,7 @@ def format_request(request, config, remainder, request_type):
         data = run_recipe(request, remainder, config)
         url = None
     if config.output_file:
-        print_to_file(data, config.output_file)
+        print(data, file=open(config.output_file, 'w'))
     return data, url
 
 
@@ -106,7 +100,7 @@ def _build_parser_arguments(parser, config):
     parser.add_argument(
         '-h', '--help', action='store_true',
         help="Type --help to get help.\nType <recipe> --help to get help with a recipe.")
-    parser.add_argument('-of', '--output-file', type=str,
+    parser.add_argument('-o', '--output-file', type=str,
                         help="Full path of the output file")
     return parser
 
