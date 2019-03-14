@@ -15,6 +15,8 @@ def run(config, args):
     data = run_query('config_durations', config, args)["data"]
     result = []
     for record in data:
+        if not record or not record[args.sort_key]:
+            continue
         if isinstance(record[1], list):
             record[1] = record[1][-1]
         if record[2] is None:
