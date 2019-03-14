@@ -6,13 +6,11 @@ Show CI regressions per config per week
     adr unique_failures [-B <branch>] [--from <date> [--to <date>]]
 """
 
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, print_function
 
 import logging
-
 from datetime import date, timedelta
 
-from ..recipe import RecipeParser
 from ..query import run_query
 
 log = logging.getLogger('adr')
@@ -22,10 +20,10 @@ BRANCH_WHITELIST = [
 ]
 
 
-def get_stats_for_week(query_args, config):
+def get_stats_for_week(args, config):
     # query all jobs that are fixed by commit- build a map and determine for each regression:
     # <fixed_rev>: [{<broken_rev>: "time_from_build_to_job", "job_name">}, ...]
-    backouts = next(run_query('fixed_by_commit_jobs', config, **query_args))['data']
+    backouts = run_query('fixed_by_commit_jobs', config, args)['data']
     if backouts == {}:
         return []
     builddate = backouts['build.date']
@@ -119,28 +117,24 @@ def get_stats_for_week(query_args, config):
     return results, configs
 
 
-def run(args, config):
-    parser = RecipeParser('date', 'branch')
-    args = parser.parse_args(args)
-    query_args = vars(args)
-
+def run(config, args):
     # Between these dates on a particular branch
-    to_date = query_args['to_date']
+    to_date = args.to_date
     if to_date == 'eod':
         to_date = str(date.today())
     to_date = to_date.split('-')
 
-    from_date = query_args['from_date']
+    from_date = args.from_date
     if from_date == 'today-week':
         from_date = str(date.today())
     from_date = from_date.split('-')
 
-    branch = query_args['branch']
+    branch = args.branches
 
     if not branch or branch == ['mozilla-central']:
         branch = BRANCH_WHITELIST
 
-    query_args['branch'] = branch
+    args.branches = branch
 
     start = date(int(from_date[0]), int(from_date[1]), int(from_date[2]))
     end = date(int(to_date[0]), int(to_date[1]), int(to_date[2]))
@@ -150,14 +144,14 @@ def run(args, config):
     configs = []
     raw = {}
     while day < end:
-        query_args['from_date'] = str(day)
+        args.from_date = str(day)
         day += timedelta(days=7)
-        query_args['to_date'] = str(day)
-        retVal, c = get_stats_for_week(query_args, config)
+        args.to_date = str(day)
+        retVal, c = get_stats_for_week(args, config)
         for x in c:
             if x not in configs:
                 configs.append(x)
-        raw[query_args['from_date']] = retVal
+        raw[args.from_date] = retVal
 
     # this is a table of all regressions seen per config
     header = ['config']
