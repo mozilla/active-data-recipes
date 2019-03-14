@@ -1,9 +1,9 @@
 """
-Show CI regressions found and SETA miss rate by week
+Show CI regressions per config per week
 
 .. code-block:: bash
 
-    adr seta_accuracy [-B <branch>] [--from <date> [--to <date>]]
+    adr unique_failures [-B <branch>] [--from <date> [--to <date>]]
 """
 
 from __future__ import print_function, absolute_import
@@ -59,6 +59,7 @@ def get_stats_for_week(query_args, config):
 
         item = item[0:12]
 
+        # TODO: this is hacky, it can get out of date and my shorthand is sloppy
         # parse: test-macosx64/opt-mochitest-browser-chrome-e10s-5
         config = '-'.join(jobname[counter].split('-')[1:])
         config = config.split('/')[0]
@@ -95,11 +96,6 @@ def get_stats_for_week(query_args, config):
         if item not in fbc:
             fbc[item] = {'revisions': [], 'branch': {}}
 
-        # TODO: if we skip this we want to detect missed regressions
-        # TODO: useful for considering scenarios of changing what we run (test suites)
-#        if config.startswith("Lin32"):
-#            continue
-
         fbc[item]['revisions'].append(buildrev[counter])
 
         b = branch[counter]
@@ -119,21 +115,6 @@ def get_stats_for_week(query_args, config):
             total = 1 if len(configs[c]) > 0 else 0
             # assume same test fails, not multiple tests and we disable the one failing test
             unique = 1 if (sum([len(configs[x]) for x in configs]) - len(configs[c])) == 0 else 0
-            if c.startswith("Lin32") and unique == 1:
-                print("JMAHER: %s - %s: %s" % (branches[0], item, configs[c]))
-                thurl = 'https://treeherder.mozilla.org'
-                print(" * %s/#/jobs?repo=%s&revision=%s" % (thurl, branches[0], item))
-                print(" * revisions fixed by this: %s" % fbc[item]['revisions'])
-                revs = [x for x in fbc if item in fbc[x]['revisions']]
-                other_failures = []
-                # TODO: some reason this doesn't seem to work
-                for rev in revs:
-                    for jmm in fbc[item]['branch'][branches[0]]:
-                        if not jmm.startswith('Lin32'):
-                            other_failures.append(jmm)
-                print(" * other non linux32 failures: %s" % other_failures)
-                print("")
-
             results.append([c, total, unique])
     return results, configs
 
@@ -178,6 +159,7 @@ def run(args, config):
                 configs.append(x)
         raw[query_args['from_date']] = retVal
 
+    # this is a table of all regressions seen per config
     header = ['config']
     for d in raw.keys():
         header.append(d)
@@ -189,6 +171,7 @@ def run(args, config):
             res.append(sum([x[1] for x in raw[d] if x[0] == c]))
         results.append(res)
 
+    # repeat now for just the unique regressions
     results.append(header)
     for c in configs:
         res = []
