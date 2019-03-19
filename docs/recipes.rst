@@ -36,6 +36,12 @@ config_durations
 .. automodule:: adr.recipes.config_durations
     :no-undoc-members:
 
+config_intermittents
+----------------
+
+.. automodule:: adr.recipes.config_intermittents
+    :no-undoc-members:
+
 files_with_coverage
 -------------------
 
