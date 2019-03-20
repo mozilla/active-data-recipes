@@ -137,3 +137,9 @@ try_users
 
 .. automodule:: adr.recipes.try_users
     :no-undoc-members:
+
+unique_failures
+---------
+
+.. automodule:: adr.recipes.unique_failures
+    :no-undoc-members:

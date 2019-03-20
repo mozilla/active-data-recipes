@@ -1,6 +1,6 @@
 from: task
 select:
-    - {aggregate: count, name: tasks}
+    - {aggregate: count, name: tasks, value: run.key}
     - {aggregate: avg, name: "average minutes", value: {div: {action.duration: 60}}}
 groupby:
     - "run.machine.platform"
@@ -11,5 +11,5 @@ where:
         - gte: [repo.push.date, {date: {$eval: from_date}}]
         - lte: [repo.push.date, {date: {$eval: to_date}}]
         - in: {run.suite.name: ["mochitest", "reftest", "web-platform-tests", "web-platform-tests-reftests", "xpcshell", "marionette", "firefox-ui", "cppunittest", "gtest", "jittest", "awsy", "web-platform-tests-wdspec", "test-verification"]}
-        - in: {build.type: ["opt","debug","pgo","asan"]}
+        - not: {in: {build.type: ["ccov"]}}
 limit: 10000

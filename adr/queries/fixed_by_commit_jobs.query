@@ -6,6 +6,7 @@ select:
     - action.request_time
     - build.revision12
     - failure.notes.text
+    - repo.branch.name
 where:
     and:
         - lte:
