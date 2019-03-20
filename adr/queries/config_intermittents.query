@@ -1,0 +1,15 @@
+from: task
+select:
+    - {"aggregate": "count", "name": "tasks", "value": "run.key"}
+    - {"aggregate": "count", "name": "failures", "value": {"then": 1, "when": {"eq": {"task.run.status": "failed"}}}}
+groupby:
+    - run.machine.platform
+    - build.type
+where:
+    and:
+        - in: {repo.branch.name: {$eval: branches}}
+        - gte: [repo.push.date, {date: {$eval: from_date}}]
+        - lte: [repo.push.date, {date: {$eval: to_date}}]
+        - regex: {run.key: ".*test-.*"}
+        - not: {in: {build.type: ["ccov"]}}
+limit: 1000
