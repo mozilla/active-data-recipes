@@ -46,18 +46,29 @@ To contribute to `active-data-recipes` first [install poetry][2], then run:
     cd active-data-recipes
     poetry install
 
-To run `adr`:
+Now you can use `poetry run` to perform various development commands:
 
+    # run adr
     poetry run adr <recipe>
-
-To run the web app:
-
+    
+    # run webapp
     poetry run adr-app
-
-To run tests:
-
+    
+    # run tests
     poetry run tox
 
+Alternatively activate the `poetry` shell ahead of time:
+
+    poetry shell
+    
+    # run adr
+    adr <recipe>
+    
+    # run app
+    adr-app
+    
+    # run tests
+    tox
 
 [0]: https://github.com/klahnakoski/ActiveData/blob/dev/docs/jx_time.md
 [1]: https://active-data-recipes.readthedocs.io/en/latest/recipes.html
