@@ -2,7 +2,7 @@ language: python
 python:
     - "3.6"
 install:
-    - python setup.py -q install
-    - pip install tox
+    - pip install poetry
+    - poetry install
 script:
-    - tox
+    - poetry run tox
