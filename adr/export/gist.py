@@ -31,7 +31,7 @@ def cli(args=sys.argv[1:]):
         return 1
 
     with open(args.gist_config, 'r') as fh:
-        config = yaml.load(fh)
+        config = yaml.load(fh, Loader=yaml.SafeLoader)
 
     output = None
     cfg = Configuration()

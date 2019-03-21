@@ -15,7 +15,7 @@ class Configuration(object):
         # No file: Empty config
         if yml_file:
             with open(yml_file, 'r') as content:
-                cfg = yaml.load(content)
+                cfg = yaml.load(content, Loader=yaml.SafeLoader)
             self.update(cfg)
         # Init attribute if not exist in config file
         for key in Configuration.__slots__:

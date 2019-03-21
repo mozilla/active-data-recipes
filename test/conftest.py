@@ -21,7 +21,7 @@ def load_recipe_tests():
     recipes = [os.path.join(recipe_dir, r) for r in os.listdir(recipe_dir) if r.endswith('.test')]
     for recipe in recipes:
         with open(recipe, 'r') as fh:
-            for test in yaml.load_all(fh):
+            for test in yaml.load_all(fh, Loader=yaml.FullLoader):
                 yield test
 
 
@@ -30,7 +30,7 @@ def load_query_tests():
     queries = [os.path.join(query_dir, q) for q in os.listdir(query_dir) if q.endswith('.test')]
     for query in queries:
         with open(query, 'r') as fh:
-            for test in yaml.load_all(fh):
+            for test in yaml.load_all(fh, Loader=yaml.FullLoader):
                 yield test
 
 
@@ -40,7 +40,7 @@ def load_formatter_tests(format):
         formatter_dir) if j.endswith('.test') and j.startswith(format)]
     for json_formatter_test in json_formatter_tests:
         with open(json_formatter_test, 'r') as fh:
-            for test in yaml.load_all(fh):
+            for test in yaml.load_all(fh, Loader=yaml.FullLoader):
                 yield test
 
 

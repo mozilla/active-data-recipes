@@ -71,7 +71,7 @@ def load_query(name):
         (exclude the context).
     """
     with open(os.path.join(QUERY_DIR, name + '.query')) as fh:
-        query = yaml.load(fh)
+        query = yaml.load(fh, Loader=yaml.SafeLoader)
         # Remove the context
         if "context" in query:
             query.pop("context")
@@ -90,7 +90,7 @@ def load_query_context(query_name, add_contexts=[]):
     """
 
     with open(os.path.join(QUERY_DIR, query_name + '.query')) as fh:
-        query = yaml.load(fh)
+        query = yaml.load(fh, Loader=yaml.SafeLoader)
         # Extract query and context
         specific_contexts = query.pop("context") if "context" in query else {}
         contexts = context.extract_context_names(query)
