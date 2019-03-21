@@ -18,6 +18,7 @@ include = [
 license = "MPL-2.0"
 authors = [
     "Andrew Halberstadt <ahalberstadt@mozilla.com>",
+    "Trang Nguyen <huyentrang1511@gmail.com>",
 ]
 
 readme = "README.md"
@@ -45,5 +46,7 @@ pygments = "^2.3.1"
 orderedset = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
+flake8 = "^3.7.7"
+flake8-import-order = "^0.18.1"
 pytest = "^3.0.0"
 tox = "^3.7.0"
