@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "active-data-recipes"
+version = "0.11.0"
+description = "Collection of recipes for finding information in ActiveData"
+
+packages = [
+    { include = "adr" },
+    { include = "app" },
+]
+include = [
+    "adr/queries/*",
+    "adr/recipes/*",
+    "adr/util/*",
+    "app/*",
+    "extra/*",
+]
+
+license = "MPL-2.0"
+authors = [
+    "Andrew Halberstadt <ahalberstadt@mozilla.com>",
+]
+
+readme = "README.md"
+repository = "https://github.com/mozilla/active-data-recipes"
+homepage = "https://github.com/mozilla/active-data-recipes"
+
+[tool.poetry.scripts]
+adr = "adr.cli:main"
+adr-gist = "adr.export.gist:cli"
+adr-test = "adr.export.test:cli"
+adr-app = "app.app:main"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+json-e = "^3.0.0"
+requests = "^2.21.0"
+terminaltables = "^3.1.0"
+pyyaml = "^5.1"
+beautifulsoup4 = "^4.7.1"
+flask = "^1.0.2"
+markdown = "^3.0.1"
+docutils = "^0.14"
+pygments = "^2.3.1"
+orderedset = "^2.0.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0.0"
+tox = "^3.7.0"
