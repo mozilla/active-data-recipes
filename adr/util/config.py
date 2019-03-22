@@ -4,6 +4,38 @@ from appdirs import user_config_dir
 from tomlkit import parse
 
 
+def merge_to(source, dest):
+    """
+    Merge dict and arrays (override scalar values).
+
+    Keys from source override keys from dest, and elements from lists in source
+    are appended to lists in dest.
+
+    Args:
+        source (dict): to copy from
+        dest (dict): to copy to (modified in place)
+    """
+
+    for key, value in source.items():
+        # Override mismatching or empty types
+        if type(value) != type(dest.get(key)):  # noqa
+            dest[key] = source[key]
+            continue
+
+        # Merge dict
+        if isinstance(value, dict):
+            merge_to(value, dest[key])
+            continue
+
+        if isinstance(value, list):
+            dest[key] = dest[key] + source[key]
+            continue
+
+        dest[key] = source[key]
+
+    return dest
+
+
 class Configuration(object):
     DEFAULT_CONFIG_PATH = os.path.join(user_config_dir('adr'), 'config.toml')
     DEFAULTS = {
@@ -21,7 +53,7 @@ class Configuration(object):
         if os.path.isfile(self.path):
             with open(self.path, 'r') as fh:
                 content = fh.read()
-                self.update(parse(content)['adr'])
+                self.merge(parse(content)['adr'])
 
     def __getitem__(self, key):
         return self._config[key]
@@ -29,8 +61,19 @@ class Configuration(object):
     def __getattr__(self, key):
         return self[key]
 
-    def update(self, data):
+    def update(self, other):
+        """Update config with the specified data.
+
+        Args:
+            other (dict): Dictionary to update configuration with.
         """
-        :param dict config: dictionary object of config
+        self._config.update(other)
+
+    def merge(self, other):
+        """Merge data into config (updates dicts and lists instead of
+        overwriting them).
+
+        Args:
+            other (dict): Dictionary to merge configuration with.
         """
-        self._config.update(data)
+        self._config = merge_to(other, self._config)
