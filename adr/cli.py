@@ -177,7 +177,7 @@ def main(args=sys.argv[1:]):
     :param list args: command-line arguments.
     """
     # load config from file
-    config = Configuration(os.path.join(here, 'config.yml'))
+    config = Configuration()
 
     # create parsers and subparsers.
     parser = ArgumentParser(

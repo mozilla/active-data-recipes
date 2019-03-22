@@ -5,7 +5,6 @@ import os
 from flask import Flask, Markup, make_response, render_template, request
 from requests.exceptions import HTTPError
 
-import adr
 from adr import recipe, recipes
 from adr.context import validdatetime
 from adr.util.config import Configuration
@@ -14,8 +13,7 @@ from adr.util.config import Configuration
 app = Flask(__name__)
 recipe_lists = []
 recipe_path = os.path.dirname(recipes.__file__)
-config_path = os.path.join(os.path.dirname(adr.__file__), 'config.yml')
-config = Configuration(config_path)
+config = Configuration()
 
 
 def transform_time(time_string):

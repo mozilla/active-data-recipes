@@ -44,6 +44,8 @@ markdown = "^3.0.1"
 docutils = "^0.14"
 pygments = "^2.3.1"
 orderedset = "^2.0.1"
+appdirs = "^1.4"
+tomlkit = "^0.5.3"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7.7"
