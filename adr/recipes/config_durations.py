@@ -9,6 +9,8 @@ from __future__ import absolute_import, print_function
 
 from ..query import run_query
 
+BROKEN = True
+
 
 def run(config, args):
     # process config data
