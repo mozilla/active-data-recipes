@@ -17,17 +17,20 @@ class Configuration(object):
     def __init__(self, path=None):
         self.path = path or self.DEFAULT_CONFIG_PATH
 
-        cfg = self.DEFAULTS.copy()
+        self._config = self.DEFAULTS.copy()
         if os.path.isfile(self.path):
             with open(self.path, 'r') as fh:
                 content = fh.read()
-                cfg.update(parse(content)['adr'])
+                self.update(parse(content)['adr'])
 
-        self.update(cfg)
+    def __getitem__(self, key):
+        return self._config[key]
 
-    def update(self, config):
+    def __getattr__(self, key):
+        return self[key]
+
+    def update(self, data):
         """
         :param dict config: dictionary object of config
         """
-        for key, value in config.items():
-            setattr(self, key, value)
+        self._config.update(data)
