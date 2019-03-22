@@ -63,7 +63,8 @@ def test_query(monkeypatch, query_test, config):
 
         print_diff()
         assert result == query_test["expected"]
-        assert debug_url == config.build_debug_url(query_test["expected"]["meta"]["saved_as"])
+        assert debug_url == config.debug_url.format(
+            query_test["expected"]["meta"]["saved_as"])
 
     elif "--table" in query_test["args"]:
 

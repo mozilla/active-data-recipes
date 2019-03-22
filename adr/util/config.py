@@ -31,10 +31,3 @@ class Configuration(object):
         """
         for key, value in config.items():
             setattr(self, key, value)
-
-    def build_debug_url(self, query_id):
-        """
-        :param query_id:  query id
-        :return: debug url with this query id
-        """
-        return self.debug_url.format(query_id)

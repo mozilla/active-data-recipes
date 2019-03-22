@@ -170,7 +170,7 @@ def format_query(query, config, remainder=[]):
     debug_url = None
     if 'saved_as' in result['meta']:
         query_id = result['meta']['saved_as']
-        debug_url = config.build_debug_url(query_id)
+        debug_url = config.debug_url.format(query_id)
 
     if config.fmt == 'json':
         return fmt(result), debug_url
