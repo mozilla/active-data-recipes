@@ -41,9 +41,6 @@ def test_config(create_config):
     config.merge({'sources': ['bar']})
     assert set(config.sources) == set(['foo', 'bar'])
 
-    config.update({'sources': ['baz']})
-    assert config['sources'] == ['baz']
-
 
 def test_merge_to():
     a = {'l': [1], 'd': {'one': 1}}

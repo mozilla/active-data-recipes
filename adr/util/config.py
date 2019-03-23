@@ -60,14 +60,6 @@ class Configuration(object):
     def __getattr__(self, key):
         return self[key]
 
-    def update(self, other):
-        """Update config with the specified data.
-
-        Args:
-            other (dict): Dictionary to update configuration with.
-        """
-        self._config.update(other)
-
     def merge(self, other):
         """Merge data into config (updates dicts and lists instead of
         overwriting them).

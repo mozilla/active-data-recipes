@@ -218,7 +218,7 @@ def main(args=sys.argv[1:]):
     # store all non-recipe/query args into config
     # From this point, only config stores all non-recipe/query args
     # Additional args will go to remainder
-    config.update(vars(parsed_args))
+    config.merge(vars(parsed_args))
 
     parsed_args.func(parsed_args, remainder, config, parser, request_type)
 
