@@ -15,23 +15,22 @@ def merge_to(source, dest):
         source (dict): to copy from
         dest (dict): to copy to (modified in place)
     """
-
     for key, value in source.items():
-        # Override mismatching or empty types
-        if type(value) != type(dest.get(key)):  # noqa
-            dest[key] = source[key]
+
+        if key not in dest:
+            dest[key] = value
             continue
 
         # Merge dict
-        if isinstance(value, dict):
+        if isinstance(value, dict) and isinstance(dest[key], dict):
             merge_to(value, dest[key])
             continue
 
-        if isinstance(value, list):
-            dest[key] = dest[key] + source[key]
+        if isinstance(value, list) and isinstance(dest[key], list):
+            dest[key] = dest[key] + value
             continue
 
-        dest[key] = source[key]
+        dest[key] = value
 
     return dest
 
@@ -76,4 +75,4 @@ class Configuration(object):
         Args:
             other (dict): Dictionary to merge configuration with.
         """
-        self._config = merge_to(other, self._config)
+        merge_to(other, self._config)
