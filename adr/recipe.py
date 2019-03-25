@@ -8,7 +8,7 @@ from argparse import Namespace
 
 from docutils.core import publish_parts
 
-from adr import context
+from adr import config, context
 from adr.context import RequestParser
 from adr.errors import MissingDataError
 from adr.formatter import all_formatters
@@ -16,8 +16,6 @@ from adr.query import load_query_context
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
-
-RECIPE_DIR = os.path.join(here, 'recipes')
 
 
 def get_recipe_contexts(recipe, mod=None):
@@ -66,7 +64,7 @@ def get_module(name):
     return mod
 
 
-def run_recipe(recipe, args, config, from_cli=True):
+def run_recipe(recipe, args, from_cli=True):
     """Given a recipe, calls the appropriate query and returns the result.
 
     The provided recipe name is used to make a call to the modules.
@@ -74,7 +72,6 @@ def run_recipe(recipe, args, config, from_cli=True):
     Args:
         recipe (str): name of the recipe to be run.
         args (list): remainder arguments that were unparsed.
-        config (Configuration): config object.
         from_cli (bool): true if run recipe from cli
     Returns:
         output (str): output after formatted.
@@ -92,7 +89,7 @@ def run_recipe(recipe, args, config, from_cli=True):
 
     try:
         # output = mod.run(Namespace(**run_args))
-        output = mod.run(config, Namespace(**parsed_args))
+        output = mod.run(Namespace(**parsed_args))
     except MissingDataError:
         return "ActiveData didn\'t return any data."
 

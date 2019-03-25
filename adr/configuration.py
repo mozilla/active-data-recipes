@@ -68,3 +68,6 @@ class Configuration(object):
             other (dict): Dictionary to merge configuration with.
         """
         merge_to(other, self._config)
+
+
+config = Configuration()

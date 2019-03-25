@@ -11,7 +11,7 @@ from __future__ import absolute_import, print_function
 from ..query import run_query
 
 
-def run(config, args):
+def run(args):
     """
     THIS IS PRONE TO DOUBLE COUNTING, AS DIFFERENT TEST CHUNKS COVER COMMON LINES
     AT THE VERY LEAST YOU GET A ROUGH ESTIMATE OF COVERAGE
@@ -49,7 +49,7 @@ def run(config, args):
                        'jit', 'Wd', 'Wr']
 
     retVal = {}
-    result = run_query('code_coverage_by_suite', config, args)
+    result = run_query('code_coverage_by_suite', args)
     for line in result['data']:
         # line = [suite, filename, count]
         if line[1] not in retVal:

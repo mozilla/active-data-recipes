@@ -23,7 +23,7 @@ RUN_CONTEXTS = [
 BROKEN = True
 
 
-def run(config, args):
+def run(args):
 
     header = ['User', 'Tasks', 'Pushes', 'Tasks / Push']
     if args.sort_key < 0 or len(header) - 1 < args.sort_key:
@@ -32,10 +32,10 @@ def run(config, args):
     args.branches = 'try'
     limit = args.limit
     delattr(args, 'limit')
-    pushes = run_query('user_pushes', config, args)
+    pushes = run_query('user_pushes', args)
     pushes = pushes['data']
 
-    tasks = run_query('user_tasks', config, args)['data']
+    tasks = run_query('user_tasks', args)['data']
 
     users = defaultdict(list)
     for user, num in tasks:

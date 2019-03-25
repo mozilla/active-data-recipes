@@ -5,7 +5,7 @@ import pytest
 from appdirs import user_config_dir
 from tomlkit import dumps
 
-from adr.util.config import (
+from adr.configuration import (
     Configuration,
     merge_to,
 )

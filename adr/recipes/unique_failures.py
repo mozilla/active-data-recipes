@@ -20,10 +20,10 @@ BRANCH_WHITELIST = [
 ]
 
 
-def get_stats_for_week(args, config):
+def get_stats_for_week(args):
     # query all jobs that are fixed by commit- build a map and determine for each regression:
     # <fixed_rev>: [{<broken_rev>: "time_from_build_to_job", "job_name">}, ...]
-    backouts = run_query('fixed_by_commit_jobs', config, args)['data']
+    backouts = run_query('fixed_by_commit_jobs', args)['data']
     if backouts == {}:
         return []
     builddate = backouts['build.date']
@@ -117,7 +117,7 @@ def get_stats_for_week(args, config):
     return results, configs
 
 
-def run(config, args):
+def run(args):
     # Between these dates on a particular branch
     to_date = args.to_date
     if to_date == 'eod':
@@ -147,7 +147,7 @@ def run(config, args):
         args.from_date = str(day)
         day += timedelta(days=7)
         args.to_date = str(day)
-        retVal, c = get_stats_for_week(args, config)
+        retVal, c = get_stats_for_week(args)
         for x in c:
             if x not in configs:
                 configs.append(x)

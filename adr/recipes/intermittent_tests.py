@@ -14,7 +14,7 @@ BROKEN = True
 RUN_CONTEXTS = [override('platform_config', hidden=True)]
 
 
-def run(config, args):
+def run(args):
     # These 4 args are defined so that we can share the queries with the
     # 'intermittent_test_data' recipe.
     args.test_name = '(~(file.*|http.*))'
@@ -22,9 +22,9 @@ def run(config, args):
     args.result = ["F"]
     args.platform_config = "test-%s/%s" % (args.platform, args.build_type)
 
-    jobs = run_query('intermittent_jobs', config, args)['data']
-    result = run_query('intermittent_tests', config, args)['data']
-    total_runs = run_query('intermittent_test_rate', config, args)['data']
+    jobs = run_query('intermittent_jobs', args)['data']
+    result = run_query('intermittent_tests', args)['data']
+    total_runs = run_query('intermittent_test_rate', args)['data']
 
     intermittent_tests = []
     # for each result, match up the revision/name with jobs, if a match, save testname

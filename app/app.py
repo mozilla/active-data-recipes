@@ -5,15 +5,13 @@ import os
 from flask import Flask, Markup, make_response, render_template, request
 from requests.exceptions import HTTPError
 
-from adr import recipe, recipes
+from adr import config, recipe, recipes
 from adr.context import validdatetime
-from adr.util.config import Configuration
 
 
 app = Flask(__name__)
 recipe_lists = []
 recipe_path = os.path.dirname(recipes.__file__)
-config = Configuration()
 
 
 def transform_time(time_string):
@@ -147,7 +145,7 @@ def run_recipe(recipe_name, request, fmt='json'):
             args[key] = int(value)
 
     config.fmt = fmt
-    return recipe.run_recipe(recipe_name, args, config, False)
+    return recipe.run_recipe(recipe_name, args, False)
 
 
 API_BASE_PATH = "/api/v1/"

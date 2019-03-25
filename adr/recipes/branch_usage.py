@@ -22,7 +22,7 @@ RUN_CONTEXTS = [
 ]
 
 
-def run(config, args):
+def run(args):
     results = []
     branches = args.branches
     delattr(args, 'branches')
@@ -30,7 +30,7 @@ def run(config, args):
     total = 0
     for branch in branches:
         args.branches = [branch]
-        data = run_query('total_hours_spent_on_branch', config, args)['data']
+        data = run_query('total_hours_spent_on_branch', args)['data']
         hours = int(data['hours'])
         total += hours
         results.append([branch, hours])

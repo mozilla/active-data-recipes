@@ -26,12 +26,12 @@ RUN_CONTEXTS = [
 ]
 
 
-def run(config, args):
+def run(args):
 
     limit = args.limit
     delattr(args, 'limit')
 
-    data = run_query('task_durations', config, args)['data']
+    data = run_query('task_durations', args)['data']
     result = []
     for record in data:
         if record[2] is None:

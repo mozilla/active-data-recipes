@@ -290,7 +290,7 @@ def extract_arguments(func, call, members=None):
     root_func = root_node.body[0]
     # Get root args, only support second arg
     # TODO: support multiple args fetching
-    root_arg = root_func.args.args[1].arg if len(root_func.args.args) > 1 else None
+    root_arg = root_func.args.args[0].arg if len(root_func.args.args) > 0 else None
     calls = set()
     attrs = set()
     # Walk through all descendants recursively

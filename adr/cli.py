@@ -7,10 +7,10 @@ import sys
 import time
 import webbrowser
 
+from adr import config
 from adr.formatter import all_formatters
 from adr.query import format_query
 from adr.recipe import run_recipe
-from adr.util.config import Configuration
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -46,7 +46,7 @@ class DefaultSubParser(argparse.ArgumentParser):
         )
 
 
-def get_parser(config):
+def get_parser():
     parser = DefaultSubParser()
     subparsers = parser.add_subparsers()
 
@@ -99,29 +99,29 @@ def get_recipes():
             if item != '__init__.py' and item.endswith('.py')]
 
 
-def handle_list(config, remainder):
+def handle_list(remainder):
     items = get_queries() if config.subcommand == 'query' else get_recipes()
     log.info('\n'.join(sorted(items)))
 
 
-def handle_recipe(config, remainder):
+def handle_recipe(remainder):
     if config.recipe not in get_recipes():
         log.error("recipe '{}' not found!".format(config.recipe))
         return
 
-    data = run_recipe(config.recipe, remainder, config)
+    data = run_recipe(config.recipe, remainder)
 
     if config.output_file:
         print(data, file=open(config.output_file, 'w'))
     return data
 
 
-def handle_query(config, remainder):
+def handle_query(remainder):
     if config.query not in get_queries():
         log.error("query '{}' not found!".format(config.query))
         return
 
-    data, url = format_query(config.query, config, remainder)
+    data, url = format_query(config.query, remainder)
     if config.output_file:
         print(data, file=open(config.output_file, 'w'))
 
@@ -150,8 +150,7 @@ def main(args=sys.argv[1:]):
     $ adr <recipe_name>
     """
     # Load config from file and override with command line.
-    config = Configuration()
-    parser = get_parser(config)
+    parser = get_parser()
 
     # Parse all arguments, then pass to appropriate handler.
     args, remainder = parser.parse_known_args()
@@ -161,7 +160,7 @@ def main(args=sys.argv[1:]):
     config.merge(vars(args))
     log.setLevel(logging.DEBUG) if config.verbose else log.setLevel(logging.INFO)
 
-    result = handler(config, remainder)
+    result = handler(remainder)
     print(result)
 
 
