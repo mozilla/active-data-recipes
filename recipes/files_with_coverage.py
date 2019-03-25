@@ -9,8 +9,8 @@ See how many files in tree have any code coverage at all.
 """
 from __future__ import absolute_import, print_function
 
-from ..errors import MissingDataError
-from ..query import run_query
+from adr.errors import MissingDataError
+from adr.query import run_query
 
 
 def run(args):

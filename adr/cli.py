@@ -6,13 +6,14 @@ import os
 import sys
 import time
 import webbrowser
+from pathlib import Path
 
 from adr import config
 from adr.formatter import all_formatters
 from adr.query import format_query
 from adr.recipe import run_recipe
 
-here = os.path.abspath(os.path.dirname(__file__))
+here = Path(__file__).parent.resolve()
 
 log = logging.getLogger('adr')
 log.setLevel(logging.DEBUG)
@@ -88,13 +89,13 @@ def get_parser():
 
 
 def get_queries():
-    request_dir = os.path.join(here, 'queries')
+    request_dir = here.parent / 'queries'
     return [os.path.splitext(item)[0] for item in os.listdir(request_dir)
             if item.endswith('.query')]
 
 
 def get_recipes():
-    request_dir = os.path.join(here, 'recipes')
+    request_dir = here.parent / 'recipes'
     return [os.path.splitext(item)[0] for item in os.listdir(request_dir)
             if item != '__init__.py' and item.endswith('.py')]
 

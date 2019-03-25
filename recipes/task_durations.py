@@ -10,8 +10,8 @@ runtime and total runtime over a given date range and set of branches.
 """
 from __future__ import absolute_import, print_function
 
-from ..context import override
-from ..query import run_query
+from adr.context import override
+from adr.query import run_query
 
 DEFAULT_BRANCHES = [
     'autoland',

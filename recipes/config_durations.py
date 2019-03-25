@@ -7,7 +7,7 @@ Get the average and total runtime for build platforms and types.
 """
 from __future__ import absolute_import, print_function
 
-from ..query import run_query
+from adr.query import run_query
 
 BROKEN = True
 

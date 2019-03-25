@@ -5,13 +5,13 @@ import os
 from flask import Flask, Markup, make_response, render_template, request
 from requests.exceptions import HTTPError
 
-from adr import config, recipe, recipes
+from adr import config, recipe
 from adr.context import validdatetime
 
 
 app = Flask(__name__)
 recipe_lists = []
-recipe_path = os.path.dirname(recipes.__file__)
+recipe_path = config.sources[0]
 
 
 def transform_time(time_string):

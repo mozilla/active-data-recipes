@@ -20,8 +20,7 @@ from adr.formatter import all_formatters
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 
-
-QUERY_DIR = os.path.join(here, 'queries')
+QUERY_DIR = config.sources[0] / 'queries'
 
 
 def format_date(timestamp, interval='day'):

@@ -18,18 +18,27 @@ log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
 
 
-def get_recipe_contexts(recipe, mod=None):
+def get_module(name):
+    """
+    Get module of a recipe
+    Args:
+        name (str): name of recipe
+    :return: module
+    """
+    modname = '.{}'.format(name)
+    mod = importlib.import_module(modname, package='recipes')
+    return mod
+
+
+def get_recipe_contexts(recipe):
     """
     Extract list of recipe context definition from the recipe file and related query files
     Args:
         recipe (str): name of recipe
-        mod (module): module of recipe
     Returns:
         result (dict): definition of all contexts needed for recipe
     """
-    if not mod:
-        modname = '.recipes.{}'.format(recipe)
-        mod = importlib.import_module(modname, package='adr')
+    mod = get_module(recipe)
 
     # try to extract name of query and run contexts automatically from run function
     queries, run_contexts = context.extract_arguments(mod.run, "run_query")
@@ -52,18 +61,6 @@ def get_recipe_contexts(recipe, mod=None):
     return recipe_context_def
 
 
-def get_module(name):
-    """
-    Get module of a recipe
-    Args:
-        name (str): name of recipe
-    :return: module
-    """
-    modname = '.recipes.{}'.format(name)
-    mod = importlib.import_module(modname, package='adr')
-    return mod
-
-
 def run_recipe(recipe, args, from_cli=True):
     """Given a recipe, calls the appropriate query and returns the result.
 
@@ -77,10 +74,7 @@ def run_recipe(recipe, args, from_cli=True):
         output (str): output after formatted.
 
     """
-
-    mod = get_module(recipe)
-
-    recipe_context_def = get_recipe_contexts(recipe, mod)
+    recipe_context_def = get_recipe_contexts(recipe)
 
     if from_cli:
         parsed_args = vars(RequestParser(recipe_context_def).parse_args(args))
@@ -88,7 +82,7 @@ def run_recipe(recipe, args, from_cli=True):
         parsed_args = args
 
     try:
-        # output = mod.run(Namespace(**run_args))
+        mod = get_module(recipe)
         output = mod.run(Namespace(**parsed_args))
     except MissingDataError:
         return "ActiveData didn\'t return any data."

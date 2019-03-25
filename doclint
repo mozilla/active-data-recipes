@@ -3,9 +3,10 @@ import os
 import re
 import sys
 from importlib import import_module
+from pathlib import Path
 
-here = os.path.abspath(os.path.dirname(__file__))
-recipe_dir = os.path.join(here, 'adr', 'recipes')
+here = Path(__file__).parent.resolve()
+recipe_dir = here / 'recipes'
 
 
 def verify_docs(identifiers):
@@ -13,7 +14,7 @@ def verify_docs(identifiers):
     # We ignore identifiers starting with '_' for the sake of tests.
     # Strings starting with "_" are ignored for doc verification
     # hence they can be used for faking test values
-    with open(os.path.join(here, 'docs', 'recipes.rst')) as fh:
+    with open(here / 'docs' / 'recipes.rst') as fh:
         doctext = "".join(fh.readlines())
 
     expression_list = [
@@ -35,7 +36,7 @@ def verify_docs(identifiers):
 def verify_docstrings(modules):
     res = 0
     for name in modules:
-        mod = import_module('adr.recipes.{}'.format(name))
+        mod = import_module('recipes.{}'.format(name))
         if not getattr(mod, '__doc__', None):
             print("ERROR: recipe `{}` missing a module level doc string".format(name))
             res = 1

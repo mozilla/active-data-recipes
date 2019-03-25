@@ -11,9 +11,9 @@ from __future__ import absolute_import, print_function
 
 from collections import defaultdict
 
-from ..context import override
-from ..query import run_query
-from ..recipe import RequestParser
+from adr.context import override
+from adr.query import run_query
+from adr.recipe import RequestParser
 
 RUN_CONTEXTS = [
     override('limit', default=25, help="Maximum number of users in result"),
