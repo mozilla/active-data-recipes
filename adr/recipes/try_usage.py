@@ -25,9 +25,9 @@ def subcommand(name):
     }
 
 
-def run(config, args):
+def run(args):
 
-    data = run_query('try_commit_messages', config, args)['data']
+    data = run_query('try_commit_messages', args)['data']
 
     count = defaultdict(int)
     count['total'] = len(data['message'])

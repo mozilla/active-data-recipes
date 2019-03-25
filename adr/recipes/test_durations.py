@@ -10,11 +10,11 @@ from __future__ import absolute_import, print_function
 from ..query import run_query
 
 
-def run(config, args):
+def run(args):
 
     result = []
 
-    data = run_query('test_durations', config, args)['data']['result.test']
+    data = run_query('test_durations', args)['data']['result.test']
 
     duration = [1, 2, 5, 10, 20, 30, 45, 60, 90, 120, 150, 'max']
     for index in range(0, len(duration)):

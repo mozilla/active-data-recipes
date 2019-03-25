@@ -17,9 +17,9 @@ RUN_CONTEXTS = [
 ]
 
 
-def run(config, args):
+def run(args):
     # process config data
-    data = run_query('config_intermittents', config, args)["data"]
+    data = run_query('config_intermittents', args)["data"]
     result = []
     for record in data:
         if not record or not record[args.sort_key]:

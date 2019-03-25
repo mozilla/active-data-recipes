@@ -12,7 +12,7 @@ import jsone
 import requests
 import yaml
 
-from adr import context
+from adr import config, context
 from adr.context import RequestParser
 from adr.errors import MissingDataError
 from adr.formatter import all_formatters
@@ -100,7 +100,7 @@ def load_query_context(query_name, add_contexts=[]):
         return query_contexts
 
 
-def run_query(name, config, args):
+def run_query(name, args):
     """Loads and runs the specified query, yielding the result.
 
     Given name of a query, this method will first read the query
@@ -113,7 +113,6 @@ def run_query(name, config, args):
     inside the query_activedata method.
 
     :param str name: name of the query file to be loaded.
-    :param Configuration config: config object.
     :param Namespace args: namespace of ActiveData configs.
     :return str: json-formatted string.
     """
@@ -138,7 +137,7 @@ def run_query(name, config, args):
     return query_activedata(query_str, config.url)
 
 
-def format_query(query, config, remainder=[]):
+def format_query(query, remainder=[]):
     """Takes the output of the ActiveData query and performs formatting.
 
     The result(s) from a query call to ActiveData is returned,
@@ -146,7 +145,6 @@ def format_query(query, config, remainder=[]):
 
     :param name query: name of the query file to be run.
     :param remainder: user contexts
-    :param Configuration config: config object.
     """
     if isinstance(config.fmt, str):
         fmt = all_formatters[config.fmt]
@@ -165,7 +163,7 @@ def format_query(query, config, remainder=[]):
             elif 'default' in value[1]:
                 real_contexts[key] = value[1]['default']
 
-    result = run_query(query, config, Namespace(**real_contexts))
+    result = run_query(query, Namespace(**real_contexts))
     data = result['data']
     debug_url = None
     if 'saved_as' in result['meta']:

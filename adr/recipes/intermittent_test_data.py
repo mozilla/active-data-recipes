@@ -13,7 +13,7 @@ from ..query import run_query
 RUN_CONTEXTS = [override('platform_config', hidden=True)]
 
 
-def run(config, args):
+def run(args):
 
     if args.test_name == '':
         args.test_name = '(~(file.*|http.*))'
@@ -24,8 +24,8 @@ def run(config, args):
         args.groupby = 'run.key'
         args.result = ["T", "F"]
 
-    result = run_query('intermittent_tests', config, args)['data']
-    total_runs = run_query('intermittent_test_rate', config, args)['data']
+    result = run_query('intermittent_tests', args)['data']
+    total_runs = run_query('intermittent_test_rate', args)['data']
 
     intermittent_tests = []
     for item in result['run.key']:

@@ -17,9 +17,9 @@ RUN_CONTEXTS = [
 ]
 
 
-def run(config, args):
+def run(args):
 
-    result = run_query('skipped_tests', config, args)['data']
+    result = run_query('skipped_tests', args)['data']
 
     result.sort(key=lambda x: x[0])
     result.insert(0, ['Result test', 'run suite', 'count'])

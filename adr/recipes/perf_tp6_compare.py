@@ -14,9 +14,9 @@ from __future__ import absolute_import, print_function
 from ..query import run_query
 
 
-def run(config, args):
+def run(args):
 
-    result = run_query("perf_tp6_compare", config, args)
+    result = run_query("perf_tp6_compare", args)
 
     tests, revisions = result["edges"]
     header = (

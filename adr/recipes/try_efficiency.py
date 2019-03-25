@@ -18,14 +18,14 @@ from ..query import run_query
 RUN_CONTEXTS = [override('branches', hidden=True)]
 
 
-def run(config, args):
+def run(args):
 
-    pushes = len(set(run_query('all_push_id', config, args)['data']['push.id']))
-    backouts = len(set(run_query('backout_rate', config, args)['data']['push.id']))
+    pushes = len(set(run_query('all_push_id', args)['data']['push.id']))
+    backouts = len(set(run_query('backout_rate', args)['data']['push.id']))
     backout_rate = round((float(backouts) / pushes) * 100, 2)
 
     args.branches = ['try']
-    data = run_query('total_hours_spent_on_branch', config, args)['data']
+    data = run_query('total_hours_spent_on_branch', args)['data']
 
     try_hours = int(data['hours'])
     try_efficiency = round(10000000 / (backout_rate * try_hours), 2)

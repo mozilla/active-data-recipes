@@ -4,12 +4,12 @@ Percentage of tests that were run for the given push.
 from adr.query import run_query
 
 
-def run(config, context):
-    push_tests = run_query('unique_tests', config, context)['data']
+def run(context):
+    push_tests = run_query('unique_tests', context)['data']
     push_tests = {item[0]: item[1] for item in push_tests if item[0] is not None}
 
     context.pushid = None
-    all_tests = run_query('unique_tests', config, context)['data']
+    all_tests = run_query('unique_tests', context)['data']
     all_tests = {item[0]: item[1] for item in all_tests if item[0] is not None}
 
     data = []

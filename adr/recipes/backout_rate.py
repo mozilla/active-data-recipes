@@ -13,10 +13,10 @@ from __future__ import absolute_import, print_function
 from ..query import run_query
 
 
-def run(config, args):
+def run(args):
 
-    pushes = len(set(run_query('all_push_id', config, args)['data']['push.id']))
-    backouts = len(set(run_query('backout_rate', config, args)['data']['push.id']))
+    pushes = len(set(run_query('all_push_id', args)['data']['push.id']))
+    backouts = len(set(run_query('backout_rate', args)['data']['push.id']))
     backout_rate = round((float(backouts) / pushes) * 100, 2)
 
     return (

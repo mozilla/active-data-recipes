@@ -17,20 +17,20 @@ RUN_CONTEXTS = [
 ]
 
 
-def run(config, args):
+def run(args):
 
     if not args.table:
-        data = run_query('meta', config, args)['data']
+        data = run_query('meta', args)['data']
         data = sorted([(d['name'],) for d in data])
         data.insert(0, ('Table',))
         return data
 
     if not args.attribute:
-        data = run_query('meta_columns', config, args)['data']
+        data = run_query('meta_columns', args)['data']
         data = sorted([(d['name'],) for d in data])
         data.insert(0, ('Column',))
         return data
 
-    data = run_query('meta_values', config, args)['data']
+    data = run_query('meta_values', args)['data']
     data.insert(0, (args.attribute, 'count'))
     return data

@@ -12,12 +12,12 @@ from ..query import run_query
 BROKEN = True
 
 
-def run(config, args):
+def run(args):
     """
     THIS IS PRONE TO DOUBLE COUNTING, AS DIFFERENT TEST CHUNKS COVER COMMON LINES
     AT THE VERY LEAST YOU GET A ROUGH ESTIMATE OF COVERAGE
     """
 
-    result = run_query('code_coverage', config, args)
+    result = run_query('code_coverage', args)
     output = [result['header']] + result['data']
     return output

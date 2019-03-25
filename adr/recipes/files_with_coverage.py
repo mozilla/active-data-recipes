@@ -13,15 +13,15 @@ from ..errors import MissingDataError
 from ..query import run_query
 
 
-def run(config, args):
+def run(args):
 
     header = ['Revision', 'Files With Coverage', 'Total Files', 'Percent with Coverage']
-    covered_files = run_query('covered_files', config, args)['data']
+    covered_files = run_query('covered_files', args)['data']
 
     if None in [item for items in covered_files for item in items]:
         raise MissingDataError("ActiveData returned null value.")
 
-    total_files = run_query('total_files', config, args)['data']
+    total_files = run_query('total_files', args)['data']
 
     if None in [item for items in total_files for item in items]:
         raise MissingDataError("ActiveData returned null value.")

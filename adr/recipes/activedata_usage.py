@@ -11,7 +11,7 @@ from __future__ import absolute_import, print_function
 from ..query import run_query
 
 
-def run(config, args):
+def run(args):
 
-    response = run_query('activedata_usage', config, args)
+    response = run_query('activedata_usage', args)
     return [response['header']] + response['data']
