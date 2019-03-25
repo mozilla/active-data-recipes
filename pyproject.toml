@@ -6,13 +6,13 @@ description = "Collection of recipes for finding information in ActiveData"
 packages = [
     { include = "adr" },
     { include = "app" },
+    { include = "recipes" },
 ]
 include = [
-    "adr/queries/*",
-    "adr/recipes/*",
     "adr/util/*",
     "app/*",
     "extra/*",
+    "queries/*",
 ]
 
 license = "MPL-2.0"

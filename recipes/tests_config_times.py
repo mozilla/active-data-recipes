@@ -7,7 +7,7 @@ Get runtimes for a specific test file broken across platforms.
 """
 from __future__ import absolute_import, print_function
 
-from ..query import run_query
+from adr.query import run_query
 
 BROKEN = True
 

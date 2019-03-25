@@ -13,7 +13,7 @@ from __future__ import absolute_import, print_function
 
 from collections import OrderedDict, defaultdict
 
-from ..query import run_query
+from adr.query import run_query
 
 
 def subcommand(name):

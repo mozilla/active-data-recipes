@@ -7,7 +7,7 @@ This is currently broken.
 """
 from __future__ import absolute_import, print_function
 
-from ..query import run_query
+from adr.query import run_query
 
 
 def run(args):

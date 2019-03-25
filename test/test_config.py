@@ -1,5 +1,5 @@
-import os
 from copy import deepcopy
+from pathlib import Path
 
 import pytest
 from appdirs import user_config_dir
@@ -26,7 +26,7 @@ def create_config(tmpdir):
 
 def test_config(create_config):
     config = Configuration()
-    assert config.path == os.path.join(user_config_dir('adr'), 'config.toml')
+    assert config.path == Path(user_config_dir('adr')) / 'config.toml'
 
     config = create_config({})
     assert config['verbose'] is False
@@ -37,9 +37,9 @@ def test_config(create_config):
     assert config.verbose is True
     assert config.debug is False
 
-    config = create_config({'sources': ['foo']})
-    config.merge({'sources': ['bar']})
-    assert set(config.sources) == set(['foo', 'bar'])
+    config = create_config({'alist': ['foo']})
+    config.merge({'alist': ['bar']})
+    assert set(config.alist) == set(['foo', 'bar'])
 
 
 def test_merge_to():

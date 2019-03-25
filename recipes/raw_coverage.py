@@ -12,8 +12,8 @@ import json
 import logging
 import os
 
-from ..context import RequestParser
-from ..query import run_query
+from adr.context import RequestParser
+from adr.query import run_query
 
 OUTPUTFILE_PREFIX = 'coverage_map'
 log = logging.getLogger('adr')

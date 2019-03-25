@@ -8,8 +8,8 @@ A summary of how many compute hours were spent on each branch.
 """
 from __future__ import absolute_import, print_function
 
-from ..context import override
-from ..query import run_query
+from adr.context import override
+from adr.query import run_query
 
 DEFAULT_BRANCHES = [
     'autoland',

@@ -1,7 +1,9 @@
-import os
+from pathlib import Path
 
 from appdirs import user_config_dir
 from tomlkit import parse
+
+import adr
 
 
 def merge_to(source, dest):
@@ -36,20 +38,21 @@ def merge_to(source, dest):
 
 
 class Configuration(object):
-    DEFAULT_CONFIG_PATH = os.path.join(user_config_dir('adr'), 'config.toml')
+    DEFAULT_CONFIG_PATH = Path(user_config_dir('adr')) / 'config.toml'
     DEFAULTS = {
         "debug": False,
         "debug_url": "https://activedata.allizom.org/tools/query.html#query_id={}",
         "fmt": "table",
+        "sources": [Path(adr.__file__).parent.parent],
         "url": "https://activedata.allizom.org/query",
         "verbose": False,
     }
 
     def __init__(self, path=None):
-        self.path = path or self.DEFAULT_CONFIG_PATH
+        self.path = Path(path or self.DEFAULT_CONFIG_PATH)
 
         self._config = self.DEFAULTS.copy()
-        if os.path.isfile(self.path):
+        if self.path.is_file():
             with open(self.path, 'r') as fh:
                 content = fh.read()
                 self.merge(parse(content)['adr'])

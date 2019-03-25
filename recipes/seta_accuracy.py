@@ -11,7 +11,7 @@ from __future__ import absolute_import, print_function
 import logging
 from datetime import date, timedelta
 
-from ..query import run_query
+from adr.query import run_query
 
 log = logging.getLogger('adr')
 BRANCH_WHITELIST = [

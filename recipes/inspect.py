@@ -9,8 +9,8 @@ available tables. To see the columns in a table, run:
 """
 from __future__ import absolute_import, print_function
 
-from ..context import override
-from ..query import run_query
+from adr.context import override
+from adr.query import run_query
 
 RUN_CONTEXTS = [
     override('attribute', hidden=True),
