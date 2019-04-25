@@ -1,33 +1,37 @@
 from __future__ import absolute_import, print_function
 
 import collections
-import importlib
+import imp
 import logging
-import os
 from argparse import Namespace
+from pathlib import Path
 
 from docutils.core import publish_parts
 
-from adr import config, context
+from adr import config, context, sources
 from adr.context import RequestParser
 from adr.errors import MissingDataError
 from adr.formatter import all_formatters
 from adr.query import load_query_context
 
 log = logging.getLogger('adr')
-here = os.path.abspath(os.path.dirname(__file__))
+here = Path(__file__).parent.resolve()
 
 
-def get_module(name):
+def get_module(recipe):
     """
     Get module of a recipe
     Args:
-        name (str): name of recipe
+        recipe (str): name of recipe
     :return: module
     """
-    modname = '.{}'.format(name)
-    mod = importlib.import_module(modname, package='recipes')
-    return mod
+    path = None
+    for source in sources:
+        if recipe in source.recipes:
+            path = str(source.path / 'recipes')
+            break
+
+    return imp.load_module(f'recipes.{recipe}', *imp.find_module(recipe, [path]))
 
 
 def get_recipe_contexts(recipe):

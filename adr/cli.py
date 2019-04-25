@@ -8,7 +8,7 @@ import time
 import webbrowser
 from pathlib import Path
 
-from adr import config
+from adr import config, sources
 from adr.formatter import all_formatters
 from adr.query import format_query
 from adr.recipe import run_recipe
@@ -52,8 +52,6 @@ def get_parser():
     subparsers = parser.add_subparsers()
 
     def add_common_args(parser):
-        parser.add_argument('-l', '--list', action='store_true', default=False,
-                            help="List available recipes.")
         parser.add_argument('-f', '--format', dest='fmt', choices=all_formatters.keys(),
                             help="Format to print data in, defaults to 'table'.")
         parser.add_argument('-v', '--verbose', action='store_true',
@@ -82,6 +80,7 @@ def get_parser():
     # list subcommand
     listcmd = subparsers.add_parser('list', help="List the available recipes (or queries).")
     listcmd.add_argument('subcommand', nargs='?', choices=['recipe', 'query'], default='recipe')
+    add_common_args(listcmd)
     listcmd.set_defaults(func=handle_list)
 
     parser.set_default_subparser('recipe')
@@ -101,8 +100,18 @@ def get_recipes():
 
 
 def handle_list(remainder):
-    items = get_queries() if config.subcommand == 'query' else get_recipes()
-    log.info('\n'.join(sorted(items)))
+    key = 'queries' if config.subcommand == 'query' else 'recipes'
+    lines = []
+    for source in sources:
+        if config.verbose:
+            lines.append(f"\n{key.capitalize()} from {source.path}/{key}:")
+
+        items = sorted(getattr(source, key))
+        if config.verbose:
+            items = ['  ' + i for i in items]
+        lines.extend(items)
+
+    log.info('\n'.join(lines).strip())
 
 
 def handle_recipe(remainder):
@@ -135,16 +144,7 @@ def handle_query(remainder):
 def main(args=sys.argv[1:]):
     """Entry point for the adr module.
 
-    When the adr module is called, this method is run.
-
-    The argument list is parsed, and the appropriate parser or subparser is created.
-
-    Using the argument list, arguments are parsed and grouped into a Namespace object
-    representing known arguments, and a remainder list representing unknown arguments.
-
-    The method then calls the appropriate method for the action specified.
-
-    Supported use cases:
+    Supported usage:
 
     $ adr recipe <recipe_name>
     $ adr query <query_name>
@@ -162,7 +162,8 @@ def main(args=sys.argv[1:]):
     log.setLevel(logging.DEBUG) if config.verbose else log.setLevel(logging.INFO)
 
     result = handler(remainder)
-    print(result)
+    if result is not None:
+        print(result)
 
 
 if __name__ == '__main__':

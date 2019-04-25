@@ -12,15 +12,13 @@ import jsone
 import requests
 import yaml
 
-from adr import config, context
+from adr import config, context, sources
 from adr.context import RequestParser
 from adr.errors import MissingDataError
 from adr.formatter import all_formatters
 
 log = logging.getLogger('adr')
 here = os.path.abspath(os.path.dirname(__file__))
-
-QUERY_DIR = config.sources[0] / 'queries'
 
 
 def format_date(timestamp, interval='day'):
@@ -56,6 +54,13 @@ def query_activedata(query, url):
     return json_response
 
 
+def query_path(query):
+    for source in sources:
+        if query in source.queries:
+            path = source.path / 'queries' / query
+            return path.as_posix() + '.query'
+
+
 def load_query(name):
     """Loads the specified query from the disk.
 
@@ -69,7 +74,7 @@ def load_query(name):
         dict query: dictionary representation of yaml query
         (exclude the context).
     """
-    with open(os.path.join(QUERY_DIR, name + '.query')) as fh:
+    with open(query_path(name)) as fh:
         query = yaml.load(fh, Loader=yaml.SafeLoader)
         # Remove the context
         if "context" in query:
@@ -77,18 +82,18 @@ def load_query(name):
         return query
 
 
-def load_query_context(query_name, add_contexts=[]):
+def load_query_context(name, add_contexts=[]):
     """
     Get query context from yaml file.
     Args:
-        query_name (str): name of query
+        name (str): name of query
         add_contexts (list): additional contexts if needed
     Returns:
         query_contexts (list): mixed array of strings (name of common contexts)
          and dictionaries (full definition of specific contexts)
     """
 
-    with open(os.path.join(QUERY_DIR, query_name + '.query')) as fh:
+    with open(query_path(name)) as fh:
         query = yaml.load(fh, Loader=yaml.SafeLoader)
         # Extract query and context
         specific_contexts = query.pop("context") if "context" in query else {}
