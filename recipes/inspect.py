@@ -13,14 +13,14 @@ from adr.context import override
 from adr.query import run_query
 
 RUN_CONTEXTS = [
-    override('attribute', hidden=True),
+    override('attribute'),
 ]
 
 
 def run(args):
 
     if not args.table:
-        data = run_query('meta', args)['data']
+        data = run_query('meta', args)['edges'][0]['domain']['partitions']
         data = sorted([(d['name'],) for d in data])
         data.insert(0, ('Table',))
         return data
