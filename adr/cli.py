@@ -87,18 +87,6 @@ def get_parser():
     return parser
 
 
-def get_queries():
-    request_dir = here.parent / 'queries'
-    return [os.path.splitext(item)[0] for item in os.listdir(request_dir)
-            if item.endswith('.query')]
-
-
-def get_recipes():
-    request_dir = here.parent / 'recipes'
-    return [os.path.splitext(item)[0] for item in os.listdir(request_dir)
-            if item != '__init__.py' and item.endswith('.py')]
-
-
 def handle_list(remainder):
     key = 'queries' if config.subcommand == 'query' else 'recipes'
     lines = []
@@ -115,7 +103,7 @@ def handle_list(remainder):
 
 
 def handle_recipe(remainder):
-    if config.recipe not in get_recipes():
+    if config.recipe not in sources.recipes:
         log.error("recipe '{}' not found!".format(config.recipe))
         return
 
@@ -127,7 +115,7 @@ def handle_recipe(remainder):
 
 
 def handle_query(remainder):
-    if config.query not in get_queries():
+    if config.query not in sources.queries:
         log.error("query '{}' not found!".format(config.query))
         return
 
