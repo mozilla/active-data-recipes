@@ -1,6 +1,5 @@
 from __future__ import absolute_import, print_function
 
-import collections
 import datetime
 import json
 import logging
@@ -156,18 +155,11 @@ def format_query(query, remainder=[]):
     query_context = load_query_context(query, ["format"])
     args = vars(RequestParser(query_context).parse_args(remainder))
 
-    # get contexts from cli, if not get default value
-    real_contexts = collections.OrderedDict()
-
     for key, value in query_context.items():
-        for name in value[0]:
-            if name in args:
-                real_contexts[key] = args[name]
-                pass
-            elif 'default' in value[1]:
-                real_contexts[key] = value[1]['default']
+        if 'default' in value[1]:
+            args.setdefault(key, value[1]['default'])
 
-    result = run_query(query, Namespace(**real_contexts))
+    result = run_query(query, Namespace(**args))
     data = result['data']
     debug_url = None
     if 'saved_as' in result['meta']:
