@@ -12,6 +12,7 @@ same as the `hours_on_try` recipe.
 from __future__ import absolute_import, print_function
 
 from collections import OrderedDict, defaultdict
+from itertools import chain
 
 from adr.query import run_query
 
@@ -28,12 +29,6 @@ def subcommand(name):
 def run(args):
 
     data = run_query('try_commit_messages', args)['data']
-
-    count = defaultdict(int)
-    count['total'] = len(data['message'])
-
-    users = defaultdict(set)
-    users['total'] = set(data['user'])
 
     # Order is important as the search stops after the first successful test.
     d = OrderedDict()
@@ -58,12 +53,22 @@ def run(args):
     }
 
     data = zip(data['user'], data['message'])
+
+    count = defaultdict(int)
+    users = defaultdict(set)
+
     for user, message in data:
+        if user == 'reviewbot':
+            continue
+
         for k, v in d.items():
             if v['test'] in message:
                 count[k] += 1
                 users[k].add(user)
                 break
+
+    count['total'] = sum(count.values())
+    users['total'] = set(chain(*users.values()))
 
     def fmt(key):
         percent = round(float(count[key]) / count['total'] * 100, 1)
