@@ -103,6 +103,7 @@ def load_query_context(name, add_contexts=[]):
         return query_contexts
 
 
+@config.cache(key='query', minutes=60)
 def run_query(name, args):
     """Loads and runs the specified query, yielding the result.
 

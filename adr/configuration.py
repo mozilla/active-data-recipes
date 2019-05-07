@@ -1,6 +1,8 @@
 from pathlib import Path
 
 from appdirs import user_config_dir
+from cachy import CacheManager
+from cachy.stores import NullStore
 from tomlkit import parse
 
 import adr
@@ -40,6 +42,7 @@ def merge_to(source, dest):
 class Configuration(object):
     DEFAULT_CONFIG_PATH = Path(user_config_dir('adr')) / 'config.toml'
     DEFAULTS = {
+        "cache": None,
         "debug": False,
         "debug_url": "https://activedata.allizom.org/tools/query.html#query_id={}",
         "fmt": "table",
@@ -56,6 +59,12 @@ class Configuration(object):
             with open(self.path, 'r') as fh:
                 content = fh.read()
                 self.merge(parse(content)['adr'])
+
+        # Use the NullStore by default. This allows us to control whether
+        # caching is enabled or not at runtime.
+        cache = self._config['cache'] or {'stores': {'null': {'driver': 'null'}}}
+        self.cache = CacheManager(cache)
+        self.cache.extend('null', lambda driver: NullStore())
 
     def __getitem__(self, key):
         return self._config[key]
