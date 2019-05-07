@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from appdirs import user_config_dir
@@ -52,7 +53,7 @@ class Configuration(object):
     }
 
     def __init__(self, path=None):
-        self.path = Path(path or self.DEFAULT_CONFIG_PATH)
+        self.path = Path(path or os.environ.get('ADR_CONFIG_PATH') or self.DEFAULT_CONFIG_PATH)
 
         self._config = self.DEFAULTS.copy()
         if self.path.is_file():
