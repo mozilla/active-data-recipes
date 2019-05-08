@@ -103,7 +103,6 @@ def load_query_context(name, add_contexts=[]):
         return query_contexts
 
 
-@config.cache(key='query', minutes=60)
 def run_query(name, args):
     """Loads and runs the specified query, yielding the result.
 
@@ -120,6 +119,10 @@ def run_query(name, args):
     :param Namespace args: namespace of ActiveData configs.
     :return str: json-formatted string.
     """
+    serialized_args = config.cache.get_store().serialize(args)
+    key = 'run_query.{}.{}'.format(name, config.cache._hash(serialized_args))
+    if config.cache.has(key):
+        return config.cache.get(key)
 
     context = vars(args)
     query = load_query(name)
@@ -138,7 +141,10 @@ def run_query(name, args):
     query_str = query_str.replace('"all"', 'null')
 
     log.debug("Running query {}:\n{}".format(name, query_str))
-    return query_activedata(query_str, config.url)
+    result = query_activedata(query_str, config.url)
+
+    config.cache.put(key, result, 60)
+    return result
 
 
 def format_query(query, remainder=[]):
