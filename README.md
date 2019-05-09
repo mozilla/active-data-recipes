@@ -17,21 +17,21 @@ Each recipe should try to answer a single question.
 
 # Installation
 
-    pip install active-data-recipes
+    $ pip install adr
 
 # Usage
 
 Run:
 
-    adr <recipe> <options>
+    $ adr <recipe> <options>
 
 For a list of recipes:
 
-    adr --list
+    $ adr --list
 
 For recipe specific options see:
 
-    adr <recipe> -- --help
+    $ adr <recipe> -- --help
 
 # Recipes
 
@@ -42,33 +42,33 @@ them.
 
 To contribute to `active-data-recipes` first [install poetry][2], then run:
 
-    git clone https://github.com/mozilla/active-data-recipes
-    cd active-data-recipes
-    poetry install
+    $ git clone https://github.com/mozilla/active-data-recipes
+    $ cd active-data-recipes
+    $ poetry install
 
 Now you can use `poetry run` to perform various development commands:
 
     # run adr
-    poetry run adr <recipe>
-    
+    $ poetry run adr <recipe>
+
     # run webapp
-    poetry run adr-app
-    
+    $ poetry run adr-app
+
     # run tests
-    poetry run tox
+    $ poetry run tox
 
 Alternatively activate the `poetry` shell ahead of time:
 
-    poetry shell
-    
+    $ poetry shell
+
     # run adr
-    adr <recipe>
-    
+    $ adr <recipe>
+
     # run app
-    adr-app
-    
+    $ adr-app
+
     # run tests
-    tox
+    $ tox
 
 [0]: https://github.com/klahnakoski/ActiveData/blob/dev/docs/jx_time.md
 [1]: https://active-data-recipes.readthedocs.io/en/latest/recipes.html
