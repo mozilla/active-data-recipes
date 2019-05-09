@@ -24,17 +24,6 @@ version = "19.1.0"
 
 [[package]]
 category = "main"
-description = "Screen-scraping library"
-name = "beautifulsoup4"
-optional = false
-python-versions = "*"
-version = "4.7.1"
-
-[package.dependencies]
-soupsieve = ">=1.2"
-
-[[package]]
-category = "main"
 description = "Cachy provides a simple yet effective caching library."
 name = "cachy"
 optional = false
@@ -322,14 +311,6 @@ version = "1.12.0"
 
 [[package]]
 category = "main"
-description = "A CSS4 selector implementation for Beautiful Soup."
-name = "soupsieve"
-optional = false
-python-versions = "*"
-version = "1.9"
-
-[[package]]
-category = "main"
 description = "Generate simple tables in terminals from a nested list of strings."
 name = "terminaltables"
 optional = false
@@ -394,14 +375,13 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.15.1"
 
 [metadata]
-content-hash = "e5bd1a5fa4274a470536b97df7c3a3f696b39c05359f3942a8f80f9a63c8c272"
+content-hash = "2e43d29a8bccdc2134264269b8b157838509725412a5c62eff0cd15bcf41a98f"
 python-versions = "^3.6"
 
 [metadata.hashes]
 appdirs = ["9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92", "d8b24664561d0d34ddfaec54636d502d7cea6e29c3eaf68f3df6180863e2166e"]
 atomicwrites = ["03472c30eb2c5d1ba9227e4c2ca66ab8287fbfbbda3888aa93dc2e28fc6811b4", "75a9445bac02d8d058d5e1fe689654ba5a6556a1dfd8ce6ec55a0ed79866cfa6"]
 attrs = ["69c0dbf2ed392de1cb5ec704444b08a5ef81680a61cb899dc08127123af36a79", "f0b870f674851ecbfbbbd364d6b5cbdff9dcedbc7f3f5e18a6891057f21fe399"]
-beautifulsoup4 = ["034740f6cb549b4e932ae1ab975581e6103ac8f942200a0e9759065984391858", "945065979fb8529dd2f37dbb58f00b661bdbcbebf954f93b32fdf5263ef35348", "ba6d5c59906a85ac23dadfe5c88deaf3e179ef565f4898671253e50a78680718"]
 cachy = ["b71513e5a38ce90c1280c02b7d8d6bb3fdf64666c9cc0584f2479afea097d56c", "b71e8e7ddb5b386e23e81befdfac8a93885406139b8681bedc17b3444fcb8fca"]
 certifi = ["59b7658e26ca9c7339e00f8f4636cdfe59d34fa37b9b04f6f9e9926b3cece1a5", "b26104d6835d1f5e49452a26eb2ff87fe7090b89dfcaee5ea2212697e1e1d7ae"]
 chardet = ["84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae", "fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"]
@@ -433,7 +413,6 @@ pyyaml = ["1adecc22f88d38052fb787d959f003811ca858b799590a5eaa70e63dca50308c", "4
 redis = ["6946b5dca72e86103edc8033019cc3814c031232d339d5f4533b02ea85685175", "8ca418d2ddca1b1a850afa1680a7d2fd1f3322739271de4b704e0d4668449273"]
 requests = ["502a824f31acdacb3a35b6690b5fbf0bc41d63a24a45c4004352b0242707598e", "7bf2a778576d825600030a110f3c0e3e8edc51dfaafe1c146e39a2027784957b"]
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
-soupsieve = ["3aef141566afd07201b525c17bfaadd07580a8066f82b57f7c9417f26adbd0a3", "e41a65e99bd125972d84221022beb1e4b5cfc68fa12c170c39834ce32d1b294c"]
 terminaltables = ["f3eb0eb92e3833972ac36796293ca0906e998dc3be91fbe1f8615b331b853b81"]
 toml = ["229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c", "235682dd292d5899d361a811df37e04a8828a5b1da3115886b73cf81ebc9100e", "f1db651f9657708513243e61e6cc67d101a39bad662eaa9b5546f789338e07a3"]
 tomlkit = ["d6506342615d051bc961f70bfcfa3d29b6616cc08a3ddfd4bc24196f16fd4ec2", "f077456d35303e7908cc233b340f71e0bec96f63429997f38ca9272b7d64029e"]
