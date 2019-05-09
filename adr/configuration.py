@@ -40,6 +40,23 @@ def merge_to(source, dest):
     return dest
 
 
+def flatten(d, prefix=''):
+    if prefix:
+        prefix += '.'
+
+    result = []
+    for key, value in d.items():
+        if isinstance(value, dict):
+            result.extend(flatten(value, prefix=f"{prefix}{key}"))
+        elif isinstance(value, (set, list)):
+            vstr = '\n'.join([f"    {i}" for i in value])
+            result.append(f"{prefix}{key}=\n{vstr}")
+        else:
+            result.append(f"{prefix}{key}={value}")
+
+    return sorted(result)
+
+
 class Configuration(object):
     DEFAULT_CONFIG_PATH = Path(user_config_dir('adr')) / 'config.toml'
     DEFAULTS = {
@@ -47,7 +64,7 @@ class Configuration(object):
         "debug": False,
         "debug_url": "https://activedata.allizom.org/tools/query.html#query_id={}",
         "fmt": "table",
-        "sources": [Path(os.getcwd()), Path(adr.__file__).parent.parent],
+        "sources": [os.getcwd(), Path(adr.__file__).parent.parent.as_posix()],
         "url": "https://activedata.allizom.org/query",
         "verbose": False,
     }
@@ -60,6 +77,8 @@ class Configuration(object):
             with open(self.path, 'r') as fh:
                 content = fh.read()
                 self.merge(parse(content)['adr'])
+
+        self._config['sources'] = set(self._config['sources'])
 
         # Use the NullStore by default. This allows us to control whether
         # caching is enabled or not at runtime.
@@ -81,6 +100,9 @@ class Configuration(object):
             other (dict): Dictionary to merge configuration with.
         """
         merge_to(other, self._config)
+
+    def dump(self):
+        return '\n'.join(flatten(self._config))
 
 
 config = Configuration()

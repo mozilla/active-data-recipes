@@ -82,8 +82,16 @@ def get_parser():
     add_common_args(listcmd)
     listcmd.set_defaults(func=handle_list)
 
+    # config subcommand
+    configcmd = subparsers.add_parser('config', help="Print active configuration.")
+    configcmd.set_defaults(func=handle_config)
+
     parser.set_default_subparser('recipe')
     return parser
+
+
+def handle_config(remainder):
+    print(config.dump())
 
 
 def handle_list(remainder):
@@ -91,7 +99,8 @@ def handle_list(remainder):
     lines = []
     for source in sources:
         if config.verbose:
-            lines.append(f"\n{key.capitalize()} from {source.path}:")
+            attr = getattr(source, f"{config.subcommand}_dir")
+            lines.append(f"\n{key.capitalize()} from {attr}:")
 
         items = sorted(getattr(source, key))
         if config.verbose:
