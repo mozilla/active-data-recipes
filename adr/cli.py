@@ -91,7 +91,7 @@ def handle_list(remainder):
     lines = []
     for source in sources:
         if config.verbose:
-            lines.append(f"\n{key.capitalize()} from {source.path}/{key}:")
+            lines.append(f"\n{key.capitalize()} from {source.path}:")
 
         items = sorted(getattr(source, key))
         if config.verbose:

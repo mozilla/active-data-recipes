@@ -7,13 +7,9 @@ from adr import config
 
 class Source:
     def __init__(self, path):
-        self.path = Path(path).expanduser().resolve()
+        self.recipe_dir = Path(path).expanduser().resolve()
         self._recipes = None
         self._queries = None
-
-    @property
-    def recipe_dir(self):
-        return self.path / 'recipes'
 
     @property
     def query_dir(self):
@@ -38,19 +34,25 @@ class Source:
         return self._queries
 
 
-class MergedSources:
+class SourceHandler:
 
     def __init__(self, sources):
         self._sources = []
-        for source in sources:
-            source = Source(Path(source).expanduser().resolve())
+        for source in set(sources):
+            source = Path(source).expanduser().resolve()
 
-            if not source.recipe_dir.is_dir():
+            recipe_dirs = [p for p in source.glob('*recipes') if p.is_dir()]
+
+            if not recipe_dirs:
                 if source.as_posix() != os.getcwd():
-                    print(f"warning: {source.recipe_dir} does not exist!")
+                    print(f"warning: {source} does not contain any recipes!")
                 continue
 
-            self._sources.append(source)
+            for recipe_dir in recipe_dirs:
+                source = Source(recipe_dir)
+                if not source.recipes:
+                    continue
+                self._sources.append(source)
 
     def __len__(self):
         return len(self._sources)
@@ -75,4 +77,4 @@ class MergedSources:
                 return getattr(s, f'{mode}_dir') / (name + f'{suffix}')
 
 
-sources = MergedSources(config.sources)
+sources = SourceHandler(config.sources)
