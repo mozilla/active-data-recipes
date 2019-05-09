@@ -5,30 +5,22 @@ _log() {
 }
 
 _adr_completion() {
-    local cur dir ext targets
+    local cur items targets
     COMPREPLY=()
 
-    dir=$(python -c "import adr, os; print(os.path.dirname(adr.__file__))")
     if [[ $COMP_LINE == *" query"* ]]; then
-        dir="$dir/queries"
-        ext="query"
+        items=$(python -c "from adr import sources; print(' '.join(sources.queries))")
     else
-        dir="$dir/recipes"
-        ext="py"
+        items=$(python -c "from adr import sources; print(' '.join(sources.recipes))")
     fi
 
-    for name in $dir/*
+    for name in $items
     do
-        name=${name##*/}
-        if [[ $name == *.$ext && $name != "_"* ]]; then
-            name=${name%.*}
-
-            if [[ $COMP_LINE == *"$name "* ]]; then
-                return
-            fi
-
-            targets="$targets $name"
+        if [[ $COMP_LINE == *"$name "* ]]; then
+            return
         fi
+
+        targets="$targets $name"
     done
 
     cur="${COMP_WORDS[COMP_CWORD]}"
