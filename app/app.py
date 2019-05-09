@@ -1,17 +1,13 @@
 import datetime
 import json
-import os
 
 from flask import Flask, Markup, make_response, render_template, request
 from requests.exceptions import HTTPError
 
-from adr import config, recipe
+from adr import config, recipe, sources
 from adr.context import validdatetime
 
-
 app = Flask(__name__)
-recipe_lists = []
-recipe_path = config.sources[0]
 
 
 def transform_time(time_string):
@@ -80,22 +76,6 @@ def transform_context_attributes(recipe_contexts, request_args):
     return recipe_contexts
 
 
-def get_recipes():
-    """
-    Return a list of recipes located in /adr/recipes path
-    """
-    for file in os.listdir(recipe_path):
-        if file.endswith('.py') and file != '__init__.py':
-            recipe_name = file.rsplit('.', 1)[0]
-            if not recipe.is_fail(recipe_name):
-                recipe_lists.append(recipe_name)
-
-    recipe_lists.sort()
-
-
-get_recipes()
-
-
 @app.route('/')
 def home():
     """
@@ -103,7 +83,7 @@ def home():
     :returns: template
     """
     return render_template('home.html',
-                           recipes=recipe_lists,
+                           recipes=sources.recipes,
                            type="is-info",
                            recipe="Welcome",
                            welcome="Welcome to Active Data Recipe Tool."
@@ -116,9 +96,9 @@ def recipe_handler(recipe_name):
     :param list recipe:the name of the selected recipe file
     :returns: template
     """
-    if recipe_name not in recipe_lists:
+    if recipe_name not in sources.recipes:
         return render_template('home.html',
-                               recipes=recipe_lists,
+                               recipes=sources.recipes,
                                type="is-warning",
                                recipe="Warning",
                                error="Please choose recipe to run"), 404
@@ -126,7 +106,7 @@ def recipe_handler(recipe_name):
     recipe_contexts = recipe.get_recipe_contexts(recipe_name)
     transform_context_attributes(recipe_contexts, request.args)
 
-    return render_template('recipe.html', recipes=recipe_lists, recipe=recipe_name,
+    return render_template('recipe.html', recipes=sources.recipes, recipe=recipe_name,
                            recipe_contexts=recipe_contexts,
                            docstring=Markup(recipe.get_docstring(recipe_name)))
 
