@@ -33,7 +33,17 @@ class Source:
 class MergedSources:
 
     def __init__(self, sources):
-        self._sources = [Source(s) for s in sources]
+        self._sources = []
+        for source in sources:
+            source = Path(source).expanduser().resolve()
+
+            recipe_dir = source.joinpath('recipes')
+            if not recipe_dir.is_dir():
+                if source.as_posix() != os.getcwd():
+                    print(f"warning: {recipe_dir} does not exist!")
+                continue
+
+            self._sources.append(Source(source))
 
     def __len__(self):
         return len(self._sources)

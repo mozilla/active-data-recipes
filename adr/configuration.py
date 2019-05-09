@@ -47,7 +47,7 @@ class Configuration(object):
         "debug": False,
         "debug_url": "https://activedata.allizom.org/tools/query.html#query_id={}",
         "fmt": "table",
-        "sources": [Path(adr.__file__).parent.parent],
+        "sources": [os.getcwd(), Path(adr.__file__).parent.parent],
         "url": "https://activedata.allizom.org/query",
         "verbose": False,
     }
