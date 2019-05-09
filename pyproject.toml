@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "active-data-recipes"
-version = "0.12.1"
-description = "Collection of recipes for finding information in ActiveData"
+name = "adr"
+version = "0.13.0"
+description = "Utility for running ActiveData recipes"
 
 packages = [
     { include = "adr" },
@@ -12,7 +12,7 @@ include = [
     "adr/util/*",
     "app/*",
     "extra/*",
-    "queries/*",
+    "recipes/queries/*",
 ]
 
 license = "MPL-2.0"
