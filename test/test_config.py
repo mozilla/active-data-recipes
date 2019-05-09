@@ -35,7 +35,10 @@ def test_config(create_config):
     config = create_config({})
     assert config['verbose'] is False
     assert config.debug is False
-    assert config._config == Configuration.DEFAULTS
+
+    defaults = Configuration.DEFAULTS
+    defaults['sources'] = set(defaults['sources'])
+    assert config._config == defaults
 
     config = create_config({'verbose': True})
     assert config.verbose is True
