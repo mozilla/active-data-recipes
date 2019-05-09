@@ -53,13 +53,6 @@ def query_activedata(query, url):
     return json_response
 
 
-def query_path(query):
-    for source in sources:
-        if query in source.queries:
-            path = source.path / 'queries' / query
-            return path.as_posix() + '.query'
-
-
 def load_query(name):
     """Loads the specified query from the disk.
 
@@ -73,7 +66,7 @@ def load_query(name):
         dict query: dictionary representation of yaml query
         (exclude the context).
     """
-    with open(query_path(name)) as fh:
+    with open(sources.get(name, mode='query')) as fh:
         query = yaml.load(fh, Loader=yaml.SafeLoader)
         # Remove the context
         if "context" in query:
@@ -92,7 +85,7 @@ def load_query_context(name, add_contexts=[]):
          and dictionaries (full definition of specific contexts)
     """
 
-    with open(query_path(name)) as fh:
+    with open(sources.get(name, mode='query')) as fh:
         query = yaml.load(fh, Loader=yaml.SafeLoader)
         # Extract query and context
         specific_contexts = query.pop("context") if "context" in query else {}

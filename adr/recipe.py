@@ -25,13 +25,8 @@ def get_module(recipe):
         recipe (str): name of recipe
     :return: module
     """
-    path = None
-    for source in sources:
-        if recipe in source.recipes:
-            path = str(source.path / 'recipes')
-            break
-
-    return imp.load_module(f'recipes.{recipe}', *imp.find_module(recipe, [path]))
+    path = sources.get(recipe)
+    return imp.load_module(f'recipes.{path.stem}', *imp.find_module(recipe, [path.parent]))
 
 
 def get_recipe_contexts(recipe):

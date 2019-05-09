@@ -12,12 +12,20 @@ class Source:
         self._queries = None
 
     @property
+    def recipe_dir(self):
+        return self.path / 'recipes'
+
+    @property
+    def query_dir(self):
+        return self.recipe_dir / 'queries'
+
+    @property
     def recipes(self):
         if self._recipes:
             return self._recipes
 
-        self._recipes = [os.path.splitext(item)[0] for item in os.listdir(self.path / 'recipes')
-                         if item != '__init__.py' and item.endswith('.py')]
+        self._recipes = [item.stem for item in self.recipe_dir.iterdir()
+                         if item.is_file() and item != '__init__.py' and item.suffix == '.py']
         return self._recipes
 
     @property
@@ -25,8 +33,8 @@ class Source:
         if self._queries:
             return self._queries
 
-        self._queries = [os.path.splitext(item)[0] for item in os.listdir(self.path / 'queries')
-                         if item.endswith('.query')]
+        self._queries = [item.stem for item in self.query_dir.iterdir()
+                         if item.is_file() if item.suffix == '.query']
         return self._queries
 
 
@@ -35,15 +43,14 @@ class MergedSources:
     def __init__(self, sources):
         self._sources = []
         for source in sources:
-            source = Path(source).expanduser().resolve()
+            source = Source(Path(source).expanduser().resolve())
 
-            recipe_dir = source.joinpath('recipes')
-            if not recipe_dir.is_dir():
+            if not source.recipe_dir.is_dir():
                 if source.as_posix() != os.getcwd():
-                    print(f"warning: {recipe_dir} does not exist!")
+                    print(f"warning: {source.recipe_dir} does not exist!")
                 continue
 
-            self._sources.append(Source(source))
+            self._sources.append(source)
 
     def __len__(self):
         return len(self._sources)
@@ -59,8 +66,13 @@ class MergedSources:
     def queries(self):
         return chain(*[s.queries for s in self._sources])
 
-    def has_recipe(self, name):
-        return any(s.has_recipe(name) for s in self._sources)
+    def get(self, name, mode='recipe'):
+        attr = 'queries' if mode == 'query' else 'recipes'
+        suffix = '.query' if mode == 'query' else '.py'
+
+        for s in self._sources:
+            if name in getattr(s, attr):
+                return getattr(s, f'{mode}_dir') / (name + f'{suffix}')
 
 
 sources = MergedSources(config.sources)
