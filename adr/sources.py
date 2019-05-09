@@ -25,7 +25,7 @@ class Source:
             return self._recipes
 
         self._recipes = [item.stem for item in self.recipe_dir.iterdir()
-                         if item.is_file() and item != '__init__.py' and item.suffix == '.py']
+                         if item.is_file() and item.stem != '__init__' and item.suffix == '.py']
         return self._recipes
 
     @property
