@@ -44,8 +44,7 @@ name> [arguments]``. You can see the help for a recipe by running ``adr <recipe 
    :maxdepth: 2
    :caption: Contents:
 
-   recipes
-
+   modules
 
 
 Indices and tables
