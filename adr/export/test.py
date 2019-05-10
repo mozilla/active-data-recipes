@@ -10,9 +10,8 @@ from copy import deepcopy
 
 import yaml
 
-from adr import query
+from adr import config, query
 from adr.recipe import run_recipe
-from adr.util.config import Configuration
 
 here = os.path.abspath(os.path.dirname(__file__))
 test_dir = os.path.join(here, os.pardir, os.pardir, 'test', 'recipe_tests')
@@ -29,19 +28,18 @@ def cli(args=sys.argv[1:]):
     orig_run_query = query.run_query
     query_results = []
 
-    def new_run_query(name, config, context):
-        context.limit = 10
-        result = orig_run_query(name, config, context)
+    def new_run_query(name, args):
+        args.limit = 10
+        result = orig_run_query(name, args)
         mock_result = deepcopy(result)
         mock_result.pop('meta')
         query_results.append(mock_result)
         return result
 
     query.run_query = new_run_query
-    cfg = Configuration(os.path.join(os.path.dirname(here), 'config.yml'))
-    cfg.fmt = 'json'
+    config.fmt = 'json'
 
-    result = run_recipe(args.recipe, remainder, cfg)
+    result = run_recipe(args.recipe, remainder)
     test = OrderedDict()
     test['recipe'] = args.recipe
     test['args'] = remainder
