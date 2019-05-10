@@ -1,4 +1,5 @@
 import os
+from collections import Mapping
 from pathlib import Path
 
 from appdirs import user_config_dir
@@ -57,14 +58,17 @@ def flatten(d, prefix=''):
     return sorted(result)
 
 
-class Configuration(object):
+class Configuration(Mapping):
     DEFAULT_CONFIG_PATH = Path(user_config_dir('adr')) / 'config.toml'
     DEFAULTS = {
         "cache": None,
         "debug": False,
         "debug_url": "https://activedata.allizom.org/tools/query.html#query_id={}",
         "fmt": "table",
-        "sources": [os.getcwd(), Path(adr.__file__).parent.parent.as_posix()],
+        "sources": [
+            os.getcwd(),
+            Path(adr.__file__).parent.parent.as_posix(),
+        ],
         "url": "https://activedata.allizom.org/query",
         "verbose": False,
     }
@@ -86,11 +90,19 @@ class Configuration(object):
         self.cache = CacheManager(cache)
         self.cache.extend('null', lambda driver: NullStore())
 
+    def __len__(self):
+        return len(self._config)
+
+    def __iter__(self):
+        return iter(self._config)
+
     def __getitem__(self, key):
         return self._config[key]
 
     def __getattr__(self, key):
-        return self[key]
+        if key in vars(self):
+            return vars(self)[key]
+        return self.__getitem__(key)
 
     def merge(self, other):
         """Merge data into config (updates dicts and lists instead of
