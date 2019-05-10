@@ -2,6 +2,8 @@ from __future__ import absolute_import, print_function
 
 import argparse
 import logging
+import os
+import subprocess
 import sys
 import time
 import webbrowser
@@ -84,6 +86,8 @@ def get_parser():
 
     # config subcommand
     configcmd = subparsers.add_parser('config', help="Print active configuration.")
+    configcmd.add_argument("-e", "--edit", action="store", nargs="?",
+                           default=False, help="Open the config file in an editor.")
     configcmd.set_defaults(func=handle_config)
 
     parser.set_default_subparser('recipe')
@@ -91,7 +95,22 @@ def get_parser():
 
 
 def handle_config(remainder):
-    print(config.dump())
+    if config.edit is False:
+        print(config.dump())
+        return
+
+    editor = None
+    if config.edit is not None:
+        editor = config.edit
+    elif "VISUAL" in os.environ:
+        editor = os.environ["VISUAL"]
+    elif "EDITOR" in os.environ:
+        editor = os.environ["EDITOR"]
+    else:
+        print('Unable to determine editor; please specify a binary')
+
+    if editor:
+        subprocess.Popen([editor, config.path]).wait()
 
 
 def handle_list(remainder):

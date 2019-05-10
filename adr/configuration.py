@@ -78,7 +78,7 @@ class Configuration(object):
                 content = fh.read()
                 self.merge(parse(content)['adr'])
 
-        self._config['sources'] = set(self._config['sources'])
+        self._config['sources'] = sorted(map(os.path.expanduser, set(self._config['sources'])))
 
         # Use the NullStore by default. This allows us to control whether
         # caching is enabled or not at runtime.
