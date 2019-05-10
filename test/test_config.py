@@ -37,7 +37,7 @@ def test_config(create_config):
     assert config.debug is False
 
     defaults = Configuration.DEFAULTS
-    defaults['sources'] = set(defaults['sources'])
+    defaults['sources'] = sorted(map(os.path.expanduser, set(defaults['sources'])))
     assert config._config == defaults
 
     config = create_config({'verbose': True})
