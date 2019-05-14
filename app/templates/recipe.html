@@ -20,31 +20,31 @@
     </article>
     <form id="recipe_input" recipe="{{recipe}}" method="GET">
         {% for key, value in recipe_contexts.items() %}
-            {% if "hidden" not in value[1] or value[1].hidden == False %}
+            {% if "hidden" not in value or value.hidden == False %}
                 <div class="field">
                     <label class="label">{{key}}</label>
-                    <p class="help">{{value[1].help}}</p>
+                    <p class="help">{{value.help}}</p>
                     <div id="recipe_contexts" class="control">
-                        {% if value[1].type == "dropdown" %}
-                            <div class="select {{ value[1].action[0] }}">
-                                <select {{ value[1].action[1] }} size={{ value[1].choices|length }}>
-                                {% for item in value[1].choices %}
+                        {% if value.type == "dropdown" %}
+                            <div class="select {{ value.action[0] }}">
+                                <select {{ value.action[1] }} size={{ value.choices|length }}>
+                                {% for item in value.choices %}
                                     <option {{ item[1] }}>{{ item[0] }}</option>
                                 {% endfor %}
                                 </select>
                             </div>
-                        {% elif value[1].type == "datetime" %}
+                        {% elif value.type == "datetime" %}
                             <input class="input" type="text" name={{key}} id={{ 'datepicker_' + key}}
-                                {% if ("default" in value[1]) and (value[1].default != None) %}
-                                    value={{value[1].default}}
+                                {% if ("default" in value) and (value.default != None) %}
+                                    value={{value.default}}
                                 {% endif %}
                             />
                         {% else %}
                         <input class="input" id={{key}} name={{key}} required
-                               placeholder="Text input" type={{ value[1].type }}
+                               placeholder="Text input" type={{ value.type }}
 
-                            {% if ("default" in value[1]) and (value[1].default != None) %}
-                               value={{value[1].default}}
+                            {% if ("default" in value) and (value.default != None) %}
+                               value={{value.default}}
                             {% endif %}
                         />
                         {% endif %}

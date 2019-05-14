@@ -68,17 +68,33 @@ class SourceHandler:
     def queries(self):
         return chain(*[s.queries for s in self._sources])
 
-    def get(self, name, mode='recipe'):
+    def _find_source(self, name, query=False):
         sources = self._sources
-        if mode == 'query' and 'recipe' in config:
+        if query and 'recipe' in config:
             sources = [s for s in sources if config.recipe in s.recipes]
 
-        attr = 'queries' if mode == 'query' else 'recipes'
-        suffix = '.query' if mode == 'query' else '.py'
+        attr = 'queries' if query else 'recipes'
 
         for s in sources:
             if name in getattr(s, attr):
-                return getattr(s, f'{mode}_dir') / (name + f'{suffix}')
+                return s
+
+    @property
+    def active_source(self):
+        recipe = config.get('recipe')
+        if recipe:
+            return self._find_source(recipe)
+
+        query = config.get('query')
+        if query:
+            return self._find_source(query, query=True)
+
+    def get(self, name, query=False):
+        source = self._find_source(name, query=query)
+        if source:
+            if query:
+                return source.query_dir / (name + '.query')
+            return source.recipe_dir / (name + '.py')
 
 
 sources = SourceHandler(config.sources)

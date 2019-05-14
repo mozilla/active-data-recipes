@@ -29,7 +29,7 @@ def api_url_func(api_host):
 
         # convert cli form to context form
         for key, value in recipe_context_def.items():
-            for name in value[0]:
+            for name in value.get('flags', []):
                 try:
                     index = args.index(name)
                     recipe_args.setdefault(key, args[index + 1])
@@ -47,8 +47,9 @@ def client():
     return app.app.test_client()
 
 
-def test_api(patch_active_data, api_url_func, client, recipe_test, validate):
+def test_api(set_config, patch_active_data, api_url_func, client, recipe_test, validate):
     try:
+        set_config(recipe=recipe_test['recipe'], debug=False)
         patch_active_data(recipe_test)
 
         url = api_url_func(recipe_test)

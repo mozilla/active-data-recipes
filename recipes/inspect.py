@@ -13,7 +13,7 @@ from adr.context import override
 from adr.query import run_query
 
 RUN_CONTEXTS = [
-    override('attribute'),
+    override('attribute', default=None),
 ]
 
 

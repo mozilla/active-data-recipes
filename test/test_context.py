@@ -59,9 +59,3 @@ DEFINITIONS = [
 
 def id_fn(val):
     return str(val)
-
-
-@pytest.mark.parametrize("contexts, expected_definitions", DEFINITIONS, ids=id_fn)
-def test_get_definitions(contexts, expected_definitions):
-    definitions = context.get_context_definitions(contexts)
-    assert expected_definitions == definitions

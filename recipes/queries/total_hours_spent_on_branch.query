@@ -13,4 +13,4 @@ where:
 limit: 1000
 
 context:
-    build_type: [["-b", "--build-type"], {default: "all", help: "Build type (default: all)"}]
+    build_type: {flags: ["-b", "--build-type"], default: "all", help: "Build type (default: all)"}

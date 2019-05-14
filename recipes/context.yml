@@ -1,0 +1,90 @@
+attribute:
+  flags: ['--at']
+  nargs: '?'
+  help: "Display values of specified attribute within --table."
+
+branches:
+  flags: ['-B', '--branch']
+  default: ["mozilla-central"]
+  type: str
+  choices: ["mozilla-central", "mozilla-inbound", "autoland", "beta", "release"]
+  action: 'append'
+  help: "Branches to query results from"
+
+build_type:
+  flags: ['-b', '--build-type']
+  default: 'opt'
+  help: "Build type (default: opt)"
+
+format:
+  flags: ['--format']
+  type: str
+  default: 'table'
+  choices: ['table', 'json']
+  help: "format of result"
+
+groupby:
+  flags: ['--groupby']
+  default: 'result.test'
+
+limit:
+  flags: ['--limit']
+  type: int
+  default: 10
+  help: "limit the number of rows in result"
+
+path:
+  flags: ['--path']
+  default: 'dom/indexedDB'
+  help: "Path relative to repository root (file or directory)"
+
+platform:
+  flags: ['-p', '--platform']
+  default: 'windows10-64'
+  help: "Platform to limit results to (default: windows10-64)"
+
+platform_config:
+  flags: ['--platform-config']
+  default: 'test-'
+
+pushid:
+  flags: ['--push']
+  type: int
+  required: true
+  help: "id of push to unittest"
+
+rev:
+  flags: ['-r', '--rev', '--revision']
+  default: '5b33b070378a'
+  help: "Revision to limit results to"
+
+result:
+  flags: ['--result']
+  default: "F"
+
+sort_key:
+  flags: ['--sort-key']
+  type: int
+  default: 4
+  help: "Key to sort on (int, 0-based index)"
+
+table:
+  flags: ['--table']
+  help: "Table to inspect."
+
+test_name:
+  flags: ['-t', '--test']
+  default: ''
+  help: "Path to a test file"
+
+from_date:
+  flags: ['--from']
+  default: 'today-week'
+  type: validdatetime
+  help: "Starting date to pull data from, defaults to a week ago"
+
+to_date:
+  flags: ['--to']
+  default: 'eod'  # end of day
+  type: validdatetime
+  help: "Ending date to pull data from, defaults to end of day"

@@ -1,8 +1,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 import json
-import sys
-from imp import reload
 from io import StringIO as IO
 
 import yaml
@@ -20,15 +18,14 @@ class RunQuery(object):
         return self.query_test['mock_data']
 
 
-def test_query(monkeypatch, query_test):
-    config.fmt = 'json'
-    config.debug = False
-    config.debug_url = "https://activedata.allizom.org/tools/query.html#query_id={}"
-
+def test_query(monkeypatch, query_test, set_config):
+    set_config(**{
+        'query': query_test['query'],
+        'fmt': 'json',
+        'debug': False,
+        'debug_url': "https://activedata.allizom.org/tools/query.html#query_id={}",
+    })
     monkeypatch.setattr(query, 'query_activedata', RunQuery(query_test))
-    module = 'adr.queries.{}'.format(query_test['query'])
-    if module in sys.modules:
-        reload(sys.modules[module])
 
     def print_diff():
 
@@ -44,7 +41,9 @@ def test_query(monkeypatch, query_test):
 
     if "--debug" in query_test["args"]:
 
-        config.debug = True
+        set_config(debug=True)
+        monkeypatch.setattr(query, 'query_activedata', RunQuery(query_test))
+
         formatted_query = format_query(query_test['query'])
         result = json.loads(formatted_query[0])
         debug_url = formatted_query[1]
@@ -56,7 +55,9 @@ def test_query(monkeypatch, query_test):
 
     elif "--table" in query_test["args"]:
 
-        config.fmt = "table"
+        set_config(fmt='table')
+        monkeypatch.setattr(query, 'query_activedata', RunQuery(query_test))
+
         formatted_query = format_query(query_test['query'])
         result = formatted_query[0]
         debug_url = formatted_query[1]

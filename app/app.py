@@ -38,40 +38,40 @@ def transform_context_attributes(recipe_contexts, request_args):
     for k, v in recipe_contexts.items():
         # context with "choices" will be a single choice drop-down
         # context with "choices" & "append" will be a multiple choice drop-down
-        if "choices" in v[1]:
-            v[1]["type"] = "dropdown"
+        if "choices" in v:
+            v["type"] = "dropdown"
 
-            if "default" in v[1]:
+            if "default" in v:
                 default_value = set()
-                for item in v[1]["default"]:
+                for item in v["default"]:
                     default_value.add(item)
-                for i in range(len(v[1]["choices"])):
-                    value = v[1]["choices"][i]
+                for i in range(len(v["choices"])):
+                    value = v["choices"][i]
                     if value in default_value:
-                        v[1]["choices"][i] = [value, "selected"]
+                        v["choices"][i] = [value, "selected"]
                     else:
-                        v[1]["choices"][i] = [value, ""]
+                        v["choices"][i] = [value, ""]
 
-            if ("action" in v[1]) and (v[1]["action"] == "append"):
-                v[1]["action"] = ["is-multiple", "multiple"]
+            if ("action" in v) and (v["action"] == "append"):
+                v["action"] = ["is-multiple", "multiple"]
             else:
-                v[1]["action"] = ["", ""]
-        elif "type" in v[1]:
-            context_type = v[1]["type"]
+                v["action"] = ["", ""]
+        elif "type" in v:
+            context_type = v["type"]
             if context_type == int:
-                v[1]["type"] = "number"
+                v["type"] = "number"
             elif context_type == validdatetime:
-                v[1]["type"] = "datetime"
-                v[1]["default"] = transform_time(v[1]["default"])
+                v["type"] = "datetime"
+                v["default"] = transform_time(v["default"])
         else:
-            v[1]["type"] = "text"
+            v["type"] = "text"
 
     # If having args, mean running recipe
     if len(request_args) > 0:
         # Update value of context
         for k, v in recipe_contexts.items():
             if k in request_args:
-                v[1]['default'] = request_args[k]
+                v['default'] = request_args[k]
 
     return recipe_contexts
 
@@ -96,6 +96,8 @@ def recipe_handler(recipe_name):
     :param list recipe:the name of the selected recipe file
     :returns: template
     """
+    config.merge({'recipe': recipe_name})
+
     if recipe_name not in sources.recipes:
         return render_template('home.html',
                                recipes=sources.recipes,
@@ -112,15 +114,16 @@ def recipe_handler(recipe_name):
 
 
 def run_recipe(recipe_name, request, fmt='json'):
+    config.merge({'recipe': recipe_name})
     recipe_contexts = recipe.get_recipe_contexts(recipe_name)
     args = request.args.to_dict(flat=True)
 
     for key, value in recipe_contexts.items():
-        if "default" in value[1]:
-            args.setdefault(key, value[1]["default"])
+        if "default" in value:
+            args.setdefault(key, value["default"])
 
     for key, value in args.items():
-        context = recipe_contexts[key][1]
+        context = recipe_contexts[key]
         if context.get('type') == 'number':
             args[key] = int(value)
 
@@ -133,6 +136,7 @@ API_BASE_PATH = "/api/v1/"
 
 @app.route(API_BASE_PATH + "<recipe_name>")
 def run_recipe_api(recipe_name):
+    config.merge({'recipe': recipe_name})
     try:
         data = run_recipe(recipe_name, request)
         result = make_response(data)
