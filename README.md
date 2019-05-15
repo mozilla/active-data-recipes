@@ -1,25 +1,30 @@
-[![Build Status](https://travis-ci.org/mozilla/active-data-recipes.svg?branch=master)](https://travis-ci.org/mozilla/active-data-recipes)
-[![PyPI version](https://badge.fury.io/py/adr.svg)](https://badge.fury.io/py/adr)
-[![PyPI version](https://readthedocs.org/projects/active-data-recipes/badge/?version=latest)](https://active-data-recipes.readthedocs.io)
+[![Build Status](https://travis-ci.org/mozilla/example-active-data-recipes.svg?branch=master)](https://travis-ci.org/mozilla/example-active-data-recipes)
+[![PyPI version](https://readthedocs.org/projects/example-active-data-recipes/badge/?version=latest)](https://example-active-data-recipes.readthedocs.io)
 
-# active-data-recipes
+# Example ActiveData Recipes
 
-A repository of various ActiveData recipes. A recipe is a small snippet that runs one or more active
-data queries and returns the output. Queries can sometimes be modified by command line arguments and
-output can sometimes be post-processed.
+This is a repository of example [ActiveData recipes][0]. A recipe is a small snippet that runs one
+or more active data queries and returns the output. Queries can sometimes be modified by command
+line arguments and output can sometimes be post-processed.
 
 Each recipe should try to answer a single question.
 
-# Software requirements
-
-- You will need Python 3.6 or higher to run the program.
-
-
 # Installation
 
-    $ pip install adr
+First [install poetry][2], then run:
+
+    $ git clone https://github.com/mozilla/example-active-data-recipes
+    $ cd example-active-data-recipes
+    $ poetry install
+
+You will need Python 3.6 or higher.
 
 # Usage
+
+The `poetry install` command will create a virtualenv with all of the required dependencies
+installed. You can use `poetry run <cmd>` to run a single command within the virtualenv context. Or
+you can use `poetry shell` to spawn a new shell with the virtualenv activated. The commands below
+assume you have run the latter.
 
 Run:
 
@@ -27,11 +32,15 @@ Run:
 
 For a list of recipes:
 
-    $ adr --list
+    $ adr list
 
 For recipe specific options see:
 
     $ adr <recipe> -- --help
+
+To serve the web app locally:
+
+    $ adr-app
 
 # Recipes
 
@@ -40,36 +49,16 @@ them.
 
 # Development
 
-To contribute to `active-data-recipes` first [install poetry][2], then run:
+To contribute to `example-active-data-recipes` first follow the installation steps above.
+You can run tests with:
 
-    $ git clone https://github.com/mozilla/active-data-recipes
-    $ cd active-data-recipes
-    $ poetry install
-
-Now you can use `poetry run` to perform various development commands:
-
-    # run adr
-    $ poetry run adr <recipe>
-
-    # run webapp
-    $ poetry run adr-app
-
-    # run tests
     $ poetry run tox
 
-Alternatively activate the `poetry` shell ahead of time:
+Or:
 
     $ poetry shell
-
-    # run adr
-    $ adr <recipe>
-
-    # run app
-    $ adr-app
-
-    # run tests
     $ tox
 
-[0]: https://github.com/klahnakoski/ActiveData/blob/dev/docs/jx_time.md
-[1]: https://active-data-recipes.readthedocs.io/en/latest/recipes.html
+[0]: https://github.com/mozilla/active-data-recipes
+[1]: https://example-active-data-recipes.readthedocs.io/en/latest/recipes.html
 [2]: https://poetry.eustace.io/docs/#installation
