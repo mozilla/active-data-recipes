@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.org/mozilla/example-active-data-recipes.svg?branch=master)](https://travis-ci.org/mozilla/example-active-data-recipes)
-[![PyPI version](https://readthedocs.org/projects/example-active-data-recipes/badge/?version=latest)](https://example-active-data-recipes.readthedocs.io)
+[![Build Status](https://travis-ci.org/mozilla/active-data-recipes.svg?branch=master)](https://travis-ci.org/mozilla/active-data-recipes)
+[![PyPI version](https://readthedocs.org/projects/active-data-recipes/badge/?version=latest)](https://active-data-recipes.readthedocs.io)
 
-# Example ActiveData Recipes
+# ActiveData Recipes
 
-This is a repository of example [ActiveData recipes][0]. A recipe is a small snippet that runs one
-or more active data queries and returns the output. Queries can sometimes be modified by command
+This is a repository of various [ActiveData recipes][0]. A recipe is a small snippet that runs one
+or more [ActiveData][3] queries and returns the output. Queries can sometimes be modified by command
 line arguments and output can sometimes be post-processed.
 
 Each recipe should try to answer a single question.
@@ -13,8 +13,8 @@ Each recipe should try to answer a single question.
 
 First [install poetry][2], then run:
 
-    $ git clone https://github.com/mozilla/example-active-data-recipes
-    $ cd example-active-data-recipes
+    $ git clone https://github.com/mozilla/active-data-recipes
+    $ cd active-data-recipes
     $ poetry install
 
 You will need Python 3.6 or higher.
@@ -49,7 +49,7 @@ them.
 
 # Development
 
-To contribute to `example-active-data-recipes` first follow the installation steps above.
+To contribute to `active-data-recipes` first follow the installation steps above.
 You can run tests with:
 
     $ poetry run tox
@@ -60,5 +60,6 @@ Or:
     $ tox
 
 [0]: https://github.com/mozilla/active-data-recipes
-[1]: https://example-active-data-recipes.readthedocs.io/en/latest/recipes.html
+[1]: https://active-data-recipes.readthedocs.io/en/latest/recipes.html
 [2]: https://poetry.eustace.io/docs/#installation
+[3]: https://github.com/mozilla/ActiveData
