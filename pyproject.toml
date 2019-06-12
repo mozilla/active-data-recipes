@@ -23,7 +23,7 @@ homepage = "https://github.com/mozilla/active-data-recipes"
 
 [tool.poetry.dependencies]
 python = "^3.6"
-adr = "^0.15.0"
+adr = "^0.16.2"
 
 
 [tool.poetry.dev-dependencies]
