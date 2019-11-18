@@ -127,17 +127,24 @@ task_durations
     :members:
     :no-undoc-members:
 
-test_durations
----------------
-
-.. automodule:: recipes.test_durations
-    :members:
-    :no-undoc-members:
-
 tests_config_times
 --------------------
 
 .. automodule:: recipes.tests_config_times
+    :members:
+    :no-undoc-members:
+
+tests_by_suite
+--------------
+
+.. automodule:: recipes.tests_by_suite
+    :members:
+    :no-undoc-members:
+
+test_durations
+---------------
+
+.. automodule:: recipes.test_durations
     :members:
     :no-undoc-members:
 
