@@ -1,0 +1,11 @@
+from: unittest
+groupby: run.suite.name
+select:
+    - {"aggregate": "count"}
+    - {"value": "result.test", "aggregate":"cardinality"}
+where:
+    and:
+        - in: {repo.branch.name: {$eval: branches}}
+        - gte: [repo.push.date, {date: {$eval: from_date}}]
+        - lte: [repo.push.date, {date: {$eval: to_date}}]
+limit: 100000
