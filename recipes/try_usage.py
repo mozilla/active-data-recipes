@@ -37,12 +37,14 @@ def run(args):
         'test': 'try:',
         'method': 'vanilla try syntax',
     }
-    d.update(subcommand('fuzzy'))
     d.update(subcommand('again'))
-    d.update(subcommand('empty'))
-    d.update(subcommand('release'))
-    d.update(subcommand('coverage'))
+    d.update(subcommand('auto'))
     d.update(subcommand('chooser'))
+    d.update(subcommand('coverage'))
+    d.update(subcommand('empty'))
+    d.update(subcommand('fuzzy'))
+    d.update(subcommand('release'))
+    d.update(subcommand('scriptworker'))
     d['other'] = {
         'test': '',
         'method': 'other',
