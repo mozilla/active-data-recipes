@@ -43,6 +43,7 @@ def run(args):
     d.update(subcommand('coverage'))
     d.update(subcommand('empty'))
     d.update(subcommand('fuzzy'))
+    d.update(subcommand('perftest'))
     d.update(subcommand('release'))
     d.update(subcommand('scriptworker'))
     d['other'] = {
