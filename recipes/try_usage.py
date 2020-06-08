@@ -60,9 +60,6 @@ def run(args):
     users = defaultdict(set)
 
     for user, message in data:
-        if user == 'reviewbot':
-            continue
-
         for k, v in d.items():
             if v['test'] in message:
                 count[k] += 1
