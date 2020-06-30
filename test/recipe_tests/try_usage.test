@@ -20,9 +20,20 @@ queries:
               "baz@example.com"
           ]
       }
+    - data:
+      - - fuzzy
+        - 1
+        - 20
+      - - syntax
+        - 3
+        - 70
+      - - null
+        - 2
+        - 50
 expected: [
-    ['Method', 'Pushes', 'Percent', 'Users', 'Push / User'],
-    ['total', 6, 100.0, 3, 2.0], ['mach try syntax', 3, 50.0, 2, 1.5],
-    ['vanilla try syntax', 2, 33.3, 2, 1.0],
-    ['mach try fuzzy', 1, 16.7, 1, 1.0]
+    ['Method', 'Pushes', 'Percent', 'Users', 'Push / User', 'Hours / Push'],
+    ['total', 6, 100.0, 3, 2.0, 23.3],
+    ['mach try syntax', 3, 50.0, 2, 1.5, 23.3],
+    ['vanilla try syntax', 2, 33.3, 2, 1.0, 0.0],
+    ['mach try fuzzy', 1, 16.7, 1, 1.0, 20.0]
 ]
