@@ -1,0 +1,21 @@
+---
+from: "task"
+groupby:
+  - name: "mach try ..."
+    value: {"between": {"repo.changeset.description": ["mach try ", "`"]}}
+select:
+  - aggregate: "cardinality"
+    name: "num pushes"
+    value: "repo.push.id"
+  - aggregate: "sum"
+    name: "Total hours"
+    value: {"div": {"action.duration": 3600}}
+where:
+  and:
+    - or:
+        - {"prefix": {"repo.changeset.description": "try: "}}
+        - {"find": {"repo.changeset.description": "mach try "}}
+    - eq: {"repo.branch.name": "try"}
+    - gte: {"task.run.start_time": {"date": {$eval: from_date}}}
+    - lte: {"task.run.start_time": {"date": {$eval: to_date}}}
+limit: 100

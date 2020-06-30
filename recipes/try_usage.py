@@ -27,7 +27,6 @@ def subcommand(name):
 
 
 def run(args):
-
     data = run_query('try_commit_messages', args)['data']
 
     # Order is important as the search stops after the first successful test.
@@ -59,6 +58,7 @@ def run(args):
 
     count = defaultdict(int)
     users = defaultdict(set)
+    usage = defaultdict(float)
 
     for user, message in data:
         for k, v in d.items():
@@ -70,11 +70,21 @@ def run(args):
     count['total'] = sum(count.values())
     users['total'] = set(chain(*users.values()))
 
+    data = run_query('try_hours_by_selector', args)['data']
+    total_pushes = 0
+    total_hours = 0.0
+    for selector, pushes, hours in data:
+        usage[selector] = round(hours / pushes, 1)
+        total_pushes += pushes
+        total_hours += hours
+
+    usage['total'] = round(total_hours / total_pushes, 1)
+
     def fmt(key):
         percent = round(float(count[key]) / count['total'] * 100, 1)
-        return [d[key]['method'], count[key], percent, len(users[key]), round(float(count[key]) / len(users[key]), 2)]  # noqa
+        return [d[key]['method'], count[key], percent, len(users[key]), round(float(count[key]) / len(users[key]), 2), usage[key]]  # noqa
 
-    data = [['Method', 'Pushes', 'Percent', 'Users', 'Push / User']]
+    data = [['Method', 'Pushes', 'Percent', 'Users', 'Push / User', 'Hours / Push']]
     for k, v in sorted(count.items(), key=lambda t: t[1], reverse=True):
         data.append(fmt(k))
     return data
