@@ -1,4 +1,4 @@
-### Archived due to ActiveData decommissioned
+## Archived due to ActiveData being decommissioned
 
 [![Build Status](https://travis-ci.org/mozilla/active-data-recipes.svg?branch=master)](https://travis-ci.org/mozilla/active-data-recipes)
 [![PyPI version](https://readthedocs.org/projects/active-data-recipes/badge/?version=latest)](https://active-data-recipes.readthedocs.io)
